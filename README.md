@@ -1,19 +1,21 @@
 # Mineralchemy
 
-Jogo de descoberta mineralógica. Combine duas peças na bancada para descobrir espécies minerais, substâncias e transformações.
+Jogo de descoberta mineralógica. Combine íons, minerais e processos geológicos para descobrir novas espécies e transformações.
 
-## Jogar
+**Jogar:** https://marquesbarros.github.io/mineralchemy/
 
-https://marquesbarros.github.io/mineralchemy/
+## Reações metamórficas
 
-## Publicação
+A bancada usa sempre duas peças. Quando uma reação envolve três reagentes, os dois primeiros formam uma **associação mineral intermediária**; ao adicionar o terceiro, são revelados os produtos da reação. A associação não é contabilizada como nova espécie mineral.
 
-O site é um único `index.html` autônomo, sem PWA nem service worker. Para publicar: **Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**.
+Nesta versão, há exemplos de descarbonatação, desidratação, crescimento de granada e de estaurolita, e reações de alta pressão. O registro mostra a equação completa e indica quando uma transformação é apenas esquemática. Os coeficientes estequiométricos não correspondem à quantidade de peças arrastadas.
 
-## Dados
+## Como jogar
 
-O progresso fica no armazenamento local do navegador, sem sincronização entre dispositivos.
+Selecione materiais na coleção, arraste-os até a bancada e encoste duas peças. As descobertas ficam salvas localmente no navegador.
 
 ## Desenvolvimento
 
-O jogo foi desenvolvido com apoio de assistentes de programação. Melhorias e correções podem ser sugeridas pelas [issues](https://github.com/marquesbarros/mineralchemy/issues).
+O jogo é publicado como um `index.html` autônomo, sem dependência de servidor ou service worker. Para atualizar o site, a branch `main` deve estar configurada no GitHub Pages: **Settings → Pages → Deploy from a branch → main → /(root)**.
+
+O código-fonte TypeScript, os testes e o catálogo mineralógico estão disponíveis no pacote de desenvolvimento da versão 0.12.
