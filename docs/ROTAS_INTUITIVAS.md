@@ -338,3 +338,25 @@ Essas exceções não foram preenchidas artificialmente: as opções presentes n
 As duas peças representam associação mineralógica, não o balanço de uma reação fechada. No histórico, balanços de referência podem incluir água, sílica, cátions, fluidos e subprodutos não selecionados. As condições termodinâmicas e o aporte geoquímico continuam necessários.
 
 Fontes: [Metamorphic Reactions](https://utc.pressbooks.pub/mineralogy/chapter/metamorphic-reactions/); [GASP](https://www.science.smith.edu/~jbrady/petrology/metrocks-topics/conditions/conditions-page05.php); [Tateyama et al., 1972](https://www.jstage.jst.go.jp/article/ganko1941/67/2/67_2_35/_article/-char/en).
+
+
+## Rotas metamórficas e raciocínio de campo · v0.20
+
+As receitas abaixo são **atalhos intuitivos de descoberta**. As combinações não são, por si sós, equações químicas nem garantem que a fase resultante seja estável em qualquer P–T ou composição global:
+
+| Associação intuitiva | Descoberta |
+| --- | --- |
+| Alumínio (Al³⁺) + quartzo | Polimorfo Al₂SiO₅ |
+| Coríndon + quartzo | Polimorfo Al₂SiO₅ |
+| Cianita + Na⁺ | Albita |
+| Andaluzita + K⁺ | Ortoclásio |
+| Sillimanita + Ca²⁺ | Anortita |
+| Cianita + ortoclásio | Muscovita |
+| Cianita + albita | Paragonita |
+| Magnésio-hornblenda + K⁺ | Biotita |
+| Magnésio-hornblenda + fluido hidrotermal | Biotita |
+| Tremolita + K⁺ | Flogopita |
+| Ortoclásio + intemperismo | Caulinita |
+| Caulinita + K⁺ | Ortoclásio |
+
+As reações reais envolvem frequentemente componentes ambientais adicionais e condições próprias. O jogo mantém separadas a **mecânica de descoberta** e a **referência química/mineralógica**.

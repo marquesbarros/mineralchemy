@@ -61,3 +61,10 @@ o pacote estático por `npm test` e `npm run build`.
 Alumínio e quartzo permitem alcançar Al₂SiO₅. Os polimorfos andaluzita, cianita e sillimanita, combinados com Na⁺, K⁺ ou Ca²⁺, conduzem a feldspatos em rotas intuitivas de sistema aberto. Feldspato potássico + Al₂SiO₅ pode produzir muscovita e quartzo, enquanto anfibólios com potássio ou fluidos hidrotermais apropriados podem conduzir a biotita ou flogopita. A caulinita permanece sobretudo um produto de alteração; seu aquecimento isolado não reconstitui feldspatos.
 
 As equações químicas de referência incluem componentes adicionais e não pretendem igualar o balanço das duas peças. Consulte [o catálogo de rotas](docs/ROTAS_INTUITIVAS.md).
+
+
+## Rotas metamórficas intuitivas · v0.20
+
+As descobertas partem de relações petrológicas, não de uma exigência de que o par escolhido seja, isoladamente, uma equação balanceada. A combinação Al³⁺ + quartzo ou coríndon + quartzo aproxima o jogador dos polimorfos Al₂SiO₅. Cianita, andaluzita e sillimanita podem ser associadas a Na, K ou Ca para encontrar feldspatos, com a sílica e as condições geológicas tratadas como componentes ambientais do modelo.
+
+As rotas alternativas incluem cianita + ortoclásio → muscovita; cianita + albita → paragonita; hornblenda + K ou fluido hidrotermal → biotita; tremolita + K → flogopita; e retornos envolvendo feldspatos e argilominerais em sistemas abertos. A equação de referência, quando apresentada, é independente da associação intuitiva e deve representar um processo balanceado. Uma associação no jogo não implica transformação automática em qualquer condição geológica.
