@@ -1,29 +1,37 @@
 # Mineralchemy
 
-Jogo de descoberta mineralógica. Combine íons, minerais e condições geológicas para descobrir espécies e transformações metamórficas.
+Jogo de descoberta mineralógica. Combine íons, minerais e condições geológicas
+para descobrir espécies e transformações, incluindo reações metamórficas em etapas.
 
-**Jogar:** https://marquesbarros.github.io/mineralchemy/
+**[Jogar](https://marquesbarros.github.io/mineralchemy/)** · **[Atlas dos 178 ícones](https://marquesbarros.github.io/mineralchemy/iconografia.html)**
 
 ## Como jogar
 
-A bancada combina sempre duas peças. Quando uma reação tem três reagentes, os dois primeiros formam uma associação mineral intermediária. A reação final pode liberar vários produtos. Progresso e histórico ficam salvos no navegador.
+A bancada combina sempre duas peças. Quando uma reação envolve três reagentes,
+os dois primeiros formam uma associação mineral temporária; o terceiro completa
+a transformação. A reação pode revelar vários produtos ao mesmo tempo.
+O progresso e o histórico ficam salvos localmente no navegador.
 
-## Iconografia v0.15
+## Iconografia v0.16
 
-**178 minerais possuem ilustrações SVG exclusivas**, incluindo todos os sete elementos nativos. Os 19 desenhos originais foram preservados; os 159 restantes utilizam variações individuais de arquétipos mineralógicos, a serem refinadas posteriormente quando necessário.
+**178 minerais, 178 ilustrações SVG próprias.** A biblioteca preserva os 19
+desenhos originais e os 30 primeiros refinamentos da versão 0.15. Os outros
+129 minerais receberam representações individuais baseadas em hábito, textura,
+clivagem, geminação ou agregação. Em espécies de uma mesma série composicional,
+a proximidade visual é mantida quando mineralogicamente justificável.
 
-Íons, moléculas e reagentes não minerais utilizam fórmulas químicas: Fe²⁺, H₂O, SO₄²⁻. Agentes geológicos usam notação de processos: P↑, T↑, fO₂↑.
+Elementos nativos minerais, como ouro, prata, cobre, ferro, enxofre, grafita e
+diamante, também possuem ilustrações. Íons e moléculas não minerais usam fórmulas
+químicas; agentes geológicos usam símbolos como P↑, T↑ e fO₂↑.
 
-Consulte [os critérios e a cobertura da iconografia](docs/ICONOGRAFIA.md).
+A ilustração é didática: um hábito representativo não implica forma ou cor
+exclusivas da espécie. Veja [a documentação da iconografia](docs/ICONOGRAFIA.md).
 
-## Publicação
+## Tecnologia e publicação
 
-O jogo está compilado em um arquivo HTML independente na raiz do repositório, sem PWA ou service worker. GitHub Pages publica a branch main, pasta /(root).
+O jogo é distribuído em `index.html`, sem service worker ou dependências de
+servidor. O atlas `iconografia.html` é autônomo e pode ser publicado na mesma
+raiz. O GitHub Pages utiliza a branch `main`, diretório `/(root)`.
 
-O projeto completo com TypeScript, testes e dados científicos também é preservado como pacote-fonte da versão v0.13.
-
-Desenhos estilizados indicam hábitos representativos, não diagnósticos universais.
-
-### Revisão visual v0.15
-
-Refinamentos de **30 minerais** com variação real de hábito, silhueta, detalhes cristalográficos ou textura, além de correções de paleta. Os 178 minerais continuam com SVG próprio. [Veja a galeria das ilustrações refinadas](docs/ICONOGRAFIA_v0.15.html).
+Na árvore-fonte, o código TypeScript, os dados e os testes permitem reconstruir
+o pacote estático por `npm test` e `npm run build`.

@@ -510,6 +510,47 @@ function paletteFor(meta) {
         pyrrhotite: [34, 32, 43], sphalerite: [28, 35, 39], pentlandite: [34, 24, 41],
         spodumene: [276, 32, 72], dravite: [32, 37, 41], schorl: [235, 8, 25],
     };
+    // Cores ilustrativas de ocorrências características, nunca diagnósticas isoladas.
+    // Evitam que minerais menos comuns recebam matizes arbitrários por hash.
+    const specimenColors = {
+        halite: [190, 9, 89], hematite: [8, 35, 39], periclase: [185, 10, 83], lime: [70, 8, 88],
+        corundum: [350, 52, 57], cuprite: [4, 46, 51], portlandite: [115, 9, 83], goethite: [31, 46, 45],
+        brucite: [116, 15, 79], gibbsite: [90, 12, 84], wustite: [218, 8, 36],
+        spinel: [352, 45, 51], hercynite: [224, 11, 30], magnesioferrite: [23, 14, 36],
+        tenorite: [218, 10, 27], anhydrite: [201, 13, 83],
+        enstatite: [97, 18, 58], forsterite: [103, 35, 62], wollastonite: [190, 10, 84],
+        ferrosilite: [31, 19, 36], diopside: [151, 39, 48], hedenbergite: [143, 20, 36], fayalite: [46, 31, 43],
+        augite: [134, 26, 34], tremolite: [106, 15, 74], tephroite: [27, 28, 43],
+        monticellite: [94, 23, 59], kirschsteinite: [42, 29, 44], clinoenstatite: [96, 19, 54],
+        jadeite: [145, 33, 70], omphacite: [151, 36, 46], aegirine: [145, 24, 31], pigeonite: [42, 20, 42],
+        actinolite: [135, 35, 48], ferroactinolite: [146, 18, 33], anthophyllite: [33, 24, 62],
+        grunerite: [34, 19, 36], glaucophane: [214, 47, 57], riebeckite: [218, 40, 34],
+        pargasite: [137, 31, 36], magnesiohornblende: [145, 24, 33], ferrohornblende: [112, 16, 28],
+        sanidine: [28, 25, 80], oligoclase: [37, 18, 79], andesine: [29, 17, 71], bytownite: [32, 21, 64],
+        nepheline: [76, 10, 79], leucite: [43, 9, 83], sodalite: [215, 56, 49], analcime: [190, 9, 84],
+        laumontite: [25, 21, 83], clinoptilolite: [36, 19, 79],
+        kaolinite: [48, 9, 86], talc: [130, 14, 80], paragonite: [74, 13, 82], phlogopite: [35, 38, 60],
+        annite: [24, 16, 27], lepidolite: [289, 31, 72], pyrophyllite: [45, 18, 80], clinochlore: [134, 25, 59],
+        chamosite: [99, 22, 38], montmorillonite: [48, 18, 72], nontronite: [69, 31, 56], halloysite: [42, 11, 83],
+        pyrope: [355, 54, 46], spessartine: [24, 70, 57], grossular: [78, 38, 61], andradite: [83, 32, 46],
+        uvarovite: [139, 55, 44], staurolite: [27, 40, 42], zoisite: [110, 21, 59], clinozoisite: [96, 16, 70],
+        epidote: [89, 40, 49], lawsonite: [205, 20, 75], prehnite: [125, 32, 70], pumpellyite_mg: [145, 32, 52],
+        titanite: [41, 42, 51], hydroxylapatite: [106, 20, 67], monazite_ce: [43, 39, 61],
+        xenotime_y: [37, 32, 56], elbaite: [166, 44, 59], beryl: [154, 31, 69], topaz: [194, 17, 83],
+        tridymite: [200, 11, 86], cristobalite: [200, 9, 85], coesite: [190, 13, 82], stishovite: [201, 15, 73],
+        aragonite: [46, 14, 82], ankerite: [30, 26, 53], smithsonite: [167, 33, 74], cerussite: [200, 10, 85],
+        strontianite: [193, 11, 86], witherite: [195, 9, 84], barite: [46, 13, 82], celestine: [203, 39, 74],
+        anglesite: [192, 11, 80], jarosite: [42, 54, 55], alunite: [37, 13, 77], chalcanthite: [211, 62, 58],
+        chlorargyrite: [47, 11, 72], brookite: [31, 40, 43], ilmenite: [221, 8, 31], chromite: [224, 7, 27],
+        cassiterite: [31, 27, 39], pyrolusite: [216, 10, 28], manganite: [225, 8, 25],
+        lepidocrocite: [14, 58, 50], boehmite: [45, 9, 83], diaspore: [70, 13, 78], uraninite: [221, 8, 27],
+        chalcopyrite: [45, 55, 53], troilite: [36, 30, 37], covellite: [214, 50, 43], bornite: [27, 33, 41],
+        chalcocite: [214, 12, 39], molybdenite: [215, 10, 48], cinnabar: [5, 70, 50], arsenopyrite: [213, 9, 58],
+        realgar: [14, 73, 58], orpiment: [45, 66, 58], stibnite: [216, 8, 42], acanthite: [219, 7, 32],
+        cobaltite: [212, 12, 49], scheelite: [36, 50, 59], ferberite: [26, 13, 26], hubnerite: [16, 32, 39],
+        wolframite: [25, 21, 31], vivianite: [169, 38, 49],
+    };
+    Object.assign(curatedColors, specimenColors);
     const curated = curatedColors[meta.id];
     if (curated)
         [hue, sat, light] = curated;
@@ -712,6 +753,331 @@ function curatedSpeciesShape(meta, p, seed) {
         default: return null;
     }
 }
+/** Hábito principal, detalhe visual e observação mineralógica por espécie.
+ * Nenhuma entrada deste mapa depende apenas de recoloração do desenho-base.
+ * Hábito e textura são ilustrações de ocorrências características, não universais.
+ */
+const SPECIES_ART_DIRECTION = {
+    // Haletos, óxidos e hidróxidos
+    halite: ['hopper', 'terraces', 'cubos com crescimento em degraus'],
+    hematite: ['rosette', 'metal', 'hematita especular em roseta de placas'],
+    periclase: ['cubePair', 'cleavage', 'cristais cúbicos e clivagem'],
+    lime: ['granular', 'pores', 'agregados granulares de CaO'],
+    corundum: ['barrel', 'sixRidges', 'prisma hexagonal barrilado'],
+    cuprite: ['octaPair', 'brightFacet', 'octaedros vermelho-cobre'],
+    portlandite: ['hexPlate', 'layering', 'lamelas pseudohexagonais'],
+    goethite: ['botryoidal', 'radialLines', 'massas reniformes e fibras radiais'],
+    brucite: ['flaky', 'pearly', 'agregados de placas hexagonais'],
+    gibbsite: ['hexPlate', 'stepped', 'placas pseudohexagonais sobrepostas'],
+    wustite: ['cube', 'fracture', 'octaedros não privilegiados; massa com clivagem cúbica'],
+    spinel: ['octa', 'facet', 'cristal octaédrico'],
+    hercynite: ['octaPair', 'darkSeams', 'octaedros escuros agrupados'],
+    magnesioferrite: ['octa', 'streaks', 'octaedro com faces reflexivas'],
+    tenorite: ['bladed', 'striated', 'agulhas e lâminas escuras de CuO'],
+    anhydrite: ['tabularPair', 'cleavage', 'placas de anidrita ortorrômbica'],
+    // Inossilicatos, nesossilicatos, anfibólios
+    enstatite: ['prismPair', 'straightCleavage', 'cristais prismáticos ortopiroxênicos'],
+    forsterite: ['granular', 'facet', 'grãos facetados verdes de olivina magnesiana'],
+    wollastonite: ['needleFan', 'silky', 'feixes aciculares de wollastonita'],
+    ferrosilite: ['prism', 'shadowCore', 'prisma marrom-ferrífero'],
+    diopside: ['prismPair', 'cleavage', 'prismas verdes e clivagens distintas'],
+    hedenbergite: ['prism', 'darkSeams', 'prisma clinopiroxênico escuro'],
+    fayalite: ['granular', 'darkSeams', 'grãos de olivina ferrífera'],
+    augite: ['stubbyPrism', 'cleavage', 'prismas curtos e robustos de augita'],
+    tremolite: ['needleFan', 'paleCore', 'feixes aciculares claros'],
+    tephroite: ['granular', 'crossgrain', 'cristais maciços ricos em Mn'],
+    monticellite: ['shortPrism', 'paleCore', 'cristais prismáticos curtos'],
+    kirschsteinite: ['granular', 'veins', 'grãos Ca-Fe-olivínicos'],
+    clinoenstatite: ['twinPrism', 'obliqueCleavage', 'clinoenstatita com prisma geminado'],
+    jadeite: ['shards', 'translucent', 'massa verde clara de cristais fibrosos compactos'],
+    omphacite: ['prismPair', 'zoning', 'prismas verdes heterogêneos'],
+    aegirine: ['needleFan', 'darkSeams', 'agulhas alongadas verde-escuras'],
+    pigeonite: ['shortPrism', 'smallFacets', 'prismas compactos'],
+    actinolite: ['fan', 'parallel', 'cristais alongados e fibrosos verdes'],
+    ferroactinolite: ['prismPair', 'darkSeams', 'cristais escuros com clivagens anfibólicas'],
+    anthophyllite: ['fibres', 'silky', 'feixes paralelos ortorrômbicos'],
+    grunerite: ['fibres', 'darkSeams', 'fibras de anfibólio Fe'],
+    glaucophane: ['needleFan', 'blueRidges', 'agulhas de anfibólio azul'],
+    riebeckite: ['prism', 'parallel', 'anfibólio azul-escuro prismático'],
+    pargasite: ['stubbyPrism', 'cleavage', 'anfibólio compacto verde escuro'],
+    magnesiohornblende: ['prismPair', 'crossgrain', 'prismas escuros com clivagens'],
+    ferrohornblende: ['stubbyPrism', 'darkSeams', 'prismas ferríferos robustos'],
+    // Feldspatos, feldspatoides e zeólitas
+    sanidine: ['block', 'cleanFaces', 'cristal tabular simples de alta temperatura'],
+    oligoclase: ['tabularPair', 'fineTwins', 'plagioclásio com maclas finas'],
+    andesine: ['block', 'lamellarTwins', 'plagioclásio com lamelas abundantes'],
+    bytownite: ['tabularPair', 'strongTwins', 'plagioclásio cálcico maclado'],
+    nepheline: ['barrel', 'edgeZone', 'prisma pseudohexagonal curto'],
+    leucite: ['garnet', 'trapezoid', 'formas trapezoédricas de leucita'],
+    sodalite: ['granular', 'blueVeins', 'massa azul e fraturas claras de sodalita'],
+    analcime: ['garnet', 'glassy', 'analcima com cristais trapezoédricos'],
+    laumontite: ['twinPrism', 'cleavage', 'prismas alongados de laumontita'],
+    clinoptilolite: ['flaky', 'feathery', 'placas finas de zeólita'],
+    // Filossilicatos, argilas e micas
+    kaolinite: ['hexPlate', 'fineStack', 'pilhas de plaquetas pseudohexagonais'],
+    talc: ['flaky', 'silky', 'lâminas escamosas de talco'],
+    paragonite: ['flaky', 'straightCleavage', 'muscovita sódica em folhas finas'],
+    phlogopite: ['hexPlate', 'metal', 'lâminas micáceas bronzeadas'],
+    annite: ['flaky', 'darkSeams', 'mica ferro-escura estriada'],
+    lepidolite: ['rosette', 'flakeLines', 'roseta de lâminas lilases'],
+    pyrophyllite: ['rosette', 'feathery', 'roseta foliácea de pirofilita'],
+    clinochlore: ['flaky', 'greenRidges', 'clorita verde em folhas superpostas'],
+    chamosite: ['flaky', 'darkSeams', 'clorita verde-escura ferrífera'],
+    montmorillonite: ['earthy', 'layering', 'agregado argiloso estratificado'],
+    nontronite: ['earthy', 'pores', 'agregado terroso de esmectita ferrífera'],
+    halloysite: ['tubes', 'hollow', 'agregado de tubos e filamentos de haloisita'],
+    // Granadas e metamórficos
+    pyrope: ['garnet', 'brightFacet', 'granada magnesiana vermelho-profundo'],
+    spessartine: ['garnet', 'striated', 'granada manganesífera alaranjada'],
+    grossular: ['garnetPair', 'facet', 'granadas claras/verde-mel agrupadas'],
+    andradite: ['garnet', 'triangularFacet', 'granada férrica multifacetada'],
+    uvarovite: ['druzy', 'greenRidges', 'granada cromífera em drusa verde'],
+    staurolite: ['cross', 'twinMark', 'geminação cruzada em estaurolita'],
+    zoisite: ['prismPair', 'longitudinal', 'epidoto ortorrômbico prismático'],
+    clinozoisite: ['bladed', 'fineTwins', 'epidoto-clinozoisita em lâminas'],
+    epidote: ['prismPair', 'pistachio', 'prismas verdes estriados de epidoto'],
+    lawsonite: ['tabularPair', 'edgeZone', 'cristais tabulares azulados de lawsonita'],
+    prehnite: ['botryoidal', 'radialLines', 'agregado mamelonar de prehnita'],
+    pumpellyite_mg: ['needleFan', 'feathery', 'cristais radiantes de pumpellyita'],
+    // Acessórios, fosfatos, turmalinas, polimorfos SiO2
+    titanite: ['wedge', 'smallFacets', 'cristais em cunha de titanita'],
+    hydroxylapatite: ['hexBarrel', 'straightCleavage', 'prisma hexagonal curto de apatita'],
+    monazite_ce: ['wedge', 'brightFacet', 'cristais tabulares amarelo-âmbar'],
+    xenotime_y: ['tetraBipyramid', 'facets', 'bipirâmide tetragonal de xenotima'],
+    elbaite: ['hexPrism', 'zoning', 'turmalina estriada e zonada'],
+    beryl: ['hexPrism', 'fineTwins', 'cristal hexagonal de berilo'],
+    topaz: ['twinPrism', 'cleavage', 'cristal ortorrômbico facetado de topázio'],
+    tridymite: ['hexPlate', 'thinPlates', 'lamelas delgadas de sílica'],
+    cristobalite: ['octa', 'fineFacet', 'cristal pseudooctaédrico de cristobalita'],
+    coesite: ['granular', 'microfractures', 'agregados finos de sílica de alta pressão'],
+    stishovite: ['needleFan', 'paleCore', 'cristais aciculares de SiO₂ de alta pressão'],
+    // Carbonatos, sulfatos e haletos
+    magnesite: ['rhomboPair', 'paleCore', 'romboedros claros de magnesita'],
+    aragonite: ['pseudoHex', 'twinning', 'maclas pseudohexagonais de aragonita'],
+    ankerite: ['rhombo', 'edgeZone', 'romboedro carbonático ferrífero'],
+    smithsonite: ['botryoidal', 'banded', 'agregado botrioidal de smithsonita'],
+    cerussite: ['twinPrism', 'twinMark', 'geminação característica em cerussita'],
+    strontianite: ['needleFan', 'paleCore', 'feixes radiais de estroncianita'],
+    witherite: ['pseudoHex', 'crossgrain', 'cristal pseudohexagonal de witherita'],
+    barite: ['rosette', 'bladeBands', 'roseta de cristais tabulares de barita'],
+    celestine: ['tabularPair', 'blueRidges', 'cristais tabulares azul-claros'],
+    anglesite: ['tetraBipyramid', 'paleCore', 'bipirâmides ortorrômbicas'],
+    jarosite: ['rhomboPair', 'microfacets', 'cristais romboédricos amarelos finos'],
+    alunite: ['earthy', 'smallFacets', 'agregado alunítico claro'],
+    chalcanthite: ['bladed', 'translucent', 'cristais azuis triclinicos'],
+    chlorargyrite: ['roundedCube', 'waxy', 'cubo arredondado de clorargirita'],
+    // Óxidos, hidróxidos e sulfetos metálicos
+    brookite: ['tabularPair', 'darkSeams', 'placas de brookita castanha'],
+    ilmenite: ['hexPlate', 'metal', 'placas escuras pseudohexagonais'],
+    chromite: ['granular', 'darkSeams', 'agregado granular preto de cromita'],
+    cassiterite: ['twinPrism', 'brightFacet', 'geminação em joelho de cassiterita'],
+    pyrolusite: ['dendritic', 'radiating', 'agulhas/dendritos negros de MnO₂'],
+    manganite: ['needleFan', 'darkSeams', 'cristais negros aciculares'],
+    lepidocrocite: ['rosette', 'warmEdges', 'lâminas vermelhas alaranjadas'],
+    boehmite: ['flaky', 'paleCore', 'flocos finos de boehmita'],
+    diaspore: ['bladed', 'striated', 'lâminas alongadas de diásporo'],
+    uraninite: ['cubePair', 'fracture', 'cubos negros de uraninita'],
+    chalcopyrite: ['tetraBipyramid', 'metal', 'faces metálicas de calcopirita'],
+    troilite: ['granular', 'bronze', 'agregado sulfetado hexagonal escuro'],
+    covellite: ['flaky', 'blueRidges', 'lâminas metálicas azuis de covelita'],
+    bornite: ['granular', 'tarnish', 'agregado com iridescência superficial'],
+    chalcocite: ['tabularPair', 'darkSeams', 'placas pseudohexagonais escuras'],
+    molybdenite: ['flaky', 'metal', 'folhas metálicas de molibdenita'],
+    cinnabar: ['rhomboPair', 'brightFacet', 'romboedros de cinábrio vermelho'],
+    arsenopyrite: ['prismPair', 'metal', 'prismas estriados de arsenopirita'],
+    realgar: ['bladed', 'brightFacet', 'cristais vermelhos alaranjados de realgar'],
+    orpiment: ['flaky', 'yellowBands', 'lâminas amarelas de ouropigmento'],
+    stibnite: ['needleFan', 'metal', 'agulhas radiantes metálicas de estibnita'],
+    acanthite: ['roundedCube', 'metal', 'massa pseudo-cúbica de acantita'],
+    cobaltite: ['cube', 'brightFacet', 'faces metálicas cúbicas de cobaltita'],
+    // Tungstatos, fosfatos
+    scheelite: ['tetraBipyramid', 'honeyFacet', 'bipirâmide tetragonal de scheelita'],
+    ferberite: ['tabularPair', 'longitudinal', 'lâminas escuras alongadas de wolframita Fe'],
+    hubnerite: ['bladed', 'warmEdges', 'lâminas vermelho-acastanhadas de wolframita Mn'],
+    wolframite: ['tabularPair', 'darkSeams', 'placas ferrimanganesíferas estriadas'],
+    vivianite: ['fan', 'blueRidges', 'feixe de cristais verdes-azulados de vivianita'],
+};
+const REMAINING_ICON_IDS = Object.freeze(Object.keys(SPECIES_ART_DIRECTION));
+/** Ícones individualizados manualmente na versão anterior. */
+const CURATED_ICON_IDS = Object.freeze([
+    'fluorite', 'sylvite', 'dolomite', 'siderite', 'rhodochrosite', 'malachite',
+    'azurite', 'gypsum', 'microcline', 'anorthite', 'labradorite', 'rutile',
+    'anatase', 'lizardite', 'antigorite', 'chrysotile', 'zircon', 'fluorapatite',
+    'sillimanite', 'andalusite', 'stilbite', 'cordierite', 'chloritoid',
+    'marcasite', 'pyrrhotite', 'sphalerite', 'pentlandite', 'spodumene', 'dravite', 'schorl',
+]);
+/** Geometria e texturas para os 129 desenhos individualizados nesta revisão.
+ * Os repertórios são compartilhados, mas a composição e detalhe estão escolhidos
+ * individualmente em SPECIES_ART_DIRECTION, em vez de serem derivados de cor/ID.
+ */
+function speciesBaseShape(habit, p, seed) {
+    const edge = `stroke="${p.stroke}" stroke-width="1.45" stroke-linejoin="round"`;
+    const g = (inner, transform) => `<g transform="${transform}">${inner}</g>`;
+    const j = seed % 5;
+    switch (habit) {
+        case 'cube': return tplCube(p, seed);
+        case 'hopper': return `${tplCube(p, seed)}<path d="M28 42L49 31L68 40L49 51Z M34 43L49 35L61 41L49 47Z M52 55L71 45L71 62L52 73Z" fill="none" stroke="${p.sheen}" stroke-width="2.2" opacity=".84"/>`;
+        case 'cubePair': return g(tplCube(p, seed), 'translate(-15 12) scale(.86)') + g(tplCube(p, seed + 2), 'translate(22 -5) scale(.76)');
+        case 'roundedCube': return `<path d="M24 36Q24 31 29 29L47 20Q52 18 56 21L73 32Q77 35 77 40L76 65Q76 70 71 73L54 81Q50 83 46 81L24 69Q20 67 20 61Z" fill="${p.main}" ${edge}/><path d="M24 36L49 47L73 32L54 21L29 29Z" fill="${p.light}"/><path d="M49 47L76 39L76 65L54 81L49 77Z" fill="${p.dark}"/><path d="M49 47V77M24 36L49 47L73 32" fill="none" stroke="${p.stroke}" stroke-width="1.1"/>`;
+        case 'octa': return tplOcta(p, seed);
+        case 'octaPair': return g(tplOcta(p, seed), 'translate(-18 14) scale(.8)') + g(tplOcta(p, seed + 3), 'translate(20 -3) scale(.79)');
+        case 'garnet': return tplDodeca(p, seed);
+        case 'garnetPair': return g(tplDodeca(p, seed), 'translate(-18 14) scale(.8)') + g(tplDodeca(p, seed + 5), 'translate(19 -4) scale(.79)');
+        case 'rhombo': return tplRhombo(p, seed);
+        case 'rhomboPair': return g(tplRhombo(p, seed), 'translate(-16 14) scale(.80)') + g(tplRhombo(p, seed + 4), 'translate(18 -4) scale(.82)');
+        case 'prism': return `${tplPrism(p, seed)}<path d="M36 34L42 69M59 31L63 68" stroke="${p.accent}" stroke-width="1.4" opacity=".55"/>`;
+        case 'prismPair': return g(tplPrism(p, seed), 'translate(-18 13) scale(.82)') + g(tplPrism(p, seed + 3), 'translate(19 -6) scale(.83)');
+        case 'shortPrism': return g(tplPrism(p, seed), 'translate(-5 11) scale(1.12 .81)');
+        case 'stubbyPrism': return g(tplPrism(p, seed), 'translate(-10 13) scale(1.23 .80)') + `<path d="M32 69L51 72L64 65" stroke="${p.sheen}" stroke-width="1.65" fill="none" opacity=".56"/>`;
+        case 'twinPrism': return `${g(tplPrism(p, seed), 'translate(-12 7) scale(.81 .96) rotate(-12 48 48)')}${g(tplPrism(p, seed + 2), 'translate(17 -5) scale(.83) rotate(14 48 48)')}`;
+        case 'block': return tplBlock(p, seed);
+        case 'barrel':
+        case 'hexBarrel':
+        case 'hexPrism': {
+            const top = habit === 'hexBarrel' ? 29 : habit === 'barrel' ? 32 : 20;
+            const bottom = habit === 'hexBarrel' ? 71 : habit === 'barrel' ? 68 : 81;
+            return `<path d="M27 ${top + 8}L41 ${top}L59 ${top}L72 ${top + 8}L69 ${bottom - 5}L56 ${bottom}L38 ${bottom - 1}L25 ${bottom - 10}Z" fill="${p.main}" ${edge}/><path d="M27 ${top + 8}L41 ${top}L46 ${top + 20}L38 ${bottom - 1}L25 ${bottom - 10}Z" fill="${p.light}"/><path d="M46 ${top + 20}L59 ${top}L72 ${top + 8}L69 ${bottom - 5}L56 ${bottom}L46 ${bottom - 4}Z" fill="${p.dark}"/><path d="M27 ${top + 8}L46 ${top + 20}L72 ${top + 8}M46 ${top + 20}L46 ${bottom - 4}M41 ${top}L59 ${top}" fill="none" stroke="${p.stroke}" stroke-width="1.05"/>`;
+        }
+        case 'hexPlate': {
+            const piece = `<path d="M20 48L35 36L59 36L76 48L61 61L35 62Z" fill="${p.main}" ${edge}/><path d="M20 48L35 36L59 36L47 47Z" fill="${p.light}"/><path d="M47 47L59 36L76 48L61 61Z" fill="${p.dark}"/>`;
+            return `${g(piece, 'translate(-2 17) scale(1 .82)')}${g(piece, 'translate(3 -7) scale(.98 .95)')}`;
+        }
+        case 'tabularPair': return `${g(tplTabular(p, seed), 'translate(-12 15) scale(.88) rotate(-10 48 48)')}${g(tplTabular(p, seed + 3), 'translate(15 -5) scale(.86) rotate(8 48 48)')}`;
+        case 'bladed': return `${tplBlade(p, seed)}${g(tplBlade(p, seed + 1), 'translate(-18 14) scale(.63) rotate(-17 48 48)')}`;
+        case 'wedge': return `${tplWedge(p, seed)}<path d="M34 27L54 48L66 36" fill="none" stroke="${p.sheen}" stroke-width="1.8" opacity=".55"/>`;
+        case 'tetraBipyramid': return `${tplBipyramid(p, seed)}<path d="M29 33L47 49L68 32M47 49L48 80" fill="none" stroke="${p.accent}" stroke-width="1.15" opacity=".55"/>`;
+        case 'pseudoHex': return `<path d="M47 13L67 28L77 49L68 73L47 83L27 73L18 48L27 27Z" fill="${p.main}" ${edge}/><path d="M47 13L67 28L48 48L27 27Z" fill="${p.light}"/><path d="M67 28L77 49L68 73L48 48Z" fill="${p.dark}"/><path d="M27 27L48 48L27 73L18 48Z" fill="${p.main}"/><path d="M48 48L68 73L47 83L27 73Z" fill="${p.dark}"/><path d="M47 13L48 48L47 83M18 48L77 49" stroke="${p.stroke}" stroke-width="1.1" fill="none"/>`;
+        case 'cross': return tplCross(p, seed);
+        case 'flaky': return `${tplSheet(p, seed)}<path d="M22 ${56 + j}Q46 ${40 + j} 69 48" stroke="${p.sheen}" stroke-width="1.4" opacity=".7" fill="none"/>`;
+        case 'fibres': {
+            const lines = Array.from({ length: 8 }, (_, i) => { const x = 18 + i * 8, by = 78 - ((seed + i) % 3) * 3, tx = 31 + i * 6 - ((seed + i) % 5); return `<path d="M${x} ${by}Q${x + 1} 43 ${tx} ${19 + ((seed + i) % 12)}" stroke="${i % 3 === 0 ? p.dark : i % 3 === 1 ? p.main : p.light}" stroke-width="${4 + (i % 3)}" stroke-linecap="round" fill="none"/>`; });
+            return `${lines.join('')}<path d="M21 80Q47 72 76 79" stroke="${p.stroke}" stroke-width="1.4" fill="none"/>`;
+        }
+        case 'tubes': {
+            const tubes = Array.from({ length: 5 }, (_, i) => { const x = 24 + i * 10, dy = (i * 3 + seed) % 8; return `<path d="M${x} ${77 - dy}Q${x - 4} 45 ${x + 8} ${29 + dy}" stroke="${p.stroke}" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M${x} ${77 - dy}Q${x - 4} 45 ${x + 8} ${29 + dy}" stroke="${p.main}" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="${x + 8}" cy="${29 + dy}" r="2.8" fill="${p.dark}"/>`; }).join('');
+            return tubes;
+        }
+        case 'shards': return `<path d="M22 75L30 32L47 17L43 70Z" fill="${p.light}" ${edge}/><path d="M37 79L48 28L60 18L65 72Z" fill="${p.main}" ${edge}/><path d="M56 76L73 35L79 53L71 78Z" fill="${p.dark}" ${edge}/>`;
+        case 'fan':
+        case 'needleFan': {
+            const narrow = habit === 'needleFan';
+            const count = narrow ? 7 : 5;
+            return Array.from({ length: count }, (_, i) => {
+                const x = 48 + (i - (count - 1) / 2) * (narrow ? 8 : 12), top = 14 + (i * 9 + seed) % 19, bottom = 78 + (i % 2) * 2, w = narrow ? 3.5 : 7;
+                return `<path d="M${45 + (i % 3)} 80L${x - w} ${top + 11}L${x} ${top}L${x + w} ${top + 11}L${51 + (i % 2)} ${bottom}Z" fill="${i % 3 === 0 ? p.dark : i % 3 === 1 ? p.main : p.light}" ${edge}/><path d="M${x} ${top + 4}L${47 + (i % 3)} 75" stroke="${p.sheen}" stroke-width=".8" opacity=".65"/>`;
+            }).join('');
+        }
+        case 'rosette': {
+            return `<circle cx="48" cy="55" r="18" fill="${p.dark}" opacity=".4"/>${Array.from({ length: 7 }, (_, i) => `<g transform="rotate(${i * 360 / 7 + (seed % 8)} 48 53)"><path d="M41 54L34 31L44 15L53 30L55 53Z" fill="${i % 2 ? p.main : p.light}" ${edge}/><path d="M44 24L48 49" stroke="${p.accent}" opacity=".55" stroke-width="1.3"/></g>`).join('')}<circle cx="48" cy="53" r="6" fill="${p.dark}" stroke="${p.stroke}" stroke-width="1.4"/>`;
+        }
+        case 'botryoidal': {
+            const coords = [[26, 59, 16], [41, 42, 18], [60, 44, 18], [72, 61, 14], [48, 65, 20]];
+            return `<path d="M19 70Q11 50 29 37Q45 17 63 32Q84 33 81 58Q77 77 49 82Z" fill="${p.dark}" ${edge}/>` + coords.map(([x, y, r], i) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${i % 2 ? p.main : p.light}" stroke="${p.stroke}" stroke-width="1.2"/><ellipse cx="${x - 4}" cy="${y - 5}" rx="${Math.round(r / 3)}" ry="${Math.round(r / 5)}" fill="${p.sheen}" opacity=".7"/>`).join('');
+        }
+        case 'granular': {
+            const coords = [[29, 43, 13], [49, 31, 15], [69, 46, 14], [33, 67, 14], [55, 65, 17]];
+            return coords.map(([x, y, r], i) => { const d = (seed + i * 3) % 6; return `<path d="M${x - r} ${y - 2}L${x - r / 2} ${y - r + d}L${x + r / 2} ${y - r / 2}L${x + r} ${y + 3}L${x + r / 4} ${y + r}L${x - r / 2} ${y + r / 2}Z" fill="${i % 3 === 0 ? p.dark : i % 3 === 1 ? p.main : p.light}" ${edge}/><path d="M${x - r / 2} ${y - r + d}L${x} ${y + 1}L${x + r / 4} ${y + r}" stroke="${p.sheen}" opacity=".52" stroke-width="1.1" fill="none"/>`; }).join('');
+        }
+        case 'earthy': {
+            const points = `M18 64L24 44L37 36L45 22L63 30L76 43L82 62L67 77L43 81L24 73Z`;
+            return `<path d="${points}" fill="${p.main}" ${edge}/><path d="M24 44L45 22L52 44L37 62L24 73Z" fill="${p.light}"/><path d="M52 44L63 30L76 43L82 62L67 77L43 81Z" fill="${p.dark}" opacity=".66"/>` + Array.from({ length: 13 }, (_, i) => { const x = 25 + ((i * 11 + seed) % 47), y = 41 + ((i * 7 + (seed >> 4)) % 31); return `<circle cx="${x}" cy="${y}" r="${1 + (i % 2)}" fill="${i % 3 === 0 ? p.stroke : p.sheen}" opacity=".65"/>`; }).join('');
+        }
+        case 'druzy': {
+            const mass = `<path d="M17 64L27 49L39 57L52 48L67 53L80 64L74 79L24 80Z" fill="${p.dark}" ${edge}/>`;
+            return mass + Array.from({ length: 9 }, (_, i) => { const x = 21 + i * 7, y = 44 + ((seed >> i) % 10), h = 14 + ((seed + i * 13) % 17); return `<path d="M${x - 5} ${y + 15}L${x} ${y - h}L${x + 6} ${y + 15}Z" fill="${i % 3 === 0 ? p.dark : i % 3 === 1 ? p.main : p.light}" ${edge}/>`; }).join('');
+        }
+        case 'dendritic': {
+            const branches = ['M48 82L48 18', 'M48 54L26 33L20 19', 'M48 60L72 39L79 21', 'M48 69L24 63L17 49', 'M48 42L62 24L62 15', 'M36 43L38 21', 'M62 49L76 51'];
+            return `<g fill="none" stroke-linecap="round" stroke-linejoin="round">${branches.map((d, i) => `<path d="${d}" stroke="${p.stroke}" stroke-width="${i === 0 ? 10 : 7}"/><path d="${d}" stroke="${i % 2 ? p.light : p.main}" stroke-width="${i === 0 ? 7 : 4.5}"/>`).join('')}</g>`;
+        }
+        default: throw new Error(`Unknown mineral habit: ${habit}`);
+    }
+}
+/** Detalhes específicos de hábito, geminação, agregação, textura ou acabamento.
+ * Cada chave tem geometria própria; algumas foram escolhidas para séries que
+ * não se distinguem macroscopicamente, preservando apenas uma diferença sutil.
+ */
+function speciesDetail(feature, p, seed) {
+    const z = seed % 7, u = (seed >> 4) % 5;
+    const S = p.stroke, L = p.sheen, A = p.accent, D = p.dark;
+    switch (feature) {
+        case 'terraces': return `<path d="M32 43L49 34L64 42L48 50Z M37 44L49 38L58 43L49 47Z" fill="none" stroke="${L}" opacity=".72" stroke-width="1.7"/>`;
+        case 'cleavage': return `<path d="M29 40L43 57L38 74M49 34L63 51L56 74" stroke="${S}" stroke-width="1.4" opacity=".48" fill="none"/>`;
+        case 'straightCleavage': return `<path d="M${29 + z} 33L${35 + z} 72M${41 + u} 28L${45 + u} 73M${54 + z} 31L${59 + z} 69" stroke="${A}" stroke-width="1.1" opacity=".67"/>`;
+        case 'obliqueCleavage': return `<path d="M31 45L61 56M33 54L64 65M29 62L60 72" stroke="${S}" stroke-width="1.1" opacity=".52"/>`;
+        case 'darkSeams': return `<path d="M${30 + z} 37L${44 + z} 53L${36 + u} 73M53 30L${61 + z} 46L58 69" fill="none" stroke="${S}" stroke-width="2.2" opacity=".63"/>`;
+        case 'shadowCore': return `<path d="M44 36L56 42L56 68L45 73Z" fill="${D}" opacity=".34"/><path d="M47 38L50 66" stroke="${S}" stroke-width="1.2" opacity=".4"/>`;
+        case 'facet': return `<path d="M32 43L48 33L61 42L55 57L41 62Z" fill="${L}" opacity=".35"/><path d="M33 43L49 53L57 69" fill="none" stroke="${S}" stroke-width="1.2"/>`;
+        case 'facets': return `<path d="M28 45L45 35L62 47L53 62L36 67Z" fill="${A}" opacity=".3"/><path d="M28 45L53 62L62 47M45 35L53 62" stroke="${L}" stroke-width="1.2" opacity=".52" fill="none"/>`;
+        case 'brightFacet': return `<path d="M35 33L54 30L61 42L47 49Z" fill="${L}" opacity=".62"/><path d="M40 38L51 33" stroke="${L}" stroke-width="2.8" stroke-linecap="round"/>`;
+        case 'sixRidges': return `<path d="M29 37L43 45L43 70M43 45L61 36M54 42L55 71" fill="none" stroke="${S}" stroke-width="1.2" opacity=".65"/>`;
+        case 'layering': return `<path d="M22 58Q48 51 72 58M27 66Q50 61 67 66M29 73L63 73" fill="none" stroke="${A}" stroke-width="1.3" opacity=".53"/>`;
+        case 'thinPlates': return `<path d="M24 50L70 46M26 55L71 53M29 60L68 58M31 65L65 63M34 69L62 68" fill="none" stroke="${L}" stroke-width="1.25" opacity=".72"/>`;
+        case 'fineStack': return `<path d="M25 51L71 49M26 55L68 53M29 60L66 57M31 64L65 61M33 69L63 66" stroke="${S}" stroke-width=".85" opacity=".62"/>`;
+        case 'stepped': return `<path d="M28 48L49 44L66 49M29 54L50 50L67 56M32 61L53 57L63 61" stroke="${L}" stroke-width="1.2" fill="none" opacity=".7"/>`;
+        case 'pearly': return `<path d="M29 42Q46 35 69 44M27 51Q50 44 72 54" stroke="${L}" stroke-width="2" opacity=".65" fill="none"/>`;
+        case 'paleCore': return `<path d="M40 40L53 29L60 45L49 62L39 57Z" fill="${L}" opacity=".35"/>`;
+        case 'metal': return `<path d="M27 38L48 32L56 38M30 58L43 53L54 56M52 70L67 63" stroke="${L}" stroke-width="2.1" stroke-linecap="round" opacity=".72"/>`;
+        case 'bronze': return `<path d="M31 42L46 36L57 45M36 61L48 56L65 63" stroke="${A}" stroke-width="2.1" stroke-linecap="round" fill="none" opacity=".72"/>`;
+        case 'tarnish': return `<path d="M25 50Q39 31 54 46Q62 51 73 39" stroke="hsl(221 55% 54%)" stroke-width="5" opacity=".75" fill="none"/><path d="M26 62Q48 44 70 66" stroke="hsl(281 41% 55%)" stroke-width="4" opacity=".72" fill="none"/>`;
+        case 'pores': return Array.from({ length: 8 }, (_, i) => `<circle cx="${28 + (i * 11 + z) % 41}" cy="${35 + (i * 7 + u) % 36}" r="${1.5 + i % 2}" fill="${i % 2 ? S : D}" opacity=".55"/>`).join('');
+        case 'microfractures': return `<path d="M27 47L39 54L34 64M57 37L52 51L65 61M47 66L51 75" stroke="${S}" stroke-width="1.1" fill="none" opacity=".47"/>`;
+        case 'fracture': return `<path d="M28 39L36 51L34 61L48 69M54 32L50 44L67 56L63 73" fill="none" stroke="${S}" stroke-width="1.9" opacity=".6"/>`;
+        case 'smallFacets': return `<path d="M36 38L47 30L55 37L46 49L34 46Z" fill="${A}" opacity=".25"/><path d="M35 55L46 48L60 54L53 65Z" fill="${L}" opacity=".3"/>`;
+        case 'microfacets': return `<path d="M32 43L39 38L46 43L40 51ZM51 52L60 46L66 54L57 60Z" fill="${L}" opacity=".4"/>`;
+        case 'fineFacet': return `<path d="M38 27L54 33L48 47Z M31 55L49 48L43 66Z" fill="${L}" opacity=".44"/>`;
+        case 'triangularFacet': return `<path d="M35 37L55 27L56 48Z M44 55L65 50L59 70Z" fill="${A}" opacity=".42"/>`;
+        case 'honeyFacet': return `<path d="M30 43L47 31L62 45L45 61Z" fill="${L}" opacity=".5"/><path d="M34 46L47 38L57 47" stroke="${S}" stroke-width="1.1" fill="none"/>`;
+        case 'trapezoid': return `<path d="M29 34L50 26L67 38L57 51L35 48Z" fill="${L}" opacity=".39"/><path d="M30 64L44 51L67 58L57 73Z" fill="${A}" opacity=".22"/>`;
+        case 'glassy': return `<path d="M30 39L38 31M52 30L59 34M47 63L57 55" stroke="${L}" stroke-width="3" stroke-linecap="round" opacity=".72"/>`;
+        case 'translucent': return `<path d="M31 34L51 25L63 41L52 69L38 65Z" fill="${L}" opacity=".24"/><path d="M37 36L47 31" stroke="${L}" stroke-width="2.1" opacity=".8"/>`;
+        case 'silky': return `<path d="M29 58Q33 39 40 24M37 64Q45 44 51 24M51 68Q59 49 62 31M62 65Q68 50 70 41" stroke="${L}" stroke-width="1.15" opacity=".7" fill="none"/>`;
+        case 'feathery': return `<path d="M45 75L49 23M41 47L33 40M54 44L66 38M40 58L28 52M54 58L70 51M44 36L36 30M53 36L61 27" stroke="${L}" stroke-width="1.3" opacity=".67"/>`;
+        case 'radiating': return `<path d="M49 74L30 35M49 74L47 25M49 74L65 35M49 74L76 50" stroke="${L}" stroke-width="1.4" opacity=".56"/>`;
+        case 'radialLines': return `<path d="M48 66L30 38M48 66L43 28M48 66L62 33M48 66L70 49M48 66L23 60" stroke="${A}" stroke-width="1.3" opacity=".54"/>`;
+        case 'twinning': return `<path d="M25 43L48 60L72 41M25 52L48 69L72 52" stroke="${S}" stroke-width="1.6" fill="none" opacity=".68"/>`;
+        case 'twinMark': return `<path d="M27 40L54 61M33 29L63 56M30 61L62 40" stroke="${A}" stroke-width="1.35" opacity=".67"/>`;
+        case 'fineTwins': return `<path d="M30 41L43 47M32 45L45 51M34 49L47 55M36 53L49 59M38 57L51 63" stroke="${S}" stroke-width=".75" opacity=".57"/>`;
+        case 'lamellarTwins': return `<path d="M29 42L49 53M29 49L49 60M30 56L50 67M31 63L52 74" stroke="${S}" stroke-width="1.35" opacity=".55"/>`;
+        case 'strongTwins': return `<path d="M26 40L51 54M28 49L54 63M30 58L55 72" stroke="${S}" stroke-width="2.1" opacity=".65"/>`;
+        case 'twinPrism': return `<path d="M32 37L46 48L60 35M32 47L46 58L60 46" stroke="${S}" stroke-width="1.7" fill="none" opacity=".5"/>`;
+        case 'striated': return Array.from({ length: 4 }, (_, i) => `<path d="M${30 + i * 7} ${35 + i}L${33 + i * 7} ${66 + i}" stroke="${A}" stroke-width="${i % 2 ? 1.05 : 1.35}" opacity=".52"/>`).join('');
+        case 'streaks': return `<path d="M26 43L48 34M28 50L52 42M31 57L53 49M51 63L69 54" stroke="${L}" stroke-width="1.15" opacity=".64"/>`;
+        case 'parallel': return `<path d="M31 37L40 74M39 29L48 73M48 28L57 72M58 33L65 68" stroke="${L}" stroke-width="1.25" opacity=".64"/>`;
+        case 'longitudinal': return `<path d="M35 31L38 74M44 28L46 74M54 30L57 72M63 35L65 64" stroke="${S}" stroke-width="1.1" opacity=".6"/>`;
+        case 'crossgrain': return `<path d="M29 48L53 61M34 38L61 51M36 62L62 74" stroke="${L}" stroke-width="1.4" opacity=".7"/>`;
+        case 'greenRidges': return `<path d="M24 43L46 38L67 46M25 52L48 48L70 57M29 62L51 57L68 64" stroke="${A}" stroke-width="1.5" opacity=".56" fill="none"/>`;
+        case 'blueRidges': return `<path d="M32 36L51 50M37 28L57 46M42 60L61 73" stroke="hsl(207 56% 75%)" stroke-width="2.0" opacity=".75"/>`;
+        case 'pistachio': return `<path d="M28 53L42 43L58 49M34 66L50 57L64 61" stroke="hsl(75 42% 72%)" stroke-width="2.1" opacity=".8" fill="none"/>`;
+        case 'zoning': return `<path d="M35 37L53 33L65 45L56 61L40 64L30 50Z" fill="none" stroke="${A}" stroke-width="2.1" opacity=".51"/>`;
+        case 'edgeZone': return `<path d="M28 40L42 29L65 37L69 59L53 70L30 63Z" fill="none" stroke="${L}" stroke-width="2" opacity=".58"/>`;
+        case 'blueVeins': return `<path d="M30 37L41 52L33 64M56 28L53 46L67 57L63 72" stroke="hsl(198 55% 83%)" stroke-width="2.2" opacity=".76" fill="none"/>`;
+        case 'banded': return `<path d="M23 63Q40 44 62 50M27 71Q47 53 69 58M30 79Q51 63 74 68" stroke="${L}" stroke-width="2" opacity=".66" fill="none"/>`;
+        case 'bladeBands': return `<path d="M35 35L52 57M42 25L59 49M26 46L47 65" stroke="${A}" stroke-width="1.4" opacity=".72"/>`;
+        case 'yellowBands': return `<path d="M24 47Q48 42 72 50M25 57Q50 51 72 60" stroke="hsl(54 80% 78%)" stroke-width="3" opacity=".75" fill="none"/>`;
+        case 'warmEdges': return `<path d="M27 41L43 28M57 35L68 42M32 67L54 75" stroke="hsl(24 68% 76%)" stroke-width="2.0" opacity=".72" fill="none"/>`;
+        case 'flakeLines': return `<path d="M28 46L61 38M29 53L68 45M33 60L65 54" stroke="${S}" stroke-width="1.2" opacity=".53"/>`;
+        case 'smallStripes': return `<path d="M30 37L37 68M40 34L47 70M51 33L59 68" stroke="${A}" stroke-width="1.15" opacity=".56"/>`;
+        case 'hollow': return Array.from({ length: 5 }, (_, i) => `<circle cx="${26 + i * 10}" cy="${30 + (i * 3 + z) % 8}" r="${2 + i % 2}" fill="${D}" opacity=".5"/>`).join('');
+        case 'waxy': return `<path d="M29 40Q47 27 65 39M28 58Q50 43 70 57" fill="none" stroke="${L}" stroke-width="2.8" opacity=".6" stroke-linecap="round"/>`;
+        case 'cleanFaces': return `<path d="M33 39L45 32M51 45L64 37" stroke="${L}" opacity=".55" stroke-width="1.8" stroke-linecap="round"/>`;
+        case 'veins': return `<path d="M28 46Q38 41 48 55Q57 65 67 60" stroke="${A}" stroke-width="2.1" opacity=".55" fill="none"/>`;
+        default: throw new Error(`Unknown mineral detail: ${feature}`);
+    }
+}
+function artDirectedSpeciesShape(meta, p, seed) {
+    const spec = SPECIES_ART_DIRECTION[meta.id];
+    if (!spec)
+        return null;
+    const [habit, detail] = spec;
+    // Offset and proportions are small, deliberate specimen-to-specimen variations;
+    // the primary silhouette and diagnostic detail come from the map above.
+    const shift = (seed % 5) - 2;
+    const twist = ((seed >>> 3) % 7) - 3;
+    const art = speciesBaseShape(habit, p, seed);
+    const surface = speciesDetail(detail, p, seed);
+    return `<g transform="translate(${shift * .7} 0) rotate(${twist * .55} 48 48)">${art}${surface}</g>`;
+}
 function buildGeneratedShape(meta) {
     const p = paletteFor(meta);
     const seed = iconHash(meta.id + meta.name + meta.family);
@@ -751,7 +1117,7 @@ function mineralIconMarkup(input) {
     const meta = normalizeMeta(input);
     if (!meta)
         return null;
-    const shape = HANDCRAFTED_SHAPES[meta.id] ?? curatedSpeciesShape(meta, paletteFor(meta), iconHash(meta.id + meta.name + meta.family)) ?? buildGeneratedShape(meta);
+    const shape = HANDCRAFTED_SHAPES[meta.id] ?? curatedSpeciesShape(meta, paletteFor(meta), iconHash(meta.id + meta.name + meta.family)) ?? artDirectedSpeciesShape(meta, paletteFor(meta), iconHash(meta.id + meta.name + meta.family)) ?? buildGeneratedShape(meta);
     const label = iconEsc(meta.name || meta.id);
     return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false" data-mineral="${iconEsc(meta.id)}" aria-label="${label}">${shape}</svg>`;
 }
