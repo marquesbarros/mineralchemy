@@ -27,6 +27,14 @@ químicas; agentes geológicos usam símbolos como P↑, T↑ e fO₂↑.
 A ilustração é didática: um hábito representativo não implica forma ou cor
 exclusivas da espécie. Veja [a documentação da iconografia](docs/ICONOGRAFIA.md).
 
+## Catálogo de reações · v0.17
+
+O histórico agrupa as **rotas realizadas** em cinco seções: formação de minerais, transformações mineralógicas, alterações por agentes, associações em etapas e reações de componentes. As seções mostram contadores de rotas registradas e disponíveis, mas **não revelam equações nem produtos de reações ainda não realizadas**.
+
+Os filtros são transversais: metamorfismo, H₂O e fluidos, oxirredução, formações, transformações, agentes e etapas. Uma rota pode integrar mais de uma categoria temática, mas aparece apenas uma vez na listagem principal. A busca funciona por componentes, produtos e equações já realizados.
+
+As categorias não alteram o motor de descoberta, as receitas nem os dados locais. Leia [a documentação do catálogo de reações](docs/REACTIONS_CATALOG.md).
+
 ## Tecnologia e publicação
 
 O jogo é distribuído em `index.html`, sem service worker ou dependências de
