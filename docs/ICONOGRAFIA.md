@@ -1,37 +1,25 @@
-# Iconografia do Mineralchemy · v0.13
+# Iconografia mineralógica · v0.14
 
-## Princípio
+## Política visual
 
-Todos os minerais, inclusive os elementos nativos, receberão SVGs próprios. Íons, moléculas e reagentes não minerais usam fórmulas. Agentes geológicos usam símbolos de processos. Associações intermediárias não são novas espécies.
+Cada uma das **178 entradas minerais** recebe um SVG exclusivo no jogo, incluindo os sete elementos nativos (Au, Ag, Cu, Fe, S, grafita e diamante). Íons, moléculas e outras substâncias não minerais permanecem representados por fórmula; agentes geológicos usam notação de processo.
 
-## Primeira biblioteca (19 de 178)
+A semelhança estrutural entre minerais da mesma família pode ser aproveitada, mas os ícones diferem em cor, facetas, estriações, proporção ou detalhes. O desenho representa um hábito ou aspecto característico, **não uma identificação mineralógica definitiva**.
 
-| Mineral | ID | Aspecto representado |
-|---|---|---|
-| Quartzo | quartz | Prisma pseudohexagonal, sistema trigonal |
-| Ortoclásio | orthoclase | Bloco tabular feldspático |
-| Albita | albite | Bloco estriado |
-| Calcita | calcite | Romboedro |
-| Pirita | pyrite | Cubo dourado estriado |
-| Galena | galena | Cubo cinza-chumbo |
-| Magnetita | magnetite | Octaedro escuro |
-| Olivina intermediária | olivine | Grão verde multifacetado |
-| Cianita | kyanite | Lâminas azuis |
-| Almandina | almandine | Granada polifacetada vinho |
-| Muscovita | muscovite | Lâminas claras sobrepostas |
-| Biotita | biotite | Lâminas escuras sobrepostas |
-| Ferro nativo | fe | Massa metálica irregular |
-| Enxofre nativo | s | Cristal amarelo |
-| Cobre nativo | cu | Dendrito metálico |
-| Ouro nativo | gold_native | Pepita irregular dourada |
-| Prata nativa | silver_native | Filamentos metálicos |
-| Grafita | graphite | Lâminas cinzentas empilhadas |
-| Diamante | diamond | Octaedro facetado translúcido |
+## Cobertura
 
-Cor, hábito e textura variam naturalmente. Os desenhos são representações didáticas de ocorrências características, não critérios diagnósticos isolados. Diamante e grafita têm fórmula C, mas ícones diferentes.
+- **19 ilustrações autorais originais preservadas**: quartzo, ortoclásio, albita, calcita, pirita, galena, magnetita, olivina, cianita, almandina, muscovita, biotita, ferro nativo, enxofre, cobre nativo, ouro, prata, grafita e diamante.
+- **159 SVGs adicionais exclusivos**, produzidos a partir de arquétipos vetoriais (prismático, tabular, lamelar, granular, octaédrico, dodecaédrico, cúbico, romboédrico, acicular etc.) com paleta e detalhes diferenciados conforme a entrada.
+- **178/178 minerais cobertos** pela interface. Os 159 SVGs adicionais são representações iniciais geradas por regras, sujeitas a refinamento individual quanto a hábitos e cores em revisões futuras.
 
-## Detalhes técnicos
+## Aplicação
 
-Os SVGs são incorporados ao index.html na compilação. O mesmo ícone aparece na biblioteca, bancada, coleção e detalhe. Não interfere com os gestos de arraste e é marcado como decorativo para acessibilidade. Demais 159 entradas aguardam desenho individual.
+A mesma ilustração aparece na biblioteca, na bancada, na coleção e na ficha de detalhes. Os SVGs são incorporados ao `index.html` autônomo, que não depende de serviço externo nem de service worker.
 
-**Referência:** [Mineral Identification Key, MSA](https://msaweb.org/mineral-id-key/).
+As associações metamórficas intermediárias não contam como espécies minerais e possuem representação simbólica própria.
+
+## Validação
+
+A versão foi compilada e executou **73 testes automatizados**, incluindo a presença de SVG para cada uma das 178 entradas minerais e a unicidade do conteúdo de seus ícones. Os testes não substituem uma revisão mineralógica individual dos 159 novos desenhos.
+
+Referência de hábitos: [Mineral Identification Key, Mineralogical Society of America](https://msaweb.org/mineral-id-key/).
