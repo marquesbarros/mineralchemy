@@ -360,3 +360,11 @@ As receitas abaixo são **atalhos intuitivos de descoberta**. As combinações n
 | Caulinita + K⁺ | Ortoclásio |
 
 As reações reais envolvem frequentemente componentes ambientais adicionais e condições próprias. O jogo mantém separadas a **mecânica de descoberta** e a **referência química/mineralógica**.
+
+## Retificações da v0.22
+
+A formação de nefelina e leucita não é atribuída a calor ou óxido isolados: exige baixa atividade de sílica ou um contexto ígneo/hidrotermal adequado. Coesita e stishovita retrotransformam-se em quartzo em resposta à descompressão; resfriamento isolado não representa a relação física.
+
+Foram retiradas associações que davam potássio a micas sem aporte de K, hidratavam diopsídio por aquecimento e confundiam polimorfismo com decomposição química. Desidratação de paragonita + quartzo e decomposição de dolomita, grunerita, ferroactinolita e sodalita receberam produtos/copro­dutos explícitos.
+
+Essas relações são atalhos de memória mineralógica e não substituem condições P–T–X. **695 rotas herdadas continuam exigindo validação individual**.

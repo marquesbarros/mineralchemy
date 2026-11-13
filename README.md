@@ -68,3 +68,13 @@ As equações químicas de referência incluem componentes adicionais e não pre
 As descobertas partem de relações petrológicas, não de uma exigência de que o par escolhido seja, isoladamente, uma equação balanceada. A combinação Al³⁺ + quartzo ou coríndon + quartzo aproxima o jogador dos polimorfos Al₂SiO₅. Cianita, andaluzita e sillimanita podem ser associadas a Na, K ou Ca para encontrar feldspatos, com a sílica e as condições geológicas tratadas como componentes ambientais do modelo.
 
 As rotas alternativas incluem cianita + ortoclásio → muscovita; cianita + albita → paragonita; hornblenda + K ou fluido hidrotermal → biotita; tremolita + K → flogopita; e retornos envolvendo feldspatos e argilominerais em sistemas abertos. A equação de referência, quando apresentada, é independente da associação intuitiva e deve representar um processo balanceado. Uma associação no jogo não implica transformação automática em qualquer condição geológica.
+
+## Revisão de integridade mineralógica · v0.22
+
+O catálogo possui **178 minerais**, **723 combinações executáveis** e **170/178 minerais com pelo menos uma transformação por agente**. As 122 verificações automatizadas passam, incluindo acessibilidade das espécies, ausência de pares conflitantes e preservação de partidas antigas.
+
+A mecânica de misturar duas peças é uma **associação de descoberta**, não uma equação balanceada por definição. O histórico separa a combinação do jogador de uma referência química quando ela é defensável. **695 rotas herdadas continuam pendentes de revisão mineralógica individual**; os testes de software não certificam estabilidade ou mecanismo geológico.
+
+Nesta revisão, nefelina e leucita exigem baixa atividade de sílica ou rotas de decomposição apropriadas; coesita e stishovita retornam a quartzo por descompressão, em vez de resfriamento isolado. Foram descontinuados 18 atalhos indevidos (como micas potássicas sem K e hidratação de piroxênio por aquecimento seco), preservando os eventos antigos no histórico. Foram corrigidas as transformações térmicas de aragonita, dolomita, grunerita, ferroactinolita e sodalita, além de paragonita + quartzo e oxidação de ilmenita.
+
+Veja [a auditoria e limitações científicas](docs/REVISAO_GEOLOGICA_v022.md).
