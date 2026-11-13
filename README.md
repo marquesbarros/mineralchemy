@@ -35,6 +35,12 @@ Os filtros são transversais: metamorfismo, H₂O e fluidos, oxirredução, form
 
 As categorias não alteram o motor de descoberta, as receitas nem os dados locais. Leia [a documentação do catálogo de reações](docs/REACTIONS_CATALOG.md).
 
+## Reações e referências químicas
+
+As combinações seguem associações intuitivas entre elementos, minerais e processos. As peças escolhidas pelo jogador não precisam corresponder termo a termo à equação de uma reação natural.
+
+No histórico, os ícones identificam as peças e os produtos. A ficha apresenta **equações químicas balanceadas** quando há uma reação representativa defensável; para soluções sólidas e outros casos sem balanço único, apresenta a composição dos produtos ou a equivalência entre polimorfos. Balanço estequiométrico não implica formação espontânea: a mineralogênese real também depende de pressão, temperatura, fluidos e potencial redox.
+
 ## Tecnologia e publicação
 
 O jogo é distribuído em `index.html`, sem service worker ou dependências de
