@@ -8,7 +8,7 @@ Jogo de descoberta mineralógica. Combine íons, minerais e condições geológi
 
 A bancada combina sempre duas peças. Quando uma reação tem três reagentes, os dois primeiros formam uma associação mineral intermediária. A reação final pode liberar vários produtos. Progresso e histórico ficam salvos no navegador.
 
-## Iconografia v0.14
+## Iconografia v0.15
 
 **178 minerais possuem ilustrações SVG exclusivas**, incluindo todos os sete elementos nativos. Os 19 desenhos originais foram preservados; os 159 restantes utilizam variações individuais de arquétipos mineralógicos, a serem refinadas posteriormente quando necessário.
 
@@ -23,3 +23,7 @@ O jogo está compilado em um arquivo HTML independente na raiz do repositório, 
 O projeto completo com TypeScript, testes e dados científicos também é preservado como pacote-fonte da versão v0.13.
 
 Desenhos estilizados indicam hábitos representativos, não diagnósticos universais.
+
+### Revisão visual v0.15
+
+Refinamentos de **30 minerais** com variação real de hábito, silhueta, detalhes cristalográficos ou textura, além de correções de paleta. Os 178 minerais continuam com SVG próprio. [Veja a galeria das ilustrações refinadas](docs/ICONOGRAFIA_v0.15.html).
