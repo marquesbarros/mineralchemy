@@ -418,16 +418,16 @@ const HANDCRAFTED_SHAPES = {
     diamond: `<path d="M48 12L77 44L48 84L19 44Z" fill="#E6F1F5" stroke="#6D8996" stroke-width="1.7"/><path d="M48 12L77 44L48 49Z" fill="#C1E1EB"/><path d="M48 12L19 44L48 49Z" fill="#FFFFFF"/><path d="M19 44L48 49L48 84Z" fill="#B9D6E1"/><path d="M77 44L48 49L48 84Z" fill="#77A8BC"/><path d="M48 12L48 84M19 44L77 44" fill="none" stroke="#6D8996" stroke-width="1.1" opacity=".55"/><path d="M39 26L44 21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/><path d="M62 52L53 68" stroke="#E9FAFF" stroke-width="2" opacity=".8"/>`,
 };
 const INITIAL_ICON_IDS = Object.freeze(Object.keys(HANDCRAFTED_SHAPES));
-const esc = (v) => v.replace(/[&<>"]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[s] ?? s));
-const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-const hash = (str) => { let h = 2166136261 >>> 0; for (const ch of str) {
+const iconEsc = (v) => v.replace(/[&<>"]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[s] ?? s));
+const iconClamp = (n, min, max) => Math.max(min, Math.min(max, n));
+const iconHash = (str) => { let h = 2166136261 >>> 0; for (const ch of str) {
     h ^= ch.charCodeAt(0);
     h = Math.imul(h, 16777619);
 } return h >>> 0; };
-const hsl = (h, s, l) => `hsl(${((h % 360) + 360) % 360} ${clamp(s, 10, 95)}% ${clamp(l, 12, 94)}%)`;
+const hsl = (h, s, l) => `hsl(${((h % 360) + 360) % 360} ${iconClamp(s, 10, 95)}% ${iconClamp(l, 12, 94)}%)`;
 function paletteFor(meta) {
     const id = (meta.id + ' ' + meta.name + ' ' + meta.family).toLowerCase();
-    let hue = hash(meta.id) % 360, sat = 38, light = 62;
+    let hue = iconHash(meta.id) % 360, sat = 38, light = 62;
     const set = (H, S, L) => { hue = H; sat = S; light = L; };
     if (/gold|ouro/.test(id))
         set(45, 68, 55);
@@ -491,7 +491,13 @@ function paletteFor(meta) {
         set(175, 30, 76);
     else if (/dolomite|magnesite|brucite|portlandite|boehmite|diaspore|gibbsite/.test(id))
         set(120, 10, 82);
-    const accent = (hue + 25 + (hash(meta.name) % 55)) % 360;
+    // Variações perceptíveis entre espécies de mesma família, sem abandonar
+    // a cor mineralógica de referência; evita ícones idênticos só por metadados.
+    const individual = iconHash(meta.id);
+    hue = (hue + ((individual >>> 5) % 23) - 11 + 360) % 360;
+    sat = iconClamp(sat + ((individual >>> 15) % 17) - 8, 10, 90);
+    light = iconClamp(light + ((individual >>> 24) % 13) - 6, 18, 90);
+    const accent = (hue + 25 + (iconHash(meta.name) % 55)) % 360;
     return {
         main: hsl(hue, sat, light),
         light: hsl(hue, sat - 5, Math.min(light + 16, 92)),
@@ -621,7 +627,7 @@ function tplNative(p, seed, meta) {
 }
 function buildGeneratedShape(meta) {
     const p = paletteFor(meta);
-    const seed = hash(meta.id + meta.name + meta.family);
+    const seed = iconHash(meta.id + meta.name + meta.family);
     const kind = archetype(meta);
     switch (kind) {
         case 'cube': return tplCube(p, seed);
@@ -659,8 +665,8 @@ function mineralIconMarkup(input) {
     if (!meta)
         return null;
     const shape = HANDCRAFTED_SHAPES[meta.id] ?? buildGeneratedShape(meta);
-    const label = esc(meta.name || meta.id);
-    return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false" data-mineral="${esc(meta.id)}" aria-label="${label}">${shape}</svg>`;
+    const label = iconEsc(meta.name || meta.id);
+    return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false" data-mineral="${iconEsc(meta.id)}" aria-label="${label}">${shape}</svg>`;
 }
 
 const app = document.querySelector('#app');
