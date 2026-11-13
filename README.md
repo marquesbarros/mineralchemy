@@ -1,21 +1,25 @@
 # Mineralchemy
 
-Jogo de descoberta mineralógica. Combine íons, minerais e processos geológicos para descobrir novas espécies e transformações.
+Jogo de descoberta mineralógica. Combine íons, minerais e condições geológicas para descobrir espécies e transformações metamórficas.
 
 **Jogar:** https://marquesbarros.github.io/mineralchemy/
 
-## Reações metamórficas
-
-A bancada usa sempre duas peças. Quando uma reação envolve três reagentes, os dois primeiros formam uma **associação mineral intermediária**; ao adicionar o terceiro, são revelados os produtos da reação. A associação não é contabilizada como nova espécie mineral.
-
-Nesta versão, há exemplos de descarbonatação, desidratação, crescimento de granada e de estaurolita, e reações de alta pressão. O registro mostra a equação completa e indica quando uma transformação é apenas esquemática. Os coeficientes estequiométricos não correspondem à quantidade de peças arrastadas.
-
 ## Como jogar
 
-Selecione materiais na coleção, arraste-os até a bancada e encoste duas peças. As descobertas ficam salvas localmente no navegador.
+A bancada combina sempre duas peças. Quando uma reação tem três reagentes, os dois primeiros formam uma associação mineral intermediária. A reação final pode liberar vários produtos. Progresso e histórico ficam salvos no navegador.
 
-## Desenvolvimento
+## Iconografia v0.13
 
-O jogo é publicado como um `index.html` autônomo, sem dependência de servidor ou service worker. Para atualizar o site, a branch `main` deve estar configurada no GitHub Pages: **Settings → Pages → Deploy from a branch → main → /(root)**.
+A biblioteca inicial reúne **19 ícones SVG individuais**, incluindo todos os **sete minerais nativos** do catálogo: ouro, prata, cobre, ferro, enxofre, grafita e diamante.
 
-O código-fonte TypeScript, os testes e o catálogo mineralógico estão disponíveis no pacote de desenvolvimento da versão 0.12.
+Íons, moléculas e reagentes não minerais utilizam suas fórmulas químicas: Fe²⁺, H₂O, SO₄²⁻. Agentes geológicos usam notação de processos: P↑, T↑, fO₂↑.
+
+Os demais minerais ainda usam pictogramas provisórios. Consulte [os critérios de iconografia](docs/ICONOGRAFIA.md).
+
+## Publicação
+
+O jogo está compilado em um arquivo HTML independente na raiz do repositório, sem PWA ou service worker. GitHub Pages publica a branch main, pasta /(root).
+
+O projeto completo com TypeScript, testes e dados científicos também é preservado como pacote-fonte da versão v0.13.
+
+Desenhos estilizados indicam hábitos representativos, não diagnósticos universais.
