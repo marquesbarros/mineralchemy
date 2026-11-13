@@ -56,3 +56,8 @@ raiz. O GitHub Pages utiliza a branch `main`, diretório `/(root)`.
 
 Na árvore-fonte, o código TypeScript, os dados e os testes permitem reconstruir
 o pacote estático por `npm test` e `npm run build`.
+## Aluminosilicatos e rotas metamórficas · v0.20
+
+Alumínio e quartzo permitem alcançar Al₂SiO₅. Os polimorfos andaluzita, cianita e sillimanita, combinados com Na⁺, K⁺ ou Ca²⁺, conduzem a feldspatos em rotas intuitivas de sistema aberto. Feldspato potássico + Al₂SiO₅ pode produzir muscovita e quartzo, enquanto anfibólios com potássio ou fluidos hidrotermais apropriados podem conduzir a biotita ou flogopita. A caulinita permanece sobretudo um produto de alteração; seu aquecimento isolado não reconstitui feldspatos.
+
+As equações químicas de referência incluem componentes adicionais e não pretendem igualar o balanço das duas peças. Consulte [o catálogo de rotas](docs/ROTAS_INTUITIVAS.md).

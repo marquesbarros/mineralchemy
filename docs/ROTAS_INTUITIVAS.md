@@ -3,10 +3,10 @@
 ## Cobertura
 
 - Minerais: **178**
-- Combinações executáveis na bancada: **702**
-- Novas rotas nesta versão: **274**
+- Combinações executáveis na bancada: **732**
+- Novas rotas nesta versão: **304**
 - Minerais com ao menos uma transformação por agente: **171/178**
-- Reações no motor (incluindo entradas triplas e preparação): **717**
+- Reações no motor (incluindo entradas triplas e preparação): **747**
 
 Os dois ícones combinados **não** estabelecem uma equação estequiométrica. Trocas Fe–Mg, Na–Ca, Na–K e outros substituintes expressam deslocamentos composicionais. As equações químicas de referência, quando existentes, são independentes da combinação de jogo. Em processos de alteração, o fluido, gases ou componentes disponíveis no sistema aberto podem fornecer ou remover espécies que não foram arrastadas pelo jogador.
 
@@ -319,3 +319,22 @@ Essas exceções não foram preenchidas artificialmente: as opções presentes n
 - [Feldspatos alcalinos e plagioclásios, Geosciences LibreTexts](https://geo.libretexts.org/Bookshelves/Geology/Mineralogy_(Perkins_et_al.)/14:_Mineral_Descriptions/14.01:_Silicate_Class/14.1.01:_Silicate_Class_-_Framework_Silicates)
 - [Produtos de intemperismo de silicatos, Geosciences LibreTexts](https://geo.libretexts.org/Bookshelves/Geology/Environmental_Geology_(Earle)/10:_Weathering_Soil_and_Clay_Minerals/10.05:_Clay_Minerals)
 - [Olivinas e substituições Mg–Fe, Mineralogical Society / Mindat](https://www.mindat.org/min-8658.html)
+## Aluminosilicatos e rotas metamórficas · v0.20
+
+| Combinação | Descoberta |
+|---|---|
+| Al³⁺ + Quartzo | Andaluzita |
+| Coríndon + Quartzo | Andaluzita |
+| Cianita, Andaluzita ou Silimanita + Na⁺ | Albita |
+| Cianita, Andaluzita ou Silimanita + K⁺ | Ortoclásio |
+| Cianita, Andaluzita ou Silimanita + Ca²⁺ | Anortita |
+| Polimorfo Al₂SiO₅ + Ortoclásio | Muscovita + Quartzo |
+| Polimorfo Al₂SiO₅ + Albita | Paragonita + Quartzo |
+| Grossulária + Cianita | Anortita (quartzo ambiental) |
+| Magnésio-hornblenda + K⁺ ou Fluido hidrotermal | Biotita |
+| Tremolita + K⁺ ou Fluido hidrotermal | Flogopita |
+| Biotita + Ca²⁺ | Magnésio-hornblenda (reequilíbrio em sistema aberto) |
+
+As duas peças representam associação mineralógica, não o balanço de uma reação fechada. No histórico, balanços de referência podem incluir água, sílica, cátions, fluidos e subprodutos não selecionados. As condições termodinâmicas e o aporte geoquímico continuam necessários.
+
+Fontes: [Metamorphic Reactions](https://utc.pressbooks.pub/mineralogy/chapter/metamorphic-reactions/); [GASP](https://www.science.smith.edu/~jbrady/petrology/metrocks-topics/conditions/conditions-page05.php); [Tateyama et al., 1972](https://www.jstage.jst.go.jp/article/ganko1941/67/2/67_2_35/_article/-char/en).
