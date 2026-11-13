@@ -8,13 +8,13 @@ Jogo de descoberta mineralógica. Combine íons, minerais e condições geológi
 
 A bancada combina sempre duas peças. Quando uma reação tem três reagentes, os dois primeiros formam uma associação mineral intermediária. A reação final pode liberar vários produtos. Progresso e histórico ficam salvos no navegador.
 
-## Iconografia v0.13
+## Iconografia v0.14
 
-A biblioteca inicial reúne **19 ícones SVG individuais**, incluindo todos os **sete minerais nativos** do catálogo: ouro, prata, cobre, ferro, enxofre, grafita e diamante.
+**178 minerais possuem ilustrações SVG exclusivas**, incluindo todos os sete elementos nativos. Os 19 desenhos originais foram preservados; os 159 restantes utilizam variações individuais de arquétipos mineralógicos, a serem refinadas posteriormente quando necessário.
 
-Íons, moléculas e reagentes não minerais utilizam suas fórmulas químicas: Fe²⁺, H₂O, SO₄²⁻. Agentes geológicos usam notação de processos: P↑, T↑, fO₂↑.
+Íons, moléculas e reagentes não minerais utilizam fórmulas químicas: Fe²⁺, H₂O, SO₄²⁻. Agentes geológicos usam notação de processos: P↑, T↑, fO₂↑.
 
-Os demais minerais ainda usam pictogramas provisórios. Consulte [os critérios de iconografia](docs/ICONOGRAFIA.md).
+Consulte [os critérios e a cobertura da iconografia](docs/ICONOGRAFIA.md).
 
 ## Publicação
 
