@@ -391,8 +391,12 @@ function makeBoardProducts(ids, x, y, width, height, firstId) {
     });
 }
 
-/** Ilustrações originais: primeira biblioteca de 19 minerais, incluindo 7 elementos nativos. */
-const MINERAL_SHAPES = {
+/** Biblioteca de iconografia mineralógica.
+ * 19 espécies mantêm ilustrações autorais totalmente desenhadas.
+ * As demais recebem SVGs exclusivos gerados a partir de arquétipos mineralógicos,
+ * preservando a regra: todo mineral possui ícone próprio; íons e moléculas não.
+ */
+const HANDCRAFTED_SHAPES = {
     quartz: `<path d="M29 39 L41 21 L58 21 L70 39 L70 71 L57 81 L41 81 L29 71 Z" fill="#D7E8E8" stroke="#676F6F" stroke-width="1.6"></path><path d="M29 39 L41 21 L48 40 L41 81 L29 71 Z" fill="#E5F0F0" opacity=".78"></path><path d="M48 40 L58 21 L70 39 L70 71 L57 81 L48 75 Z" fill="#9AA7A7" opacity=".8"></path><path d="M29 39 L48 40 L70 39 M48 40 L48 75" fill="none" opacity=".6" stroke="#676F6F" stroke-width="1"></path>`,
     orthoclase: `<path d="M23 37 L42 25 L72 31 L72 70 L53 82 L23 75 Z" fill="#DFA9A0" stroke="#6B514C" stroke-width="1.6"></path><path d="M23 37 L42 25 L72 31 L53 43 Z" fill="#EAC7C1"></path><path d="M53 43 L72 31 L72 70 L53 82 Z" fill="#A07973"></path><path d="M53 43 L53 82 M32 42 L32 74 M38 40 L38 77" fill="none" opacity=".65" stroke="#6B514C" stroke-width="1.1"></path><path d="M28 45 L49 54" opacity=".6" stroke="#955C59" stroke-width="1.3"></path>`,
     albite: `<path d="M23 37 L42 25 L72 31 L72 70 L53 82 L23 75 Z" fill="#EBE7DD" stroke="#706E6A" stroke-width="1.6"></path><path d="M23 37 L42 25 L72 31 L53 43 Z" fill="#F2EFE8"></path><path d="M53 43 L72 31 L72 70 L53 82 Z" fill="#A9A69F"></path><path d="M53 43 L53 82 M32 42 L32 74 M38 40 L38 77" fill="none" opacity=".65" stroke="#706E6A" stroke-width="1.1"></path><path d="M30 44 L30 72 M36 42 L36 75 M42 44 L42 77" opacity=".8" stroke="#7B8A92" stroke-width="1.1"></path>`,
@@ -413,13 +417,250 @@ const MINERAL_SHAPES = {
     graphite: `<path d="M18 57L41 45L78 50L60 67L38 76L19 65Z" fill="#44464E" stroke="#2E3137" stroke-width="1.6"/><path d="M19 49L44 37L77 42L59 58L38 67L19 56Z" fill="#6C717B" stroke="#32373E" stroke-width="1.6"/><path d="M17 41L44 27L77 35L60 50L37 59L17 48Z" fill="#969AA4" stroke="#32373E" stroke-width="1.6"/><path d="M17 41L44 27L77 35L60 50L37 59L17 48Z" fill="none" stroke="#E0E3E9" stroke-width=".8" opacity=".7"/><path d="M26 40L44 32L66 37M27 50L38 55L58 48M28 59L39 64L62 57" stroke="#262A30" stroke-width="1.4" opacity=".65" fill="none"/>`,
     diamond: `<path d="M48 12L77 44L48 84L19 44Z" fill="#E6F1F5" stroke="#6D8996" stroke-width="1.7"/><path d="M48 12L77 44L48 49Z" fill="#C1E1EB"/><path d="M48 12L19 44L48 49Z" fill="#FFFFFF"/><path d="M19 44L48 49L48 84Z" fill="#B9D6E1"/><path d="M77 44L48 49L48 84Z" fill="#77A8BC"/><path d="M48 12L48 84M19 44L77 44" fill="none" stroke="#6D8996" stroke-width="1.1" opacity=".55"/><path d="M39 26L44 21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/><path d="M62 52L53 68" stroke="#E9FAFF" stroke-width="2" opacity=".8"/>`,
 };
-const INITIAL_ICON_IDS = Object.freeze(Object.keys(MINERAL_SHAPES));
-/** `null` significa ícone não desenvolvido; nunca representa um elemento nativo com texto. */
-function mineralIconMarkup(id) {
-    const shape = Object.prototype.hasOwnProperty.call(MINERAL_SHAPES, id) ? MINERAL_SHAPES[id] : null;
-    if (!shape)
+const INITIAL_ICON_IDS = Object.freeze(Object.keys(HANDCRAFTED_SHAPES));
+const esc = (v) => v.replace(/[&<>"]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[s] ?? s));
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+const hash = (str) => { let h = 2166136261 >>> 0; for (const ch of str) {
+    h ^= ch.charCodeAt(0);
+    h = Math.imul(h, 16777619);
+} return h >>> 0; };
+const hsl = (h, s, l) => `hsl(${((h % 360) + 360) % 360} ${clamp(s, 10, 95)}% ${clamp(l, 12, 94)}%)`;
+function paletteFor(meta) {
+    const id = (meta.id + ' ' + meta.name + ' ' + meta.family).toLowerCase();
+    let hue = hash(meta.id) % 360, sat = 38, light = 62;
+    const set = (H, S, L) => { hue = H; sat = S; light = L; };
+    if (/gold|ouro/.test(id))
+        set(45, 68, 55);
+    else if (/silver|prata/.test(id))
+        set(210, 10, 72);
+    else if (/cobre nativo|^cu$/.test(meta.id))
+        set(22, 55, 54);
+    else if (/sulfur|enxofre|^s$/.test(meta.id))
+        set(50, 80, 54);
+    else if (/diamond|diamante/.test(id))
+        set(197, 32, 88);
+    else if (/graphite|grafita/.test(id))
+        set(220, 8, 43);
+    else if (/hematit|cuprite|realgar|cinnabar|rutile|ferberite|hubnerite/.test(id))
+        set(10, 52, 48);
+    else if (/goeth|limon|jarosite|pyrite|chalcopyrite|orpiment|alunite/.test(id))
+        set(43, 55, 55);
+    else if (/halite|anhydrite|gypsum|gipsita|anglesite|barite|calcite|cerussite|witherite|strontianite/.test(id))
+        set(185, 8, 88);
+    else if (/fluorite|amethyst|lepidolite/.test(id))
+        set(278, 40, 74);
+    else if (/corundum|spinel|hercynite|magnetite|magnesioferrite|galena|molybdenite|chromite|uraninite|stibnite|acanthite/.test(id))
+        set(220, 10, 34);
+    else if (/forsterite|olivine|olivina|monticellite|nepheline|epidote|prehnite|pumpellyite|uvarovite/.test(id))
+        set(102, 35, 56);
+    else if (/fayalite|ferro|hedenberg|siderite|ankerite|ilmenite|nontronite|chamosite|annite/.test(id))
+        set(30, 25, 42);
+    else if (/diopside|augite|actinolite|tremolite|malachite|vivianite|fluorapatite|hydroxylapatite/.test(id))
+        set(145, 42, 52);
+    else if (/kyanite|glaucophane|riebeckite|sodalite|azurite|labradorite|celestine|lawsonite|beryl/.test(id))
+        set(210, 46, 56);
+    else if (/muscov|albite|coesite|quartz|stishovite|cristobalite|tridymite|topaz|zircon/.test(id))
+        set(195, 15, 80);
+    else if (/orthoclase|microcline|sanidine|oligoclase|andesine|bytownite|plagioclase|feldspato|sylvite/.test(id))
+        set(25, 35, 72);
+    else if (/phlogopite|staurolite|dravite|titanite|scheelite|wolframite|cassiterite/.test(id))
+        set(35, 35, 49);
+    else if (/paragonite|pyrophyllite|kaolinite|halloysite|clinozoisite|zoisite/.test(id))
+        set(85, 14, 79);
+    else if (/spessart|rhodochrosite/.test(id))
+        set(20, 70, 55);
+    else if (/grossular/.test(id))
+        set(70, 42, 58);
+    else if (/almand/.test(id))
+        set(348, 38, 40);
+    else if (/pyrope/.test(id))
+        set(350, 55, 46);
+    else if (/andradite/.test(id))
+        set(95, 28, 45);
+    else if (/tourmaline|elbaite/.test(id))
+        set(165, 48, 52);
+    else if (/schorl/.test(id))
+        set(224, 10, 26);
+    else if (/monazite|xenotime|apatite/.test(id))
+        set(28, 43, 63);
+    else if (/sphalerite|bornite|pentlandite|pyrrhotite|arsenopyrite|cobaltite/.test(id))
+        set(30, 26, 45);
+    else if (/chlorargyrite/.test(id))
+        set(260, 12, 78);
+    else if (/smithsonite/.test(id))
+        set(175, 30, 76);
+    else if (/dolomite|magnesite|brucite|portlandite|boehmite|diaspore|gibbsite/.test(id))
+        set(120, 10, 82);
+    const accent = (hue + 25 + (hash(meta.name) % 55)) % 360;
+    return {
+        main: hsl(hue, sat, light),
+        light: hsl(hue, sat - 5, Math.min(light + 16, 92)),
+        dark: hsl(hue, sat + 6, Math.max(light - 18, 18)),
+        accent: hsl(accent, Math.min(sat + 18, 78), Math.max(light - 6, 24)),
+        stroke: hsl(hue, sat * 0.35, Math.max(light - 35, 20)),
+        sheen: hsl(hue, sat * 0.3, Math.min(light + 24, 96)),
+    };
+}
+function archetype(meta) {
+    const t = (meta.id + ' ' + meta.name + ' ' + meta.family).toLowerCase();
+    if (/muscov|biotite|phlogopite|annite|paragonite|lepidolite|graphite|pyrophyllite|kaolinite|halloysite|montmorillonite|nontronite|clinochlore|chamosite|lizardite|antigorite|chrysotile|talc/.test(t))
+        return 'sheet';
+    if (/kyanite|andalusite|sillimanite|spodumene|beryl|topaz|stibnite/.test(t))
+        return 'blade';
+    if (/actinolite|tremolite|glaucophane|riebeckite|pargasite|hornblende|anthophyllite|grunerite|wollastonite/.test(t))
+        return 'fan';
+    if (/tourmaline|dravite|schorl|elbaite|enstatite|ferrosilite|diopside|hedenbergite|augite|jadeite|omphacite|aegirine|clinoenstatite|pigeonite/.test(t))
+        return 'prism';
+    if (/staurolite/.test(t))
+        return 'cross';
+    if (/calcite|dolomite|ankerite|magnesite|siderite|rhodochrosite|smithsonite|aragonite|cerussite|strontianite|witherite/.test(t))
+        return 'rhombo';
+    if (/fluorite|halite|sylvite|pyrite|galena/.test(t))
+        return 'cube';
+    if (/garnet|almandine|pyrope|grossular|spessartine|andradite|uvarovite/.test(t))
+        return 'dodeca';
+    if (/magnetite|spinel|hercynite|magnesioferrite|diamond/.test(t))
+        return 'octa';
+    if (/quartz|zircon|apatite|nepheline|sodalite|analcime|leucite|fluorapatite|hydroxylapatite/.test(t))
+        return 'bipyramid';
+    if (/barite|celestine|anglesite|laumontite|stilbite|clinoptilolite|gypsum|jarosite|alunite/.test(t))
+        return 'tabular';
+    if (/brookite|titanite/.test(t))
+        return 'wedge';
+    if (/goethite|manganite|boehmite|diaspore/.test(t))
+        return 'needle';
+    if (/cu$|silver_native|gold_native|fe$/.test(meta.id))
+        return 'native';
+    if (/s$/.test(meta.id))
+        return 'aggregate';
+    if (/malachite|azurite|prehnite|pumpellyite|chloritoid|cordierite/.test(t))
+        return 'aggregate';
+    if (/coesite|stishovite|cristobalite|tridymite/.test(t))
+        return 'silica';
+    if (/orthoclase|albite|microcline|sanidine|oligoclase|andesine|labradorite|bytownite|anorthite|corundum/.test(t))
+        return 'block';
+    return 'aggregate';
+}
+function detailLines(seed, c) {
+    const v = (seed % 5) + 2;
+    const segs = [];
+    for (let i = 0; i < v; i++) {
+        const x1 = 22 + ((seed >> (i + 1)) % 46), y1 = 24 + ((seed >> (i + 4)) % 46), x2 = x1 + 8 + ((seed >> (i + 8)) % 18), y2 = y1 + ((i % 2) * 8 - 4);
+        segs.push(`<path d="M${x1} ${y1}L${x2} ${y2}" stroke="${c}" stroke-width="1.1" opacity=".45" stroke-linecap="round"/>`);
+    }
+    return segs.join('');
+}
+function tplCube(p, seed) {
+    const s = seed % 3;
+    return `<path d="M22 33L49 19L76 33L76 66L49 81L22 67Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.7"/><path d="M22 33L49 19L76 33L49 47Z" fill="${p.light}"/><path d="M49 47L76 33L76 66L49 81Z" fill="${p.dark}"/><path d="M49 47V81" fill="none" stroke="${p.stroke}" stroke-width="1.1"/><path d="M${26 + s * 2} 43l18 -10M${28 + s * 2} 52l18 -10M${30 + s * 2} 61l12 -7" stroke="${p.accent}" stroke-width="1.3" opacity=".6"/>`;
+}
+function tplBlock(p, seed) {
+    const dx = seed % 4;
+    return `<path d="M22 37L42 25L73 30L72 69L53 82L22 75Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.6"/><path d="M22 37L42 25L73 30L53 43Z" fill="${p.light}"/><path d="M53 43L73 30L72 69L53 82Z" fill="${p.dark}"/><path d="M53 43V82M31 42V74M${37 + dx} 40V77" fill="none" stroke="${p.stroke}" stroke-width="1.05" opacity=".7"/><path d="M29 45L49 54" stroke="${p.accent}" stroke-width="1.25" opacity=".55"/>`;
+}
+function tplRhombo(p, seed) {
+    const dy = seed % 4;
+    return `<path d="M23 33L56 22L77 41L67 71L35 82L17 62Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.7"/><path d="M23 33L56 22L77 41L42 52Z" fill="${p.light}"/><path d="M42 52L77 41L67 71L35 82Z" fill="${p.dark}"/><path d="M42 52L35 82L17 62L23 33Z" fill="${p.main}" opacity=".7"/><path d="M23 33L42 52L77 41M42 52L35 82" fill="none" stroke="${p.stroke}" stroke-width="1"/>${detailLines(seed, p.accent)}<path d="M${30 + dy} 38L${38 + dy} 52L${34 + dy} 66" stroke="${p.sheen}" stroke-width="1.1" opacity=".55"/>`;
+}
+function tplOcta(p, seed) {
+    return `<path d="M48 14L79 45L48 83L18 46Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.6"/><path d="M48 14L79 45L47 48Z" fill="${p.light}"/><path d="M18 46L48 14L47 48Z" fill="${p.main}"/><path d="M18 46L47 48L48 83Z" fill="${p.dark}" opacity=".86"/><path d="M47 48L79 45L48 83Z" fill="${p.dark}"/><path d="M18 46L47 48L79 45M47 48L48 83" fill="none" stroke="${p.stroke}" stroke-width="1.15"/><path d="M49 16L49 80" opacity=".38" stroke="${p.accent}" stroke-width="1"/>`;
+}
+function tplDodeca(p, seed) {
+    return `<path d="M30 20L52 15L74 29L80 49L67 75L43 83L19 65L17 39Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.7"/><path d="M30 20L52 15L56 39L34 45L17 39Z" fill="${p.light}"/><path d="M56 39L74 29L80 49L67 75L53 61Z" fill="${p.dark}"/><path d="M34 45L56 39L53 61L43 83L19 65Z" fill="${p.main}" opacity=".73"/><path d="M56 39L53 61L34 45L17 39M53 61L67 75" fill="none" stroke="${p.stroke}" stroke-width="1.1"/>${detailLines(seed, p.sheen)}`;
+}
+function tplPrism(p, seed) {
+    const shift = seed % 6;
+    return `<path d="M31 ${23 + shift}L49 18L65 ${26 + shift}L72 68L54 77L38 72Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.45"/><path d="M31 ${23 + shift}L49 18L54 46L38 72Z" fill="${p.light}"/><path d="M54 46L65 ${26 + shift}L72 68L54 77Z" fill="${p.dark}"/><path d="M54 46L38 72M46 25L59 ${67 - shift}" fill="none" stroke="${p.stroke}" stroke-width="1.05" opacity=".75"/><path d="M42 30L55 66M47 27L60 62" stroke="${p.accent}" stroke-width="1.1" opacity=".5"/>`;
+}
+function tplBlade(p, seed) {
+    const tilt = seed % 3;
+    return `<path d="M34 16L49 20L63 77L49 84Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.45"/><path d="M48 20L60 ${12 + tilt}L78 69L63 77Z" fill="${p.light}" stroke="${p.stroke}" stroke-width="1.35"/><path d="M63 77L78 69L68 84L49 84Z" fill="${p.dark}"/><path d="M40 28L54 76M57 24L71 69" stroke="${p.accent}" stroke-width="1.1" opacity=".62"/>`;
+}
+function tplSheet(p, seed) {
+    const a = (seed % 5) - 2;
+    return `<path d="M23 62Q42 43 76 51L72 66Q49 58 27 75Z" fill="${p.dark}" stroke="${p.stroke}" stroke-width="1.25"/><path d="M20 52Q45 ${32 + a} 77 39L76 55Q48 46 22 67Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.25"/><path d="M21 43Q43 ${26 - a} 76 32L78 45Q50 40 21 57Z" fill="${p.light}" stroke="${p.stroke}" stroke-width="1.25"/><path d="M23 47L71 41" opacity=".42" stroke="${p.accent}" stroke-width="1.0"/><path d="M25 57L71 52" opacity=".34" stroke="${p.sheen}" stroke-width=".9"/>`;
+}
+function tplFan(p, seed) {
+    const spread = seed % 4;
+    return `<path d="M24 76L42 20L53 22L41 77Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.35"/><path d="M40 77L56 18L67 22L57 79Z" fill="${p.light}" stroke="${p.stroke}" stroke-width="1.35"/><path d="M54 78L72 ${26 + spread}L78 ${38 + spread}L70 80Z" fill="${p.dark}" stroke="${p.stroke}" stroke-width="1.35"/><path d="M29 65L46 27M45 67L59 25M61 72L72 ${39 + spread}" stroke="${p.accent}" stroke-width="1" opacity=".6"/>`;
+}
+function tplTabular(p, seed) {
+    return `<path d="M18 51L35 28L69 24L80 43L64 68L31 72Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.5"/><path d="M18 51L35 28L69 24L50 49Z" fill="${p.light}"/><path d="M50 49L69 24L80 43L64 68Z" fill="${p.dark}"/><path d="M50 49L31 72L18 51M50 49L64 68" fill="none" stroke="${p.stroke}" stroke-width="1"/><path d="M24 55L58 51M30 63L63 59" stroke="${p.accent}" stroke-width="1.15" opacity=".58"/>`;
+}
+function tplWedge(p, seed) {
+    return `<path d="M20 52L37 21L69 29L77 50L53 78L29 72Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.55"/><path d="M20 52L37 21L53 49L29 72Z" fill="${p.light}"/><path d="M53 49L69 29L77 50L53 78Z" fill="${p.dark}"/><path d="M29 72L53 49L20 52M53 49L77 50" fill="none" stroke="${p.stroke}" stroke-width="1.02"/><path d="M38 29L50 50M45 26L58 45" stroke="${p.accent}" stroke-width="1.1" opacity=".5"/>`;
+}
+function tplNeedle(p, seed) {
+    const s = seed % 6;
+    return `<path d="M30 82L45 ${18 + s}L49 ${19 + s}L38 82Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.25"/><path d="M45 ${18 + s}L58 ${12 + s}L66 77L50 82Z" fill="${p.light}" stroke="${p.stroke}" stroke-width="1.18"/><path d="M54 81L67 ${26 + s}L73 ${33 + s}L66 83Z" fill="${p.dark}" stroke="${p.stroke}" stroke-width="1.18"/><path d="M35 72L46 ${29 + s}M49 76L61 ${26 + s}M59 76L69 ${40 + s}" stroke="${p.accent}" stroke-width="1" opacity=".58"/>`;
+}
+function tplAggregate(p, seed) {
+    const a = seed % 4;
+    return `<path d="M18 49L31 31L51 23L71 31L80 52L69 72L44 81L24 72Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.6"/><path d="M18 49L31 31L44 47L24 72Z" fill="${p.light}"/><path d="M44 47L51 23L71 31L80 52L58 56Z" fill="${p.dark}"/><path d="M24 72L44 47L58 56L69 72L44 81Z" fill="${p.main}" opacity=".78"/><circle cx="${28 + a * 2}" cy="60" r="4" fill="${p.sheen}" opacity=".6"/><circle cx="${59 - a}" cy="41" r="3.4" fill="${p.sheen}" opacity=".56"/><path d="M43 47L58 56L80 52" stroke="${p.stroke}" stroke-width="1" fill="none"/>`;
+}
+function tplCross(p, seed) {
+    return `<path d="M34 18L47 18L58 42L76 52L72 64L53 60L45 80L33 79L37 58L20 47L23 34L40 40Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.6"/><path d="M34 18L47 18L48 48L37 58L20 47L23 34L40 40Z" fill="${p.light}"/><path d="M48 48L58 42L76 52L72 64L53 60L45 80L33 79L37 58Z" fill="${p.dark}"/><path d="M48 48L40 40L58 42M48 48L45 80" fill="none" stroke="${p.stroke}" stroke-width="1.05"/>`;
+}
+function tplSilica(p, seed) {
+    return `<path d="M23 39L37 24L59 21L73 35L67 57L49 73L29 66Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.55"/><path d="M23 39L37 24L47 42L29 66Z" fill="${p.light}"/><path d="M47 42L59 21L73 35L67 57L49 73Z" fill="${p.dark}"/><path d="M47 42L49 73M47 42L73 35" fill="none" stroke="${p.stroke}" stroke-width="1" opacity=".68"/><path d="M28 57L64 40M33 65L66 49" stroke="${p.accent}" stroke-width="1.0" opacity=".45"/>`;
+}
+function tplBipyramid(p, seed) {
+    return `<path d="M48 14L67 30L75 50L48 82L21 50L29 30Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.55"/><path d="M48 14L67 30L48 49L29 30Z" fill="${p.light}"/><path d="M29 30L48 49L21 50Z" fill="${p.main}" opacity=".8"/><path d="M67 30L75 50L48 49Z" fill="${p.dark}"/><path d="M21 50L48 49L48 82Z" fill="${p.main}" opacity=".68"/><path d="M75 50L48 49L48 82Z" fill="${p.dark}" opacity=".85"/><path d="M48 14V82M21 50H75" fill="none" stroke="${p.stroke}" stroke-width="1.05" opacity=".55"/>`;
+}
+function tplNative(p, seed, meta) {
+    const id = meta.id;
+    if (id === 'gold_native')
+        return HANDCRAFTED_SHAPES.gold_native;
+    if (id === 'silver_native')
+        return HANDCRAFTED_SHAPES.silver_native;
+    if (id === 'cu')
+        return HANDCRAFTED_SHAPES.cu;
+    if (id === 'fe')
+        return HANDCRAFTED_SHAPES.fe;
+    return `<path d="M19 50L31 31L51 26L72 35L78 53L66 73L42 80L24 69Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.7"/><path d="M19 50L31 31L44 48L24 69Z" fill="${p.light}"/><path d="M44 48L51 26L72 35L78 53L57 57Z" fill="${p.dark}"/><path d="M24 69L44 48L57 57L66 73L42 80Z" fill="${p.main}" opacity=".74"/>${detailLines(seed, p.sheen)}`;
+}
+function buildGeneratedShape(meta) {
+    const p = paletteFor(meta);
+    const seed = hash(meta.id + meta.name + meta.family);
+    const kind = archetype(meta);
+    switch (kind) {
+        case 'cube': return tplCube(p, seed);
+        case 'block': return tplBlock(p, seed);
+        case 'rhombo': return tplRhombo(p, seed);
+        case 'octa': return tplOcta(p, seed);
+        case 'dodeca': return tplDodeca(p, seed);
+        case 'prism': return tplPrism(p, seed);
+        case 'blade': return tplBlade(p, seed);
+        case 'sheet': return tplSheet(p, seed);
+        case 'fan': return tplFan(p, seed);
+        case 'tabular': return tplTabular(p, seed);
+        case 'wedge': return tplWedge(p, seed);
+        case 'needle': return tplNeedle(p, seed);
+        case 'cross': return tplCross(p, seed);
+        case 'silica': return tplSilica(p, seed);
+        case 'bipyramid': return tplBipyramid(p, seed);
+        case 'native': return tplNative(p, seed, meta);
+        default: return tplAggregate(p, seed);
+    }
+}
+function normalizeMeta(input) {
+    if (typeof input === 'string')
+        return HANDCRAFTED_SHAPES[input] ? { id: input, name: input, family: '', formula: '' } : null;
+    if (!input || !input.id)
         return null;
-    return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false">${shape}</svg>`;
+    const family = (input.family ?? '').toLowerCase();
+    if (/íon|ion|molécula|molecula|agente|reagente|aquoso/.test(family))
+        return null;
+    return { id: input.id, name: input.name ?? input.id, family: input.family ?? '', formula: input.formula ?? '' };
+}
+/** `null` significa que a entrada não é um mineral reconhecido pela biblioteca. */
+function mineralIconMarkup(input) {
+    const meta = normalizeMeta(input);
+    if (!meta)
+        return null;
+    const shape = HANDCRAFTED_SHAPES[meta.id] ?? buildGeneratedShape(meta);
+    const label = esc(meta.name || meta.id);
+    return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false" data-mineral="${esc(meta.id)}" aria-label="${label}">${shape}</svg>`;
 }
 
 const app = document.querySelector('#app');
@@ -486,7 +727,7 @@ const icon = (p) => {
         return '◈';
     return mineralGlyph(p); // Ícone provisório para minerais fora da primeira biblioteca.
 };
-const iconMarkup = (p) => p.kind === 'mineral' ? (mineralIconMarkup(p.id) ?? esc(icon(p))) : esc(icon(p));
+const iconMarkup = (p) => p.kind === 'mineral' ? (mineralIconMarkup({ id: p.id, name: p.name, family: p.family, formula: p.formula }) ?? esc(icon(p))) : esc(icon(p));
 const denseIcon = (p) => p.kind !== 'mineral' && icon(p).length > 5;
 const chemicalIcon = (p) => p.kind === 'ion' || p.kind === 'molecule' || p.kind === 'reagent' || p.kind === 'aqueous' || p.kind === 'agent';
 const palette = (p) => {
