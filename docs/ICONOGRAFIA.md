@@ -23,3 +23,14 @@ As associações metamórficas intermediárias não contam como espécies minera
 A versão foi compilada e executou **73 testes automatizados**, incluindo a presença de SVG para cada uma das 178 entradas minerais e a unicidade do conteúdo de seus ícones. Os testes não substituem uma revisão mineralógica individual dos 159 novos desenhos.
 
 Referência de hábitos: [Mineral Identification Key, Mineralogical Society of America](https://msaweb.org/mineral-id-key/).
+
+
+## Revisão v0.15: 30 ilustrações individualizadas
+
+O refinamento preservou as 19 ilustrações autorais iniciais e passou a diferenciar por geometria, hábito ou textura outras **30 espécies** antes muito próximas visualmente. Entre as mudanças: malaquita botrioidal; azurita prismática; geminação em cauda de andorinha na gipsita; cristais em crista de galo na marcassita; feixes fibrosos de crisotila; bandas onduladas de antigorita; rutilo acicular; anatásio bipiramidal; estriações e geminações nos feldspatos. As paletas também foram revistas para evitar cores aleatórias pouco representativas.
+
+A semelhança entre minerais aparentados permanece quando ela é mineralogicamente justificável. Desenhos esquemáticos não substituem identificação de amostras reais.
+
+[Galeria comparativa da revisão v0.15](ICONOGRAFIA_v0.15.html).
+
+**Validação:** 75 testes automatizados, incluindo a comparação de geometria ignorando a cor para pares selecionados, e testes funcionais em desktop e celular.
