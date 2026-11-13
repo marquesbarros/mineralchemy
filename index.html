@@ -497,6 +497,22 @@ function paletteFor(meta) {
     hue = (hue + ((individual >>> 5) % 23) - 11 + 360) % 360;
     sat = iconClamp(sat + ((individual >>> 15) % 17) - 8, 10, 90);
     light = iconClamp(light + ((individual >>> 24) % 13) - 6, 18, 90);
+    // Valores curados para espécies cujo tom aleatório não é didático.
+    // Uma ocorrência característica, não uma cor diagnóstica universal.
+    const curatedColors = {
+        fluorite: [277, 33, 72], sylvite: [24, 18, 86], dolomite: [118, 11, 76], siderite: [32, 23, 37],
+        rhodochrosite: [344, 54, 63], malachite: [145, 60, 41], azurite: [215, 65, 43],
+        gypsum: [190, 9, 88], microcline: [12, 35, 68], anorthite: [25, 21, 77], labradorite: [207, 40, 58],
+        rutile: [12, 62, 45], anatase: [202, 27, 49], lizardite: [130, 22, 69], antigorite: [115, 26, 62],
+        chrysotile: [115, 25, 70], zircon: [36, 43, 56], fluorapatite: [143, 30, 59],
+        sillimanite: [49, 16, 78], andalusite: [15, 31, 64], stilbite: [22, 31, 79],
+        cordierite: [229, 31, 54], chloritoid: [125, 24, 44], marcasite: [43, 37, 56],
+        pyrrhotite: [34, 32, 43], sphalerite: [28, 35, 39], pentlandite: [34, 24, 41],
+        spodumene: [276, 32, 72], dravite: [32, 37, 41], schorl: [235, 8, 25],
+    };
+    const curated = curatedColors[meta.id];
+    if (curated)
+        [hue, sat, light] = curated;
     const accent = (hue + 25 + (iconHash(meta.name) % 55)) % 360;
     return {
         main: hsl(hue, sat, light),
@@ -625,6 +641,77 @@ function tplNative(p, seed, meta) {
         return HANDCRAFTED_SHAPES.fe;
     return `<path d="M19 50L31 31L51 26L72 35L78 53L66 73L42 80L24 69Z" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.7"/><path d="M19 50L31 31L44 48L24 69Z" fill="${p.light}"/><path d="M44 48L51 26L72 35L78 53L57 57Z" fill="${p.dark}"/><path d="M24 69L44 48L57 57L66 73L42 80Z" fill="${p.main}" opacity=".74"/>${detailLines(seed, p.sheen)}`;
 }
+/**
+ * Refinamentos espécie a espécie. Uma identidade própria é consequência do hábito,
+ * da textura ou da geminação ilustrada; variação de cor sozinha não basta.
+ * Não usar os desenhos como chave de identificação mineralógica absoluta.
+ */
+function curatedSpeciesShape(meta, p, seed) {
+    const edge = `stroke="${p.stroke}" stroke-width="1.4" stroke-linejoin="round"`;
+    switch (meta.id) {
+        case 'fluorite': // grupo cúbico em que triângulos sugerem clivagem octaédrica
+            return `<path d="M20 39L43 22L69 31L76 58L55 78L27 69Z" fill="${p.main}" ${edge}/><path d="M20 39L43 22L50 47L27 69Z" fill="${p.light}"/><path d="M50 47L69 31L76 58L55 78Z" fill="${p.dark}"/><path d="M27 69L50 47L55 78Z" fill="${p.accent}" opacity=".65"/><path d="M35 35L50 47L70 44M50 47L55 78" stroke="${p.stroke}" stroke-width="1.2" fill="none"/><path d="M38 27L52 38" stroke="${p.sheen}" stroke-width="2" opacity=".7"/>`;
+        case 'sylvite': // cubo com crescimento em degraus
+            return `${tplCube(p, seed)}<path d="M32 45L49 36L63 42L48 51L34 51Z" fill="${p.light}" opacity=".65"/><path d="M35 58L49 50L65 56M37 65L50 57L65 63" fill="none" stroke="${p.sheen}" stroke-width="2.2" opacity=".85"/>`;
+        case 'dolomite': // romboedro com faces encurvadas, forma de sela estilizada
+            return `<path d="M17 43Q38 25 63 30L80 49Q64 69 39 79L19 62Z" fill="${p.main}" ${edge}/><path d="M17 43Q38 25 63 30L46 48Z" fill="${p.light}"/><path d="M46 48L63 30L80 49L39 79Z" fill="${p.dark}"/><path d="M17 43Q37 55 46 48Q61 54 80 49M46 48L39 79" stroke="${p.stroke}" stroke-width="1.1" fill="none"/><path d="M25 57Q47 65 68 51" stroke="${p.sheen}" stroke-width="1.6" opacity=".65" fill="none"/>`;
+        case 'siderite': // romboedro marrom com zoneamento ferrífero
+            return `${tplRhombo(p, seed)}<path d="M31 44L48 55L44 73M38 37L56 48L55 68" stroke="${p.accent}" opacity=".9" stroke-width="2.2" fill="none"/>`;
+        case 'rhodochrosite': // agregado mamelonar róseo sobre romboedros
+            return `<path d="M22 69L27 48L44 32L68 38L77 56L63 76L39 80Z" fill="${p.dark}" ${edge}/><circle cx="35" cy="48" r="15" fill="${p.main}" ${edge}/><circle cx="57" cy="52" r="17" fill="${p.light}" ${edge}/><circle cx="40" cy="68" r="15" fill="${p.main}" ${edge}/><circle cx="57" cy="62" r="11" fill="${p.accent}" stroke="${p.stroke}" stroke-width="1" opacity=".65"/><path d="M44 44Q54 39 64 47M34 65Q39 60 45 63" fill="none" stroke="${p.sheen}" stroke-width="2"/>`;
+        case 'malachite': // massas botrioidais e bandas concêntricas
+            return `<path d="M17 57Q20 39 36 39Q38 23 54 25Q69 25 70 43Q83 50 76 67Q65 79 44 77Q25 83 17 57Z" fill="${p.dark}" ${edge}/><circle cx="39" cy="56" r="19" fill="${p.main}" stroke="${p.stroke}" stroke-width="1.1"/><circle cx="39" cy="56" r="13" fill="none" stroke="${p.light}" stroke-width="3.8"/><circle cx="39" cy="56" r="7" fill="${p.dark}"/><circle cx="62" cy="54" r="14" fill="${p.main}" stroke="${p.stroke}" stroke-width="1"/><circle cx="62" cy="54" r="9" fill="none" stroke="${p.light}" stroke-width="3"/><path d="M25 45Q38 31 51 43M55 48Q64 44 70 51" fill="none" stroke="${p.sheen}" stroke-width="1.8" opacity=".8"/>`;
+        case 'azurite': // prismas tabulares azuis em leque
+            return `<path d="M25 76L22 36L39 24L49 63Z" fill="${p.main}" ${edge}/><path d="M35 77L42 17L58 25L57 72Z" fill="${p.light}" ${edge}/><path d="M49 72L66 24L78 38L65 78Z" fill="${p.dark}" ${edge}/><path d="M22 36L36 45L39 24M42 17L54 43L58 25M66 24L65 57L78 38" fill="none" stroke="${p.stroke}" stroke-width="1.2"/><path d="M31 45L37 69M48 34L50 65M70 38L60 70" stroke="${p.sheen}" opacity=".6" stroke-width="1.5"/>`;
+        case 'gypsum': // cristais de selenita geminados em cauda de andorinha
+            return `<path d="M25 77L25 35L40 18L52 49L66 19L78 37L68 78L47 63Z" fill="${p.main}" ${edge}/><path d="M25 35L40 18L52 49L47 63L25 77Z" fill="${p.light}"/><path d="M52 49L66 19L78 37L68 78L47 63Z" fill="${p.dark}"/><path d="M25 35L47 63L68 78M78 37L47 63M40 18L52 49L66 19" stroke="${p.stroke}" stroke-width="1.2" fill="none"/><path d="M31 39L40 29M67 30L72 39" stroke="${p.sheen}" stroke-width="2"/>`;
+        case 'microcline': // geminação em grade cruzada (efeito xadrez)
+            return `${tplBlock(p, seed)}<path d="M29 46L47 55M30 54L47 63M30 62L46 72M35 42L35 72M43 44L43 77" stroke="${p.accent}" stroke-width="1.55" opacity=".75"/>`;
+        case 'anorthite': // lâminas tabulares com maclas mais esparsas
+            return `<path d="M19 40L42 21L70 28L77 65L53 82L24 72Z" fill="${p.main}" ${edge}/><path d="M19 40L42 21L70 28L47 47Z" fill="${p.light}"/><path d="M47 47L70 28L77 65L53 82Z" fill="${p.dark}"/><path d="M47 47L53 82M28 43L33 72M36 40L41 76" stroke="${p.stroke}" stroke-width="1.1" fill="none"/><path d="M29 50L44 56M33 61L48 67" stroke="${p.sheen}" stroke-width="2.1" opacity=".8"/>`;
+        case 'labradorite': // feldspato tabular com planos de reflexo iridescente ilustrativos
+            return `${tplBlock(p, seed)}<path d="M29 48L49 53L54 64L31 60Z" fill="#78B7C9" opacity=".75"/><path d="M33 62L51 65L54 72L35 70Z" fill="#4A7BA8" opacity=".85"/><path d="M35 44L50 47" stroke="#C9F3EF" stroke-width="2.2" opacity=".8"/>`;
+        case 'rutile': // agulhas tetragonais vermelhas em feixe
+            return `<path d="M24 78L33 25L43 15L43 73Z" fill="${p.dark}" ${edge}/><path d="M38 80L50 19L62 15L55 77Z" fill="${p.main}" ${edge}/><path d="M56 78L65 29L75 23L70 77Z" fill="${p.light}" ${edge}/><path d="M28 68L38 30M45 69L56 27M61 69L69 36" stroke="${p.sheen}" stroke-width="1.5" opacity=".64"/>`;
+        case 'anatase': // cristal bipiramidal tetragonal com terminação aguda
+            return `<path d="M48 12L71 34L80 51L48 85L16 51L25 34Z" fill="${p.main}" ${edge}/><path d="M48 12L25 34L48 50Z" fill="${p.light}"/><path d="M48 12L71 34L48 50Z" fill="${p.dark}"/><path d="M16 51L48 50L48 85Z" fill="${p.main}"/><path d="M80 51L48 50L48 85Z" fill="${p.dark}"/><path d="M25 34L16 51L48 50L80 51L71 34" fill="none" stroke="${p.stroke}" stroke-width="1.1"/>`;
+        case 'lizardite': // serpentinitos lamelares em placas muito finas
+            return `<path d="M19 64L32 45L71 41L79 54L67 73L30 78Z" fill="${p.dark}" ${edge}/><path d="M20 51L35 34L71 31L77 45L64 61L27 66Z" fill="${p.main}" ${edge}/><path d="M23 42L37 24L70 22L75 34L64 50L28 57Z" fill="${p.light}" ${edge}/><path d="M30 45L63 41M28 59L64 54M32 71L63 65" stroke="${p.accent}" stroke-width="1.2" opacity=".6"/>`;
+        case 'antigorite': // ondulações de bandas serpentiníticas
+            return `<path d="M18 67Q29 32 44 46Q60 61 77 23L80 44Q65 81 48 65Q34 52 21 81Z" fill="${p.main}" ${edge}/><path d="M20 55Q33 23 49 39Q64 54 75 17" fill="none" stroke="${p.light}" stroke-width="7" stroke-linecap="round" opacity=".9"/><path d="M25 68Q37 42 48 54Q62 68 76 35" fill="none" stroke="${p.dark}" stroke-width="3.5" stroke-linecap="round"/>`;
+        case 'chrysotile': // feixe de fibras sedosas finas
+            return `<path d="M23 77Q30 38 42 20M31 81Q37 42 47 18M39 82Q45 45 54 16M49 81Q56 47 64 22M59 79Q66 48 73 30" fill="none" stroke="${p.stroke}" stroke-width="7" stroke-linecap="round"/><path d="M23 77Q30 38 42 20M31 81Q37 42 47 18M39 82Q45 45 54 16M49 81Q56 47 64 22M59 79Q66 48 73 30" fill="none" stroke="${p.main}" stroke-width="5.2" stroke-linecap="round"/><path d="M25 75Q32 42 42 24M42 77Q49 42 54 21M62 74Q67 49 73 32" stroke="${p.sheen}" stroke-width="1.7" fill="none" opacity=".8"/>`;
+        case 'zircon': // prisma tetragonal com duas terminações piramidais
+            return `<path d="M49 10L68 26L70 64L49 86L28 64L30 26Z" fill="${p.main}" ${edge}/><path d="M49 10L68 26L49 38L30 26Z" fill="${p.light}"/><path d="M49 38L68 26L70 64L49 86Z" fill="${p.dark}"/><path d="M30 26L49 38L49 86L28 64Z" fill="${p.main}"/><path d="M30 26L49 38L68 26M49 38V86M28 64L49 72L70 64" stroke="${p.stroke}" stroke-width="1.1" fill="none"/>`;
+        case 'fluorapatite': // prismas hexagonais com terminação plana
+            return `<path d="M27 27L42 19L59 20L73 30L70 70L55 80L37 77L25 66Z" fill="${p.main}" ${edge}/><path d="M27 27L42 19L44 40L37 77L25 66Z" fill="${p.light}"/><path d="M44 40L59 20L73 30L70 70L55 80L44 75Z" fill="${p.dark}"/><path d="M27 27L44 40L73 30M44 40L44 75M42 19L59 20" fill="none" stroke="${p.stroke}" stroke-width="1"/>`;
+        case 'sillimanite': // fibrolita em feixe acicular
+            return `<path d="M21 77L30 32L37 17L37 71Z" fill="${p.main}" ${edge}/><path d="M31 81L44 23L53 14L50 78Z" fill="${p.light}" ${edge}/><path d="M48 79L60 19L69 26L64 79Z" fill="${p.main}" ${edge}/><path d="M62 76L72 34L79 45L74 79Z" fill="${p.dark}" ${edge}/><path d="M26 69L34 30M37 72L48 30M53 70L64 31" stroke="${p.sheen}" opacity=".6" stroke-width="1.3"/>`;
+        case 'andalusite': // prisma quadrado com núcleo em cruz estilizado
+            return `<path d="M25 28L40 19L67 26L73 71L53 81L27 70Z" fill="${p.main}" ${edge}/><path d="M25 28L40 19L67 26L50 40Z" fill="${p.light}"/><path d="M50 40L67 26L73 71L53 81Z" fill="${p.dark}"/><path d="M50 40V76M28 51L49 59M34 43L42 65M43 47L31 61" stroke="${p.stroke}" stroke-width="2" fill="none" opacity=".75"/>`;
+        case 'stilbite': // agregados radiantes em feixe / laço
+            return `<path d="M48 54L18 31L31 19L49 49L67 18L79 31Z" fill="${p.main}" ${edge}/><path d="M48 54L19 71L31 82L50 60L66 82L79 69Z" fill="${p.light}" ${edge}/><path d="M48 54L25 31M48 54L34 22M48 54L71 30M48 54L69 71M48 54L32 74" stroke="${p.stroke}" stroke-width="1.4"/><circle cx="49" cy="55" r="4" fill="${p.dark}"/>`;
+        case 'cordierite': // prisma pseudohexagonal curto
+            return `<path d="M24 33L38 23L57 22L72 33L73 70L58 80L37 79L24 69Z" fill="${p.main}" ${edge}/><path d="M24 33L38 23L45 42L37 79L24 69Z" fill="${p.light}"/><path d="M45 42L57 22L72 33L73 70L58 80L45 75Z" fill="${p.dark}"/><path d="M24 33L45 42L72 33M45 42V75" stroke="${p.stroke}" stroke-width="1.2" fill="none"/>`;
+        case 'chloritoid': // placas foliáceas com faces losangulares
+            return `<path d="M21 46L41 29L69 31L77 54L56 72L26 69Z" fill="${p.dark}" ${edge}/><path d="M18 35L39 18L67 22L74 43L53 62L24 59Z" fill="${p.main}" ${edge}/><path d="M18 35L39 18L52 40L24 59Z" fill="${p.light}"/><path d="M52 40L67 22L74 43L53 62Z" fill="${p.dark}"/><path d="M24 59L52 40L74 43" stroke="${p.stroke}" stroke-width="1" fill="none"/>`;
+        case 'marcasite': // agregado em crista de galo (piritas não possuem esta silhueta)
+            return `<path d="M19 73L16 45L29 37L32 63L38 29L49 23L49 61L58 25L71 31L66 64L80 43L80 65L68 78L36 81Z" fill="${p.main}" ${edge}/><path d="M16 45L29 37L32 63L38 29L49 23L49 61Z" fill="${p.light}"/><path d="M49 61L58 25L71 31L66 64L80 43L80 65L68 78Z" fill="${p.dark}"/><path d="M25 48L29 68M42 37L44 65M62 36L60 69" stroke="${p.sheen}" opacity=".64" stroke-width="1.6"/>`;
+        case 'pyrrhotite': // placas hexagonais superpostas
+            return `<path d="M16 49L38 31L61 31L80 47L66 66L40 69Z" fill="${p.dark}" ${edge}/><path d="M20 38L40 20L63 22L77 38L62 56L39 59Z" fill="${p.main}" ${edge}/><path d="M20 38L40 20L63 22L48 38Z" fill="${p.light}"/><path d="M48 38L63 22L77 38L62 56L39 59Z" fill="${p.dark}"/><path d="M26 48L56 51M32 61L67 59" stroke="${p.accent}" stroke-width="1.1" opacity=".7"/>`;
+        case 'sphalerite': // agregado tetraédrico com faces brilhantes
+            return `<path d="M25 68L47 18L73 71Z" fill="${p.main}" ${edge}/><path d="M25 68L47 18L49 59Z" fill="${p.light}"/><path d="M47 18L73 71L49 59Z" fill="${p.dark}"/><path d="M33 76L54 43L78 76Z" fill="${p.main}" ${edge}/><path d="M33 76L54 43L56 67Z" fill="${p.light}"/><path d="M54 43L78 76L56 67Z" fill="${p.dark}"/>`;
+        case 'pentlandite': // massa metálica granular com faces cúbicas em inclusão
+            return `<path d="M18 57L28 34L48 23L69 30L80 53L66 74L41 81L21 71Z" fill="${p.dark}" ${edge}/><path d="M22 51L34 34L50 37L53 59L34 67Z" fill="${p.main}" ${edge}/><path d="M44 42L61 31L73 43L67 63L51 67Z" fill="${p.light}" ${edge}/><path d="M32 43L44 40L48 55L35 58ZM54 52L67 49L65 59L56 60Z" fill="${p.accent}" opacity=".5"/>`;
+        case 'spodumene': // cristais longos e achatados
+            return `<path d="M26 83L38 21L54 14L50 75L38 85Z" fill="${p.main}" ${edge}/><path d="M46 80L59 16L75 26L66 78Z" fill="${p.light}" ${edge}/><path d="M54 14L59 16L46 80L50 75Z" fill="${p.dark}"/><path d="M32 70L45 27M53 69L66 28" stroke="${p.sheen}" stroke-width="1.6" opacity=".74"/>`;
+        case 'dravite': // prisma de turmalina com seção triangular e estrias
+            return `<path d="M30 27L48 17L69 28L67 71L47 81L29 71Z" fill="${p.main}" ${edge}/><path d="M30 27L48 17L48 81L29 71Z" fill="${p.light}"/><path d="M48 17L69 28L67 71L48 81Z" fill="${p.dark}"/><path d="M36 31L36 70M42 28L42 75M55 28L54 76M61 31L60 72" stroke="${p.accent}" stroke-width="1.25" opacity=".55"/>`;
+        case 'schorl': // cristais de turmalina prismáticos mais esguios e quase negros
+            return `<path d="M25 72L30 25L44 15L57 22L66 70L48 82Z" fill="${p.main}" ${edge}/><path d="M30 25L44 15L47 42L25 72Z" fill="${p.light}"/><path d="M47 42L57 22L66 70L48 82Z" fill="${p.dark}"/><path d="M39 24L38 72M51 29L53 76M57 35L61 68" stroke="${p.sheen}" stroke-width="1.2" opacity=".45"/>`;
+        default: return null;
+    }
+}
 function buildGeneratedShape(meta) {
     const p = paletteFor(meta);
     const seed = iconHash(meta.id + meta.name + meta.family);
@@ -664,7 +751,7 @@ function mineralIconMarkup(input) {
     const meta = normalizeMeta(input);
     if (!meta)
         return null;
-    const shape = HANDCRAFTED_SHAPES[meta.id] ?? buildGeneratedShape(meta);
+    const shape = HANDCRAFTED_SHAPES[meta.id] ?? curatedSpeciesShape(meta, paletteFor(meta), iconHash(meta.id + meta.name + meta.family)) ?? buildGeneratedShape(meta);
     const label = iconEsc(meta.name || meta.id);
     return `<svg class="mineral-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" aria-hidden="true" focusable="false" data-mineral="${iconEsc(meta.id)}" aria-label="${label}">${shape}</svg>`;
 }
