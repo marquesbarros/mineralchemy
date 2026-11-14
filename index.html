@@ -76,9 +76,7 @@
 .shortcut-guide kbd{border:1px solid #d5e6da;background:#fff;border-radius:4px;padding:1px 5px;color:#275a40;font:700 11px ui-monospace,monospace}
 @media(max-width:680px){.library-section-label{padding:3px 6px}.filters{flex-wrap:wrap}.filters button{flex:1 1 auto}}
 
-/* Catálogo recolhível e agrupamento de receitas */
-.game.catalog-collapsed{grid-template-columns:minmax(0,1fr)}
-.game.catalog-collapsed .library{display:none}
+/* Agrupamento do histórico de reações */
 .history-grouping{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 15px}
 .history-grouping-label{font-size:11px;font-weight:700;color:#788a80;margin-right:3px}
 .history-group-button{border:1px solid #e5ece7;background:#fbfcfb;border-radius:10px;padding:8px 11px;font-size:11px;font-weight:700;color:#506357}
@@ -1788,7 +1786,6 @@ let historySearch = '';
 let historyFilter = 'all';
 let historyGroup = 'section';
 let collectionTopic = 'all';
-let catalogVisible = true;
 let modal = null;
 let detailId = null;
 let active = null;
@@ -2228,7 +2225,7 @@ function modalMarkup() {
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Detalhes do material"><button class="close" data-action="close" aria-label="Fechar">×</button><div class="detail-orb" style="${styleFor(present)}">${iconMarkup(present)}</div><p class="overline">${esc(present.kind === 'agent' ? 'AGENTE' : present.family)}</p><h2>${esc(present.name)}</h2><div class="detail-formula">${esc(present.formula)}</div><p>${esc(present.description)}</p>${routes}<div class="detail-foot">${num} reações no catálogo</div><button class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada <span>↗</span></button></section></div>`;
     }
     if (modal === 'help')
-        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Descubra misturando.</h2><div class="help-step"><span>01</span><p><b>Escolha uma peça</b> na coleção e arraste para a bancada. Você também pode tocar para adicioná-la.</p></div><div class="help-step"><span>02</span><p><b>Encoste duas peças</b> para misturá-las. Se forem compatíveis, aparecerá uma transformação.</p></div><div class="help-step"><span>03</span><p><b>Experimente de novo.</b> Cada descoberta entra na coleção e pode ser usada quantas vezes quiser.</p></div><p class="help-note">As combinações simplificam processos geoquímicos. As fórmulas e descrições aparecem ao tocar em uma peça na bancada.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Qualquer letra</kbd> inicia a busca · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado e fecha a busca.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> recolhe/abre o catálogo · <kbd>Esc</kbd> fecha a pesquisa.</div><div>Para reações com três componentes, forme primeiro uma associação mineral.</div></div><button class="primary" data-action="close">Começar a explorar <span>→</span></button></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Descubra misturando.</h2><div class="help-step"><span>01</span><p><b>Escolha uma peça</b> na coleção e arraste para a bancada. Você também pode tocar para adicioná-la.</p></div><div class="help-step"><span>02</span><p><b>Encoste duas peças</b> para misturá-las. Se forem compatíveis, aparecerá uma transformação.</p></div><div class="help-step"><span>03</span><p><b>Experimente de novo.</b> Cada descoberta entra na coleção e pode ser usada quantas vezes quiser.</p></div><p class="help-note">As combinações simplificam processos geoquímicos. As fórmulas e descrições aparecem ao tocar em uma peça na bancada.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Qualquer letra</kbd> inicia a busca · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado e fecha a busca.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> abre/fecha o catálogo de descobertas · <kbd>Esc</kbd> fecha a pesquisa.</div><div>Para reações com três componentes, forme primeiro uma associação mineral.</div></div><button class="primary" data-action="close">Começar a explorar <span>→</span></button></section></div>`;
     if (modal === 'reset')
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Reiniciar descobertas"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">NOVA PARTIDA</p><h2>Reiniciar descobertas?</h2><p>Isso apagará a coleção descoberta e o histórico deste navegador. Não será possível desfazer.</p><div class="dialog-buttons"><button class="secondary" data-action="close">Cancelar</button><button class="danger" data-action="confirm-reset">Reiniciar jogo</button></div></section></div>`;
     if (modal === 'paths')
@@ -2256,8 +2253,8 @@ function modalMarkup() {
 function mainMarkup() {
     const acquired = knownItems();
     const library = `<aside class="library"><div class="library-heading"><h2>Coleção <span>${acquired.length}</span></h2></div><label class="search"><span>⌕</span><input id="catalogSearch" value="${esc(search)}" type="search" placeholder="Comece a digitar para buscar" aria-label="Buscar na coleção" autocomplete="off"/></label><div class="filters"><button data-action="filter" data-filter="all" class="${filter === 'all' ? 'selected' : ''}">Tudo</button><button data-action="filter" data-filter="ion" class="${filter === 'ion' ? 'selected' : ''}">Íons</button><button data-action="filter" data-filter="mineral" class="${filter === 'mineral' ? 'selected' : ''}">Minerais</button><button data-action="filter" data-filter="agent" class="${filter === 'agent' ? 'selected' : ''}">Agentes</button><button data-action="filter" data-filter="compound" class="${filter === 'compound' ? 'selected' : ''}">Compostos</button></div><div id="libraryItems" class="library-items">${libraryMarkup()}</div></aside>`;
-    const board = `<section class="workspace"><div class="workspace-heading"><h1>Bancada</h1><div class="board-actions"><button type="button" class="clear-button catalog-toggle" data-action="toggle-catalog" title="${catalogVisible ? 'Recolher' : 'Mostrar'} catálogo (Tab)" aria-label="${catalogVisible ? 'Recolher' : 'Mostrar'} catálogo" aria-pressed="${catalogVisible}">▤ <span>Catálogo</span></button><span id="pieceCount">${pieces.length} peças</span><button type="button" data-action="react" class="clear-button board-react" title="Reagir as peças da bancada (Ctrl+Enter)" aria-label="Reagir as peças da bancada">⚗ <span>Reagir</span></button><button type="button" data-action="clear" class="clear-button" title="Limpar a bancada (C ou Delete)">↺ <span>Limpar</span></button></div></div><div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}<div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}"></div></div></section>`;
-    return `${headerMarkup()}<div class="game ${catalogVisible ? '' : 'catalog-collapsed'}">${board}${library}</div><div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
+    const board = `<section class="workspace"><div class="workspace-heading"><h1>Bancada</h1><div class="board-actions"><span id="pieceCount">${pieces.length} peças</span><button type="button" data-action="react" class="clear-button board-react" title="Reagir as peças da bancada (Ctrl+Enter)" aria-label="Reagir as peças da bancada">⚗ <span>Reagir</span></button><button type="button" data-action="clear" class="clear-button" title="Limpar a bancada (C ou Delete)">↺ <span>Limpar</span></button></div></div><div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}<div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}"></div></div></section>`;
+    return `${headerMarkup()}<div class="game">${board}${library}</div><div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
 }
 function render() { if (!app)
     return; app.innerHTML = mainMarkup(); const w = boardSize(); for (const p of pieces) {
@@ -2509,14 +2506,10 @@ function action(el) {
             historySearch = '';
             historyFilter = 'all';
             historyGroup = 'section';
-            catalogVisible = true;
             render();
             notify('Nova partida iniciada.');
             break;
         }
-        case 'toggle-catalog':
-            setCatalogVisible(!catalogVisible);
-            break;
         case 'filter':
             filter = el.dataset.filter;
             updateLibrary();
@@ -2554,23 +2547,10 @@ function updateHistoryResults() { const root = document.querySelector('#historyR
     root.innerHTML = historySectionsMarkup(); }
 function updateLibrary() { const panel = document.querySelector('#libraryItems'); if (panel)
     panel.innerHTML = libraryMarkup(); document.querySelectorAll('.filters button').forEach(button => button.classList.toggle('selected', button.dataset.filter === filter)); }
-function setCatalogVisible(visible) {
-    if (catalogVisible === visible) return;
-    catalogVisible = visible;
-    document.querySelector('.game')?.classList.toggle('catalog-collapsed', !visible);
-    const toggle = document.querySelector('[data-action="toggle-catalog"]');
-    toggle?.setAttribute?.('aria-pressed', String(visible));
-    toggle?.setAttribute?.('aria-label', visible ? 'Recolher catálogo' : 'Mostrar catálogo');
-    toggle?.setAttribute?.('title', (visible ? 'Recolher' : 'Mostrar') + ' catálogo (Tab)');
-    for (const p of pieces) clampPiece(p);
-    updateBoardDom();
-    persistBoard();
-}
 function setLibrarySearch(value) {
     search = value;
     if (search.trim()) {
         filter = 'all';
-        if (!catalogVisible) setCatalogVisible(true);
     }
     updateLibrary();
 }
@@ -2659,20 +2639,23 @@ app.addEventListener('input', e => {
 
 
 function handleGameplayShortcut(e) {
-    if (!engine || modal || detailId || e.defaultPrevented || e.isComposing) return;
+    if (!engine || e.defaultPrevented || e.isComposing) return;
     const key = String(e.key ?? '').toLowerCase();
     const target = e.target;
     const editing = !!target && (target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(target.tagName));
-    // Preserva Tab/Shift+Tab para navegação por campos e controles acessíveis.
+    // Atalho do atlas de descobertas; preservar Tab nativo nos campos e controles.
     if (e.key === 'Tab' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey &&
-        !editing && !['BUTTON', 'A'].includes(target?.tagName)) {
+        !editing && !['BUTTON', 'A'].includes(target?.tagName) &&
+        (!modal || modal === 'collection') && !detailId) {
         e.preventDefault();
-        setCatalogVisible(!catalogVisible);
+        modal = modal === 'collection' ? null : 'collection';
+        updateModal();
         return;
     }
+    if (modal || detailId) return;
     const input = document.querySelector('#catalogSearch');
     if ((e.ctrlKey || e.metaKey) && key === 'k' && !e.altKey) {
-        e.preventDefault(); if (!catalogVisible) setCatalogVisible(true); input?.focus(); return;
+        e.preventDefault(); input?.focus(); return;
     }
     if (e.key === 'Enter' && target?.id === 'catalogSearch' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault(); addFirstSearchResult(); return;
