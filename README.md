@@ -12,6 +12,16 @@ os dois primeiros formam uma associação mineral temporária; o terceiro comple
 a transformação. A reação pode revelar vários produtos ao mesmo tempo.
 O progresso e o histórico ficam salvos localmente no navegador.
 
+## Curadoria científica do catálogo · v0.23
+
+A triagem reduziu a bancada de **723 para 270 pares executáveis**, preservando as **178 espécies minerais** e os IDs históricos de reações descontinuadas. O motor possui 284 reações ativas e 475 registros arquivados. As 48 rotas aprovadas pelo avaliador foram preservadas; duas foram corrigidas conforme comentários recebidos.
+
+A distinção entre intemperismo, hidratação e fluido hidrotermal é explícita. A redução Fe³⁺ + e⁻ → Fe²⁺ substitui a conversão direta a ferro nativo; a formação de goethita a partir de hematita agora utiliza o agente de intemperismo. Ouro nativo e silício elementar substituem dois íons iniciais redundantes, sem equiparar quimicamente os demais íons a metais.
+
+Os cortes incidiram principalmente sobre associações intuitivas redundantes ou sem fundamentação suficiente. **Ainda existem 115 atalhos simbólicos provisórios** necessários à progressão atual. Eles não são tratados como reações naturais aprovadas. O histórico antigo continua reconhecível, sem reativar rotas arquivadas.
+
+Consulte o [catálogo de reações gabaritado para avaliação](catalogo-auditoria.html), o [registro completo](docs/REGISTRO_REVISAO_REACOES.json) e a [curadoria e limites científicos da v0.23](docs/PODA_CIENTIFICA_v023.md).
+
 ## Iconografia v0.16
 
 **178 minerais, 178 ilustrações SVG próprias.** A biblioteca preserva os 19
@@ -69,7 +79,7 @@ As descobertas partem de relações petrológicas, não de uma exigência de que
 
 As rotas alternativas incluem cianita + ortoclásio → muscovita; cianita + albita → paragonita; hornblenda + K ou fluido hidrotermal → biotita; tremolita + K → flogopita; e retornos envolvendo feldspatos e argilominerais em sistemas abertos. A equação de referência, quando apresentada, é independente da associação intuitiva e deve representar um processo balanceado. Uma associação no jogo não implica transformação automática em qualquer condição geológica.
 
-## Revisão de integridade mineralógica · v0.22
+## Revisão de integridade mineralógica · v0.22 (histórico)
 
 O catálogo possui **178 minerais**, **723 combinações executáveis** e **170/178 minerais com pelo menos uma transformação por agente**. As 122 verificações automatizadas passam, incluindo acessibilidade das espécies, ausência de pares conflitantes e preservação de partidas antigas.
 
