@@ -4,7 +4,9 @@
 
 Este documento define os critérios de construção e validação do catálogo de reações. A composição mineral, uma transformação geoquímica e uma associação didática são conceitos distintos. Uma rota executável no jogo não constitui, por si só, uma reação natural demonstrada.
 
-**Atualização v0.23:** o motor foi reduzido a **270 pares executáveis** e **284 reações ativas**, sem perda das 178 espécies. Os números da seção abaixo registram a versão anterior à triagem. Os resultados e as pendências atuais estão em [Poda científica v0.23](PODA_CIENTIFICA_v023.md) e [Registro integral atualizado](REGISTRO_REVISAO_REACOES.json).
+**Atualização v0.25:** a revisão [Processos Hídricos v0.25](PROCESSOS_HIDRICOS_v025.md) diferencia água pura, intemperismo e hidrotermalismo. O motor tem 279 reações ativas e 269 pares executáveis, mantendo 178 espécies alcançáveis; os 489 registros arquivados permanecem consultáveis. Os totais antigos são históricos.
+
+**Atualização v0.23 (histórico):** o motor foi reduzido a **270 pares executáveis** e **284 reações ativas**, sem perda das 178 espécies. Os números da seção abaixo registram a versão anterior à triagem. Os resultados e as pendências atuais estão em [Poda científica v0.23](PODA_CIENTIFICA_v023.md) e [Registro integral atualizado](REGISTRO_REVISAO_REACOES.json).
 
 
 
