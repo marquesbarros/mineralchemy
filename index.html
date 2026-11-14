@@ -1867,7 +1867,8 @@ const palette = (p) => {
 const styleFor = (p) => { const [bg, fg, ring] = palette(p); return `--orb:${bg};--ink:${fg};--ring:${ring}`; };
 const percent = () => { const count = engine.cards.filter(c => c.kind === 'mineral' && save.discovered.includes(c.id)).length; const total = engine.cards.filter(c => c.kind === 'mineral').length; return { count, total }; };
 const discovered = () => new Set([...save.discovered, ...specialAgents]);
-const knownItems = () => playables.filter(p => discovered().has(p.id));
+const HIDDEN_ARCHIVED_IONS = new Set(['gold3', 'silicon4']);
+const knownItems = () => playables.filter(p => discovered().has(p.id) && !HIDDEN_ARCHIVED_IONS.has(p.id));
 const normalizeText = (value) => value.toLocaleLowerCase('pt-BR');
 const mineralPlayables = () => engine.cards.filter((c) => c.kind === 'mineral').map(c => item(c.id)).filter((p) => !!p);
 const collectionTopicDefs = [
@@ -2012,7 +2013,7 @@ function restoreBoard() {
             return;
         const used = new Set();
         const valid = discovered();
-        pieces = raw.filter((p) => !!p && typeof p === 'object' && typeof p.instanceId === 'number' && Number.isSafeInteger(p.instanceId) && p.instanceId >= 1 && typeof p.itemId === 'string' && valid.has(canonicalCardId(p.itemId)) && typeof p.x === 'number' && Number.isFinite(p.x) && typeof p.y === 'number' && Number.isFinite(p.y) && !used.has(p.instanceId) && !!used.add(p.instanceId)).map(p => ({ ...p, itemId: canonicalCardId(p.itemId) })).slice(-120);
+        pieces = raw.filter((p) => !!p && typeof p === 'object' && typeof p.instanceId === 'number' && Number.isSafeInteger(p.instanceId) && p.instanceId >= 1 && typeof p.itemId === 'string' && valid.has(canonicalCardId(p.itemId)) && !HIDDEN_ARCHIVED_IONS.has(canonicalCardId(p.itemId)) && typeof p.x === 'number' && Number.isFinite(p.x) && typeof p.y === 'number' && Number.isFinite(p.y) && !used.has(p.instanceId) && !!used.add(p.instanceId)).map(p => ({ ...p, itemId: canonicalCardId(p.itemId) })).slice(-120);
         nextInstance = Math.max(1, ...pieces.map(p => p.instanceId + 1));
     }
     catch { /* bad save is ignored */ }
