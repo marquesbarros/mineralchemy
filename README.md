@@ -5,6 +5,14 @@ para descobrir espécies e transformações, incluindo reações metamórficas e
 
 **[Jogar](https://marquesbarros.github.io/mineralchemy/)** · **[Atlas dos 178 ícones](https://marquesbarros.github.io/mineralchemy/iconografia.html)**
 
+## Revisão de processos hídricos · v0.25
+
+O jogo distingue agora **Água**, **Intemperismo** e **Fluido hidrotermal** pelo processo que representam. Água continua sendo um reagente de hidratação, hidrólise ou dissolução; não é um agente universal de alteração metamórfica e hidrotermal. A serpentinização de olivina/forsterita passa a depender de fluido hidrotermal e de condições específicas de reação.
+
+Foram descontinuados 15 caminhos inadequados, criadas 9 rotas condicionais e reativada uma reação mineralógica balanceada de lizardita + quartzo → talco + água. O motor possui **279 reações ativas**, **269 pares executáveis** e mantém **178 minerais alcançáveis**. Os 489 registros arquivados continuam disponíveis no histórico e no gabarito de auditoria.
+
+As rotas hidrotermais remanescentes não constituem aprovação termodinâmica: exigem revisão de P–T–X, balanço de massa, atividade dos fluidos e mecanismos. Veja a [revisão de água, intemperismo e hidrotermalismo](docs/PROCESSOS_HIDRICOS_v025.md) ou [avalie o catálogo atualizado](catalogo-auditoria.html).
+
 ## Interação e busca · v0.24
 
 A busca da coleção diferencia caracteres com e sem acento, aceita formas Unicode equivalentes e pode ser iniciada digitando uma letra ou outro caractere imprimível. **Enter** adiciona o primeiro resultado visível, limpa a busca e retira o foco do campo, para permitir **Delete** limpar a bancada. **Ctrl+K** foca a pesquisa e **Ctrl+Enter** executa uma reação com as peças da bancada.
