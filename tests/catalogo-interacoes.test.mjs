@@ -53,27 +53,28 @@ function press(game, key, target = 'BODY', extras = '') {
   game.run(`handleGameplayShortcut({key:${JSON.stringify(key)},target:{tagName:${JSON.stringify(target)},isContentEditable:false},ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){},${extras}})`);
 }
 
-test('Tab recolhe e reabre a coleção lateral sem alterar o catálogo mineralógico', async () => {
+test('Tab abre e fecha o catálogo de descobertas sem ocultar a barra lateral', async () => {
   const g = await makeGame();
-  assert.equal(g.run('catalogVisible'), true);
+  assert.equal(g.run('modal'), null);
   press(g, 'Tab');
-  assert.equal(g.run('catalogVisible'), false);
-  assert.match(g.run('mainMarkup()'), /game catalog-collapsed/);
+  assert.equal(g.run('modal'), 'collection');
+  assert.match(g.run('modalMarkup()'), /class="dialog dialog-wide collection-dialog"/);
+  assert.match(g.run('mainMarkup()'), /class="library"/);
   press(g, 'Tab');
-  assert.equal(g.run('catalogVisible'), true);
-  assert.doesNotMatch(g.run('mainMarkup()'), /game catalog-collapsed/);
-  assert.match(g.run('mainMarkup()'), /data-action="toggle-catalog"/);
+  assert.equal(g.run('modal'), null);
+  assert.match(g.run('mainMarkup()'), /class="library"/);
+  assert.doesNotMatch(g.run('mainMarkup()'), /catalog-collapsed|toggle-catalog/);
 });
 
-test('Tab preserva navegação reversa, edição e diálogos abertos', async () => {
+test('Tab mantém navegação reversa e campos editáveis e não interfere em outros modais', async () => {
   const g = await makeGame();
   press(g, 'Tab', 'BODY', 'shiftKey:true,');
-  assert.equal(g.run('catalogVisible'), true);
+  assert.equal(g.run('modal'), null);
   press(g, 'Tab', 'INPUT');
-  assert.equal(g.run('catalogVisible'), true);
+  assert.equal(g.run('modal'), null);
   g.run("modal = 'history'");
   press(g, 'Tab');
-  assert.equal(g.run('catalogVisible'), true);
+  assert.equal(g.run('modal'), 'history');
 });
 
 test('digitação e busca no campo retornam à aba Tudo e abrangem todas as categorias', async () => {
@@ -86,11 +87,11 @@ test('digitação e busca no campo retornam à aba Tudo e abrangem todas as cate
   input.value = 'calcio';
   g.appEvents.get('input')({ target: input });
   assert.equal(g.run('filter'), 'all');
-  g.run("filter = 'compound'; search = ''; catalogVisible = false");
+  g.run("filter = 'compound'; search = ''");
   press(g, 'c');
   assert.equal(g.run('filter'), 'all');
   assert.equal(g.run('search'), 'c');
-  assert.equal(g.run('catalogVisible'), true);
+  assert.equal(g.run('modal'), null);
 });
 
 test('agrupamento por produto usa apenas reações concluídas e contempla múltiplas saídas', async () => {
