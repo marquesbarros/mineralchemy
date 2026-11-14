@@ -1,0 +1,5979 @@
+{
+  "title": "Registro de revisão científica das rotas explícitas",
+  "date": "2026-11-14",
+  "repository": "marquesbarros/mineralchemy",
+  "source": {
+    "file": "index.html",
+    "blob_sha": "eab865f1460a30e327d9dccad37fb93a7061f56c",
+    "json_path": "EMBEDDED.reactions"
+  },
+  "method": "Triagem estrutural; ainda não é certificação de plausibilidade geológica",
+  "explicit_routes": 422,
+  "not_included": "Rotas calculadas dinamicamente por generateFamilyReactions e generateIntuitiveRoutes; devem ser inventariadas antes da aprovação final.",
+  "checks": {
+    "balanced_reference_equations": 75,
+    "symbolic_routes": 347,
+    "generic_source_routes": 243
+  },
+  "routes": [
+    {
+      "id": "assemble-water",
+      "kind": "synthesis",
+      "inputs": [
+        "h2",
+        "o2"
+      ],
+      "outputs": [
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "assemble-co2",
+      "kind": "synthesis",
+      "inputs": [
+        "c",
+        "o2"
+      ],
+      "outputs": [
+        "co2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-quartz",
+      "kind": "synthesis",
+      "inputs": [
+        "si",
+        "o2"
+      ],
+      "outputs": [
+        "quartz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-halite",
+      "kind": "synthesis",
+      "inputs": [
+        "na",
+        "cl2"
+      ],
+      "outputs": [
+        "halite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-hematite",
+      "kind": "synthesis",
+      "inputs": [
+        "fe",
+        "o2"
+      ],
+      "outputs": [
+        "hematite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-periclase",
+      "kind": "synthesis",
+      "inputs": [
+        "mg",
+        "o2"
+      ],
+      "outputs": [
+        "periclase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-lime",
+      "kind": "synthesis",
+      "inputs": [
+        "ca",
+        "o2"
+      ],
+      "outputs": [
+        "lime"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-fluorite",
+      "kind": "synthesis",
+      "inputs": [
+        "ca",
+        "f2"
+      ],
+      "outputs": [
+        "fluorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-corundum",
+      "kind": "synthesis",
+      "inputs": [
+        "al",
+        "o2"
+      ],
+      "outputs": [
+        "corundum"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-pyrite",
+      "kind": "synthesis",
+      "inputs": [
+        "fe",
+        "s"
+      ],
+      "outputs": [
+        "pyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-cuprite",
+      "kind": "synthesis",
+      "inputs": [
+        "cu",
+        "o2"
+      ],
+      "outputs": [
+        "cuprite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-enstatite",
+      "kind": "synthesis",
+      "inputs": [
+        "periclase",
+        "quartz"
+      ],
+      "outputs": [
+        "enstatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-forsterite",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "periclase"
+      ],
+      "outputs": [
+        "forsterite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-wollastonite",
+      "kind": "synthesis",
+      "inputs": [
+        "lime",
+        "quartz"
+      ],
+      "outputs": [
+        "wollastonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-calcite",
+      "kind": "synthesis",
+      "inputs": [
+        "lime",
+        "co2"
+      ],
+      "outputs": [
+        "calcite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-magnesite",
+      "kind": "synthesis",
+      "inputs": [
+        "periclase",
+        "co2"
+      ],
+      "outputs": [
+        "magnesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-portlandite",
+      "kind": "synthesis",
+      "inputs": [
+        "lime",
+        "water"
+      ],
+      "outputs": [
+        "portlandite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-goethite",
+      "kind": "synthesis",
+      "inputs": [
+        "hematite",
+        "water"
+      ],
+      "outputs": [
+        "goethite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-halite-water",
+      "kind": "alteration",
+      "inputs": [
+        "halite"
+      ],
+      "outputs": [
+        "sodium_ion",
+        "chloride"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-forsterite-serp",
+      "kind": "alteration",
+      "inputs": [
+        "forsterite"
+      ],
+      "outputs": [
+        "lizardite",
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-forsterite-carbon",
+      "kind": "alteration",
+      "inputs": [
+        "forsterite"
+      ],
+      "outputs": [
+        "magnesite",
+        "quartz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-woll-carbon",
+      "kind": "alteration",
+      "inputs": [
+        "wollastonite"
+      ],
+      "outputs": [
+        "calcite",
+        "quartz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-brucite-carbon",
+      "kind": "alteration",
+      "inputs": [
+        "brucite"
+      ],
+      "outputs": [
+        "magnesite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-lizardite-carbon",
+      "kind": "alteration",
+      "inputs": [
+        "lizardite"
+      ],
+      "outputs": [
+        "magnesite",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-pyrite-air",
+      "kind": "alteration",
+      "inputs": [
+        "pyrite"
+      ],
+      "outputs": [
+        "goethite",
+        "sulfate",
+        "proton"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-orthoclase-rain",
+      "kind": "alteration",
+      "inputs": [
+        "orthoclase"
+      ],
+      "outputs": [
+        "kaolinite",
+        "potassium_ion",
+        "silicic_acid"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-kaolinite-rain",
+      "kind": "alteration",
+      "inputs": [
+        "kaolinite"
+      ],
+      "outputs": [
+        "gibbsite",
+        "silicic_acid"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-anhydrite-water",
+      "kind": "alteration",
+      "inputs": [
+        "anhydrite"
+      ],
+      "outputs": [
+        "gypsum"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-gypsum-heat",
+      "kind": "alteration",
+      "inputs": [
+        "gypsum"
+      ],
+      "outputs": [
+        "anhydrite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-calcite-rain",
+      "kind": "alteration",
+      "inputs": [
+        "calcite"
+      ],
+      "outputs": [
+        "calcium_ion",
+        "bicarbonate"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-calcite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "calcite"
+      ],
+      "outputs": [
+        "lime",
+        "co2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-magnesite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "magnesite"
+      ],
+      "outputs": [
+        "periclase",
+        "co2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-portlandite-co2",
+      "kind": "alteration",
+      "inputs": [
+        "portlandite"
+      ],
+      "outputs": [
+        "calcite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-goethite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "goethite"
+      ],
+      "outputs": [
+        "hematite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-cuprite-rain",
+      "kind": "alteration",
+      "inputs": [
+        "cuprite"
+      ],
+      "outputs": [
+        "malachite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-lime-water",
+      "kind": "alteration",
+      "inputs": [
+        "lime"
+      ],
+      "outputs": [
+        "portlandite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-portlandite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "portlandite"
+      ],
+      "outputs": [
+        "lime",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-chalcopyrite",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "cu"
+      ],
+      "outputs": [
+        "chalcopyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-ferrosilite-direct",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "fe"
+      ],
+      "outputs": [
+        "ferrosilite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-ferrosilite",
+      "kind": "synthesis",
+      "inputs": [
+        "wustite",
+        "quartz"
+      ],
+      "outputs": [
+        "ferrosilite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-wustite",
+      "kind": "synthesis",
+      "inputs": [
+        "fe",
+        "hematite"
+      ],
+      "outputs": [
+        "wustite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-enstatite-direct",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "mg"
+      ],
+      "outputs": [
+        "enstatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-wollastonite-direct",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "ca"
+      ],
+      "outputs": [
+        "wollastonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-diopside",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "wollastonite"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-hedenbergite",
+      "kind": "synthesis",
+      "inputs": [
+        "ferrosilite",
+        "wollastonite"
+      ],
+      "outputs": [
+        "hedenbergite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-fayalite",
+      "kind": "synthesis",
+      "inputs": [
+        "ferrosilite",
+        "wustite"
+      ],
+      "outputs": [
+        "fayalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-forsterite-fe",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "fe"
+      ],
+      "outputs": [
+        "olivine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-olivine-fe",
+      "kind": "synthesis",
+      "inputs": [
+        "olivine",
+        "fe"
+      ],
+      "outputs": [
+        "fayalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-olivine-mg",
+      "kind": "synthesis",
+      "inputs": [
+        "olivine",
+        "mg"
+      ],
+      "outputs": [
+        "forsterite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-enstatite-ca",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "ca"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-diopside-fe",
+      "kind": "synthesis",
+      "inputs": [
+        "diopside",
+        "fe"
+      ],
+      "outputs": [
+        "augite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-augite-fe",
+      "kind": "synthesis",
+      "inputs": [
+        "augite",
+        "fe"
+      ],
+      "outputs": [
+        "hedenbergite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-hedenbergite-mg",
+      "kind": "synthesis",
+      "inputs": [
+        "hedenbergite",
+        "mg"
+      ],
+      "outputs": [
+        "augite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "e-augite-mg",
+      "kind": "synthesis",
+      "inputs": [
+        "augite",
+        "mg"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-brucite-water",
+      "kind": "synthesis",
+      "inputs": [
+        "periclase",
+        "water"
+      ],
+      "outputs": [
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-serpentine-water",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "water"
+      ],
+      "outputs": [
+        "lizardite",
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-olivine-water",
+      "kind": "synthesis",
+      "inputs": [
+        "olivine",
+        "water"
+      ],
+      "outputs": [
+        "lizardite",
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-enstatite-water",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "water"
+      ],
+      "outputs": [
+        "lizardite",
+        "talc"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-diopside-water",
+      "kind": "synthesis",
+      "inputs": [
+        "diopside",
+        "water"
+      ],
+      "outputs": [
+        "tremolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "s-anhydrite-water",
+      "kind": "synthesis",
+      "inputs": [
+        "anhydrite",
+        "water"
+      ],
+      "outputs": [
+        "gypsum"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-periclase-water",
+      "kind": "alteration",
+      "inputs": [
+        "periclase"
+      ],
+      "outputs": [
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-hematite-water",
+      "kind": "alteration",
+      "inputs": [
+        "hematite"
+      ],
+      "outputs": [
+        "goethite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-forsterite-water",
+      "kind": "alteration",
+      "inputs": [
+        "forsterite"
+      ],
+      "outputs": [
+        "lizardite",
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-olivine-water",
+      "kind": "alteration",
+      "inputs": [
+        "olivine"
+      ],
+      "outputs": [
+        "lizardite",
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-enstatite-water",
+      "kind": "alteration",
+      "inputs": [
+        "enstatite"
+      ],
+      "outputs": [
+        "lizardite",
+        "talc"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-diopside-water",
+      "kind": "alteration",
+      "inputs": [
+        "diopside"
+      ],
+      "outputs": [
+        "tremolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-talc-heat",
+      "kind": "alteration",
+      "inputs": [
+        "talc"
+      ],
+      "outputs": [
+        "enstatite",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-brucite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "brucite"
+      ],
+      "outputs": [
+        "periclase",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "a-tremolite-heat",
+      "kind": "alteration",
+      "inputs": [
+        "tremolite"
+      ],
+      "outputs": [
+        "diopside",
+        "enstatite",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-oxide-proton",
+      "kind": "synthesis",
+      "inputs": [
+        "oxide",
+        "proton"
+      ],
+      "outputs": [
+        "hydroxide"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-water",
+      "kind": "synthesis",
+      "inputs": [
+        "hydroxide",
+        "proton"
+      ],
+      "outputs": [
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-chlorine",
+      "kind": "synthesis",
+      "inputs": [
+        "chloride",
+        "chloride"
+      ],
+      "outputs": [
+        "cl2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-oxygen",
+      "kind": "synthesis",
+      "inputs": [
+        "oxide",
+        "oxide"
+      ],
+      "outputs": [
+        "o2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-hydrogen",
+      "kind": "synthesis",
+      "inputs": [
+        "proton",
+        "proton"
+      ],
+      "outputs": [
+        "h2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-fluorine",
+      "kind": "synthesis",
+      "inputs": [
+        "fluoride",
+        "fluoride"
+      ],
+      "outputs": [
+        "f2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-halite",
+      "kind": "synthesis",
+      "inputs": [
+        "sodium_ion",
+        "chloride"
+      ],
+      "outputs": [
+        "halite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-fluorite",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "fluoride"
+      ],
+      "outputs": [
+        "fluorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-quartz",
+      "kind": "synthesis",
+      "inputs": [
+        "silicon4",
+        "oxide"
+      ],
+      "outputs": [
+        "quartz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-periclase",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesium_ion",
+        "oxide"
+      ],
+      "outputs": [
+        "periclase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-wustite",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "oxide"
+      ],
+      "outputs": [
+        "wustite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-lime",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "oxide"
+      ],
+      "outputs": [
+        "lime"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-hematite",
+      "kind": "synthesis",
+      "inputs": [
+        "iron3",
+        "oxide"
+      ],
+      "outputs": [
+        "hematite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-corundum",
+      "kind": "synthesis",
+      "inputs": [
+        "aluminium3",
+        "oxide"
+      ],
+      "outputs": [
+        "corundum"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-tenorite",
+      "kind": "synthesis",
+      "inputs": [
+        "copper2",
+        "oxide"
+      ],
+      "outputs": [
+        "tenorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-hydroxide-brucite",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesium_ion",
+        "hydroxide"
+      ],
+      "outputs": [
+        "brucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-hydroxide-portlandite",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "hydroxide"
+      ],
+      "outputs": [
+        "portlandite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-hydroxide-gibbsite",
+      "kind": "synthesis",
+      "inputs": [
+        "aluminium3",
+        "hydroxide"
+      ],
+      "outputs": [
+        "gibbsite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-hydroxide-goethite",
+      "kind": "synthesis",
+      "inputs": [
+        "iron3",
+        "hydroxide"
+      ],
+      "outputs": [
+        "goethite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-siderite",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "carbonate"
+      ],
+      "outputs": [
+        "siderite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-calcite",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "carbonate"
+      ],
+      "outputs": [
+        "calcite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-magnesite",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesium_ion",
+        "carbonate"
+      ],
+      "outputs": [
+        "magnesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-troilite",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "sulfide"
+      ],
+      "outputs": [
+        "troilite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-sphalerite",
+      "kind": "synthesis",
+      "inputs": [
+        "zinc2",
+        "sulfide"
+      ],
+      "outputs": [
+        "sphalerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-covellite",
+      "kind": "synthesis",
+      "inputs": [
+        "copper2",
+        "sulfide"
+      ],
+      "outputs": [
+        "covellite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-pyrite",
+      "kind": "synthesis",
+      "inputs": [
+        "troilite",
+        "s"
+      ],
+      "outputs": [
+        "pyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-sulfate",
+      "kind": "synthesis",
+      "inputs": [
+        "sulfide",
+        "o2"
+      ],
+      "outputs": [
+        "sulfate"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-anhydrite",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "sulfate"
+      ],
+      "outputs": [
+        "anhydrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-bicarbonate",
+      "kind": "synthesis",
+      "inputs": [
+        "carbonate",
+        "proton"
+      ],
+      "outputs": [
+        "bicarbonate"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-carbon-dioxide",
+      "kind": "synthesis",
+      "inputs": [
+        "bicarbonate",
+        "proton"
+      ],
+      "outputs": [
+        "co2",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-silicate",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "oxide"
+      ],
+      "outputs": [
+        "silicate"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-silicic-acid",
+      "kind": "synthesis",
+      "inputs": [
+        "silicate",
+        "proton"
+      ],
+      "outputs": [
+        "silicic_acid"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-iron-native",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "reduction"
+      ],
+      "outputs": [
+        "fe"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-copper-native",
+      "kind": "synthesis",
+      "inputs": [
+        "copper2",
+        "reduction"
+      ],
+      "outputs": [
+        "cu"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-gold-native",
+      "kind": "synthesis",
+      "inputs": [
+        "gold3",
+        "reduction"
+      ],
+      "outputs": [
+        "gold_native"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "ion-silver-native",
+      "kind": "synthesis",
+      "inputs": [
+        "silver1",
+        "reduction"
+      ],
+      "outputs": [
+        "silver_native"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-sodium-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "sodium_ion",
+        "reduction"
+      ],
+      "outputs": [
+        "na"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-potassium-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "potassium_ion",
+        "reduction"
+      ],
+      "outputs": [
+        "k"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-calcium-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "reduction"
+      ],
+      "outputs": [
+        "ca"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-magnesium-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesium_ion",
+        "reduction"
+      ],
+      "outputs": [
+        "mg"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-aluminium-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "aluminium3",
+        "reduction"
+      ],
+      "outputs": [
+        "al"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-silicon-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "silicon4",
+        "reduction"
+      ],
+      "outputs": [
+        "si"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-sulfur-native",
+      "kind": "synthesis",
+      "inputs": [
+        "sulfide",
+        "air"
+      ],
+      "outputs": [
+        "s"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-carbon-neutral",
+      "kind": "synthesis",
+      "inputs": [
+        "co2",
+        "reduction"
+      ],
+      "outputs": [
+        "c"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-graphite",
+      "kind": "synthesis",
+      "inputs": [
+        "c",
+        "heat"
+      ],
+      "outputs": [
+        "graphite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-diamond",
+      "kind": "synthesis",
+      "inputs": [
+        "graphite",
+        "pressure"
+      ],
+      "outputs": [
+        "diamond"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-iron-oxidation",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "air"
+      ],
+      "outputs": [
+        "iron3"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-chalcopyrite",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "copper2"
+      ],
+      "outputs": [
+        "chalcopyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-ferrosilite",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "iron2"
+      ],
+      "outputs": [
+        "ferrosilite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-enstatite",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "enstatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-wollastonite",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "wollastonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-olivine",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "iron2"
+      ],
+      "outputs": [
+        "olivine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-fayalite",
+      "kind": "synthesis",
+      "inputs": [
+        "olivine",
+        "iron2"
+      ],
+      "outputs": [
+        "fayalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-forsterite",
+      "kind": "synthesis",
+      "inputs": [
+        "olivine",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "forsterite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-diopside",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-augite",
+      "kind": "synthesis",
+      "inputs": [
+        "diopside",
+        "iron2"
+      ],
+      "outputs": [
+        "augite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-hedenbergite",
+      "kind": "synthesis",
+      "inputs": [
+        "augite",
+        "iron2"
+      ],
+      "outputs": [
+        "hedenbergite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-augite-mg",
+      "kind": "synthesis",
+      "inputs": [
+        "hedenbergite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "augite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-diopside-mg",
+      "kind": "synthesis",
+      "inputs": [
+        "augite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-kaolinite",
+      "kind": "synthesis",
+      "inputs": [
+        "aluminium3",
+        "silicate"
+      ],
+      "outputs": [
+        "kaolinite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "ion-path-orthoclase",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "potassium_ion"
+      ],
+      "outputs": [
+        "muscovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-albite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "orthoclase",
+        "sodium_ion"
+      ],
+      "outputs": [
+        "albite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-albite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "sodium_ion"
+      ],
+      "outputs": [
+        "paragonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-anorthite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "bytownite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "anorthite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-anorthite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "prehnite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-microcline-1",
+      "kind": "synthesis",
+      "inputs": [
+        "orthoclase",
+        "cooling"
+      ],
+      "outputs": [
+        "microcline"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-microcline-2",
+      "kind": "synthesis",
+      "inputs": [
+        "orthoclase",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "microcline"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-sanidine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "orthoclase",
+        "heat"
+      ],
+      "outputs": [
+        "sanidine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-sanidine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "microcline",
+        "heat"
+      ],
+      "outputs": [
+        "sanidine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-oligoclase-1",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "anorthite"
+      ],
+      "outputs": [
+        "oligoclase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-oligoclase-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "labradorite"
+      ],
+      "outputs": [
+        "oligoclase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-andesine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "oligoclase",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "andesine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-andesine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "labradorite",
+        "sodium_ion"
+      ],
+      "outputs": [
+        "andesine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-labradorite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "andesine",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "labradorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-labradorite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "oligoclase",
+        "anorthite"
+      ],
+      "outputs": [
+        "labradorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-bytownite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "labradorite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "bytownite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-bytownite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "andesine"
+      ],
+      "outputs": [
+        "bytownite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-nepheline-1",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "low_silica"
+      ],
+      "outputs": [
+        "nepheline"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-nepheline-2",
+      "kind": "synthesis",
+      "inputs": [
+        "analcime",
+        "heat"
+      ],
+      "outputs": [
+        "nepheline",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-leucite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "sanidine",
+        "low_silica"
+      ],
+      "outputs": [
+        "leucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-leucite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "nepheline",
+        "potassium_ion"
+      ],
+      "outputs": [
+        "leucite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-sodalite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "nepheline",
+        "chloride"
+      ],
+      "outputs": [
+        "sodalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-sodalite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "chloride"
+      ],
+      "outputs": [
+        "sodalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-analcime-1",
+      "kind": "synthesis",
+      "inputs": [
+        "nepheline",
+        "water"
+      ],
+      "outputs": [
+        "analcime"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-analcime-2",
+      "kind": "synthesis",
+      "inputs": [
+        "sodalite",
+        "water"
+      ],
+      "outputs": [
+        "analcime"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-tephroite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "manganese2"
+      ],
+      "outputs": [
+        "tephroite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-tephroite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "fayalite",
+        "manganese2"
+      ],
+      "outputs": [
+        "tephroite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-monticellite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "monticellite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-monticellite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "wollastonite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "monticellite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-kirschsteinite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "fayalite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "kirschsteinite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-kirschsteinite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "monticellite",
+        "iron2"
+      ],
+      "outputs": [
+        "kirschsteinite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinoenstatite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "pressure"
+      ],
+      "outputs": [
+        "clinoenstatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-clinoenstatite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "heat"
+      ],
+      "outputs": [
+        "clinoenstatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-jadeite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "pressure"
+      ],
+      "outputs": [
+        "jadeite",
+        "quartz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar",
+      "priority": "P2",
+      "scientific_issue": "Equação balanceada; exigir estabilidade P–T e interpretação como decomposição de albita em equilíbrio, não pressão como reagente químico."
+    },
+    {
+      "id": "v08-jadeite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "nepheline",
+        "quartz"
+      ],
+      "outputs": [
+        "jadeite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-omphacite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "diopside",
+        "jadeite"
+      ],
+      "outputs": [
+        "omphacite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-omphacite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "augite"
+      ],
+      "outputs": [
+        "omphacite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-aegirine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "iron3"
+      ],
+      "outputs": [
+        "aegirine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-aegirine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "nepheline",
+        "iron3"
+      ],
+      "outputs": [
+        "aegirine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-spodumene-1",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "lithium1"
+      ],
+      "outputs": [
+        "spodumene"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-spodumene-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "lithium1"
+      ],
+      "outputs": [
+        "spodumene"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-pigeonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "ferrosilite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "pigeonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-pigeonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "augite",
+        "enstatite"
+      ],
+      "outputs": [
+        "pigeonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-actinolite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "tremolite",
+        "iron2"
+      ],
+      "outputs": [
+        "actinolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-actinolite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "ferroactinolite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "actinolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-ferroactinolite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "actinolite",
+        "iron2"
+      ],
+      "outputs": [
+        "ferroactinolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-ferroactinolite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hedenbergite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "ferroactinolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-anthophyllite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "anthophyllite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-anthophyllite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "talc",
+        "heat"
+      ],
+      "outputs": [
+        "anthophyllite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-grunerite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "ferrosilite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "grunerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-glaucophane-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pargasite",
+        "pressure"
+      ],
+      "outputs": [
+        "glaucophane"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-glaucophane-2",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "tremolite"
+      ],
+      "outputs": [
+        "glaucophane"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-riebeckite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "glaucophane",
+        "iron2"
+      ],
+      "outputs": [
+        "riebeckite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-riebeckite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "aegirine",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "riebeckite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-pargasite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "tremolite",
+        "albite"
+      ],
+      "outputs": [
+        "pargasite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-pargasite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "actinolite",
+        "albite"
+      ],
+      "outputs": [
+        "pargasite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-magnesiohornblende-1",
+      "kind": "synthesis",
+      "inputs": [
+        "tremolite",
+        "orthoclase"
+      ],
+      "outputs": [
+        "magnesiohornblende"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-magnesiohornblende-2",
+      "kind": "synthesis",
+      "inputs": [
+        "pargasite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "magnesiohornblende"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-ferrohornblende-1",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesiohornblende",
+        "iron2"
+      ],
+      "outputs": [
+        "ferrohornblende"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-ferrohornblende-2",
+      "kind": "synthesis",
+      "inputs": [
+        "ferroactinolite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "ferrohornblende"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-muscovite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "microcline",
+        "hydroxide"
+      ],
+      "outputs": [
+        "muscovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-muscovite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "orthoclase",
+        "hydroxide"
+      ],
+      "outputs": [
+        "muscovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-paragonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "sodium_ion"
+      ],
+      "outputs": [
+        "paragonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-paragonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "paragonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-phlogopite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "phlogopite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-phlogopite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "talc",
+        "microcline"
+      ],
+      "outputs": [
+        "phlogopite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-annite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "biotite",
+        "iron2"
+      ],
+      "outputs": [
+        "annite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-annite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "iron2"
+      ],
+      "outputs": [
+        "annite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-biotite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "phlogopite",
+        "annite"
+      ],
+      "outputs": [
+        "biotite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-biotite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "olivine"
+      ],
+      "outputs": [
+        "biotite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lepidolite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "lithium1"
+      ],
+      "outputs": [
+        "lepidolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lepidolite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "phlogopite",
+        "lithium1"
+      ],
+      "outputs": [
+        "lepidolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrophyllite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "quartz"
+      ],
+      "outputs": [
+        "pyrophyllite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrophyllite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "talc",
+        "aluminium3"
+      ],
+      "outputs": [
+        "pyrophyllite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinochlore-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lizardite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "clinochlore"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinochlore-2",
+      "kind": "synthesis",
+      "inputs": [
+        "phlogopite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "clinochlore"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chamosite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "clinochlore",
+        "iron2"
+      ],
+      "outputs": [
+        "chamosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chamosite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "annite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "chamosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-montmorillonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "albite"
+      ],
+      "outputs": [
+        "montmorillonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-montmorillonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "montmorillonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-nontronite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "montmorillonite",
+        "iron3"
+      ],
+      "outputs": [
+        "nontronite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-nontronite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "goethite",
+        "albite"
+      ],
+      "outputs": [
+        "nontronite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-halloysite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "water"
+      ],
+      "outputs": [
+        "halloysite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-halloysite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "rain"
+      ],
+      "outputs": [
+        "halloysite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-antigorite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lizardite",
+        "heat"
+      ],
+      "outputs": [
+        "antigorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-antigorite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "chrysotile",
+        "heat"
+      ],
+      "outputs": [
+        "antigorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-chrysotile-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lizardite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "chrysotile"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-chrysotile-2",
+      "kind": "synthesis",
+      "inputs": [
+        "antigorite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "chrysotile"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrope-1",
+      "kind": "synthesis",
+      "inputs": [
+        "forsterite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "pyrope"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrope-2",
+      "kind": "synthesis",
+      "inputs": [
+        "enstatite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "pyrope"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-almandine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrope",
+        "iron2"
+      ],
+      "outputs": [
+        "almandine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-almandine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "fayalite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "almandine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-spessartine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "almandine",
+        "manganese2"
+      ],
+      "outputs": [
+        "spessartine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-spessartine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrope",
+        "manganese2"
+      ],
+      "outputs": [
+        "spessartine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-grossular-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrope",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "grossular"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-grossular-2",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "pressure"
+      ],
+      "outputs": [
+        "grossular"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-andradite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "grossular",
+        "iron3"
+      ],
+      "outputs": [
+        "andradite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-andradite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hedenbergite",
+        "iron3"
+      ],
+      "outputs": [
+        "andradite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-uvarovite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "grossular",
+        "chromium3"
+      ],
+      "outputs": [
+        "uvarovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-uvarovite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "andradite",
+        "chromium3"
+      ],
+      "outputs": [
+        "uvarovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-andalusite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "heat"
+      ],
+      "outputs": [
+        "andalusite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-andalusite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "corundum",
+        "quartz"
+      ],
+      "outputs": [
+        "andalusite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-kyanite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "andalusite",
+        "pressure"
+      ],
+      "outputs": [
+        "kyanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-kyanite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "pressure"
+      ],
+      "outputs": [
+        "kyanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-sillimanite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "andalusite",
+        "heat"
+      ],
+      "outputs": [
+        "sillimanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-sillimanite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "kyanite",
+        "heat"
+      ],
+      "outputs": [
+        "sillimanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cordierite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "sillimanite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "cordierite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cordierite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "biotite",
+        "heat"
+      ],
+      "outputs": [
+        "cordierite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-staurolite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "almandine",
+        "andalusite"
+      ],
+      "outputs": [
+        "staurolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-staurolite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "biotite",
+        "kyanite"
+      ],
+      "outputs": [
+        "staurolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chloritoid-1",
+      "kind": "synthesis",
+      "inputs": [
+        "chamosite",
+        "pressure"
+      ],
+      "outputs": [
+        "chloritoid"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chloritoid-2",
+      "kind": "synthesis",
+      "inputs": [
+        "kaolinite",
+        "iron2"
+      ],
+      "outputs": [
+        "chloritoid"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-zoisite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "zoisite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-zoisite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "grossular",
+        "hydroxide"
+      ],
+      "outputs": [
+        "zoisite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinozoisite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "zoisite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "clinozoisite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinozoisite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "clinozoisite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-epidote-1",
+      "kind": "synthesis",
+      "inputs": [
+        "clinozoisite",
+        "iron3"
+      ],
+      "outputs": [
+        "epidote"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-epidote-2",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "iron3"
+      ],
+      "outputs": [
+        "epidote"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lawsonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "zoisite",
+        "water"
+      ],
+      "outputs": [
+        "lawsonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lawsonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "lawsonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-prehnite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "water"
+      ],
+      "outputs": [
+        "prehnite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-prehnite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "epidote",
+        "hydroxide"
+      ],
+      "outputs": [
+        "prehnite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pumpellyite_mg-1",
+      "kind": "synthesis",
+      "inputs": [
+        "prehnite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "pumpellyite_mg"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pumpellyite_mg-2",
+      "kind": "synthesis",
+      "inputs": [
+        "epidote",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "pumpellyite_mg"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-zircon-1",
+      "kind": "synthesis",
+      "inputs": [
+        "zirconium4",
+        "silicate"
+      ],
+      "outputs": [
+        "zircon"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-zircon-2",
+      "kind": "synthesis",
+      "inputs": [
+        "zirconium4",
+        "quartz"
+      ],
+      "outputs": [
+        "zircon"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-titanite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "rutile",
+        "wollastonite"
+      ],
+      "outputs": [
+        "titanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-titanite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "diopside",
+        "titanium4"
+      ],
+      "outputs": [
+        "titanite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-fluorapatite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "fluorite",
+        "phosphate"
+      ],
+      "outputs": [
+        "fluorapatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-fluorapatite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hydroxylapatite",
+        "fluoride"
+      ],
+      "outputs": [
+        "fluorapatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-hydroxylapatite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "phosphate"
+      ],
+      "outputs": [
+        "hydroxylapatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-hydroxylapatite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "fluorapatite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "hydroxylapatite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-monazite_ce-1",
+      "kind": "synthesis",
+      "inputs": [
+        "cerium3",
+        "phosphate"
+      ],
+      "outputs": [
+        "monazite_ce"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-monazite_ce-2",
+      "kind": "synthesis",
+      "inputs": [
+        "fluorapatite",
+        "cerium3"
+      ],
+      "outputs": [
+        "monazite_ce"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-xenotime_y-1",
+      "kind": "synthesis",
+      "inputs": [
+        "yttrium3",
+        "phosphate"
+      ],
+      "outputs": [
+        "xenotime_y"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-xenotime_y-2",
+      "kind": "synthesis",
+      "inputs": [
+        "monazite_ce",
+        "yttrium3"
+      ],
+      "outputs": [
+        "xenotime_y"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-dravite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pargasite",
+        "borate"
+      ],
+      "outputs": [
+        "dravite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-dravite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "schorl",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "dravite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-schorl-1",
+      "kind": "synthesis",
+      "inputs": [
+        "dravite",
+        "iron2"
+      ],
+      "outputs": [
+        "schorl"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-schorl-2",
+      "kind": "synthesis",
+      "inputs": [
+        "elbaite",
+        "iron2"
+      ],
+      "outputs": [
+        "schorl"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-elbaite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "dravite",
+        "lithium1"
+      ],
+      "outputs": [
+        "elbaite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-elbaite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "schorl",
+        "lithium1"
+      ],
+      "outputs": [
+        "elbaite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-beryl-1",
+      "kind": "synthesis",
+      "inputs": [
+        "beryllium2",
+        "muscovite"
+      ],
+      "outputs": [
+        "beryl"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-beryl-2",
+      "kind": "synthesis",
+      "inputs": [
+        "beryllium2",
+        "albite"
+      ],
+      "outputs": [
+        "beryl"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-topaz-1",
+      "kind": "synthesis",
+      "inputs": [
+        "andalusite",
+        "fluoride"
+      ],
+      "outputs": [
+        "topaz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-topaz-2",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "fluoride"
+      ],
+      "outputs": [
+        "topaz"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-tridymite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "heat"
+      ],
+      "outputs": [
+        "tridymite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-tridymite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "cristobalite",
+        "cooling"
+      ],
+      "outputs": [
+        "tridymite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cristobalite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "tridymite",
+        "heat"
+      ],
+      "outputs": [
+        "cristobalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cristobalite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "volcanism"
+      ],
+      "outputs": [
+        "cristobalite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-coesite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "quartz",
+        "pressure"
+      ],
+      "outputs": [
+        "coesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-coesite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "tridymite",
+        "pressure"
+      ],
+      "outputs": [
+        "coesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stishovite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "coesite",
+        "pressure"
+      ],
+      "outputs": [
+        "stishovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stishovite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "coesite",
+        "impact"
+      ],
+      "outputs": [
+        "stishovite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-laumontite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "proton"
+      ],
+      "outputs": [
+        "laumontite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-laumontite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "prehnite",
+        "water"
+      ],
+      "outputs": [
+        "laumontite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stilbite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "laumontite",
+        "sodium_ion"
+      ],
+      "outputs": [
+        "stilbite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stilbite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "laumontite",
+        "albite"
+      ],
+      "outputs": [
+        "stilbite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinoptilolite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "stilbite",
+        "potassium_ion"
+      ],
+      "outputs": [
+        "clinoptilolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-clinoptilolite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "albite",
+        "water"
+      ],
+      "outputs": [
+        "clinoptilolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-dolomite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "calcite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "dolomite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-dolomite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "magnesite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "dolomite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-aragonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "calcite",
+        "pressure"
+      ],
+      "outputs": [
+        "aragonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-aragonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "calcite",
+        "strontium2"
+      ],
+      "outputs": [
+        "aragonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ankerite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "dolomite",
+        "iron2"
+      ],
+      "outputs": [
+        "ankerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ankerite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "siderite",
+        "calcium_ion"
+      ],
+      "outputs": [
+        "ankerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-rhodochrosite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "manganese2",
+        "carbonate"
+      ],
+      "outputs": [
+        "rhodochrosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-rhodochrosite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "siderite",
+        "manganese2"
+      ],
+      "outputs": [
+        "rhodochrosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-smithsonite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "zinc2",
+        "carbonate"
+      ],
+      "outputs": [
+        "smithsonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-smithsonite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "sphalerite",
+        "carbonate"
+      ],
+      "outputs": [
+        "smithsonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-azurite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "malachite",
+        "co2"
+      ],
+      "outputs": [
+        "azurite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-azurite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "copper2",
+        "carbonate"
+      ],
+      "outputs": [
+        "azurite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cerussite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lead2",
+        "carbonate"
+      ],
+      "outputs": [
+        "cerussite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cerussite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "galena",
+        "co2"
+      ],
+      "outputs": [
+        "cerussite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-strontianite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "strontium2",
+        "carbonate"
+      ],
+      "outputs": [
+        "strontianite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-strontianite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "aragonite",
+        "strontium2"
+      ],
+      "outputs": [
+        "strontianite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-witherite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "barium2",
+        "carbonate"
+      ],
+      "outputs": [
+        "witherite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-witherite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "barite",
+        "carbonate"
+      ],
+      "outputs": [
+        "witherite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-barite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "barium2",
+        "sulfate"
+      ],
+      "outputs": [
+        "barite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-barite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "anhydrite",
+        "barium2"
+      ],
+      "outputs": [
+        "barite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-celestine-1",
+      "kind": "synthesis",
+      "inputs": [
+        "strontium2",
+        "sulfate"
+      ],
+      "outputs": [
+        "celestine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-celestine-2",
+      "kind": "synthesis",
+      "inputs": [
+        "barite",
+        "strontium2"
+      ],
+      "outputs": [
+        "celestine"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-anglesite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lead2",
+        "sulfate"
+      ],
+      "outputs": [
+        "anglesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-anglesite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "galena",
+        "o2"
+      ],
+      "outputs": [
+        "anglesite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-jarosite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "goethite",
+        "alunite"
+      ],
+      "outputs": [
+        "jarosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-jarosite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "potassium_ion"
+      ],
+      "outputs": [
+        "jarosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-alunite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "jarosite",
+        "aluminium3"
+      ],
+      "outputs": [
+        "alunite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-alunite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "gibbsite",
+        "jarosite"
+      ],
+      "outputs": [
+        "alunite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chalcanthite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "copper2",
+        "sulfate"
+      ],
+      "outputs": [
+        "chalcanthite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chalcanthite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "tenorite",
+        "sulfate"
+      ],
+      "outputs": [
+        "chalcanthite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-sylvite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "potassium_ion",
+        "chloride"
+      ],
+      "outputs": [
+        "sylvite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-sylvite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "halite",
+        "potassium_ion"
+      ],
+      "outputs": [
+        "sylvite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chlorargyrite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "silver1",
+        "chloride"
+      ],
+      "outputs": [
+        "chlorargyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chlorargyrite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "silver_native",
+        "chloride"
+      ],
+      "outputs": [
+        "chlorargyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-rutile-1",
+      "kind": "synthesis",
+      "inputs": [
+        "titanium4",
+        "oxide"
+      ],
+      "outputs": [
+        "rutile"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-rutile-2",
+      "kind": "synthesis",
+      "inputs": [
+        "ilmenite",
+        "air"
+      ],
+      "outputs": [
+        "rutile",
+        "hematite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-anatase-1",
+      "kind": "synthesis",
+      "inputs": [
+        "ilmenite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "anatase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-anatase-2",
+      "kind": "synthesis",
+      "inputs": [
+        "titanium4",
+        "water"
+      ],
+      "outputs": [
+        "anatase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-brookite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "anatase",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "brookite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-brookite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "rutile",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "brookite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ilmenite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "rutile",
+        "iron2"
+      ],
+      "outputs": [
+        "ilmenite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ilmenite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hematite",
+        "titanium4"
+      ],
+      "outputs": [
+        "ilmenite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chromite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "hercynite",
+        "chromium3"
+      ],
+      "outputs": [
+        "chromite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chromite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "magnetite",
+        "chromium3"
+      ],
+      "outputs": [
+        "chromite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cassiterite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "tin4",
+        "oxide"
+      ],
+      "outputs": [
+        "cassiterite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cassiterite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "rutile",
+        "tin4"
+      ],
+      "outputs": [
+        "cassiterite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrolusite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "manganese2",
+        "air"
+      ],
+      "outputs": [
+        "pyrolusite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrolusite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "rhodochrosite",
+        "air"
+      ],
+      "outputs": [
+        "pyrolusite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-manganite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrolusite",
+        "hydroxide"
+      ],
+      "outputs": [
+        "manganite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-manganite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "manganese2",
+        "hydroxide"
+      ],
+      "outputs": [
+        "manganite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lepidocrocite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "goethite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "lepidocrocite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-lepidocrocite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hematite",
+        "rain"
+      ],
+      "outputs": [
+        "lepidocrocite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-boehmite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "gibbsite",
+        "heat"
+      ],
+      "outputs": [
+        "boehmite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-boehmite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "corundum",
+        "hydroxide"
+      ],
+      "outputs": [
+        "boehmite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-diaspore-1",
+      "kind": "synthesis",
+      "inputs": [
+        "boehmite",
+        "pressure"
+      ],
+      "outputs": [
+        "diaspore"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-diaspore-2",
+      "kind": "synthesis",
+      "inputs": [
+        "gibbsite",
+        "pressure"
+      ],
+      "outputs": [
+        "diaspore"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-uraninite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "uranium4",
+        "oxide"
+      ],
+      "outputs": [
+        "uraninite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-uraninite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "uranium4",
+        "reduction"
+      ],
+      "outputs": [
+        "uraninite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-galena-1",
+      "kind": "synthesis",
+      "inputs": [
+        "lead2",
+        "sulfide"
+      ],
+      "outputs": [
+        "galena"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-galena-2",
+      "kind": "synthesis",
+      "inputs": [
+        "lead2",
+        "troilite"
+      ],
+      "outputs": [
+        "galena"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrrhotite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "troilite",
+        "heat"
+      ],
+      "outputs": [
+        "pyrrhotite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pyrrhotite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "heat"
+      ],
+      "outputs": [
+        "pyrrhotite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-marcasite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "marcasite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-marcasite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrrhotite",
+        "s"
+      ],
+      "outputs": [
+        "marcasite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-bornite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "chalcopyrite",
+        "copper2"
+      ],
+      "outputs": [
+        "bornite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-bornite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "chalcopyrite",
+        "cu"
+      ],
+      "outputs": [
+        "bornite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chalcocite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "covellite",
+        "cu"
+      ],
+      "outputs": [
+        "chalcocite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-chalcocite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "cu",
+        "sulfide"
+      ],
+      "outputs": [
+        "chalcocite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-molybdenite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "molybdate",
+        "sulfide"
+      ],
+      "outputs": [
+        "molybdenite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-molybdenite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "molybdate",
+        "s"
+      ],
+      "outputs": [
+        "molybdenite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pentlandite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrrhotite",
+        "nickel2"
+      ],
+      "outputs": [
+        "pentlandite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-pentlandite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "troilite",
+        "nickel2"
+      ],
+      "outputs": [
+        "pentlandite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cinnabar-1",
+      "kind": "synthesis",
+      "inputs": [
+        "mercury2",
+        "sulfide"
+      ],
+      "outputs": [
+        "cinnabar"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cinnabar-2",
+      "kind": "synthesis",
+      "inputs": [
+        "mercury2",
+        "s"
+      ],
+      "outputs": [
+        "cinnabar"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-arsenopyrite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "arsenic3"
+      ],
+      "outputs": [
+        "arsenopyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-arsenopyrite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "troilite",
+        "arsenic3"
+      ],
+      "outputs": [
+        "arsenopyrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-realgar-1",
+      "kind": "synthesis",
+      "inputs": [
+        "arsenic3",
+        "sulfide"
+      ],
+      "outputs": [
+        "realgar"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-realgar-2",
+      "kind": "synthesis",
+      "inputs": [
+        "arsenopyrite",
+        "arsenic3"
+      ],
+      "outputs": [
+        "realgar"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-orpiment-1",
+      "kind": "synthesis",
+      "inputs": [
+        "realgar",
+        "s"
+      ],
+      "outputs": [
+        "orpiment"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-orpiment-2",
+      "kind": "synthesis",
+      "inputs": [
+        "arsenic3",
+        "s"
+      ],
+      "outputs": [
+        "orpiment"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stibnite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "antimony3",
+        "sulfide"
+      ],
+      "outputs": [
+        "stibnite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-stibnite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "antimony3",
+        "s"
+      ],
+      "outputs": [
+        "stibnite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-acanthite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "silver1",
+        "sulfide"
+      ],
+      "outputs": [
+        "acanthite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-acanthite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "silver_native",
+        "s"
+      ],
+      "outputs": [
+        "acanthite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cobaltite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "cobalt2",
+        "realgar"
+      ],
+      "outputs": [
+        "cobaltite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-cobaltite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "arsenopyrite",
+        "cobalt2"
+      ],
+      "outputs": [
+        "cobaltite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-scheelite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "calcium_ion",
+        "tungstate"
+      ],
+      "outputs": [
+        "scheelite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-scheelite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "wollastonite",
+        "tungstate"
+      ],
+      "outputs": [
+        "scheelite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ferberite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "tungstate"
+      ],
+      "outputs": [
+        "ferberite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-ferberite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "scheelite",
+        "iron2"
+      ],
+      "outputs": [
+        "ferberite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-hubnerite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "manganese2",
+        "tungstate"
+      ],
+      "outputs": [
+        "hubnerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-hubnerite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "scheelite",
+        "manganese2"
+      ],
+      "outputs": [
+        "hubnerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-wolframite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "ferberite",
+        "manganese2"
+      ],
+      "outputs": [
+        "wolframite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-wolframite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "hubnerite",
+        "iron2"
+      ],
+      "outputs": [
+        "wolframite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-vivianite-1",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "phosphate"
+      ],
+      "outputs": [
+        "vivianite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-vivianite-2",
+      "kind": "synthesis",
+      "inputs": [
+        "siderite",
+        "phosphate"
+      ],
+      "outputs": [
+        "vivianite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "referência_genérica"
+    },
+    {
+      "id": "v08-alt-iron3-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "iron3",
+        "reduction"
+      ],
+      "outputs": [
+        "fe"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Fe(III) não vira ferro nativo por redução ambiental genérica; exige condições redutoras extremas e um balanço eletrônico explícito."
+    },
+    {
+      "id": "v08-alt-sulfate-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "sulfate",
+        "reduction"
+      ],
+      "outputs": [
+        "s"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Redução de sulfato não tem enxofre nativo como produto universal; especificar meio, agente redutor e percurso redox."
+    },
+    {
+      "id": "v08-alt-cuprite-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "cuprite",
+        "reduction"
+      ],
+      "outputs": [
+        "cu"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-tenorite-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "tenorite",
+        "reduction"
+      ],
+      "outputs": [
+        "cuprite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-anhydrite-hydrothermal",
+      "kind": "synthesis",
+      "inputs": [
+        "anhydrite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "gypsum"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-corundum-magnesium_ion",
+      "kind": "synthesis",
+      "inputs": [
+        "corundum",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "spinel"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-spinel-iron2",
+      "kind": "synthesis",
+      "inputs": [
+        "spinel",
+        "iron2"
+      ],
+      "outputs": [
+        "hercynite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-hematite-iron2",
+      "kind": "synthesis",
+      "inputs": [
+        "hematite",
+        "iron2"
+      ],
+      "outputs": [
+        "magnetite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-magnetite-magnesium_ion",
+      "kind": "synthesis",
+      "inputs": [
+        "magnetite",
+        "magnesium_ion"
+      ],
+      "outputs": [
+        "magnesioferrite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-lizardite-quartz",
+      "kind": "synthesis",
+      "inputs": [
+        "lizardite",
+        "quartz"
+      ],
+      "outputs": [
+        "talc"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-talc-wollastonite",
+      "kind": "synthesis",
+      "inputs": [
+        "talc",
+        "wollastonite"
+      ],
+      "outputs": [
+        "tremolite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-pyrite-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrite",
+        "reduction"
+      ],
+      "outputs": [
+        "troilite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Redução de pirita para troilita exige destino do excesso de enxofre e condições adequadas."
+    },
+    {
+      "id": "v08-alt-smithsonite-sulfide",
+      "kind": "synthesis",
+      "inputs": [
+        "smithsonite",
+        "sulfide"
+      ],
+      "outputs": [
+        "sphalerite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-iron2-bicarbonate",
+      "kind": "synthesis",
+      "inputs": [
+        "iron2",
+        "bicarbonate"
+      ],
+      "outputs": [
+        "siderite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-gold3-hydrothermal",
+      "kind": "synthesis",
+      "inputs": [
+        "gold3",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "gold_native"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-acanthite-reduction",
+      "kind": "synthesis",
+      "inputs": [
+        "acanthite",
+        "reduction"
+      ],
+      "outputs": [
+        "silver_native"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-diamond-heat",
+      "kind": "synthesis",
+      "inputs": [
+        "diamond",
+        "heat"
+      ],
+      "outputs": [
+        "graphite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Grafitização de diamante depende de condições termodinâmicas, cinética e meio; calor isolado não determina o produto."
+    },
+    {
+      "id": "v08-alt-c-pressure",
+      "kind": "synthesis",
+      "inputs": [
+        "c",
+        "pressure"
+      ],
+      "outputs": [
+        "diamond"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-malachite-heat",
+      "kind": "synthesis",
+      "inputs": [
+        "malachite",
+        "heat"
+      ],
+      "outputs": [
+        "tenorite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "A decomposição térmica da malaquita precisa explicitar também CO2 e H2O, não somente tenorita."
+    },
+    {
+      "id": "v08-alt-marcasite-air",
+      "kind": "synthesis",
+      "inputs": [
+        "marcasite",
+        "air"
+      ],
+      "outputs": [
+        "goethite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-sphalerite-air",
+      "kind": "synthesis",
+      "inputs": [
+        "sphalerite",
+        "air"
+      ],
+      "outputs": [
+        "smithsonite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Formação de smithsonita por alteração oxidante requer carbono inorgânico e água; não é oxidação seca."
+    },
+    {
+      "id": "v08-alt-bornite-air",
+      "kind": "synthesis",
+      "inputs": [
+        "bornite",
+        "air"
+      ],
+      "outputs": [
+        "covellite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-chalcocite-air",
+      "kind": "synthesis",
+      "inputs": [
+        "chalcocite",
+        "air"
+      ],
+      "outputs": [
+        "malachite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-chalcopyrite-air",
+      "kind": "synthesis",
+      "inputs": [
+        "chalcopyrite",
+        "air"
+      ],
+      "outputs": [
+        "malachite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Formação de malaquita exige carbonatação, oxidação, lixiviação e gestão do Fe e S; não é transformação binária fechada."
+    },
+    {
+      "id": "v08-alt-anorthite-rain",
+      "kind": "synthesis",
+      "inputs": [
+        "anorthite",
+        "rain"
+      ],
+      "outputs": [
+        "kaolinite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "A caulinização da anortita é de sistema aberto e libera Ca2+; não deve figurar como conversão fechada."
+    },
+    {
+      "id": "v08-alt-muscovite-heat",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "heat"
+      ],
+      "outputs": [
+        "orthoclase"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P0",
+      "scientific_issue": "Inadequada como reação isolada: omite fases aluminossilicáticas e voláteis; considerar descontinuar o atalho e manter meta-muscovite-out como rota de referência."
+    },
+    {
+      "id": "v08-alt-biotite-water",
+      "kind": "synthesis",
+      "inputs": [
+        "biotite",
+        "hydrothermal"
+      ],
+      "outputs": [
+        "chamosite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "v08-alt-actinolite-heat",
+      "kind": "synthesis",
+      "inputs": [
+        "actinolite",
+        "heat"
+      ],
+      "outputs": [
+        "diopside"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar",
+      "priority": "P1",
+      "scientific_issue": "Actinolita para diopsídio isolado perde Fe, Si e H2O do balanço; declarar copro­dutos e condições ou manter apenas como associação."
+    },
+    {
+      "id": "v08-alt-jadeite-pressure",
+      "kind": "synthesis",
+      "inputs": [
+        "jadeite",
+        "hedenbergite"
+      ],
+      "outputs": [
+        "omphacite"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-wollastonite-decarbonation",
+      "kind": "synthesis",
+      "inputs": [
+        "calcite",
+        "quartz"
+      ],
+      "outputs": [
+        "wollastonite",
+        "co2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-diopside-dolomite",
+      "kind": "synthesis",
+      "inputs": [
+        "dolomite",
+        "quartz"
+      ],
+      "outputs": [
+        "diopside",
+        "co2"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-muscovite-out",
+      "kind": "synthesis",
+      "inputs": [
+        "muscovite",
+        "quartz"
+      ],
+      "outputs": [
+        "orthoclase",
+        "sillimanite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar",
+      "priority": "P2",
+      "scientific_issue": "Equação global balanceada; especificar campo de estabilidade de Al2SiO5 e a possível fusão em condições suprassólidus."
+    },
+    {
+      "id": "meta-antigorite-brucite",
+      "kind": "synthesis",
+      "inputs": [
+        "antigorite",
+        "brucite"
+      ],
+      "outputs": [
+        "forsterite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-clinochlore-muscovite-quartz",
+      "kind": "synthesis",
+      "inputs": [
+        "clinochlore",
+        "muscovite",
+        "quartz"
+      ],
+      "outputs": [
+        "pyrope",
+        "phlogopite",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-garnet-chlorite-muscovite",
+      "kind": "synthesis",
+      "inputs": [
+        "almandine",
+        "clinochlore",
+        "muscovite"
+      ],
+      "outputs": [
+        "staurolite",
+        "biotite",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-staurolite-chlorite-muscovite",
+      "kind": "synthesis",
+      "inputs": [
+        "staurolite",
+        "clinochlore",
+        "muscovite"
+      ],
+      "outputs": [
+        "kyanite",
+        "biotite",
+        "quartz",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "associação_simbólica",
+      "source_specificity": "a_verificar"
+    },
+    {
+      "id": "meta-tremolite-calcite-quartz",
+      "kind": "synthesis",
+      "inputs": [
+        "tremolite",
+        "calcite",
+        "quartz"
+      ],
+      "outputs": [
+        "diopside",
+        "co2",
+        "water"
+      ],
+      "scientific_review": "pendente",
+      "equation_check": "balanceamento_elemental_e_carga_aprovado",
+      "source_specificity": "a_verificar"
+    }
+  ]
+}
