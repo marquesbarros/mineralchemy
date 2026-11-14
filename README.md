@@ -5,6 +5,14 @@ para descobrir espécies e transformações, incluindo reações metamórficas e
 
 **[Jogar](https://marquesbarros.github.io/mineralchemy/)** · **[Atlas dos 178 ícones](https://marquesbarros.github.io/mineralchemy/iconografia.html)**
 
+## Interação e busca · v0.24
+
+A busca da coleção diferencia caracteres com e sem acento, aceita formas Unicode equivalentes e pode ser iniciada digitando uma letra ou outro caractere imprimível. **Enter** adiciona o primeiro resultado visível, limpa a busca e retira o foco do campo, para permitir **Delete** limpar a bancada. **Ctrl+K** foca a pesquisa e **Ctrl+Enter** executa uma reação com as peças da bancada.
+
+Letras como **R** e **C** não são mais atalhos isolados, pois devem poder iniciar a digitação. Na bancada, arrastar uma peça e soltá-la fora da área remove essa instância, sem apagar as descobertas. Se houver excesso de peças, o botão **Reagir** avisa sobre a quantidade; reações de três componentes continuam usando associações intermediárias.
+
+A coleção usa uma única ordem alfabética, com a faixa de **Usados recentemente** exclusivamente na aba **Tudo**. As categorias exibidas são **Tudo, Íons, Minerais, Agentes e Compostos**. O agente identificado internamente como `reduction` agora é chamado **Redução**, mantendo compatibilidade com partidas existentes.
+
 ## Como jogar
 
 A bancada combina sempre duas peças. Quando uma reação envolve três reagentes,
