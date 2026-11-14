@@ -55,8 +55,8 @@ test('qualquer letra, inclusive R e C, inicia busca sem acionar comandos antigos
 
 test('Enter seleciona primeiro resultado, limpa, tira foco e Delete limpa bancada',async()=>{
  const g=await makeGame();
- g.eval("search='cal';");
- g.get('#catalogSearch').value='cal';
+ g.eval("search='cál';");
+ g.get('#catalogSearch').value='cál';
  const expected=g.eval("getLibraryItems()[0].id");
  g.eval(key('Enter','INPUT','catalogSearch'));
  assert.equal(g.eval('pieces.length'),1);
@@ -113,5 +113,6 @@ test('Outros se divide em Agentes e Compostos, sem perder espécies',async()=>{
  assert.ok(g.eval("getLibraryItems().every(p=>p.kind==='agent')"));
  g.eval("filter='compound'");
  assert.ok(g.eval("getLibraryItems().every(p=>!['mineral','ion','agent'].includes(p.kind))"));
- assert.ok(g.eval("getLibraryItems().some(p=>p.id==='water' || p.id==='co2')"));
+ g.eval("save.discovered.push('water')");
+ assert.ok(g.eval("getLibraryItems().some(p=>p.id==='water')"));
 });
