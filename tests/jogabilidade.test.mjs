@@ -40,9 +40,11 @@ async function setup() {
     Element: class {},
     HTMLElement: class {},
     HTMLInputElement: class {},
+    HTMLSelectElement: class {},
   });
   vm.runInContext(script.replace(/void boot\(\);\s*$/, ''), context);
   await vm.runInContext('boot()', context);
+  nodeFor('#catalogSearch');
   return { eval: code => vm.runInContext(code, context), storage, handlers, nodes };
 }
 
