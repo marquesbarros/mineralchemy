@@ -4,7 +4,11 @@
 
 Este documento define os critérios de construção e validação do catálogo de reações. A composição mineral, uma transformação geoquímica e uma associação didática são conceitos distintos. Uma rota executável no jogo não constitui, por si só, uma reação natural demonstrada.
 
-## 1. Estado verificável do catálogo
+**Atualização v0.23:** o motor foi reduzido a **270 pares executáveis** e **284 reações ativas**, sem perda das 178 espécies. Os números da seção abaixo registram a versão anterior à triagem. Os resultados e as pendências atuais estão em [Poda científica v0.23](PODA_CIENTIFICA_v023.md) e [Registro integral atualizado](REGISTRO_REVISAO_REACOES.json).
+
+
+
+## 1. Fotografia anterior à poda (v0.22)
 
 | Verificação | Resultado |
 |---|---:|
@@ -22,7 +26,7 @@ Este documento define os critérios de construção e validação do catálogo d
 
 As 75 equações foram verificadas quanto à conservação dos elementos e da carga formal. Esse teste **não** avalia espontaneidade, estabilidade das fases, cinética, fluido, textura, paragênese ou representatividade do ambiente natural.
 
-O motor combina essas entradas com **12 rotas de família** (incluindo duas ternárias), **296 rotas intuitivas ativas**, **18 intuitivas descontinuadas** para compatibilidade histórica e **8 reações técnicas de preparação/conclusão de associações**. A reconstrução das regras publicadas identificou **723 pares executáveis distintos**. Essas contagens descrevem o grafo de jogo e não o número de transformações geológicas comprovadas.
+O motor anterior à poda combinava essas entradas com **12 rotas de família** (incluindo duas ternárias), **296 rotas intuitivas ativas**, **18 intuitivas descontinuadas** para compatibilidade histórica e **8 reações técnicas de preparação/conclusão de associações**. A reconstrução das regras publicadas identificou **723 pares executáveis distintos**. Essas contagens descrevem o grafo de jogo e não o número de transformações geológicas comprovadas.
 
 O registro integral das rotas explícitas, automáticas, descontinuadas e preparatórias está em [REGISTRO_REVISAO_REACOES.json](REGISTRO_REVISAO_REACOES.json). **Nenhuma rota recebeu aprovação científica individual nesta fase.** A verificação de balanço e a triagem de riscos não podem ser confundidas com essa aprovação. Duas rotas ternárias dos clinopiroxênios são mantidas no motor sem associação intermediária e, portanto, não aparecem entre os pares diretamente executáveis da bancada.
 
