@@ -14,13 +14,17 @@ Este documento define os critérios de construção e validação do catálogo d
 | Reações explícitas no `EMBEDDED.reactions` | 422 |
 | Equações explicitamente não simbólicas com conservação de elementos e carga | 75 |
 | Rotas explícitas classificadas como simbólicas | 347 |
+| Rotas geradas por regra de família | 12 (10 binárias, 2 ternárias) |
+| Rotas intuitivas ativas / históricas descontinuadas | 291 / 18 |
+| Reações técnicas de associações ternárias | 8 |
+| Pares efetivamente disponíveis na bancada | 723 |
 | Rotas explícitas que apontam para duas referências gerais, sem validação específica | 243 |
 
 As 75 equações foram verificadas quanto à conservação dos elementos e da carga formal. Esse teste **não** avalia espontaneidade, estabilidade das fases, cinética, fluido, textura, paragênese ou representatividade do ambiente natural.
 
-O motor combina essas entradas com rotas adicionais de `generateFamilyReactions` e `generateIntuitiveRoutes`; portanto, o inventário das 422 rotas explícitas não cobre ainda todo o grafo executável. As estatísticas de 723 combinações executáveis e 695 rotas não revisadas constam da auditoria anterior `REVISAO_GEOLOGICA_v022.md`; não são interpretadas aqui como número de transformações geológicas válidas.
+O motor combina essas entradas com **12 rotas de família** (incluindo duas ternárias), **291 rotas intuitivas ativas**, **18 intuitivas descontinuadas** para compatibilidade histórica e **8 reações técnicas de preparação/conclusão de associações**. A reconstrução das regras publicadas identificou **723 pares executáveis distintos**. Essas contagens descrevem o grafo de jogo e não o número de transformações geológicas comprovadas.
 
-O registro das rotas explícitas e das pendências está em [REGISTRO_REVISAO_REACOES.json](REGISTRO_REVISAO_REACOES.json). **Nenhuma das 422 rotas explícitas recebeu aprovação científica individual nesta fase.** A verificação de balanço e a triagem de riscos não podem ser confundidas com essa aprovação.
+O registro integral das rotas explícitas, automáticas, descontinuadas e preparatórias está em [REGISTRO_REVISAO_REACOES.json](REGISTRO_REVISAO_REACOES.json). **Nenhuma rota recebeu aprovação científica individual nesta fase.** A verificação de balanço e a triagem de riscos não podem ser confundidas com essa aprovação. Duas rotas ternárias dos clinopiroxênios são mantidas no motor sem associação intermediária e, portanto, não aparecem entre os pares diretamente executáveis da bancada.
 
 ## 2. Tipologia científica obrigatória
 
@@ -144,7 +148,7 @@ As diretrizes acima são **triagem de correções**, não prova de que as demais
 
 ## 7. Ordem da revisão integral
 
-1. Completar inventário das rotas geradas e resolver a divergência entre contagens de documentação e runtime.
+1. Conciliar os totais da documentação histórica e manter o inventário integral sincronizado com os geradores de rotas.
 2. Eliminar atalhos cientificamente enganosos, começando pelos casos P0/P1 no registro.
 3. Auditar reações de referência balanceadas quanto ao campo de estabilidade e mecanismo.
 4. Auditar rotas simbólicas por famílias e processos: silicatos, metamorfismo, sistemas magmáticos, óxidos, sulfetos, carbonatos, sulfatos, argilas, solos, hidrotermalismo e acessórios.
