@@ -2055,7 +2055,7 @@ const SEARCH_ALIASES = {
     pressure: ['Pressão alta'],
     olivine: ['Olivina'],
 };
-const searchWords = (value) => value.split(/[\\s\\/()_,+.;:–—-]+/).filter(Boolean);
+const searchWords = (value) => value.match(/[\p{L}\p{N}]+/gu) ?? [];
 const librarySearchScore = (p, query) => {
     const name = normalizeText(p.name);
     const short = normalizeText(shortName(p));
