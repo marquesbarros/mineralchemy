@@ -32,12 +32,12 @@ async function makeGame(){
 }
 const key=(k,tag='BODY',id='')=>'handleGameplayShortcut({key:'+JSON.stringify(k)+',target:{tagName:'+JSON.stringify(tag)+',id:'+JSON.stringify(id)+'},ctrlKey:false,metaKey:false,altKey:false,preventDefault(){}})';
 
-test('busca respeita acentos e aceita formas Unicode equivalentes',async()=>{
+test('busca ignora acentos e aceita formas Unicode equivalentes',async()=>{
  const g=await makeGame();
  g.eval("search='cálcio'");
  assert.ok(g.eval("getLibraryItems().some(p=>p.id==='calcium_ion')"));
  g.eval("search='calcio'");
- assert.equal(g.eval("getLibraryItems().some(p=>p.id==='calcium_ion')"),false);
+ assert.equal(g.eval("getLibraryItems().some(p=>p.id==='calcium_ion')"),true);
  g.eval("search='ca\\u0301lcio'");
  assert.ok(g.eval("getLibraryItems().some(p=>p.id==='calcium_ion')"));
 });
