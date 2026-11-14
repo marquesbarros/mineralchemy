@@ -61,6 +61,15 @@ test('lepidocrocita é ligada a precipitação/oxidação supergênica, não à 
   assert.equal(pair('iron2','rain')?.id,'s-lepidocrocite-weathering');
 });
 
+test('talco é formado por reação com sílica e não por água isolada',()=>{
+  const route=pair('lizardite','quartz');
+  assert.equal(route?.id,'v08-alt-lizardite-quartz');
+  assert.deepEqual([...route.outputs],['talc','water']);
+  assert.equal(route.symbolic,false);
+  assert.equal(route.mechanic,null);
+  assert.equal(pair('enstatite','water'),undefined);
+});
+
 test('todas as espécies continuam alcançáveis, sem duplicações de pares e sem perder histórico',()=>{
   assert.equal(engine.diagnostics.length,0);
   const reached=evalGame('reachableIds(createEngine(EMBEDDED.cards, EMBEDDED.agents, EMBEDDED.reactions, EMBEDDED.rules))');
