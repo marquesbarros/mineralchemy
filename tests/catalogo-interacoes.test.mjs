@@ -62,7 +62,7 @@ test('Tab recolhe e reabre a coleção lateral sem alterar o catálogo mineraló
   press(g, 'Tab');
   assert.equal(g.run('catalogVisible'), true);
   assert.doesNotMatch(g.run('mainMarkup()'), /game catalog-collapsed/);
-  assert.match(g.run('headerMarkup()'), /data-action="toggle-catalog"/);
+  assert.match(g.run('mainMarkup()'), /data-action="toggle-catalog"/);
 });
 
 test('Tab preserva navegação reversa, edição e diálogos abertos', async () => {
