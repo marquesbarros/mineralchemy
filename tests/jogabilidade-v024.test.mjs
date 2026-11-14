@@ -51,6 +51,9 @@ test('qualquer letra, inclusive R e C, inicia busca sem acionar comandos antigos
   assert.equal(g.get('#catalogSearch').value,letter);
   assert.equal(g.get('#catalogSearch').focused,true);
  }
+ g.eval("search=''");
+ g.eval("handleGameplayShortcut({key:'@',target:{tagName:'BODY'},ctrlKey:true,altKey:true,metaKey:false,getModifierState(name){return name==='AltGraph'},preventDefault(){}})");
+ assert.equal(g.eval('search'),'@');
 });
 
 test('Enter seleciona primeiro resultado, limpa, tira foco e Delete limpa bancada',async()=>{
