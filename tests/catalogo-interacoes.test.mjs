@@ -12,33 +12,57 @@ async function makeGame() {
   const appEvents = new Map();
   const windowEvents = new Map();
   const storage = new Map();
+  let activeElement = null;
+  const windowCapture = new Map();
   const classList = () => ({ add() {}, remove() {}, toggle() {} });
   class FakeInput {
-    constructor() { this.value = ''; this.id = ''; this.tagName = 'INPUT'; this.classList = classList(); }
-    focus() { this.focused = true; this.blurred = false; }
-    blur() { this.blurred = true; this.focused = false; }
+    constructor() { this.value = ''; this.id = ''; this.tagName = 'INPUT'; this.classList = classList(); this.selectionStart = 0; this.selectionEnd = 0; }
+    focus() { this.focused = true; this.blurred = false; activeElement = this; }
+    blur() { this.blurred = true; this.focused = false; if (activeElement === this) activeElement = null; }
+    setSelectionRange(start, end) { this.selectionStart = start; this.selectionEnd = end; }
   }
   function node() {
     return { innerHTML: '', textContent: '', value: '', style: {}, dataset: {},
       classList: classList(), addEventListener() {}, querySelector() { return null; },
       querySelectorAll() { return []; }, insertAdjacentHTML() {}, setAttribute() {},
       getBoundingClientRect() { return { width: 800, height: 550, left: 0, top: 0, right: 800, bottom: 550 }; },
-      focus() { this.focused = true; }, blur() { this.blurred = true; },
+      focus() { this.focused = true; activeElement = this; }, blur() { this.blurred = true; if (activeElement === this) activeElement = null; },
     };
   }
   const get = selector => {
     if (!nodes.has(selector)) {
-      const el = selector === '#catalogSearch' ? new FakeInput() : node();
-      if (selector === '#catalogSearch') el.id = 'catalogSearch';
+      const el = ['#catalogSearch', '#collectionSearch', '#historySearch'].includes(selector) ? new FakeInput() : node();
+      if (selector.startsWith('#')) el.id = selector.slice(1);
       nodes.set(selector, el);
     }
     return nodes.get(selector);
   };
   const app = get('#app');
   app.addEventListener = (name, fn) => appEvents.set(name, fn);
+  const modalRoot = get('#modalRoot');
+  Object.defineProperty(modalRoot, 'innerHTML', {
+    get() { return this.html ?? ''; },
+    set(html) {
+      this.html = html;
+      // A troca do HTML invalida inputs antigos, como no navegador.
+      if (activeElement && ['collectionSearch', 'historySearch'].includes(activeElement.id)) {
+        activeElement.focused = false;
+        activeElement = null;
+      }
+      nodes.delete('#collectionSearch');
+      nodes.delete('#historySearch');
+    },
+  });
+  modalRoot.querySelector = selector => {
+    if (selector === '.dialog') return modalRoot.innerHTML.includes('class="dialog') ? get('#dialog') : null;
+    if (selector?.startsWith('.collection-topic') || selector?.startsWith('.history-filter') ||
+        selector?.startsWith('.history-group-button') || selector === '#collectionSearch' ||
+        selector === '#historySearch') return get(selector);
+    return null;
+  };
   const context = vm.createContext({
-    document: { querySelector: get, querySelectorAll() { return []; } },
-    window: { addEventListener(name, fn) { windowEvents.set(name, fn); } },
+    document: { querySelector: get, querySelectorAll() { return []; }, get activeElement() { return activeElement; } },
+    window: { addEventListener(name, fn, capture = false) { windowEvents.set(name, fn); windowCapture.set(name, capture); } },
     localStorage: { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     navigator: {}, setTimeout() { return 1; }, clearTimeout() {}, console,
     HTMLElement: class {}, HTMLInputElement: FakeInput, HTMLSelectElement: class {}, Element: class {},
@@ -46,7 +70,7 @@ async function makeGame() {
   const run = source => vm.runInContext(source, context);
   run(script.replace(/void boot\(\);\s*$/, ''));
   await run('boot()');
-  return { run, get, appEvents, windowEvents };
+  return { run, get, appEvents, windowEvents, windowCapture, get activeElement() { return activeElement; } };
 }
 
 function press(game, key, target = 'BODY', extras = '') {
@@ -150,6 +174,37 @@ test('setas preservam cursores de pesquisa e não afetam Trilhas sem submenus', 
   assert.equal(g.run('collectionTopic'), 'silicates');
   press(g, 'ArrowLeft');
   assert.equal(g.run('modal'), 'paths');
+});
+
+test('foco entra no catálogo ao abrir e Shift+Tab também funciona após foco na busca', async () => {
+  const g = await makeGame();
+  press(g, 'Tab');
+  assert.equal(g.run('modal'), 'collection');
+  assert.equal(g.activeElement, g.get('#dialog'), 'o foco deve entrar no diálogo');
+  assert.equal(g.windowCapture.get('keydown'), true, 'capturar eventos antes dos controles internos');
+  press(g, 'Tab', 'INPUT', 'shiftKey:true,');
+  assert.equal(g.run('modal'), 'history');
+  assert.equal(g.activeElement, g.get('#dialog'));
+  press(g, 'Tab', 'INPUT', 'shiftKey:true,');
+  assert.equal(g.run('modal'), 'paths');
+  press(g, 'Tab', 'BUTTON');
+  assert.equal(g.run('modal'), 'collection');
+  press(g, 'Tab', 'BUTTON');
+  assert.equal(g.run('modal'), null);
+});
+
+test('a pesquisa de minerais não perde o foco nem a posição do cursor ao atualizar', async () => {
+  const g = await makeGame();
+  press(g, 'Tab');
+  const input = g.get('#collectionSearch');
+  input.value = 'quartzo';
+  input.setSelectionRange(3, 3);
+  input.focus();
+  g.appEvents.get('input')({ target: input });
+  assert.equal(g.run('collectionSearch'), 'quartzo');
+  assert.equal(g.activeElement, g.get('#collectionSearch'), 'o campo recriado recebe foco novamente');
+  assert.equal(g.activeElement.selectionStart, 3);
+  assert.equal(g.activeElement.selectionEnd, 3);
 });
 
 test('digitação e busca no campo retornam à aba Tudo e abrangem todas as categorias', async () => {
