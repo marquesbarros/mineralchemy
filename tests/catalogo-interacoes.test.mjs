@@ -66,15 +66,90 @@ test('Tab abre e fecha o catálogo de descobertas sem ocultar a barra lateral', 
   assert.doesNotMatch(g.run('mainMarkup()'), /catalog-collapsed|toggle-catalog/);
 });
 
-test('Tab mantém navegação reversa e campos editáveis e não interfere em outros modais', async () => {
+test('Shift+Tab alterna entre Descobertas, Reações e Trilhas em ciclo', async () => {
   const g = await makeGame();
-  press(g, 'Tab', 'BODY', 'shiftKey:true,');
+  for (const expected of ['collection', 'history', 'paths', 'collection', 'history']) {
+    press(g, 'Tab', 'BODY', 'shiftKey:true,');
+    assert.equal(g.run('modal'), expected);
+  }
+  press(g, 'Tab');
+  assert.equal(g.run('modal'), 'collection', 'Tab sempre abre Descobertas');
+  press(g, 'Tab');
+  assert.equal(g.run('modal'), null, 'Tab fecha Descobertas');
+});
+
+test('atalhos não capturam edição, outros diálogos ou modificadores extras', async () => {
+  const g = await makeGame();
+  press(g, 'Tab', 'INPUT', 'shiftKey:true,');
   assert.equal(g.run('modal'), null);
   press(g, 'Tab', 'INPUT');
   assert.equal(g.run('modal'), null);
-  g.run("modal = 'history'");
-  press(g, 'Tab');
-  assert.equal(g.run('modal'), 'history');
+  press(g, 'Tab', 'BODY', 'shiftKey:true, ctrlKey:true,');
+  assert.equal(g.run('modal'), null);
+  g.run("modal = 'help'");
+  press(g, 'Tab', 'BODY', 'shiftKey:true,');
+  assert.equal(g.run('modal'), 'help');
+  g.run("modal = null; detailId = 'quartz'");
+  press(g, 'Tab', 'BODY', 'shiftKey:true,');
+  assert.equal(g.run('modal'), null);
+  assert.equal(g.run('detailId'), 'quartz');
+});
+
+test('setas esquerda e direita circulam pelos submenus do atlas de descobertas', async () => {
+  const g = await makeGame();
+  g.run("modal = 'collection'");
+  press(g, 'ArrowRight');
+  assert.equal(g.run('collectionTopic'), 'silicates');
+  press(g, 'ArrowLeft');
+  assert.equal(g.run('collectionTopic'), 'all');
+  press(g, 'ArrowLeft');
+  assert.equal(g.run('collectionTopic'), 'accessory', 'deve voltar ao último submenu');
+  press(g, 'ArrowRight');
+  assert.equal(g.run('collectionTopic'), 'all');
+  assert.match(g.run('modalMarkup()'), /collection-topic selected" data-action="collection-topic" data-topic="all"/);
+});
+
+test('setas navegam filtros temáticos nas reações sem mudar o agrupamento de produtos', async () => {
+  const g = await makeGame();
+  g.run("modal = 'history'; historyGroup = 'product'");
+  press(g, 'ArrowLeft');
+  assert.equal(g.run('historyFilter'), 'components');
+  press(g, 'ArrowRight');
+  assert.equal(g.run('historyFilter'), 'all');
+  press(g, 'ArrowRight');
+  assert.equal(g.run('historyFilter'), 'formation');
+  assert.equal(g.run('historyGroup'), 'product');
+});
+
+test('setas no seletor de agrupamento de reações alternam Processo e Produto', async () => {
+  const g = await makeGame();
+  g.run("modal = 'history'; historyGroup = 'section'");
+  const onGroup = (key) => g.run(`handleGameplayShortcut({
+    key: ${JSON.stringify(key)}, target: { tagName: 'BUTTON', isContentEditable:false,
+      dataset:{ action:'history-group' } }, preventDefault(){}, shiftKey:false,
+    ctrlKey:false, metaKey:false, altKey:false
+  })`);
+  onGroup('ArrowRight');
+  assert.equal(g.run('historyGroup'), 'product');
+  onGroup('ArrowLeft');
+  assert.equal(g.run('historyGroup'), 'section');
+  assert.equal(g.run('historyFilter'), 'all');
+});
+
+test('setas preservam cursores de pesquisa e não afetam Trilhas sem submenus', async () => {
+  const g = await makeGame();
+  g.run("modal = 'history'; historyFilter = 'formation'");
+  press(g, 'ArrowRight', 'INPUT');
+  assert.equal(g.run('historyFilter'), 'formation');
+  g.run("modal = 'collection'; collectionTopic = 'silicates'");
+  press(g, 'ArrowLeft', 'INPUT');
+  assert.equal(g.run('collectionTopic'), 'silicates');
+  g.run("modal = 'paths'");
+  press(g, 'ArrowRight');
+  assert.equal(g.run('modal'), 'paths');
+  assert.equal(g.run('collectionTopic'), 'silicates');
+  press(g, 'ArrowLeft');
+  assert.equal(g.run('modal'), 'paths');
 });
 
 test('digitação e busca no campo retornam à aba Tudo e abrangem todas as categorias', async () => {
