@@ -17,7 +17,7 @@ async function setup() {
     insertAdjacentHTML() {}, getBoundingClientRect() {
       return { width: 820, height: 540, left: 0, right: 820, top: 0, bottom: 540 };
     },
-    addEventListener() {}, focus() { this.focused = true; },
+    addEventListener() {}, focus() { this.focused = true; }, blur() { this.blurred = true; },
     select() { this.selected = true; },
     setPointerCapture() {},
   });
