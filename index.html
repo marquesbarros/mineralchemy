@@ -2529,7 +2529,8 @@ function handleGameplayShortcut(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && !e.altKey && !editing) {
         e.preventDefault(); reactBoard(); return;
     }
-    if (editing || e.ctrlKey || e.metaKey || e.altKey) return;
+    const altGraph = e.getModifierState?.('AltGraph') === true;
+    if (editing || ((e.ctrlKey || e.metaKey || e.altKey) && !altGraph)) return;
     if (e.key === 'Delete') {
         e.preventDefault(); clearBoard(); return;
     }
