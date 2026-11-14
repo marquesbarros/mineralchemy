@@ -15,14 +15,14 @@ Este documento define os critérios de construção e validação do catálogo d
 | Equações explicitamente não simbólicas com conservação de elementos e carga | 75 |
 | Rotas explícitas classificadas como simbólicas | 347 |
 | Rotas geradas por regra de família | 12 (10 binárias, 2 ternárias) |
-| Rotas intuitivas ativas / históricas descontinuadas | 291 / 18 |
+| Rotas intuitivas ativas / históricas descontinuadas | 296 / 18 |
 | Reações técnicas de associações ternárias | 8 |
 | Pares efetivamente disponíveis na bancada | 723 |
 | Rotas explícitas que apontam para duas referências gerais, sem validação específica | 243 |
 
 As 75 equações foram verificadas quanto à conservação dos elementos e da carga formal. Esse teste **não** avalia espontaneidade, estabilidade das fases, cinética, fluido, textura, paragênese ou representatividade do ambiente natural.
 
-O motor combina essas entradas com **12 rotas de família** (incluindo duas ternárias), **291 rotas intuitivas ativas**, **18 intuitivas descontinuadas** para compatibilidade histórica e **8 reações técnicas de preparação/conclusão de associações**. A reconstrução das regras publicadas identificou **723 pares executáveis distintos**. Essas contagens descrevem o grafo de jogo e não o número de transformações geológicas comprovadas.
+O motor combina essas entradas com **12 rotas de família** (incluindo duas ternárias), **296 rotas intuitivas ativas**, **18 intuitivas descontinuadas** para compatibilidade histórica e **8 reações técnicas de preparação/conclusão de associações**. A reconstrução das regras publicadas identificou **723 pares executáveis distintos**. Essas contagens descrevem o grafo de jogo e não o número de transformações geológicas comprovadas.
 
 O registro integral das rotas explícitas, automáticas, descontinuadas e preparatórias está em [REGISTRO_REVISAO_REACOES.json](REGISTRO_REVISAO_REACOES.json). **Nenhuma rota recebeu aprovação científica individual nesta fase.** A verificação de balanço e a triagem de riscos não podem ser confundidas com essa aprovação. Duas rotas ternárias dos clinopiroxênios são mantidas no motor sem associação intermediária e, portanto, não aparecem entre os pares diretamente executáveis da bancada.
 
@@ -133,6 +133,22 @@ Referência de reações de intemperismo sulfetado: Geological Survey of Finland
 | `meta-muscovite-out` | Reação adequada em modelo simplificado; pode haver fusão | Preservar e indicar condições de aplicação |
 
 As diretrizes acima são **triagem de correções**, não prova de que as demais rotas estejam aprovadas.
+
+### 5.1 Colisões de receitas executáveis
+
+A reconstrução do catálogo identificou **732 definições ativas binárias ou por agente, mas apenas 723 pares distintos**. Nove pares têm definições superpostas. Oito desses pares levam aos mesmos produtos e podem ser normalizados sem perda de conteúdo mineralógico; **um par apresenta produtos distintos**.
+
+| Par de peças | Primeira rota | Rota concorrente | Decisão |
+|---|---|---|---|
+| Talco + aquecimento | `v08-anthophyllite-2`: antofilita | `a-talc-heat`: enstatita + quartzo + água | **P0: eliminar a competição e preservar a desidroxilação como processo térmico** |
+
+A referência `a-talc-heat` possui a equação Mg₃Si₄O₁₀(OH)₂ → 3 MgSiO₃ + SiO₂ + H₂O. A literatura experimental confirma a formação de enstatita e sílica durante desidroxilação do talco, embora o estado físico da sílica varie com as condições. A associação talco + calor → antofilita não fornece o magnésio adicional necessário para a composição Mg₇Si₈O₂₂(OH)₂. O catálogo já dispõe da rota alternativa `v08-anthophyllite-1` (enstatita + fluido hidrotermal), cuja reação de referência também deverá considerar sílica, água e condições de estabilidade.
+
+Referências específicas:
+- https://doi.org/10.1346/CCMN.2014.0620206
+- https://doi.org/10.1080/01411594.2014.1002092
+
+Os oito pares redundantes são: cal + água, hematita + água, anidrita + água, periclásio + água, forsterita + água, olivina intermediária + água, enstatita + água e diopsídio + água. A redundância é estrutural, não uma demonstração de que as reações estejam cientificamente aprovadas.
 
 ## 6. Critérios de aprovação do mapa
 
