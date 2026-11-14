@@ -5,9 +5,15 @@ para descobrir espécies e transformações, incluindo reações metamórficas e
 
 **[Jogar](https://marquesbarros.github.io/mineralchemy/)** · **[Atlas dos 178 ícones](https://marquesbarros.github.io/mineralchemy/iconografia.html)**
 
+## Busca por relevância
+
+A pesquisa da bancada aceita **nomes com ou sem acentos**, ignora diferenças entre maiúsculas e minúsculas e reconhece fórmulas sem subscritos (por exemplo, `Fe2O3` para `Fe₂O₃`). Os resultados são organizados por relevância: nome exato, fórmula exata, início do nome, palavras no nome, correspondências secundárias e família. Se não houver correspondência direta, pequenos erros de digitação podem gerar sugestões aproximadas.
+
+A primeira correspondência fica em destaque e **Enter** adiciona essa peça. Foram incluídos sinônimos de agentes; por exemplo, pesquisar `fluido hidrotermal` encontra **Hidrotermalismo**, preservando o ID `hydrothermal` e a compatibilidade das receitas existentes.
+
 ## Revisão de processos hídricos · v0.25
 
-O jogo distingue agora **Água**, **Intemperismo** e **Fluido hidrotermal** pelo processo que representam. Água continua sendo um reagente de hidratação, hidrólise ou dissolução; não é um agente universal de alteração metamórfica e hidrotermal. A serpentinização de olivina/forsterita passa a depender de fluido hidrotermal e de condições específicas de reação.
+O jogo distingue agora **Água**, **Intemperismo** e **Hidrotermalismo** pelo processo que representam. Água continua sendo um reagente de hidratação, hidrólise ou dissolução; não é um agente universal de alteração metamórfica e hidrotermal. A serpentinização de olivina/forsterita passa a depender de fluido hidrotermal e de condições específicas de reação.
 
 Foram descontinuados 15 caminhos inadequados, criadas 9 rotas condicionais e reativada uma reação mineralógica balanceada de lizardita + quartzo → talco + água. O motor possui **279 reações ativas**, **269 pares executáveis** e mantém **178 minerais alcançáveis**. Os 489 registros arquivados continuam disponíveis no histórico e no gabarito de auditoria.
 
@@ -15,11 +21,11 @@ As rotas hidrotermais remanescentes não constituem aprovação termodinâmica: 
 
 ## Interação e busca · v0.24
 
-A busca da coleção diferencia caracteres com e sem acento, aceita formas Unicode equivalentes e pode ser iniciada digitando uma letra ou outro caractere imprimível. **Enter** adiciona o primeiro resultado visível, limpa a busca e retira o foco do campo, para permitir **Delete** limpar a bancada. **Ctrl+K** foca a pesquisa e **Ctrl+Enter** executa uma reação com as peças da bancada.
+A busca da coleção é insensível a acentos, aceita formas Unicode equivalentes e pode ser iniciada digitando uma letra ou outro caractere imprimível. **Enter** adiciona o primeiro resultado visível, limpa a busca e retira o foco do campo, para permitir **Delete** limpar a bancada. **Ctrl+K** foca a pesquisa e **Ctrl+Enter** executa uma reação com as peças da bancada.
 
 Letras como **R** e **C** não são mais atalhos isolados, pois devem poder iniciar a digitação. Na bancada, arrastar uma peça e soltá-la fora da área remove essa instância, sem apagar as descobertas. Se houver excesso de peças, o botão **Reagir** avisa sobre a quantidade; reações de três componentes continuam usando associações intermediárias.
 
-A coleção usa uma única ordem alfabética, com a faixa de **Usados recentemente** exclusivamente na aba **Tudo**. As categorias exibidas são **Tudo, Íons, Minerais, Agentes e Compostos**. O agente identificado internamente como `reduction` agora é chamado **Redução**, mantendo compatibilidade com partidas existentes.
+Sem pesquisa, a coleção usa ordem alfabética, com a faixa de **Usados recentemente** exclusivamente na aba **Tudo**. Durante uma pesquisa, os resultados são ordenados por relevância. As categorias exibidas são **Tudo, Íons, Minerais, Agentes e Compostos**. O agente identificado internamente como `reduction` agora é chamado **Redução**, mantendo compatibilidade com partidas existentes.
 
 ## Como jogar
 
