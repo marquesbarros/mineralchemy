@@ -2445,16 +2445,31 @@ function endPointer(e) {
 function openDetails(id) { if (!discovered().has(id) || !item(id))
     return; detailId = id; modal = null; updateModal(); }
 /** Preserva posição de leitura e foco ao mudar um submenu pelo teclado. */
+/** Mantém o foco dentro da janela ativa para que seus atalhos funcionem de imediato. */
 function updateModal(focusSelector = null) {
     const root = document.querySelector('#modalRoot');
     if (!root) return;
-    const previousScroll = focusSelector ? root.querySelector?.('.dialog')?.scrollTop : null;
+    const previousDialog = root.querySelector?.('.dialog');
+    const previousScroll = previousDialog?.scrollTop ?? null;
+    const previousFocus = document.activeElement;
+    const searchId = (modal === 'collection' && previousFocus?.id === 'collectionSearch') ||
+        (modal === 'history' && previousFocus?.id === 'historySearch')
+        ? previousFocus.id : null;
+    const selection = searchId && typeof previousFocus.selectionStart === 'number'
+        ? [previousFocus.selectionStart, previousFocus.selectionEnd] : null;
     root.innerHTML = modalMarkup();
-    if (previousScroll != null) {
-        const dialog = root.querySelector?.('.dialog');
-        if (dialog) dialog.scrollTop = previousScroll;
+    const dialog = root.querySelector?.('.dialog');
+    if (!dialog) return;
+    if (previousScroll != null && (focusSelector || searchId)) dialog.scrollTop = previousScroll;
+    const selector = focusSelector || (searchId ? '#' + searchId : null);
+    const focused = selector ? root.querySelector?.(selector) : null;
+    if (focused) {
+        focused.focus?.({ preventScroll: true });
+        if (selection) focused.setSelectionRange?.(...selection);
+    } else {
+        dialog.tabIndex = -1;
+        dialog.focus?.({ preventScroll: true });
     }
-    if (focusSelector) root.querySelector?.(focusSelector)?.focus?.({ preventScroll: true });
 }
 function action(el) {
     const a = el.dataset.action;
@@ -2638,7 +2653,7 @@ app.addEventListener('input', e => {
     }
     if (target.id === 'collectionSearch') {
         collectionSearch = target.value;
-        updateModal();
+        updateModal('#collectionSearch');
         return;
     }
     if (target.id === 'historySearch') {
@@ -2661,15 +2676,17 @@ function handleGameplayShortcut(e) {
     const editing = !!target && (target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(target.tagName));
     const noModifiers = !e.ctrlKey && !e.metaKey && !e.altKey;
     const canNavigateCatalogs = !detailId && (!modal || CATALOG_SCREENS.includes(modal));
-    if (e.key === 'Tab' && noModifiers && !editing && canNavigateCatalogs) {
-        if (e.shiftKey) {
-            // Descobertas → Reações → Trilhas → Descobertas.
+    const isTab = e.key === 'Tab' || e.code === 'Tab' || e.key === 'ISO_Left_Tab';
+    const reverseTab = e.shiftKey || e.key === 'ISO_Left_Tab';
+    if (isTab && noModifiers && canNavigateCatalogs) {
+        if (reverseTab && (!editing || !!modal)) {
+            // Descobertas → Reações → Trilhas → Descobertas, inclusive a partir da busca.
             e.preventDefault();
             modal = CATALOG_SCREENS[(CATALOG_SCREENS.indexOf(modal) + 1) % CATALOG_SCREENS.length];
             updateModal();
             return;
         }
-        if (!['BUTTON', 'A'].includes(target?.tagName)) {
+        if (!reverseTab && !editing) {
             e.preventDefault();
             modal = modal === 'collection' ? null : 'collection';
             updateModal();
@@ -2728,7 +2745,7 @@ function handleGameplayShortcut(e) {
         input.focus();
     }
 }
-window.addEventListener('keydown', handleGameplayShortcut);
+window.addEventListener('keydown', handleGameplayShortcut, true);
 window.addEventListener('resize', () => { if (active)
     return; for (const p of pieces)
     clampPiece(p); updateBoardDom(); });
