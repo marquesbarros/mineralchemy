@@ -2225,7 +2225,7 @@ function modalMarkup() {
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Detalhes do material"><button class="close" data-action="close" aria-label="Fechar">×</button><div class="detail-orb" style="${styleFor(present)}">${iconMarkup(present)}</div><p class="overline">${esc(present.kind === 'agent' ? 'AGENTE' : present.family)}</p><h2>${esc(present.name)}</h2><div class="detail-formula">${esc(present.formula)}</div><p>${esc(present.description)}</p>${routes}<div class="detail-foot">${num} reações no catálogo</div><button class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada <span>↗</span></button></section></div>`;
     }
     if (modal === 'help')
-        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Descubra misturando.</h2><div class="help-step"><span>01</span><p><b>Escolha uma peça</b> na coleção e arraste para a bancada. Você também pode tocar para adicioná-la.</p></div><div class="help-step"><span>02</span><p><b>Encoste duas peças</b> para misturá-las. Se forem compatíveis, aparecerá uma transformação.</p></div><div class="help-step"><span>03</span><p><b>Experimente de novo.</b> Cada descoberta entra na coleção e pode ser usada quantas vezes quiser.</p></div><p class="help-note">As combinações simplificam processos geoquímicos. As fórmulas e descrições aparecem ao tocar em uma peça na bancada.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Qualquer letra</kbd> inicia a busca · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado e fecha a busca.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> abre/fecha o catálogo de descobertas · <kbd>Esc</kbd> fecha a pesquisa.</div><div>Para reações com três componentes, forme primeiro uma associação mineral.</div></div><button class="primary" data-action="close">Começar a explorar <span>→</span></button></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Descubra misturando.</h2><div class="help-step"><span>01</span><p><b>Escolha uma peça</b> na coleção e arraste para a bancada. Você também pode tocar para adicioná-la.</p></div><div class="help-step"><span>02</span><p><b>Encoste duas peças</b> para misturá-las. Se forem compatíveis, aparecerá uma transformação.</p></div><div class="help-step"><span>03</span><p><b>Experimente de novo.</b> Cada descoberta entra na coleção e pode ser usada quantas vezes quiser.</p></div><p class="help-note">As combinações simplificam processos geoquímicos. As fórmulas e descrições aparecem ao tocar em uma peça na bancada.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Qualquer letra</kbd> inicia a busca · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado e fecha a busca.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> abre/fecha Descobertas · <kbd>Shift+Tab</kbd> percorre Descobertas, Reações e Trilhas · <kbd>←</kbd>/<kbd>→</kbd> navegam pelos submenus · <kbd>Esc</kbd> fecha a pesquisa.</div><div>Para reações com três componentes, forme primeiro uma associação mineral.</div></div><button class="primary" data-action="close">Começar a explorar <span>→</span></button></section></div>`;
     if (modal === 'reset')
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Reiniciar descobertas"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">NOVA PARTIDA</p><h2>Reiniciar descobertas?</h2><p>Isso apagará a coleção descoberta e o histórico deste navegador. Não será possível desfazer.</p><div class="dialog-buttons"><button class="secondary" data-action="close">Cancelar</button><button class="danger" data-action="confirm-reset">Reiniciar jogo</button></div></section></div>`;
     if (modal === 'paths')
@@ -2444,8 +2444,18 @@ function endPointer(e) {
 }
 function openDetails(id) { if (!discovered().has(id) || !item(id))
     return; detailId = id; modal = null; updateModal(); }
-function updateModal() { const root = document.querySelector('#modalRoot'); if (root)
-    root.innerHTML = modalMarkup(); }
+/** Preserva posição de leitura e foco ao mudar um submenu pelo teclado. */
+function updateModal(focusSelector = null) {
+    const root = document.querySelector('#modalRoot');
+    if (!root) return;
+    const previousScroll = focusSelector ? root.querySelector?.('.dialog')?.scrollTop : null;
+    root.innerHTML = modalMarkup();
+    if (previousScroll != null) {
+        const dialog = root.querySelector?.('.dialog');
+        if (dialog) dialog.scrollTop = previousScroll;
+    }
+    if (focusSelector) root.querySelector?.(focusSelector)?.focus?.({ preventScroll: true });
+}
 function action(el) {
     const a = el.dataset.action;
     switch (a) {
@@ -2638,19 +2648,56 @@ app.addEventListener('input', e => {
 });
 
 
+const CATALOG_SCREENS = Object.freeze(['collection', 'history', 'paths']);
+/** Navegação circular entre as categorias internas de cada catálogo. */
+function nextMenuOption(options, currentId, step) {
+    const index = options.findIndex(option => option.id === currentId);
+    return options[(index + step + options.length) % options.length].id;
+}
 function handleGameplayShortcut(e) {
     if (!engine || e.defaultPrevented || e.isComposing) return;
     const key = String(e.key ?? '').toLowerCase();
     const target = e.target;
     const editing = !!target && (target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(target.tagName));
-    // Atalho do atlas de descobertas; preservar Tab nativo nos campos e controles.
-    if (e.key === 'Tab' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey &&
-        !editing && !['BUTTON', 'A'].includes(target?.tagName) &&
-        (!modal || modal === 'collection') && !detailId) {
-        e.preventDefault();
-        modal = modal === 'collection' ? null : 'collection';
-        updateModal();
-        return;
+    const noModifiers = !e.ctrlKey && !e.metaKey && !e.altKey;
+    const canNavigateCatalogs = !detailId && (!modal || CATALOG_SCREENS.includes(modal));
+    if (e.key === 'Tab' && noModifiers && !editing && canNavigateCatalogs) {
+        if (e.shiftKey) {
+            // Descobertas → Reações → Trilhas → Descobertas.
+            e.preventDefault();
+            modal = CATALOG_SCREENS[(CATALOG_SCREENS.indexOf(modal) + 1) % CATALOG_SCREENS.length];
+            updateModal();
+            return;
+        }
+        if (!['BUTTON', 'A'].includes(target?.tagName)) {
+            e.preventDefault();
+            modal = modal === 'collection' ? null : 'collection';
+            updateModal();
+            return;
+        }
+    }
+    // Não captura as setas em campos de texto: nelas movem o cursor normalmente.
+    if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && noModifiers &&
+        !e.shiftKey && !editing && !detailId) {
+        const direction = e.key === 'ArrowRight' ? 1 : -1;
+        if (modal === 'collection') {
+            e.preventDefault();
+            collectionTopic = nextMenuOption(collectionTopicDefs, collectionTopic, direction);
+            updateModal(`.collection-topic[data-topic="${collectionTopic}"]`);
+            return;
+        }
+        if (modal === 'history') {
+            e.preventDefault();
+            if (target?.dataset?.action === 'history-group' || target?.closest?.('[data-action="history-group"]')) {
+                historyGroup = historyGroup === 'section' ? 'product' : 'section';
+                updateModal(`.history-group-button[data-group="${historyGroup}"]`);
+            } else {
+                historyFilter = nextMenuOption(REACTION_CATALOG_FILTERS, historyFilter, direction);
+                updateModal(`.history-filter[data-filter="${historyFilter}"]`);
+            }
+            return;
+        }
+        // Trilhas não tem submenus; mantém o comportamento nativo das setas.
     }
     if (modal || detailId) return;
     const input = document.querySelector('#catalogSearch');
