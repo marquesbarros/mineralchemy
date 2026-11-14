@@ -17,7 +17,11 @@
     "all_route_ids": 756,
     "active_reaction_objects": 738,
     "retired_reaction_ids": 18,
-    "ternary_family_without_staging": 2
+    "ternary_family_without_staging": 2,
+    "overlapping_executable_pairs": 9,
+    "overlapping_pairs_same_outputs": 8,
+    "overlapping_pairs_divergent_outputs": 1,
+    "unstaged_ternary_family_routes": 2
   },
   "routes": [
     {
@@ -1091,7 +1095,9 @@
       "agent": "heat",
       "scientific_review": "pendente",
       "equation_check": "balanceamento_elemental_e_carga_aprovado",
-      "source_specificity": "a_verificar"
+      "source_specificity": "a_verificar",
+      "priority": "P0",
+      "scientific_issue": "P0: rota termoquímica com referência balanceada, preterida na bancada por v08-anthophyllite-2, que usa a mesma dupla de peças."
     },
     {
       "id": "a-brucite-heat",
@@ -2875,7 +2881,9 @@
       "agent": null,
       "scientific_review": "pendente",
       "equation_check": "associação_simbólica",
-      "source_specificity": "a_verificar"
+      "source_specificity": "a_verificar",
+      "priority": "P0",
+      "scientific_issue": "P0: talco + calor é interpretado como síntese de antofilita, prevalecendo sobre a desidroxilação correta do talco sem explicitar a entrada de Mg. Descontinuar este atalho após assegurar outra rota de descoberta."
     },
     {
       "id": "v08-grunerite-2",
@@ -11998,5 +12006,11 @@
   "generated_intuitive_active": 296,
   "generated_intuitive_retired": 18,
   "staged_reactions": 8,
-  "board_pairs_executable": 723
+  "board_pairs_executable": 723,
+  "audit_notes": [
+    "Das 732 reações binárias/alterações ativas, 9 pares têm duas definições concorrentes e resultam em 723 entradas únicas na bancada.",
+    "Oito pares duplicados têm produtos iguais; o par talco+aquecimento tem produtos diferentes.",
+    "Todas as 6 reações ternárias no motor exigem checagem de jogabilidade: 4 possuem associações intermediárias e 2 rotas de família não as possuem.",
+    "Reações descontinuadas permanecem no registro apenas para compatibilidade histórica."
+  ]
 }
