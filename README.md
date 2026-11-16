@@ -4,6 +4,14 @@
 
 **[Jogar Mineralchemy](https://marquesbarros.github.io/mineralchemy/)** · [Atlas de ilustrações](https://marquesbarros.github.io/mineralchemy/iconografia.html)
 
+**Documentação:** [Arquitetura e infraestrutura](docs/ARQUITETURA.md) · [Referências bibliográficas e científicas](docs/REFERENCIAS.md) · [Origem, linhagem de versões e assistência de código](docs/ORIGEM_E_DESENVOLVIMENTO.md) · [Histórico](docs/HISTORICO.md).
+
+## De onde veio a ideia
+
+O Mineralchemy nasceu de uma experiência pessoal de **Lucas Marques Barros**: um dia, ele sonhou que estava jogando algo parecido com **[Little Alchemy](https://littlealchemy.com/)** e teve uma epifania sobre a possibilidade de explorar aquela dinâmica de descoberta por combinações no universo da mineralogia. *Little Alchemy*, criado por **Jakub Koziol**, é reconhecido como inspiração lúdica; o Mineralchemy é um projeto independente, sem afiliação com os criadores do jogo original.
+
+A concepção do projeto, a seleção de conteúdo e a curadoria das associações pertencem ao autor. Leia o [relato de origem e a proveniência do desenvolvimento](docs/ORIGEM_E_DESENVOLVIMENTO.md).
+
 ## Como jogar
 
 1. **Escolha materiais** na coleção lateral. Clique ou toque para adicioná-los à bancada; também é possível arrastá-los.
@@ -70,3 +78,13 @@ Leia [a arquitetura e as verificações](docs/ARQUITETURA.md) para detalhes de m
 A página [Catálogo científico de reações](catalogo-auditoria.html) permite examinar e avaliar rotas ativas ou arquivadas, registrar decisões e exportá-las em JSON ou CSV. **Atenção: ela revela receitas que podem ainda não ter sido descobertas durante o jogo.** As avaliações não modificam a partida.
 
 Os critérios e os limites da curadoria são documentados em [Mapa científico de reações](docs/MAPA_REACOES_CIENTIFICO.md), [Processos hídricos](docs/PROCESSOS_HIDRICOS_v025.md) e [Catálogo de reações](docs/REACTIONS_CATALOG.md).
+
+
+## Bibliografia, infraestrutura e versões
+
+- **Infraestrutura:** aplicação estática de **HTML, CSS e JavaScript**, hospedada no **GitHub Pages**, com dados incorporados, progresso em `localStorage` e testes em **Node.js**. Não há backend ou build obrigatório na distribuição. Detalhes em [ARQUITETURA.md](docs/ARQUITETURA.md).
+- **Bibliografia:** fontes de mineralogia, petrologia, iconografia e revisões específicas estão reunidas em [REFERENCIAS.md](docs/REFERENCIAS.md), com a distinção entre referências gerais e validação individual das rotas.
+- **Linhagem do jogo:** os marcos documentados vão de **v0.15 a v0.25**, além de melhorias posteriores. São versões da documentação, não necessariamente tags de lançamento; consulte [HISTORICO.md](docs/HISTORICO.md).
+- **Assistentes de código:** houve assistência de **OpenAI Codex**, segundo o mantenedor, mas o **modelo e a versão exatos de cada sessão histórica não estão registrados**. A revisão documental de **16/11/2026** recebeu apoio de **ChatGPT GPT-6**. A forma de registrar modelos, builds e commits é descrita em [ORIGEM_E_DESENVOLVIMENTO.md](docs/ORIGEM_E_DESENVOLVIMENTO.md).
+
+Os testes verificam funcionalidade e integridade do catálogo, **não a estabilidade termodinâmica de todas as reações**. Não há arquivo `LICENSE` na árvore pública atual; a disponibilização do código não concede, por si só, licença irrestrita de reutilização.
