@@ -13,6 +13,13 @@ let historySearch = '';
 let historyFilter = 'all';
 let historyGroup = 'section';
 let collectionTopic = 'all';
+let trailMode = 'continuation';
+let trailFocusId = null;
+const trailHints = new Map();
+let pendingTrailPair = '';
+let trailNotice = '';
+let recentDiscoveries = [];
+let missingPairIds = [];
 let modal = null;
 let detailId = null;
 let dialogReturnFocus = null;
@@ -107,9 +114,9 @@ const palette = (p) => {
     return ['#e3f3e7', '#277b55', '#cde8d4'];
 };
 const styleFor = (p) => { const [bg, fg, ring] = palette(p); return `--orb:${bg};--ink:${fg};--ring:${ring}`; };
-const percent = () => { const count = engine.cards.filter(c => c.kind === 'mineral' && save.discovered.includes(c.id)).length; const total = engine.cards.filter(c => c.kind === 'mineral').length; return { count, total }; };
-const discovered = () => new Set([...save.discovered, ...specialAgents]);
-const knownItems = () => playables.filter(p => discovered().has(p.id) && !HIDDEN_ARCHIVED_IONS.has(p.id));
+const percent = () => { const cards = mineralPlayables(); return { count: cards.filter(c => save.discovered.includes(c.id)).length, total: cards.length }; };
+const discovered = () => new Set([...save.discovered, ...specialAgents].filter(id => isPlayableCard(item(id))));
+const knownItems = () => { const known = discovered(); return playables.filter(p => known.has(p.id)); };
 const normalizeText = (value) => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLocaleLowerCase('pt-BR');
 const mineralPlayables = () => engine.cards.filter((c) => c.kind === 'mineral').map(c => item(c.id)).filter((p) => !!p);
 const collectionTopicDefs = [
@@ -185,7 +192,7 @@ function collectionTopicStats(minerals, acquired) {
     });
 }
 function reactionActor(id) {
-    const found = item(id);
+    const found = item(id) ?? engine.byCard.get(id);
     if (found)
         return found;
     const agent = engine.agents.find(a => a.id === id);
@@ -235,7 +242,7 @@ function historyEntriesMatchQuery(reaction, query) {
     if (!query)
         return true;
     const related = [...reaction.inputs, ...reaction.outputs, ...(reaction.agent ? [reaction.agent] : [])];
-    const names = related.map(id => { const p = item(id); return `${p?.name ?? engine.agents.find(a => a.id === id)?.name ?? id} ${p?.formula ?? ''}`; }).join(' ');
+    const names = related.map(id => { const p = reactionActor(id); return `${p.name} ${p.formula}`; }).join(' ');
     const science = routeScience(reaction, engine.byCard);
     return normalizeText(`${names} ${science.reference?.equation ?? ''} ${reaction.summary} ${science.conditions}`).includes(query);
 }
@@ -439,7 +446,7 @@ function pathMarkup(ids, transitions) {
         return step + materials;
     }).join('')}</div>`;
 }
-function pathsMarkup() {
+function thematicPathsMarkup() {
     const tracks = [
         { label: 'Bowen · série descontínua', desc: 'Olivina, piroxênios, anfibólio e biotita ilustram mudanças de minerais durante a evolução de certos magmas. A ordem e as fases dependem da composição do líquido, da pressão e da água disponível.', ids: ['forsterite', ['enstatite', 'augite'], 'magnesiohornblende', 'biotite'], steps: ['reação com o líquido', 'evolução do líquido e disponibilidade de H₂O', 'evolução do líquido e inclusão de K'] },
         { label: 'Bowen · plagioclásios', desc: 'Cristais em equilíbrio com líquido magmático podem evoluir para composições mais sódicas. Difusão lenta ou retirada dos cristais pode preservar núcleos mais cálcicos.', ids: ['anorthite', 'bytownite', 'labradorite', 'andesine', 'oligoclase', 'albite'], steps: Array(5).fill('líquido residual e troca Ca–Al por Na–Si') },
@@ -447,7 +454,122 @@ function pathsMarkup() {
         { label: 'Alteração de feldspatos', desc: 'Sericitização e argilização são caminhos possíveis, não etapas obrigatórias de uma única história geológica.', ids: ['orthoclase', 'muscovite', 'kaolinite'], steps: ['+ fluido hidrotermal', '+ intemperismo, lixiviação'] },
         { label: 'Metamorfismo calcissilicático', desc: 'Reação de descarbonatação: calcita + quartzo → wollastonita + CO₂ sob condições P–T–X(CO₂) adequadas.', ids: ['calcite', 'wollastonite'], steps: ['+ quartzo, aquecimento'] },
     ];
-    return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide paths-dialog" role="dialog" aria-modal="true" aria-label="Trilhas mineralógicas"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">RELAÇÕES MINERALÓGICAS</p><h2>Trilhas de transformação</h2><p class="paths-intro">Exemplos de relações mineralógicas e mudanças de composição. Minerais ainda não descobertos permanecem ocultos. Estas trilhas não representam sequências obrigatórias nem garantem transformações em qualquer condição geológica.</p><div class="paths-grid">${tracks.map(track => `<article class="path-track"><h3>${esc(track.label)}</h3><p>${esc(track.desc)}</p>${pathMarkup(track.ids, track.steps)}</article>`).join('')}</div></section></div>`;
+    return `<p class="paths-intro">As trilhas temáticas mostram exemplos de relações mineralógicas cuja ocorrência depende das condições geológicas.</p><div class="paths-grid">${tracks.map(track => `<article class="path-track"><h3>${esc(track.label)}</h3><p>${esc(track.desc)}</p>${pathMarkup(track.ids, track.steps)}</article>`).join('')}</div>`;
+}
+function trailOptionMarkup({ reaction, inputs, partnerId, newOutputs, prerequisite }, blocked) {
+    const level = trailHints.get(reaction.id) ?? 0;
+    const partner = reactionActor(partnerId);
+    const process = PROCESS_LABELS[routeProcess(reaction, engine.byCard)];
+    const label = ['Mostrar pista', blocked ? 'Mostrar como obter a peça' : 'Revelar combinação', 'Revelar produto'][level];
+    const hint = level ? `<p>Tipo da outra peça: ${esc(MATERIAL_LABELS[materialType(partner)])}. Família: ${esc(partner.family)}.</p>` : '';
+    let recipe = '';
+    if (level >= 2 && !blocked) {
+        recipe = `<div class="trail-recipe">${reactionFlowMarkup(inputs)}<button type="button" class="secondary" data-action="trail-prepare" data-id="${esc(reaction.id)}">Preparar na bancada</button></div>`;
+    } else if (level >= 2) {
+        const route = prerequisite?.actions ?? [];
+        const step = route[0];
+        recipe = `<p>Peça por descobrir: <b>${esc(partner.name)}</b>.</p>` + (step
+            ? `<ol class="trail-steps">${route.map(({ inputs, reaction }) => `<li>${esc(inputs.map(id => reactionActor(id).name).join(' + '))} <span aria-hidden="true">→</span> ${esc(reaction.outputs.map(id => reactionActor(id).name).join(' + '))}</li>`).join('')}</ol><button type="button" class="secondary" data-action="trail-prepare" data-id="${esc(step.reaction.id)}">Preparar etapa na bancada</button><p>Depois de descobrir a peça, volte a esta continuação.</p>`
+            : '<p>Não foi encontrado um caminho para obter essa peça com os materiais atuais.</p>');
+    }
+    const result = level === 3 ? `<div class="trail-result" tabindex="-1"><p>Produto${reaction.outputs.length === 1 ? '' : 's'}: <b>${esc(reaction.outputs.map(id => reactionActor(id).name).join(' + '))}</b>.</p>${scientificDetailsMarkup(reaction, routeScience(reaction, engine.byCard))}</div>` : '';
+    return `<article class="trail-option" data-trail-reaction="${esc(reaction.id)}"><h4>${esc(process)}</h4><span class="trail-kind">${newOutputs.length ? 'Nova descoberta' : 'Rever combinação'}</span>${hint}${recipe}${result}${level < 3 ? `<button type="button" class="text-button trail-hint" data-action="trail-hint" data-id="${esc(reaction.id)}">${label}</button>` : ''}</article>`;
+}
+function terminalTrailMarkup(focus, known) {
+    const recent = completedReactions(save, engine).find(({ reaction }) => reaction.outputs.includes(focus));
+    const precursors = [...new Set(recent?.reaction.inputs ?? [])]
+        .filter(id => id !== focus && known.has(id) && item(id)?.kind !== 'agent');
+    return `<p class="paths-intro">O catálogo não oferece uma continuação acessível para este material nesta partida.</p>${precursors.length ? `<div class="trail-modes">${precursors.map(id => `<button type="button" class="secondary" data-action="trail-focus" data-id="${esc(id)}">Voltar a explorar ${esc(item(id).name)}</button>`).join('')}</div>` : ''}`;
+}
+function continuationMarkup() {
+    const list = knownItems().sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+    const known = new Set(list.map(p => p.id));
+    const focus = known.has(trailFocusId) ? trailFocusId : '';
+    const select = `<label class="trail-focus" for="trailFocus"><span>Material de partida</span><select id="trailFocus"><option value="">Escolha um material</option>${list.map(p => `<option value="${esc(p.id)}"${p.id === focus ? ' selected' : ''}>${esc(p.name)}</option>`).join('')}</select></label>`;
+    if (!focus) return `${select}<p class="paths-intro">Escolha um material disponível e peça pistas para descobrir o que pode combinar com ele.</p>`;
+    const { available, blocked } = continuationOptions(pairs, focus, known, byPlayable);
+    const group = (title, options, isBlocked) => options.length
+        ? `<section class="trail-options"><h3>${title}</h3>${options.map(option => trailOptionMarkup(option, isBlocked)).join('')}</section>` : '';
+    const choices = group('Disponíveis agora', available, false) + group('Falta uma peça', blocked, true);
+    const confirm = pendingTrailPair ? `<div class="trail-confirm" role="group" aria-labelledby="trailConfirm"><p id="trailConfirm">A bancada tem peças que não fazem parte desta etapa. Substituí-las?</p><div class="dialog-buttons"><button type="button" class="secondary" data-action="trail-keep">Manter bancada</button><button type="button" class="primary" data-action="trail-replace">Substituir peças</button></div></div>` : '';
+    return `${select}${trailNotice ? `<p class="trail-notice" role="status">${esc(trailNotice)}</p>` : ''}${confirm}${choices || terminalTrailMarkup(focus, known)}`;
+}
+function pathsMarkup() {
+    const tabs = [['continuation', 'Continuar descobertas'], ['thematic', 'Trilhas temáticas']];
+    return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide paths-dialog" role="dialog" aria-modal="true" aria-label="Trilhas mineralógicas"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Trilhas de transformação</h2><div class="trail-modes" role="group" aria-label="Modo das trilhas">${tabs.map(([mode, name]) => `<button type="button" class="secondary" data-action="trail-mode" data-mode="${mode}" aria-pressed="${trailMode === mode}">${name}</button>`).join('')}</div>${trailMode === 'continuation' ? continuationMarkup() : thematicPathsMarkup()}</section></div>`;
+}
+function boardTrailMarkup() {
+    const button = (id, label) => `<button type="button" class="trail-link" data-action="trail-focus" data-id="${esc(id)}">${esc(label)}</button>`;
+    const missed = missingPairIds.length ? `<div class="board-trail-row"><p>Não há uma combinação cadastrada para essas duas peças.</p>${missingPairIds.map(id => button(id, `Explorar com ${reactionActor(id).name}`)).join('')}</div>` : '';
+    const justFound = recentDiscoveries.length ? `<div class="board-trail-row"><p>Continuar da descoberta:</p>${recentDiscoveries.map(id => button(id, reactionActor(id).name)).join('')}</div>` : '';
+    const resume = trailFocusId ? `<button type="button" class="trail-link" data-action="trail-resume">Voltar à continuação de ${esc(reactionActor(trailFocusId).name)}</button>` : '';
+    return missed + justFound + resume;
+}
+function updateBoardTrailLinks() {
+    const area = document.querySelector('#boardTrailLinks');
+    if (!area) return;
+    const markup = boardTrailMarkup();
+    if (area.innerHTML === markup) return;
+    const previous = document.activeElement;
+    const selector = area.contains?.(previous) ? focusSelectorFor(previous) : null;
+    area.innerHTML = markup;
+    if (selector) document.querySelector(selector)?.focus?.({ preventScroll: true });
+}
+function setTrailFocus(id) {
+    const next = discovered().has(id) ? id : null;
+    if (next !== trailFocusId) {
+        trailHints.clear();
+        trailFocusId = next;
+        persistSession();
+    }
+    pendingTrailPair = '';
+    trailNotice = '';
+}
+function openContinuation(id = trailFocusId) {
+    setTrailFocus(id);
+    trailMode = 'continuation';
+    modal = 'paths';
+    detailId = null;
+    updateModal('#trailFocus');
+}
+function resetContinuation() {
+    trailHints.clear();
+    pendingTrailPair = '';
+    trailNotice = '';
+    recentDiscoveries = [];
+    missingPairIds = [];
+    trailMode = 'continuation';
+}
+function prepareTrailPair(reactionId, replace = false) {
+    const entry = pairs.pairs.find(({ reaction }) => reaction.id === reactionId);
+    const known = discovered();
+    if (!entry?.inputs.every(id => known.has(id)) || active) {
+        trailNotice = 'Essas peças ainda não estão disponíveis para preparar a etapa.';
+        pendingTrailPair = '';
+        updateModal('#trailFocus');
+        return;
+    }
+    const remaining = [...entry.inputs];
+    const kept = pieces.filter(piece => {
+        const index = remaining.indexOf(piece.itemId);
+        if (index === -1) return false;
+        remaining.splice(index, 1);
+        return true;
+    });
+    if (kept.length !== pieces.length && !replace) {
+        pendingTrailPair = reactionId;
+        updateModal('[data-action="trail-keep"]');
+        document.querySelector('.trail-confirm')?.scrollIntoView?.({ block: 'nearest' });
+        return;
+    }
+    missingPairIds = [];
+    pieces = kept;
+    for (const id of remaining) addPiece(id, false);
+    updateBoardDom();
+    persistSession();
+    closeDialog();
+    document.querySelector('.workspace [data-action="react"]')?.focus();
+    notify('Duas peças preparadas. Use Reagir para realizar a combinação.');
 }
 function headerMarkup() { const { count, total } = percent(); const n = completedReactions(save, engine).length; return `<header class="topbar"><div class="brand"><span class="brand-mark">✦</span><div><strong>mineralchemy</strong></div></div><div class="top-actions"><div class="progress" title="Minerais descobertos"><span class="progress-label">Minerais</span><b>${count}<span> / ${total}</span></b><span class="progress-track"><span style="width:${total ? Math.round(count / total * 100) : 0}%"></span></span></div><button type="button" class="top-button paths-trigger" data-action="paths" title="Trilhas mineralógicas" aria-label="Ver trilhas mineralógicas"><span>⇄</span><span class="desktop-only">Trilhas</span></button><button type="button" class="top-button history-trigger" data-action="history" title="Ver reações realizadas" aria-label="Reações realizadas"><span>≋</span><span class="desktop-only">Reações</span><span class="history-count">${n}</span></button><button type="button" class="top-button top-help" data-action="help" title="Como jogar"><span>?</span><span class="desktop-only">Ajuda</span></button><button type="button" class="top-button icon-button" data-action="collection" title="Catálogo de descobertas" aria-label="Abrir catálogo de descobertas">▦</button></div></header>`; }
 function modalMarkup() {
@@ -461,7 +583,7 @@ function modalMarkup() {
               ${scientificDetailsMarkup(reaction, routeScience(reaction, engine.byCard))}
             </details>`;
         }).join('')}</div>` : '';
-        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Detalhes do material"><button class="close" data-action="close" aria-label="Fechar">×</button><div class="detail-orb" style="${styleFor(present)}">${iconMarkup(present)}</div><p class="overline">${esc(present.kind === 'agent' ? 'AGENTE' : present.family)}</p><h2>${esc(present.name)}</h2><div class="detail-formula">${esc(present.formula)}</div><p class="material-type">${esc(MATERIAL_LABELS[materialType(present)])}</p><p>${esc(present.description)}</p>${routes}<div class="detail-foot">${possibleReactionCount} rotas cadastradas com este material</div><button class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada <span>↗</span></button></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Detalhes do material"><button class="close" data-action="close" aria-label="Fechar">×</button><div class="detail-orb" style="${styleFor(present)}">${iconMarkup(present)}</div><p class="overline">${esc(present.kind === 'agent' ? 'AGENTE' : present.family)}</p><h2>${esc(present.name)}</h2><div class="detail-formula">${esc(present.formula)}</div><p class="material-type">${esc(MATERIAL_LABELS[materialType(present)])}</p><p>${esc(present.description)}</p>${routes}<div class="detail-foot">${possibleReactionCount} rotas cadastradas com este material</div><div class="dialog-buttons"><button class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada <span>↗</span></button><button type="button" class="secondary" data-action="trail-focus" data-id="${esc(present.id)}">Continuar a partir deste material</button></div></section></div>`;
     }
     if (modal === 'help')
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Explore combinações mineralógicas</h2><div class="help-step"><span>01</span><p><b>Escolha um material</b> na coleção lateral. Toque para adicioná-lo à bancada ou arraste a peça diretamente para lá.</p></div><div class="help-step"><span>02</span><p><b>Combine duas peças</b> arrastando uma sobre a outra ou usando o botão Reagir. Algumas descobertas exigem uma associação intermediária.</p></div><div class="help-step"><span>03</span><p><b>Continue explorando.</b> Os materiais descobertos ficam disponíveis para novas combinações. Consulte o catálogo de descobertas e o histórico de reações.</p></div><p class="help-note">As combinações são modelos didáticos e não equivalem necessariamente a equações químicas balanceadas ou processos geológicos viáveis em qualquer condição. Toque em uma peça da bancada para ver seus detalhes.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Digitar</kbd> inicia a busca da coleção lateral · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> e <kbd>Shift+Tab</kbd> percorrem os controles · <kbd>←</kbd>/<kbd>→</kbd> mudam a categoria da janela aberta · <kbd>Esc</kbd> fecha a janela ou limpa a busca lateral.</div><div>Em buscas e campos editáveis, as setas continuam movendo o cursor. O jogo salva o progresso neste navegador.</div></div><div class="progress-tools"><h3>Progresso da partida</h3><div class="dialog-buttons"><button type="button" class="secondary" data-action="export-progress">Exportar progresso</button></div><label for="importProgress">Restaurar progresso</label><input id="importProgress" type="file" accept=".json,application/json"><p role="status">${esc(importNotice)}</p>${pendingImport ? '<button type="button" class="primary" data-action="confirm-import">Confirmar restauração</button>' : ''}</div><button class="primary" data-action="close">Voltar ao jogo <span>→</span></button></section></div>`;
@@ -492,7 +614,7 @@ function modalMarkup() {
 function mainMarkup() {
     const acquired = knownItems();
     const library = `<aside class="library"><div class="library-heading"><h2>Coleção <span>${acquired.length}</span></h2></div><label class="search"><span>⌕</span><input id="catalogSearch" value="${esc(search)}" type="search" placeholder="Buscar material ou fórmula" aria-label="Buscar material na coleção lateral" autocomplete="off"/></label><div class="filters"><button data-action="filter" data-filter="all" class="${filter === 'all' ? 'selected' : ''}">Tudo</button><button data-action="filter" data-filter="ion" class="${filter === 'ion' ? 'selected' : ''}">Íons</button><button data-action="filter" data-filter="mineral" class="${filter === 'mineral' ? 'selected' : ''}">Minerais</button><button data-action="filter" data-filter="agent" class="${filter === 'agent' ? 'selected' : ''}">Agentes</button><button data-action="filter" data-filter="compound" class="${filter === 'compound' ? 'selected' : ''}">Compostos</button></div><div id="libraryItems" class="library-items">${libraryMarkup()}</div></aside>`;
-    const board = `<section class="workspace"><div class="workspace-heading"><h1>Bancada</h1><div class="board-actions"><span id="pieceCount">${pieces.length} peças</span><button type="button" data-action="react" class="clear-button board-react" title="Reagir as peças da bancada (Ctrl+Enter)" aria-label="Reagir as peças da bancada">⚗ <span>Reagir</span></button><button type="button" data-action="clear" class="clear-button" title="Limpar a bancada (Delete)">↺ <span>Limpar</span></button></div></div><div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}<div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}"></div></div></section>`;
+    const board = `<section class="workspace"><div class="workspace-heading"><h1>Bancada</h1><div class="board-actions"><span id="pieceCount">${pieces.length} peças</span><button type="button" data-action="react" class="clear-button board-react" title="Reagir as peças da bancada (Ctrl+Enter)" aria-label="Reagir as peças da bancada">⚗ <span>Reagir</span></button><button type="button" data-action="clear" class="clear-button" title="Limpar a bancada (Delete)">↺ <span>Limpar</span></button></div></div><div id="boardTrailLinks" class="board-trail-links">${boardTrailMarkup()}</div><div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}<div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}"></div></div></section>`;
     return `${headerMarkup()}<p id="saveWarning" class="save-warning" role="status" ${storageWarning ? '' : 'hidden'}>${esc(storageWarning)}</p><div class="game">${board}${library}</div><div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
 }
 function render() {
@@ -539,7 +661,7 @@ function findFreeSpot() {
     }
     return { x: clamp(center.x + Math.random() * 100 - 50, PIECE_RADIUS, width - PIECE_RADIUS), y: clamp(center.y + Math.random() * 100 - 50, 52, height - 52) };
 }
-function addPiece(itemId) {
+function addPiece(itemId, saveAfterAdd = true) {
     if (!discovered().has(itemId) || !item(itemId))
         return null;
     if (pieces.length >= 120) {
@@ -556,10 +678,19 @@ function addPiece(itemId) {
     const count = document.querySelector('#pieceCount');
     if (count)
         count.textContent = `${pieces.length} peças`;
-    persistSession();
+    if (missingPairIds.length) {
+        missingPairIds = [];
+        updateBoardTrailLinks();
+    }
+    if (saveAfterAdd) persistSession();
     return p;
 }
 
+function reportUnregisteredPair(a, b) {
+    missingPairIds = [...new Set([a.itemId, b.itemId])];
+    updateBoardTrailLinks();
+    notify('Explore as alternativas para cada peça na bancada.');
+}
 function reactBoard() {
     if (active) return false;
     if (pieces.length > 2) {
@@ -571,14 +702,16 @@ function reactBoard() {
         return false;
     }
     const r = resolvePair(pairs, pieces[0].itemId, pieces[1].itemId);
-    if (!r) { notify('Não há uma combinação cadastrada para essas duas peças.'); return false; }
+    if (!r) { reportUnregisteredPair(pieces[0], pieces[1]); return false; }
     combine(pieces[0], pieces[1], r);
     return true;
 }
 function clearBoard() {
     pieces = [];
+    missingPairIds = [];
     persistSession();
     updateBoardDom();
+    updateBoardTrailLinks();
     notify('Bancada limpa. Suas descobertas foram mantidas.');
 }
 function getCoord(e) {
@@ -612,19 +745,24 @@ function beginPointer(e, origin, source) {
     element.classList.add('dragging');
     source.setPointerCapture?.(e.pointerId);
 }
-function hitTest(p) {
+function hitTest(p, reportMissing = false) {
     const target = findCollision(pieces, p.instanceId, p.x, p.y, 76);
     if (!target)
         return false;
     const reaction = resolvePair(pairs, p.itemId, target.itemId);
-    if (!reaction)
+    if (!reaction) {
+        if (reportMissing) reportUnregisteredPair(p, target);
         return false;
+    }
     combine(p, target, reaction);
     return true;
 }
 function combine(a, b, reaction) {
     const newSave = discover(save, reaction, engine);
     save = newSave.save;
+    const newPlayables = newSave.newIds.filter(id => isPlayableCard(item(id)));
+    if (newPlayables.length) recentDiscoveries = newPlayables;
+    missingPairIds = [];
     const { width, height } = boardSize();
     const x = (a.x + b.x) / 2, y = (a.y + b.y) / 2;
     pieces = pieces.filter(x => x.instanceId !== a.instanceId && x.instanceId !== b.instanceId);
@@ -672,12 +810,14 @@ function endPointer(e) {
     if (state.moved) {
         if (!pos?.inside) {
             pieces = pieces.filter(x => x.instanceId !== p.instanceId);
+            missingPairIds = [];
             updateBoardDom();
+            updateBoardTrailLinks();
             persistSession();
             if (state.origin === 'board') notify('Peça removida da bancada.');
             return;
         }
-        if (hitTest(p)) return;
+        if (hitTest(p, true)) return;
     }
     else if (state.origin === 'board')
         openDetails(p.itemId);
@@ -687,10 +827,12 @@ function endPointer(e) {
 function openDetails(id) { if (!discovered().has(id) || !item(id))
     return; detailId = id; modal = null; updateModal(); }
 function focusSelectorFor(element) {
-    const { action, instance, item: itemId } = element?.dataset ?? {};
+    const { action, instance, item: itemId, id } = element?.dataset ?? {};
     if (element?.id === 'catalogSearch') return '#catalogSearch';
     if (instance) return `[data-instance="${instance}"]`;
     if (itemId) return `[data-item="${itemId}"]`;
+    if (action === 'trail-resume') return '.board-trail-links [data-action="trail-resume"]';
+    if (action === 'trail-focus' && id) return `.board-trail-links [data-action="trail-focus"][data-id="${id}"]`;
     if (['help', 'collection', 'history', 'paths', 'react', 'clear'].includes(action)) {
         return `.topbar [data-action="${action}"], .workspace [data-action="${action}"]`;
     }
@@ -712,7 +854,10 @@ function closeDialog() {
     pendingProgressFile = null;
     pendingImport = null;
     importNotice = '';
+    pendingTrailPair = '';
+    trailNotice = '';
     updateModal();
+    updateBoardTrailLinks();
 }
 /** Preserva o foco, a seleção da busca e a rolagem ao atualizar um diálogo. */
 function updateModal(focusSelector = null) {
@@ -773,6 +918,39 @@ function action(el) {
             detailId = null;
             updateModal();
             break;
+        case 'trail-resume':
+            openContinuation();
+            break;
+        case 'trail-focus':
+            openContinuation(el.dataset.id);
+            break;
+        case 'trail-mode':
+            trailMode = el.dataset.mode === 'thematic' ? 'thematic' : 'continuation';
+            pendingTrailPair = '';
+            trailNotice = '';
+            updateModal(`[data-mode="${trailMode}"]`);
+            break;
+        case 'trail-hint': {
+            const id = el.dataset.id;
+            const next = Math.min((trailHints.get(id) ?? 0) + 1, 3);
+            trailHints.set(id, next);
+            pendingTrailPair = '';
+            const control = next === 3 ? '.trail-result' : '[data-action="trail-hint"]';
+            const selector = `[data-trail-reaction="${id}"] ${control}`;
+            updateModal(selector);
+            document.querySelector(selector)?.scrollIntoView?.({ block: 'nearest' });
+            break;
+        }
+        case 'trail-prepare':
+            prepareTrailPair(el.dataset.id);
+            break;
+        case 'trail-replace':
+            if (pendingTrailPair) prepareTrailPair(pendingTrailPair, true);
+            break;
+        case 'trail-keep':
+            pendingTrailPair = '';
+            updateModal('#trailFocus');
+            break;
         case 'reset':
             modal = 'reset';
             detailId = null;
@@ -788,6 +966,7 @@ function action(el) {
         case 'confirm-import': {
             if (!pendingImport) break;
             applySession(pendingImport);
+            resetContinuation();
             closeDialog();
             const saved = persistSession();
             render();
@@ -802,6 +981,7 @@ function action(el) {
             break;
         case 'confirm-reset': {
             applySession({ progress: makeInitialSave(engine.cards), board: [], recent: [] });
+            resetContinuation();
             closeDialog();
             persistSession();
             search = '';
@@ -917,6 +1097,10 @@ app.addEventListener('keydown', e => {
 });
 app.addEventListener('change', e => {
     if (e.target?.id === 'importProgress') void previewProgress(e.target.files?.[0]);
+    if (e.target?.id === 'trailFocus') {
+        setTrailFocus(e.target.value);
+        updateModal('#trailFocus');
+    }
 });
 app.addEventListener('input', e => {
     const target = e.target;
@@ -1029,7 +1213,7 @@ async function boot() {
         if (engine.diagnostics.length)
             throw new Error(engine.diagnostics.join('; '));
         pairs = buildPairCatalog(engine);
-        playables = [...engine.cards, ...agents.filter(a => specialAgents.has(a.id)).map(a => ({ id: a.id, name: a.name, formula: 'Agente ambiental', description: a.description, family: 'Processo geológico', kind: 'agent', color: '#80acc6' }))];
+        playables = [...engine.cards, ...agents.filter(a => specialAgents.has(a.id)).map(a => ({ id: a.id, name: a.name, formula: 'Agente ambiental', description: a.description, family: 'Processo geológico', kind: 'agent', color: '#80acc6' }))].filter(isPlayableCard);
         byPlayable = new Map(playables.map(p => [p.id, p]));
         loadSession();
         render();

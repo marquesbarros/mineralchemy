@@ -44,7 +44,7 @@ function rowFor(reaction, engine, pairIds, agentById, notes, science, describeCa
         reference, evidence, sources, source, sourceSpecificity,
         priority: active ? note?.priority ?? null : null,
         issue: active ? [equationIssue, note?.issue].filter(Boolean).join(' ') || null : null,
-        archivalNote: !active ? note?.issue ?? 'Rota retirada da bancada; conservada para leitura de partidas antigas.' : null,
+        archivalNote: !active ? reaction.archiveReason ?? note?.issue ?? 'Rota retirada da bancada; conservada para leitura de partidas antigas.' : null,
     };
     return { ...row, fingerprint: hash(row) };
 }
@@ -78,16 +78,19 @@ function buildAtlas(template, layout, minerals, iconMarkup) {
         .replace('{{ATLAS_REFINED}}', stageCounts.refined);
 }
 
-const [catalog, notes, layout, literature, game, css, atlas, modules, gameUi, audit, auditUi] = await Promise.all([
+const [catalog, notes, layout, literature, speciation, transformations, game, css, atlas, modules, gameUi, audit, auditUi] = await Promise.all([
     json('data/catalog.json'), json('data/review-notes.json'), json('data/atlas-layout.json'),
     json('data/literature.json'),
+    json('data/speciation.json'), json('data/transformations.json'),
     read('src/game.template.html'), read('src/game.css'), read('src/atlas.template.html'),
-    Promise.all(['catalog-overrides', 'game-engine', 'progress', 'catalog-science', 'mineral-icons', 'reaction-reference', 'game-storage']
+    Promise.all(['catalog-overrides', 'game-engine', 'progress', 'catalog-science', 'mineral-icons', 'reaction-reference', 'game-storage', 'trail-planner']
         .map(name => read('src/' + name + '.js'))),
     read('src/game.js'), read('src/audit.template.html'), read('src/audit.js'),
 ]);
 const sharedScript = 'const EMBEDDED = ' + safeJson(catalog) + ';\n' +
-    'const LITERATURE = ' + safeJson(literature) + ';\n\n' + modules.join('\n');
+    'const LITERATURE = ' + safeJson(literature) + ';\n' +
+    'const SPECIATION = ' + safeJson(speciation) + ';\n' +
+    'const TRANSFORMATIONS = ' + safeJson(transformations) + ';\n\n' + modules.join('\n');
 const context = vm.createContext({});
 vm.runInContext(sharedScript, context);
 const { engine, pairs, reachable, minerals } = vm.runInContext(`(() => {
@@ -100,6 +103,19 @@ const { engine, pairs, reachable, minerals } = vm.runInContext(`(() => {
 if (engine.diagnostics.length) throw new Error(engine.diagnostics.join('\n'));
 if (minerals.some(card => !reachable.has(card.id))) {
     throw new Error('Cartas inalcançáveis: ' + minerals.filter(card => !reachable.has(card.id)).map(card => card.id).join(', '));
+}
+for (const id of Object.keys(speciation.cards)) {
+    if (!engine.byCard.has(id)) throw new Error('Revisão de estados químicos sem carta: ' + id);
+}
+for (const [oldId, id] of Object.entries(speciation.aliases)) {
+    if (oldId === id || !engine.byCard.has(id)) throw new Error('Equivalência legada inválida: ' + oldId);
+}
+const speciationRoutes = new Set(Object.keys(speciation.routes));
+for (const id of Object.keys(transformations.updates)) {
+    if (speciationRoutes.has(id)) throw new Error('Rota editada por duas revisões: ' + id);
+}
+for (const id of [...speciationRoutes, ...Object.keys(transformations.updates)]) {
+    if (!engine.byReaction.has(id)) throw new Error('Revisão editorial sem rota: ' + id);
 }
 for (const id of Object.keys(notes.routes)) {
     if (!engine.byReaction.has(id)) throw new Error('Parecer editorial sem rota: ' + id);
@@ -124,6 +140,15 @@ const entries = [...engine.byReaction.values()].map(reaction => {
     const science = routeScience(reaction, engine.byCard);
     return rowFor(reaction, engine, pairIds, agentById, notes, science, describeCard, PROCESS_LABELS[science.process], REVIEW_LABELS[science.reviewStatus]);
 });
+const transformationIds = new Set([
+    ...transformations.additions.map(route => route.id),
+    ...Object.entries(transformations.updates).filter(([, patch]) => patch.retired === false).map(([id]) => id),
+]);
+for (const entry of entries.filter(row => transformationIds.has(row.id))) {
+    if (!entry.executable || entry.reference?.balance !== 'balanced' || !entry.sources.some(source => source.claim)) {
+        throw new Error('Transformação revisada sem par executável, balanço ou evidência: ' + entry.id);
+    }
+}
 const revision = hash(entries.map(row => row.fingerprint));
 const payload = { version: 2, repository: 'marquesbarros/mineralchemy', revision, pairs: pairIds.size, entries };
 let auditHtml = insert(audit, '<!-- AUDIT_PAYLOAD -->', '<script type="application/json" id="payload">' + safeJson(payload) + '</script>');

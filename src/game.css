@@ -90,3 +90,31 @@
 .detail-routes details{padding:6px 0}
 .detail-routes summary{cursor:pointer}
 .path-stage{display:flex;flex-wrap:wrap;gap:6px}
+
+.trail-modes{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+.trail-modes [aria-pressed="true"]{background:#eaf5ed;border-color:#c4dfcc;color:#215d3c}
+.trail-focus{display:grid;gap:5px;max-width:360px;margin:0 0 14px;color:#324a3c;font-weight:650}
+.trail-focus select{min-width:0;width:100%;padding:9px 10px;border:1px solid #b8cfc0;border-radius:9px;background:#fff;color:#263b2e;font:inherit}
+.trail-options{display:grid;gap:8px;margin-top:18px}
+.trail-options h3,.trail-option h4{margin:0;color:#324a3c}
+.trail-option{min-width:0;padding:12px 14px;background:#fbfcfb;border:1px solid #dfe9e1;border-radius:12px}
+.trail-option h4{display:inline;font-size:.9rem}
+.trail-kind{margin-left:8px;color:#486359;font-size:.78rem}
+.trail-option p,.trail-notice,.trail-confirm p{margin:7px 0;color:#43594c;font-size:.88rem;line-height:1.45}
+.trail-hint{display:block;color:#245c40;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.trail-recipe{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:8px}
+.trail-steps{padding-inline-start:1.4rem;color:#43594c;font-size:.88rem;line-height:1.5}
+.trail-steps li+li{margin-top:4px}
+.trail-confirm,.trail-notice{padding:10px 12px;border:1px solid #e4d5b7;border-radius:9px;background:#fff7e6}
+.trail-confirm .dialog-buttons{justify-content:start;flex-wrap:wrap;margin-top:8px}
+.board-trail-links{display:flex;flex-wrap:wrap;align-items:center;gap:5px 10px;padding:5px 8px;border:1px solid #dce8df;border-radius:10px;background:#f4f9f5;color:#324a3c;font-size:.8rem}
+.board-trail-links:empty{display:none}
+.board-trail-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px}
+.board-trail-row p{margin:0}
+.trail-link{padding:4px 7px;border:1px solid #cadfd0;border-radius:7px;background:#fff;color:#245c40;font:inherit;font-weight:650}
+.trail-link:hover{background:#ecf6ef}
+@media(max-width:680px){
+    .trail-kind{display:block;margin:3px 0 0}
+    .trail-option .secondary,.trail-modes .secondary,.trail-link{min-height:36px}
+    .board-trail-links{gap:4px 7px}
+}

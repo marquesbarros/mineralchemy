@@ -8,7 +8,7 @@ const HISTORY_LIMIT = 100;
 const BOARD_LIMIT = 120;
 
 function makeInitialSave(cards) {
-    return { version: 1, discovered: cards.filter(x => x.starter).map(x => x.id), history: [], recorded: [] };
+    return { version: 1, discovered: cards.filter(card => card.starter && isPlayableCard(card)).map(card => card.id), history: [], recorded: [] };
 }
 
 function routeSnapshot(reaction) {
@@ -114,8 +114,8 @@ function discover(save, reaction, engine) {
     };
 }
 
-function makeProgressBackup(progress, board, recent) {
-    return { format: PROGRESS_FORMAT, progress, board: board.slice(-BOARD_LIMIT), recent };
+function makeProgressBackup(progress, board, recent, trailFocusId = null) {
+    return { format: PROGRESS_FORMAT, progress, board: board.slice(-BOARD_LIMIT), recent, trailFocusId };
 }
 
 function readProgressBackup(raw, engine) {
@@ -124,7 +124,7 @@ function readProgressBackup(raw, engine) {
     }
     const progress = restoreSave(raw.progress, engine);
     const discovered = new Set([...progress.discovered, ...AVAILABLE_AGENTS]);
-    const valid = id => discovered.has(id) && !HIDDEN_ARCHIVED_IONS.has(id);
+    const valid = id => discovered.has(id) && (AVAILABLE_AGENTS.has(id) || isPlayableCard(engine.byCard.get(id)));
     const board = [];
     const used = new Set();
     for (const p of raw.board.slice(-BOARD_LIMIT)) {
@@ -135,5 +135,6 @@ function readProgressBackup(raw, engine) {
         used.add(p.instanceId);
     }
     const recent = [...new Set(raw.recent.filter(id => typeof id === 'string').map(canonicalCardId).filter(valid))].slice(0, 8);
-    return { progress, board, recent };
+    const focus = typeof raw.trailFocusId === 'string' ? canonicalCardId(raw.trailFocusId) : null;
+    return { progress, board, recent, trailFocusId: focus && valid(focus) ? focus : null };
 }

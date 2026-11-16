@@ -7,9 +7,9 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 ## O que foi desenvolvido
 
 - **178 cartas minerais**, com representações SVG individuais.
-- **279 rotas ativas**, **269 pares executáveis** e **490 rotas arquivadas**.
+- **272 rotas ativas**, **262 pares executáveis** e **507 rotas arquivadas**.
 - **Motor de combinações** entre componentes químicos, minerais e agentes geológicos.
-- **Descobertas progressivas**, com coleção de cartas, registro das reações executadas e trilhas temáticas.
+- **Descobertas progressivas**, com coleção de cartas, registro de reações e pistas de continuação calculadas a partir da partida.
 - **Busca por nome ou fórmula**, filtros por categoria, navegação por teclado e interação por arrastar e soltar.
 - **Catálogo de auditoria** com filtros por família, processo e pendência, pareceres vinculados à versão da rota e exportação em JSON ou CSV.
 - **Progresso local** com exportação e restauração pela tela Ajuda e leitura de partidas anteriores.
@@ -19,7 +19,7 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 | Bancada | Combinar materiais e descobrir produtos |
 | Descobertas | Consultar os minerais encontrados |
 | Reações | Revisar combinações por produto ou processo |
-| Trilhas | Explorar sequências de formação e transformação |
+| Trilhas | Retomar um material, obter um parceiro faltante ou explorar relações mineralógicas temáticas |
 | Auditoria | Examinar rotas ativas e arquivadas fora do jogo |
 
 ## Implementação
@@ -58,7 +58,7 @@ O fluxo do GitHub Actions verifica a geração, a integridade dos dados e os flu
 
 As combinações servem ao estudo de composição, propriedades e processos mineralógicos. **Não são uma simulação de equilíbrio termodinâmico.** Uma rota didática não estabelece, por si só, a ocorrência de uma reação na natureza.
 
-A página de auditoria permite consultar combinações ainda ocultas no jogo e acompanhar as pendências por rota. O guia inclui atividades comentadas, folha do estudante e roteiro para um piloto em turma. [Auditoria local](catalogo-auditoria.html) · [Inventário científico](docs/REVISAO_PENDENCIAS.md) · [Guia docente](docs/GUIA_DOCENTE.md) · [Referências](docs/REFERENCIAS.md)
+A página de auditoria permite consultar combinações ainda ocultas no jogo e acompanhar as pendências por rota. O guia inclui atividades comentadas, folha do estudante e roteiro para um piloto em turma. [Auditoria local](catalogo-auditoria.html) · [Progressão](docs/PROGRESSAO.md) · [Transformações](docs/TRANSFORMACOES.md) · [Estados químicos](docs/ESTADOS_QUIMICOS.md) · [Guia docente](docs/GUIA_DOCENTE.md)
 
 ## Origem
 

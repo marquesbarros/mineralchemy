@@ -9,7 +9,7 @@ function updateStorageWarning(message) {
 
 function persistSession() {
     try {
-        localStorage.setItem(SESSION_KEY, JSON.stringify(makeProgressBackup(save, pieces, recentlyUsed)));
+        localStorage.setItem(SESSION_KEY, JSON.stringify(makeProgressBackup(save, pieces, recentlyUsed, trailFocusId)));
         updateStorageWarning('');
         return true;
     } catch {
@@ -18,10 +18,11 @@ function persistSession() {
     }
 }
 
-function applySession({ progress, board, recent }) {
+function applySession({ progress, board, recent, trailFocusId: focus = null }) {
     save = progress;
     pieces = board;
     recentlyUsed = recent;
+    trailFocusId = focus;
     nextInstance = Math.max(1, ...pieces.map(p => p.instanceId + 1));
 }
 
@@ -54,7 +55,7 @@ function loadSession() {
 }
 
 function exportProgress() {
-    const blob = new Blob([JSON.stringify(makeProgressBackup(save, pieces, recentlyUsed), null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(makeProgressBackup(save, pieces, recentlyUsed, trailFocusId), null, 2)], { type: 'application/json' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.href = url;

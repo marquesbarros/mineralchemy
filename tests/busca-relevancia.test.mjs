@@ -101,9 +101,9 @@ test('Enter adiciona a opção mais relevante e mantém a limpeza da busca', asy
 
 test('não sugere minerais não descobertos nem modifica as reações', async () => {
   const g = await game();
+  const before = g.run('JSON.stringify(buildPairCatalog(engine).pairs.map(pair => pair.reaction.id))');
   assert.equal(g.search('pirita').includes('pyrite'),false);
-  assert.equal(g.run('engine.reactions.length'),279);
-  assert.equal(g.run('buildPairCatalog(engine).pairs.length'),269);
+  assert.equal(g.run('JSON.stringify(buildPairCatalog(engine).pairs.map(pair => pair.reaction.id))'),before);
   assert.equal(g.run("engine.cards.filter(x=>x.kind==='mineral').length"),178);
   assert.equal(g.run('engine.diagnostics.length'),0);
 });

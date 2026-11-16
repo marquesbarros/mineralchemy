@@ -1,0 +1,236 @@
+{
+  "cards": {
+    "na": { "starter": false, "hiddenFromPlay": true },
+    "k": { "starter": false, "hiddenFromPlay": true },
+    "ca": { "starter": false, "hiddenFromPlay": true },
+    "mg": { "starter": false, "hiddenFromPlay": true },
+    "al": { "starter": false, "hiddenFromPlay": true },
+    "c": { "starter": false, "hiddenFromPlay": true },
+    "cl2": { "starter": false, "hiddenFromPlay": true },
+    "f2": { "starter": false, "hiddenFromPlay": true },
+    "silicon4": { "starter": false, "hiddenFromPlay": true },
+    "gold3": { "starter": false, "hiddenFromPlay": true },
+    "h2": {
+      "starter": true,
+      "description": "Hidrogênio molecular. Em sistemas geológicos, pode ser gerado em reações redox como a alteração de rochas ultramáficas com ferro."
+    },
+    "o2": {
+      "starter": true,
+      "description": "Oxigênio molecular. Pode atuar como oxidante quando incorporado ao fluido ou disponível no gás."
+    },
+    "fe": {
+      "starter": true,
+      "description": "Ferro metálico natural (Fe⁰). É raro na Terra e ocorre, por exemplo, em algumas associações magmáticas muito redutoras."
+    },
+    "graphite": { "starter": true },
+    "si": {
+      "starter": true,
+      "description": "Silício elementar (Si⁰), usado como componente de referência para representar a oxidação à sílica (SiO₂). Nos silicatos, o silício está ligado ao oxigênio."
+    },
+    "iron2": {
+      "description": "Ferro ferroso. O Fe(II) pode estar dissolvido ou integrar a estrutura de minerais como faialita e siderita."
+    },
+    "iron3": {
+      "description": "Ferro férrico. O Fe(III) integra óxidos e oxi-hidróxidos como hematita e goethita. Em água, sua forma química depende do pH e dos ligantes."
+    },
+    "copper2": {
+      "description": "Cobre cúprico. A espécie Cu²⁺ representa cobre dissolvido em reações de referência. Pode integrar complexos e precipitar conforme a química do meio."
+    },
+    "silver1": {
+      "description": "Prata(I). A carta representa Ag⁺ em reações de precipitação e deposição de prata metálica por transferência de elétrons."
+    },
+    "chloride": {
+      "description": "Íon cloreto. Ocorre dissolvido em salmouras e integra minerais como halita e silvita."
+    },
+    "aluminium3": {
+      "description": "Alumínio(III). A carta representa Al³⁺ em balanços. A hidrólise e a complexação em água dependem do pH e dos ligantes."
+    }
+  },
+  "routes": {
+    "ion-sodium-neutral": { "retired": true },
+    "ion-potassium-neutral": { "retired": true },
+    "ion-calcium-neutral": { "retired": true },
+    "ion-magnesium-neutral": { "retired": true },
+    "ion-aluminium-neutral": { "retired": true },
+    "ion-iron-native": { "retired": true },
+    "ion-carbon-neutral": { "retired": true },
+    "ion-graphite": { "retired": true },
+    "ion-oxygen": { "retired": true },
+    "ion-hydrogen": { "retired": true },
+    "ion-chlorine": { "retired": true },
+    "ion-fluorine": { "retired": true },
+    "s-halite": { "retired": true },
+    "s-periclase": { "retired": true },
+    "s-lime": { "retired": true },
+    "s-fluorite": { "retired": true },
+    "s-corundum": { "retired": true },
+    "s-ferrosilite-direct": { "retired": true },
+    "s-enstatite-direct": { "retired": true },
+    "s-wollastonite-direct": { "retired": true },
+    "s-chalcopyrite": { "retired": true },
+    "e-forsterite-fe": { "retired": true },
+    "e-olivine-fe": { "retired": true },
+    "e-olivine-mg": { "retired": true },
+    "e-enstatite-ca": { "retired": true },
+    "e-diopside-fe": { "retired": true },
+    "e-augite-fe": { "retired": true },
+    "e-hedenbergite-mg": { "retired": true },
+    "e-augite-mg": { "retired": true },
+    "assemble-water": {
+      "process": "reacao-de-componentes",
+      "reviewStatus": "didatica",
+      "summary": "Balanço de formação de água a partir de H₂ e O₂.",
+      "conditions": "Montagem didática de uma reação entre gases. Sua ocorrência e velocidade dependem das condições físicas e da cinética."
+    },
+    "s-quartz": {
+      "process": "sintese-didatica",
+      "reviewStatus": "didatica",
+      "summary": "O balanço de oxidação do silício elementar ilustra a composição da sílica.",
+      "conditions": "O produto jogável representa o quartzo, um polimorfo de SiO₂. A forma da sílica depende das condições de cristalização."
+    },
+    "assemble-co2": {
+      "inputs": ["graphite", "o2"],
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "summary": "Oxidação completa do carbono da grafita a CO₂.",
+      "conditions": "Balanço da oxidação completa em presença de O₂. O grau de oxidação e a proporção entre CO e CO₂ variam com as condições do sistema.",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/0008622364900430",
+          "claim": "O estudo cinético identifica a formação de CO₂ e CO como vias de oxidação do carbono da grafita."
+        }
+      ],
+      "legacyV09": {
+        "inputs": ["c", "o2"],
+        "outputs": ["co2"],
+        "agent": null,
+        "equation": "C + O₂ → CO₂",
+        "summary": "Oxidação do carbono formando dióxido de carbono.",
+        "conditions": "Combinação química idealizada."
+      }
+    },
+    "ion-copper-native": {
+      "inputs": ["fe", "copper2"],
+      "outputs": ["cu", "iron2"],
+      "equation": "Fe(s) + Cu²⁺(aq) → Cu(s) + Fe²⁺(aq)",
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "mechanic": null,
+      "summary": "O ferro metálico doa elétrons e o cobre se deposita por cementação.",
+      "conditions": "Modelo de cementação em solução com cobre dissolvido em contato com ferro metálico. A fonte descreve recuperação de cobre de águas ácidas de mina.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.3390/min12030322",
+          "locator": "seção 4.2, equação (10)",
+          "claim": "O estudo observou deposição de Cu⁰ sobre ferro metálico e registrou o balanço com liberação de Fe²⁺."
+        }
+      ],
+      "legacyV09": {
+        "inputs": ["copper2", "reduction"],
+        "outputs": ["cu"],
+        "agent": null,
+        "equation": "Cu²⁺ + 2 e⁻ → Cu",
+        "summary": "Redução formal de cátion a espécie neutra.",
+        "conditions": "Para metais muito reativos, a redução não ocorre por deposição em água; condições específicas seriam necessárias."
+      }
+    },
+    "ion-silver-native": {
+      "inputs": ["cu", "silver1"],
+      "outputs": ["silver_native", "copper2"],
+      "equation": "Cu(s) + 2 Ag⁺(aq) → 2 Ag(s) + Cu²⁺(aq)",
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "mechanic": null,
+      "summary": "O cobre metálico doa elétrons e a prata se deposita por cementação.",
+      "conditions": "Modelo de deposição de prata em contato com cobre metálico. A especiação da prata e a química da solução influenciam a reação.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1021/jp052994r",
+          "claim": "O estudo experimental investiga o deslocamento de Ag⁺ por cobre metálico sem corrente imposta."
+        },
+        {
+          "url": "https://research.itu.edu.tr/en/publications/silver-cementation-from-nitrate-solutions-onto-copper-in-classica/",
+          "claim": "Os ensaios de cementação em soluções de nitrato investigam deposição de prata sobre cobre."
+        }
+      ],
+      "legacyV09": {
+        "inputs": ["silver1", "reduction"],
+        "outputs": ["silver_native"],
+        "agent": null,
+        "equation": "Ag⁺ + e⁻ → Ag",
+        "summary": "Redução formal de cátion a espécie neutra.",
+        "conditions": "Para metais muito reativos, a redução não ocorre por deposição em água; condições específicas seriam necessárias."
+      }
+    },
+    "v08-chalcocite-2": {
+      "inputs": ["cu", "s"],
+      "equation": "2 Cu + S → Cu₂S",
+      "process": "sintese-didatica",
+      "reviewStatus": "condicional",
+      "mechanic": null,
+      "summary": "Síntese de referência de calcosita a partir de cobre e enxofre elementares.",
+      "conditions": "Balanço do produto Cu₂S em síntese controlada. A formação dos diferentes sulfetos de cobre depende das condições e da composição global.",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0925838814010093",
+          "claim": "O estudo sintetizou Cu₂S a partir dos elementos e confirmou a estrutura da calcosita por difração de raios X."
+        },
+        {
+          "url": "https://stacks.cdc.gov/view/cdc/233985/cdc_233985_DS1.pdf",
+          "claim": "O relatório experimental usa calcosita sintética obtida de cobre e enxofre elementares como material de referência."
+        }
+      ],
+      "legacyV09": {
+        "inputs": ["cu", "sulfide"],
+        "outputs": ["chalcocite"],
+        "agent": null,
+        "equation": "Cu + S²⁻ ⇢ Cu₂S (modelo lúdico)",
+        "summary": "Associação composicional que permite descobrir Calcosita (sulfetos).",
+        "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética."
+      }
+    },
+    "ion-iron-oxidation": {
+      "environmentalInputs": ["o2", "proton"],
+      "summary": "Oxidação do Fe(II) dissolvido por oxigênio, representada em meio ácido.",
+      "conditions": "O oxigênio recebe os elétrons. O pH e a disponibilidade de O₂ influenciam a velocidade e a forma em que o ferro férrico permanece ou precipita.",
+      "sources": [
+        {
+          "url": "https://pubs.usgs.gov/wsp/2270/report.pdf",
+          "claim": "O estudo investiga a oxidação de Fe(II) em águas de drenagem ácida e a influência do ambiente sobre a velocidade de reação."
+        }
+      ]
+    }
+  },
+  "retiredReasons": {
+    "ion-sodium-neutral": "A semirreação omitia a contraparte da transferência de elétrons. A halita usa Na⁺ e Cl⁻ como peças.",
+    "ion-potassium-neutral": "A redução genérica criava potássio metálico sem um papel próprio na bancada. K⁺ permanece disponível.",
+    "ion-calcium-neutral": "A redução genérica criava cálcio metálico. As rotas disponibilizam Ca²⁺, carbonatos e óxidos como componentes.",
+    "ion-magnesium-neutral": "A redução genérica criava magnésio metálico. Mg²⁺ e os reservatórios de Mg em fases minerais cobrem as associações disponíveis.",
+    "ion-aluminium-neutral": "A semirreação de deposição do metal foi substituída pelo papel do Al(III) nas associações composicionais.",
+    "ion-iron-native": "A peça de redução representa uma condição. A ocorrência de Fe⁰ exige um sistema muito redutor ou uma fonte de ferro metálico. O Fe⁰ começa disponível como mineral nativo.",
+    "ion-carbon-neutral": "O balanço formal CO₂ → C + O₂ carecia de fonte de energia ou de processo especificado. A grafita representa o carbono sólido na bancada.",
+    "ion-graphite": "A grafitização depende do precursor e do histórico térmico. A grafita fica disponível como fase mineral inicial.",
+    "ion-oxygen": "A oxidação formal do óxido carecia de uma contraparte redox. O oxigênio molecular fica disponível como peça inicial.",
+    "ion-hydrogen": "A redução de prótons carecia de um doador de elétrons. O hidrogênio molecular fica disponível como peça inicial.",
+    "ion-chlorine": "A oxidação de cloreto carecia de um receptor de elétrons. A halita usa a associação entre Na⁺ e Cl⁻.",
+    "ion-fluorine": "A oxidação de fluoreto requer condições específicas. A rota da fluorita usa Ca²⁺ e F⁻.",
+    "s-halite": "A síntese elementar foi retirada da bancada. A rota iônica da halita representa precipitação de salmoura.",
+    "s-periclase": "A composição do periclásio continua representada com Mg²⁺ e o componente formal O²⁻.",
+    "s-lime": "A composição da cal continua representada com Ca²⁺ e o componente formal O²⁻.",
+    "s-fluorite": "A rota com Ca²⁺ e F⁻ representa a composição da fluorita e seu uso em precipitação.",
+    "s-corundum": "A composição do coríndon continua representada com Al³⁺ e o componente formal O²⁻.",
+    "s-ferrosilite-direct": "A bancada oferece wüstita + quartzo para o balanço de componentes da ferrosilita.",
+    "s-enstatite-direct": "As rotas com periclásio + quartzo ou forsterita + quartzo representam alternativas para obter enstatita.",
+    "s-wollastonite-direct": "A rota de descarbonatação usa calcita + quartzo e gera wollastonita + CO₂.",
+    "s-chalcopyrite": "A associação com cobre metálico foi retirada. A associação com Cu(II) continua como modelo didático de descoberta.",
+    "e-forsterite-fe": "A troca de Mg por Fe em olivina envolve Fe(II) na estrutura. A rota de descoberta usa a peça Fe²⁺.",
+    "e-olivine-fe": "A faixa mais rica em ferro na série de olivina envolve Fe(II) na estrutura. A rota de descoberta usa a peça Fe²⁺.",
+    "e-olivine-mg": "A rota de descoberta usa a peça Mg²⁺. Trocas em soluções sólidas dependem dos reservatórios de Mg e Fe.",
+    "e-enstatite-ca": "A peça Ca²⁺ representa o componente cálcico. A rota a partir de óxidos explicita os componentes em um balanço ideal.",
+    "e-diopside-fe": "A rota de descoberta de augita usa a peça Fe²⁺ e representa afinidade composicional.",
+    "e-augite-fe": "A rota de descoberta de hedenbergita usa a peça Fe²⁺ e representa afinidade composicional.",
+    "e-hedenbergite-mg": "A rota de descoberta de augita usa a peça Mg²⁺ e representa afinidade composicional.",
+    "e-augite-mg": "A rota de descoberta de diopsídio usa a peça Mg²⁺ e representa afinidade composicional."
+  },
+  "aliases": {}
+}

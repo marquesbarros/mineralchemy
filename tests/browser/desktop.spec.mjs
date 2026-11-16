@@ -66,11 +66,89 @@ test('Tab percorre o jogo e o diálogo devolve o foco após Escape', async ({ pa
   await expect(opener).toBeFocused();
 });
 
+test('Trilhas guia a descoberta de um precursor e retoma a continuação', async ({ page }) => {
+  await page.goto('/');
+  const board = page.getByRole('region', { name: 'Bancada' });
+  const react = page.getByRole('button', { name: 'Reagir as peças da bancada' });
+  await searchAndAdd(page, 'silicio elementar', 'Silício elementar');
+  await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
+  await react.click();
+  await expect(page.getByText('Não há uma combinação cadastrada para essas duas peças.').first()).toBeVisible();
+  await page.getByRole('button', { name: 'Explorar com Cálcio (Ca²⁺)' }).click();
+
+  const dialog = page.getByRole('dialog', { name: 'Trilhas mineralógicas' });
+  const focus = dialog.getByRole('combobox', { name: 'Material de partida' });
+  const route = dialog.locator('[data-trail-reaction="ion-path-wollastonite"]');
+  await expect(focus).toHaveValue('calcium_ion');
+  await expect(route).not.toContainText(/Quartzo|Wollastonita/);
+  await route.getByRole('button', { name: 'Mostrar pista' }).click();
+  await expect(route).not.toContainText(/Quartzo|Wollastonita/);
+  await route.getByRole('button', { name: 'Mostrar como obter a peça' }).click();
+  await expect(route).toContainText('Oxigênio molecular');
+  await expect(route).toContainText('Quartzo');
+  await expect(route).not.toContainText('Wollastonita');
+  await route.getByRole('button', { name: 'Preparar etapa na bancada' }).click();
+  await expect(dialog.getByText(/A bancada tem peças/)).toBeVisible();
+  await dialog.getByRole('button', { name: 'Manter bancada' }).click();
+  await dialog.getByRole('button', { name: 'Fechar' }).click();
+  await expect(board.getByRole('button')).toHaveCount(2);
+  const resume = page.getByRole('button', { name: 'Voltar à continuação de Cálcio (Ca²⁺)' });
+  await resume.click();
+  await expect(focus).toHaveValue('calcium_ion');
+  await route.getByRole('button', { name: 'Preparar etapa na bancada' }).click();
+  await dialog.getByRole('button', { name: 'Substituir peças' }).click();
+  await expect(board.getByRole('button', { name: /^Silício elementar\./ })).toBeVisible();
+  await expect(board.getByRole('button', { name: /^Oxigênio molecular\./ })).toBeVisible();
+  await expect(react).toBeFocused();
+  await react.click();
+  const quartz = board.getByRole('button', { name: /^Quartzo\./ });
+  await expect(quartz).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Quartzo', exact: true })).toBeVisible();
+
+  await resume.click();
+  await expect(focus).toHaveValue('calcium_ion');
+  await expect(route).not.toContainText('Wollastonita');
+  await route.getByRole('button', { name: 'Revelar produto' }).click();
+  await expect(route).toContainText('Wollastonita');
+  await expect(route.getByText('Condições', { exact: true })).toBeVisible();
+  await route.getByRole('button', { name: 'Preparar na bancada' }).click();
+  await expect(board.getByRole('button')).toHaveCount(2);
+  await react.click();
+  await expect(board.getByRole('button', { name: /^Wollastonita\./ })).toBeVisible();
+
+  await searchAndAdd(page, 'quartzo', 'Quartzo');
+  await expect(quartz).toBeVisible();
+  await quartz.focus();
+  await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: 'Continuar a partir deste material' }).click();
+  await expect(focus).toHaveValue('quartz');
+  await expect(dialog.getByText('Disponíveis agora', { exact: true })).toBeVisible();
+  await page.reload();
+  await page.getByRole('button', { name: 'Voltar à continuação de Quartzo' }).click();
+  await expect(focus).toHaveValue('quartz');
+});
+
+test('uma descoberta sem continuação oferece o retorno a um precursor', async ({ page }) => {
+  await page.goto('/');
+  await searchAndAdd(page, 'zinco', 'Zinco (Zn²⁺)');
+  await searchAndAdd(page, 'carbonato', 'Carbonato');
+  await page.getByRole('button', { name: 'Reagir as peças da bancada' }).click();
+  await page.getByRole('button', { name: 'Smithsonita', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Trilhas mineralógicas' });
+  const focus = dialog.getByRole('combobox', { name: 'Material de partida' });
+  await expect(focus).toHaveValue('smithsonite');
+  await dialog.getByRole('button', { name: 'Voltar a explorar Carbonato' }).click();
+  await expect(focus).toHaveValue('carbonate');
+  await expect(dialog.getByText('Disponíveis agora', { exact: true })).toBeVisible();
+});
+
 test('backup restaura bancada e reações em um navegador sem progresso anterior', async ({ page, browser }) => {
   await page.goto('/');
   await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
   await searchAndAdd(page, 'carbonato', 'Carbonato');
   await page.getByRole('button', { name: 'Reagir as peças da bancada' }).click();
+  await page.getByRole('button', { name: 'Calcita', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Trilhas mineralógicas' }).getByRole('button', { name: 'Fechar' }).click();
   await page.getByRole('button', { name: /Ajuda/ }).click();
 
   const downloaded = page.waitForEvent('download');
@@ -92,6 +170,10 @@ test('backup restaura bancada e reações em um navegador sem progresso anterior
     });
     await freshPage.locator('[data-action="confirm-import"]').click();
     await expect(board.getByRole('button', { name: calcite })).toBeVisible();
+    await freshPage.getByRole('button', { name: 'Voltar à continuação de Calcita' }).click();
+    const trails = freshPage.getByRole('dialog', { name: 'Trilhas mineralógicas' });
+    await expect(trails.getByRole('combobox', { name: 'Material de partida' })).toHaveValue('calcite');
+    await trails.getByRole('button', { name: 'Fechar' }).click();
     await freshPage.getByRole('button', { name: 'Reações realizadas' }).click();
     await expect(freshPage.getByRole('dialog', { name: 'Histórico de reações' }))
       .toContainText('Ca²⁺ + CO₃²⁻ → CaCO₃');

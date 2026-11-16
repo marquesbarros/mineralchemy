@@ -1,0 +1,556 @@
+{
+  "additions": [
+    {
+      "id": "a-calcite-sulfate-gypsum",
+      "kind": "synthesis",
+      "inputs": [
+        "calcite",
+        "sulfate"
+      ],
+      "agent": null,
+      "outputs": [
+        "gypsum",
+        "co2"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "CaCO₃ + SO₄²⁻ + 2 H⁺ + H₂O → CaSO₄·2H₂O + CO₂",
+      "summary": "Dissolução ácida da calcita com precipitação de gipsita.",
+      "conditions": "O fluido aquoso fornece acidez e sulfato. A dissolução libera Ca²⁺, e a gipsita precipita se a solução atingir a saturação correspondente. CO₂ representa o carbono inorgânico no balanço ácido, com distribuição entre espécies dependente do pH. Uma cobertura de gipsita pode retardar a dissolução.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.3762/bjnano.5.138",
+          "claim": "Observa por microscopia de força atômica a dissolução de calcita em soluções sulfáticas e a precipitação de gipsita em condições apropriadas.",
+          "citation": "Offeddu, F. G., Cama, J., Soler, J. M. e Putnis, C. V. (2014). Direct nanoscale observations of the coupled dissolution of calcite and dolomite and the precipitation of gypsum. Beilstein Journal of Nanotechnology, 5, 1245–1253."
+        }
+      ],
+      "environmentalInputs": [
+        "proton",
+        "water"
+      ]
+    },
+    {
+      "id": "a-anglesite-bicarbonate-cerussite",
+      "kind": "synthesis",
+      "inputs": [
+        "anglesite",
+        "bicarbonate"
+      ],
+      "agent": null,
+      "outputs": [
+        "cerussite",
+        "sulfate",
+        "co2"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "PbSO₄ + 2 HCO₃⁻ → PbCO₃ + SO₄²⁻ + CO₂ + H₂O",
+      "summary": "Substituição de anglesita por cerussita em fluido bicarbonatado.",
+      "conditions": "A solução aquosa fornece carbono inorgânico para precipitar cerussita após a dissolução de anglesita. Bicarbonato, sulfato e CO₂ dissolvido se distribuem conforme o pH e a composição do fluido. A velocidade depende da temperatura e da concentração de bicarbonato.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.11456/shigenchishitsu.63.143",
+          "claim": "Registra formação experimental de cerussita a partir de grãos naturais de anglesita em solução de bicarbonato de sódio.",
+          "locator": "pp. 143–147, resumo e resultados"
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    {
+      "id": "a-gypsum-strontium-celestine",
+      "kind": "synthesis",
+      "inputs": [
+        "gypsum",
+        "strontium2"
+      ],
+      "agent": null,
+      "outputs": [
+        "celestine",
+        "calcium_ion"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "CaSO₄·2H₂O + Sr²⁺ → SrSO₄ + Ca²⁺ + 2 H₂O",
+      "summary": "Substituição de gipsita por celestina com liberação de cálcio.",
+      "conditions": "O fluido fornece Sr²⁺. A dissolução da gipsita no contato libera sulfato, e a celestina precipita se houver supersaturação. A porosidade da camada de produto influencia a continuidade do processo.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.3390/min10020189",
+          "claim": "Documenta substituição experimental de gipsita por celestina ou barita e relaciona as diferenças de velocidade à permeabilidade da camada de produto.",
+          "citation": "Forjanes, P., Astilleros, J. M. e Fernández-Díaz, L. (2020). The Formation of Barite and Celestite through the Replacement of Gypsum. Minerals, 10(2), 189."
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    {
+      "id": "a-gypsum-barium-barite",
+      "kind": "synthesis",
+      "inputs": [
+        "gypsum",
+        "barium2"
+      ],
+      "agent": null,
+      "outputs": [
+        "barite",
+        "calcium_ion"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "CaSO₄·2H₂O + Ba²⁺ → BaSO₄ + Ca²⁺ + 2 H₂O",
+      "summary": "Substituição de gipsita por barita com liberação de cálcio.",
+      "conditions": "O fluido fornece Ba²⁺. A dissolução da gipsita fornece sulfato, e a precipitação de barita depende de supersaturação. Uma camada pouco permeável de barita pode limitar a extensão da substituição.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.3390/min10020189",
+          "claim": "Documenta substituição experimental de gipsita por celestina ou barita e relaciona as diferenças de velocidade à permeabilidade da camada de produto.",
+          "citation": "Forjanes, P., Astilleros, J. M. e Fernández-Díaz, L. (2020). The Formation of Barite and Celestite through the Replacement of Gypsum. Minerals, 10(2), 189."
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    {
+      "id": "a-celestine-carbonate-strontianite",
+      "kind": "synthesis",
+      "inputs": [
+        "celestine",
+        "carbonate"
+      ],
+      "agent": null,
+      "outputs": [
+        "strontianite",
+        "sulfate"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "SrSO₄ + CO₃²⁻ → SrCO₃ + SO₄²⁻",
+      "summary": "Carbonatação da celestina com precipitação de estroncianita.",
+      "conditions": "A transformação combina dissolução da celestina e cristalização de estroncianita em contato com solução aquosa suficientemente rica em carbonato. O pH controla a disponibilidade de CO₃²⁻ e o sulfato é liberado ao fluido.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1016/j.gca.2018.09.032",
+          "claim": "Documenta a formação de pseudomorfos de estroncianita após celestina e o mecanismo de dissolução e cristalização acopladas.",
+          "citation": "Pina, C. M. (2019). Topotaxial replacement of celestite single crystals by strontianite aggregates. Geochimica et Cosmochimica Acta, 246, 155–162."
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    {
+      "id": "a-aragonite-decompression-calcite",
+      "kind": "alteration",
+      "inputs": [
+        "aragonite"
+      ],
+      "agent": "decompression",
+      "outputs": [
+        "calcite"
+      ],
+      "process": "equilibrio-de-fases",
+      "reviewStatus": "condicional",
+      "equation": "CaCO₃ (aragonita) ⇌ CaCO₃ (calcita)",
+      "summary": "Reequilíbrio de aragonita para calcita ao entrar no campo de menor pressão.",
+      "conditions": "A queda de pressão pode favorecer calcita quando a trajetória de pressão e temperatura cruza a fronteira de estabilidade. A aragonita pode persistir de forma metaestável. Temperatura, água disponível e nucleação influenciam a velocidade.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1029/JZ070i002p00433",
+          "claim": "Compara experimentalmente a cinética de transformação entre calcita e aragonita em condições de alta e baixa pressão."
+        },
+        {
+          "url": "https://doi.org/10.1086/628744",
+          "claim": "Analisa a dependência da transformação aragonita–calcita das taxas de nucleação e crescimento."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    {
+      "id": "a-azurite-water-malachite",
+      "kind": "alteration",
+      "inputs": [
+        "azurite"
+      ],
+      "agent": "water",
+      "outputs": [
+        "malachite",
+        "co2"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "2 Cu₃(CO₃)₂(OH)₂ + H₂O ⇌ 3 Cu₂CO₃(OH)₂ + CO₂",
+      "summary": "Reequilíbrio de azurita para malaquita em ambiente aquoso favorável.",
+      "conditions": "A água participa do balanço e permite a interação com a solução. O sentido de transformação depende do pH e do CO₂ no sistema. A perda de CO₂ pode favorecer malaquita nas condições pertinentes. A estabilidade do produto depende da composição do fluido.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1180/minmag.1986.050.355.06",
+          "claim": "Calcula a fronteira azurita–malaquita e mostra a sensibilidade da transição às condições químicas, incluindo CO₂ e pH.",
+          "citation": "Vink, B. W. (1986). Stability relations of malachite and azurite. Mineralogical Magazine, 50, 41–47."
+        },
+        {
+          "url": "https://doi.org/10.2113/gsecongeo.98.3.607",
+          "claim": "Discute o ambiente de formação de carbonatos secundários de cobre e a relação entre azurita e CO₂ em veios de Morenci."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    {
+      "id": "a-sylvite-water",
+      "kind": "alteration",
+      "inputs": [
+        "sylvite"
+      ],
+      "agent": "water",
+      "outputs": [
+        "potassium_ion",
+        "chloride"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "KCl(s) ⇌ K⁺(aq) + Cl⁻(aq)",
+      "summary": "Dissolução da silvita com liberação de potássio e cloreto.",
+      "conditions": "Água é o solvente. Em solução subsaturada em KCl, a silvita fornece K⁺ e Cl⁻ até atingir o equilíbrio ou até o sólido se esgotar. A composição da salmoura controla o sentido do processo.",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0892687526001275",
+          "claim": "Mede dissolução e crescimento de KCl em água e relaciona a cinética à concentração da solução.",
+          "locator": "Resumo e resultados experimentais"
+        }
+      ],
+      "environmentalInputs": []
+    },
+    {
+      "id": "a-chalcanthite-water",
+      "kind": "alteration",
+      "inputs": [
+        "chalcanthite"
+      ],
+      "agent": "water",
+      "outputs": [
+        "copper2",
+        "sulfate"
+      ],
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "CuSO₄·5H₂O(s) ⇌ Cu²⁺(aq) + SO₄²⁻(aq) + 5 H₂O(l)",
+      "summary": "Dissolução de calcantita com liberação de cobre e sulfato.",
+      "conditions": "A solução deve estar subsaturada com respeito ao sulfato de cobre pentahidratado. A água da estrutura passa para o solvente. Os íons da bancada representam os componentes dissolvidos, cuja especiação depende da composição da solução.",
+      "sources": [
+        {
+          "url": "https://revistademetalurgia.revistas.csic.es/index.php/revistademetalurgia/article/view/605",
+          "claim": "Mede a solubilidade do sulfato de cobre pentahidratado em meio aquoso."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    {
+      "id": "a-gibbsite-hydrothermal-boehmite",
+      "kind": "alteration",
+      "inputs": [
+        "gibbsite"
+      ],
+      "agent": "hydrothermal",
+      "outputs": [
+        "boehmite",
+        "water"
+      ],
+      "process": "alteracao-hidrotermal",
+      "reviewStatus": "condicional",
+      "equation": "Al(OH)₃ → AlO(OH) + H₂O",
+      "summary": "Transformação hidrotermal de gibbsita em boehmita.",
+      "conditions": "Balanço global para condições hidrotermais alcalinas adequadas. Temperatura, concentração de alumínio, composição e alcalinidade do fluido influenciam a dissolução e a reprecipitação. A peça Hidrotermalismo representa esse contexto de fluido.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1021/acs.cgd.9b00468",
+          "claim": "Investiga a conversão de gibbsita em boehmita em solução alcalina sob condições hidrotermais e sustenta a importância da dissolução e reprecipitação."
+        }
+      ],
+      "environmentalInputs": [
+        "water",
+        "hydroxide"
+      ]
+    }
+  ],
+  "updates": {
+    "i-agent-galena-air": {
+      "retired": false,
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "equation": "PbS + 2 O₂ → PbSO₄",
+      "summary": "Oxidação supergênica da galena com formação de anglesita.",
+      "conditions": "O₂ dissolvido é o oxidante no balanço global. A água permite dissolução e precipitação, e o pH e a disponibilidade de sulfato e carbonato controlam as fases de Pb. Em ambiente oxidante ácido e pobre em carbonato, anglesita pode precipitar. Em meio carbonatado que favoreça fases de Pb com carbonato, cerussita pode competir.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.11456/shigenchishitsu.61.153",
+          "claim": "Identifica anglesita como produto sólido da alteração experimental de galena em solução sulfúrica e discute a contribuição do oxigênio.",
+          "locator": "pp. 153–166, resumo e resultados"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304389421000947",
+          "claim": "Relaciona a dissolução oxidativa da galena a fases secundárias de Pb e discute a formação de anglesita em ambientes ácidos e de cerussita em ambientes alcalinos."
+        }
+      ],
+      "environmentalInputs": [
+        "o2",
+        "water"
+      ]
+    },
+    "v08-alt-malachite-heat": {
+      "retired": false,
+      "outputs": [
+        "tenorite",
+        "co2",
+        "water"
+      ],
+      "process": "transformacao-termica",
+      "reviewStatus": "condicional",
+      "equation": "Cu₂CO₃(OH)₂ → 2 CuO + CO₂ + H₂O",
+      "summary": "Decomposição térmica de malaquita com formação de tenorita.",
+      "conditions": "O aquecimento em condições apropriadas promove a perda de CO₂ e H₂O. Temperatura, composição do meio e remoção dos voláteis afetam o percurso. O balanço apresenta os produtos finais.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1524/zkri.1978.147.1-2.13",
+          "claim": "Caracteriza por difração e análise térmica a transformação de malaquita em tenorita."
+        },
+        {
+          "url": "https://doi.org/10.1515/zkri-2024-0125",
+          "claim": "Acompanha em operação a decomposição térmica de carbonatos básicos de cobre e a perda de água e dióxido de carbono."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    "i-agent-diaspore-heat": {
+      "retired": false,
+      "outputs": [
+        "corundum",
+        "water"
+      ],
+      "process": "transformacao-termica",
+      "reviewStatus": "condicional",
+      "equation": "2 AlO(OH) → Al₂O₃ + H₂O",
+      "summary": "Desidroxilação do diásporo com formação de coríndon.",
+      "conditions": "O aquecimento sob condições adequadas remove água estrutural e produz coríndon. A trajetória depende da temperatura, da atividade da água e da cinética. O balanço global agrupa os passos intermediários.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.2465/minerj1953.7.137",
+          "claim": "Documenta a conversão de diásporo natural em coríndon por análise térmica e difração de raios X.",
+          "citation": "Iwai, S., Yamamoto, H., Morikawa, H. e Isobe, M. (1973). Topotactic thermal-transformation of diaspore to corundum. Mineralogical Journal, 7(2), 137–158."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    "i-agent-brookite-heat": {
+      "retired": false,
+      "process": "equilibrio-de-fases",
+      "reviewStatus": "condicional",
+      "equation": "TiO₂ (brookita) → TiO₂ (rutilo)",
+      "summary": "Transformação polimórfica de brookita em rutilo por aquecimento.",
+      "conditions": "A temperatura e a duração do aquecimento, o tamanho de grão e impurezas influenciam a cinética. Brookita natural pulverizada converteu-se em rutilo no intervalo de temperaturas estudado. As duas fases têm a mesma fórmula química e estruturas distintas.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1016/j.jssc.2007.12.015",
+          "claim": "Documenta a transformação direta de brookita natural pulverizada em rutilo nos ensaios de aquecimento.",
+          "citation": "Huberty, J. e Xu, H. (2008). Kinetics study on phase transformation from titania polymorph brookite to rutile. Journal of Solid State Chemistry, 181, 508–514."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    "v08-fluorapatite-2": {
+      "retired": false,
+      "outputs": [
+        "fluorapatite",
+        "hydroxide"
+      ],
+      "process": "troca-composicional",
+      "reviewStatus": "condicional",
+      "equation": "Ca₅(PO₄)₃OH + F⁻ ⇌ Ca₅(PO₄)₃F + OH⁻",
+      "summary": "Troca composicional favorecida por fluido hidrotermal rico em fluoreto.",
+      "conditions": "A relação entre atividades de F⁻ e OH⁻ e condições hidrotermais favorece fluorapatita no caso modelado. O balanço dos membros ideais resume uma substituição que pode envolver dissolução e reprecipitação.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1021/cm990797x",
+          "claim": "Mostra experimentalmente a conversão hidrotermal da hidroxilapatita em fluorapatita em meio rico em fluoreto."
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    "v08-hydroxylapatite-2": {
+      "retired": false,
+      "outputs": [
+        "hydroxylapatite",
+        "fluoride"
+      ],
+      "process": "troca-composicional",
+      "reviewStatus": "condicional",
+      "equation": "Ca₅(PO₄)₃F + OH⁻ ⇌ Ca₅(PO₄)₃OH + F⁻",
+      "summary": "Troca composicional favorecida por fluido hidrotermal alcalino.",
+      "conditions": "A relação entre atividades de OH⁻ e F⁻ em solução hidrotermal alcalina favorece hidroxilapatita no caso modelado. A substituição experimental envolveu dissolução da fluorapatita e precipitação do novo sólido.",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0022459699986231",
+          "claim": "Caracteriza a conversão de fluorapatita em hidroxilapatita em meio hidrotermal alcalino e propõe dissolução e precipitação."
+        }
+      ],
+      "environmentalInputs": [
+        "water"
+      ]
+    },
+    "i-agent-siderite-air": {
+      "retired": false,
+      "outputs": [
+        "goethite",
+        "co2"
+      ],
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "equation": "4 FeCO₃ + O₂ + 2 H₂O → 4 FeO(OH) + 4 CO₂",
+      "summary": "Dissolução oxidativa de siderita com formação representativa de goethita.",
+      "conditions": "A siderita libera Fe²⁺ ao fluido, e a oxidação seguida por precipitação pode levar a goethita. O pH, a temperatura, a oxigenação e a composição da solução podem favorecer outros produtos, como hematita. CO₂ representa o destino do carbono no balanço simplificado.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1039/D4RA05212A",
+          "claim": "Documenta produtos de substituição da siderita durante oxidação hidrotermal, incluindo goethita, e discute a seleção das fases."
+        },
+        {
+          "url": "https://doi.org/10.1038/s42004-020-0284-3",
+          "claim": "Compara trajetórias de oxidação e registra a formação de goethita da siderita em condições influenciadas por ácido húmico."
+        }
+      ],
+      "environmentalInputs": [
+        "o2",
+        "water"
+      ]
+    },
+    "v08-sillimanite-1": {
+      "retired": false,
+      "process": "equilibrio-de-fases",
+      "reviewStatus": "condicional",
+      "equation": "Al₂SiO₅ (andaluzita) ⇌ Al₂SiO₅ (silimanita)",
+      "summary": "Reequilíbrio andaluzita–silimanita no metamorfismo.",
+      "conditions": "Aquecimento em trajetória de pressão e temperatura apropriada pode deslocar a estabilidade da andaluzita para a silimanita. A presença dos dois polimorfos pode registrar preservação parcial de andaluzita por razões cinéticas.",
+      "sources": [
+        {
+          "url": "https://ajsonline.org/article/59476-stability-of-andalusite-and-the-aluminum-silicate-phase-diagram.pdf",
+          "claim": "Determina relações de estabilidade dos polimorfos de Al₂SiO₅, incluindo a fronteira andaluzita–silimanita."
+        },
+        {
+          "url": "https://www.journals.uchicago.edu/doi/10.1086/629596",
+          "claim": "Restringe o equilíbrio andaluzita–silimanita com dados da auréola de contato de Ballachulish."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    "v08-sillimanite-2": {
+      "retired": false,
+      "process": "equilibrio-de-fases",
+      "reviewStatus": "condicional",
+      "equation": "Al₂SiO₅ (cianita) ⇌ Al₂SiO₅ (silimanita)",
+      "summary": "Reequilíbrio cianita–silimanita no metamorfismo.",
+      "conditions": "Aquecimento em trajetória adequada pode levar do campo de cianita ao de silimanita. A fronteira depende da pressão, e a persistência de fases fora da fronteira de equilíbrio depende da cinética e da história do material.",
+      "sources": [
+        {
+          "url": "https://pubs.usgs.gov/publication/70016652",
+          "claim": "Restringe experimentalmente os equilíbrios cianita–silimanita e cianita–andaluzita.",
+          "citation": "Bohlen, S. R., Montana, A. e Kerrick, D. M. (1991). Precise determinations of the equilibria kyanite–sillimanite and kyanite–andalusite and a revised triple point for Al₂SiO₅ polymorphs. American Mineralogist, 76, 677–680."
+        }
+      ],
+      "environmentalInputs": []
+    },
+    "i-agent-magnesite-rain": {
+      "retired": false,
+      "process": "alteracao-aquosa",
+      "reviewStatus": "condicional",
+      "equation": "MgCO₃ + H⁺ → Mg²⁺ + HCO₃⁻",
+      "summary": "Dissolução de magnesita com mobilização de magnésio no fluido.",
+      "conditions": "O fluido de intemperismo fornece água e acidez e deve estar subsaturado com respeito à magnesita. A velocidade e as espécies de carbono dissolvido dependem do pH e da composição. Bicarbonato representa o carbono inorgânico para o balanço mostrado.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1016/S0016-7037(99)00013-7",
+          "claim": "Mede a dissolução de magnesita em solução aquosa e avalia o efeito de pH, carbono dissolvido e composição na cinética.",
+          "citation": "Pokrovsky, O. S. e Schott, J. (1999). Processes at the magnesium-bearing carbonates/solution interface. II. Kinetics and mechanism of magnesite dissolution. Geochimica et Cosmochimica Acta, 63(6), 881–897."
+        }
+      ],
+      "environmentalInputs": [
+        "water",
+        "proton"
+      ]
+    },
+    "i-agent-pyrrhotite-air": {
+      "retired": false,
+      "outputs": [
+        "iron2",
+        "sulfate",
+        "proton"
+      ],
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "equation": "2 Fe₇S₈ + 31 O₂ + 2 H₂O → 14 Fe²⁺ + 16 SO₄²⁻ + 4 H⁺",
+      "summary": "Dissolução oxidativa de pirrotita com liberação de ferro, sulfato e acidez.",
+      "conditions": "O meio aquoso fornece O₂. O balanço idealiza a pirrotita 4C como Fe₇S₈, o ferro dissolvido como Fe²⁺ e a oxidação completa do enxofre a sulfato. A deficiência de ferro varia entre pirrotitas. Em condições reais, o pH e a oxigenação afetam as espécies de ferro e parte do enxofre pode permanecer em outras formas.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1021/bk-1994-0550.ch002",
+          "claim": "Apresenta ensaios de oxidação da pirrotita com liberação de ferro e sulfato e efeito das condições de pH."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0016703799004214",
+          "claim": "Mede a liberação de Fe²⁺ e sulfato durante a oxidação por oxigênio e relaciona a diferença entre as taxas à oxidação incompleta do enxofre.",
+          "locator": "Tabela 3 e discussão de Oxidation by Oxygen"
+        }
+      ],
+      "environmentalInputs": [
+        "o2",
+        "water"
+      ],
+      "legacyV09": {
+        "inputs": [
+          "pyrrhotite"
+        ],
+        "outputs": [
+          "hematite"
+        ],
+        "agent": "air",
+        "equation": "Pirrotita + Oxidação ⇢ Hematita",
+        "summary": "Associação histórica de oxidação com hematita.",
+        "conditions": "A associação foi arquivada na revisão científica posterior."
+      }
+    },
+    "v08-alt-sphalerite-air": {
+      "retired": false,
+      "outputs": [
+        "smithsonite",
+        "sulfate"
+      ],
+      "process": "oxirreducao",
+      "reviewStatus": "condicional",
+      "equation": "ZnS + 2 O₂ + HCO₃⁻ → ZnCO₃ + SO₄²⁻ + H⁺",
+      "summary": "Oxidação de esfalerita e precipitação de smithsonita em ambiente carbonatado.",
+      "conditions": "O balanço agrupa a oxidação que mobiliza zinco e sulfato e a precipitação posterior de smithsonita. Água e O₂ possibilitam a alteração, e o fluido fornece carbono inorgânico e condições de pH favoráveis ao carbonato. Outros minerais secundários são possíveis conforme a composição e a trajetória do fluido.",
+      "sources": [
+        {
+          "url": "https://doi.org/10.1007/s00126-017-0781-1",
+          "claim": "Identifica petrográfica e quimicamente substituição de esfalerita por smithsonita em um depósito supergênico no Peru."
+        },
+        {
+          "url": "https://pubs.usgs.gov/bul/1135c/report.pdf",
+          "claim": "Descreve casos naturais de smithsonita substituindo esfalerita e discute água subterrânea oxigenada e carbono dissolvido."
+        }
+      ],
+      "environmentalInputs": [
+        "o2",
+        "water",
+        "bicarbonate"
+      ]
+    }
+  },
+  "retiredReasons": {
+    "v08-anglesite-2": "A rota jogável de oxidação da galena usa a peça Oxidação e explicita O₂ e água do meio em i-agent-galena-air. Este par legado preserva o histórico da formulação com O₂ como peça.",
+    "i-agent-aragonite-heat": "A transição retrógrada está representada pela rota a-aragonite-decompression-calcite com trajetória de pressão e temperatura explícita. Este par arquivado preserva a associação antiga de aquecimento isolado."
+  }
+}

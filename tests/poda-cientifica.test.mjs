@@ -82,7 +82,12 @@ test('as avaliações aprovadas pelo usuário são preservadas', () => {
     'prepare-assemblage-clinochlore-staurolite','complete-meta-staurolite-chlorite-muscovite',
     'prepare-assemblage-calcite-tremolite','complete-meta-tremolite-calcite-quartz'
   ];
-  for (const id of approvedIds) assert.ok(activeIds.has(id), id + ' foi removida apesar da aprovação');
+  const changes = inspect('SPECIATION.retiredReasons');
+  for (const id of approvedIds) {
+    const record = engine.byReaction.get(id);
+    assert.ok(record, id + ' saiu do registro histórico');
+    assert.ok(activeIds.has(id) || (record.retired && changes[id]), id + ' sem rota ativa ou justificativa');
+  }
 });
 
 test('a bancada permanece livre de pares ambíguos após a poda', () => {

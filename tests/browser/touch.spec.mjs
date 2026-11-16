@@ -53,6 +53,26 @@ test('arraste por toque também combina peças na bancada estreita', async ({ pa
   await expect(board.getByRole('button', { name: /^Calcita\./ })).toBeVisible();
 });
 
+test('Trilhas apresenta a continuação e as trilhas temáticas em uma tela de 360 px', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Ver trilhas mineralógicas' }).tap();
+  const dialog = page.getByRole('dialog', { name: 'Trilhas mineralógicas' });
+  await dialog.getByRole('button', { name: 'Trilhas temáticas' }).tap();
+  await expect(dialog.getByRole('heading', { name: /Bowen.*plagioclásios/ })).toBeVisible();
+  await dialog.getByRole('button', { name: 'Continuar descobertas' }).tap();
+  await dialog.getByRole('combobox', { name: 'Material de partida' }).selectOption('si');
+  const route = dialog.locator('[data-trail-reaction="s-quartz"]');
+  await expect(route).not.toContainText(/Oxigênio molecular|Quartzo/);
+  await route.getByRole('button', { name: 'Mostrar pista' }).tap();
+  await route.getByRole('button', { name: 'Revelar combinação' }).tap();
+  await expect(route).toContainText('Oxigênio molecular');
+  await expect(route).not.toContainText('Quartzo');
+  await route.getByRole('button', { name: 'Preparar na bancada' }).tap();
+  await expect(dialog).toHaveCount(0);
+  await page.getByRole('button', { name: 'Reagir as peças da bancada' }).tap();
+  await expect(page.getByRole('region', { name: 'Bancada' }).getByRole('button', { name: /^Quartzo\./ })).toBeVisible();
+});
+
 test('auditoria móvel volta da ficha à reação selecionada', async ({ page }) => {
   await page.goto('/catalogo-auditoria.html');
   await page.getByRole('searchbox').fill('a-anorthite-pressure-lawsonite');

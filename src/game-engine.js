@@ -491,9 +491,13 @@ function generateIntuitiveRoutes(cards, agents, existing) {
 
 return generateIntuitiveRoutes;
 })();
-/** Legacy saved IDs are normalized to the single game piece representing the element. */
+/** Equivalências de nomes de espécies em partidas antigas. */
 const LEGACY_CARD_ALIASES = { k_aq: 'potassium_ion', na_aq: 'sodium_ion', ca_aq: 'calcium_ion', cl_aq: 'chloride', hco3_aq: 'bicarbonate', sulfate_aq: 'sulfate', proton_aq: 'proton' };
-const canonicalCardId = (id) => LEGACY_CARD_ALIASES[id] ?? id;
+function canonicalCardId(id) {
+    if (Object.hasOwn(LEGACY_CARD_ALIASES, id)) return LEGACY_CARD_ALIASES[id];
+    return Object.hasOwn(SPECIATION.aliases, id) ? SPECIATION.aliases[id] : id;
+}
+const isPlayableCard = card => Boolean(card && !card.hiddenFromPlay && !HIDDEN_ARCHIVED_IONS.has(card.id));
 const AVAILABLE_AGENTS = new Set(['hydrothermal', 'rain', 'air', 'heat', 'reduction', 'pressure', 'cooling', 'impact', 'volcanism', 'decompression', 'low_silica']);
 for (const card of EMBEDDED.cards) {
     if (card.id === 'gold3' || card.id === 'silicon4') card.starter = false;
@@ -502,10 +506,15 @@ for (const card of EMBEDDED.cards) {
 const keyFor = (ids) => [...ids].sort().join('::');
 const pairKey = (left, right) => keyFor([left, right]);
 function createEngine(cards, agents, baseReactions, rules) {
+    cards = cards.map(card => ({ ...card, ...SPECIATION.cards[card.id] }));
     const generated = rules ? generateFamilyReactions(cards, rules) : [];
     const intuitive = generateIntuitiveRoutes(cards, agents, [...baseReactions, ...generated]);
     const coreReactions = [...baseReactions.map(auditedReaction), ...generated,
-        ...intuitive.map(auditIntuitiveReaction), ANORTHITE_REFERENCE, ...HYDRIC_REPLACEMENTS];
+        ...intuitive.map(auditIntuitiveReaction), ANORTHITE_REFERENCE, ...HYDRIC_REPLACEMENTS, ...TRANSFORMATIONS.additions]
+        .map(reaction => ({
+            ...reaction, ...SPECIATION.routes[reaction.id], ...TRANSFORMATIONS.updates[reaction.id],
+            archiveReason: TRANSFORMATIONS.retiredReasons[reaction.id] ?? SPECIATION.retiredReasons[reaction.id],
+        }));
     const stagingCards = [];
     const stagingReactions = [];
     const stagingPairs = new Map();
@@ -557,6 +566,8 @@ function createEngine(cards, agents, baseReactions, rules) {
         for (const id of [...reaction.inputs, ...reaction.outputs]) {
             if (!byCard.has(id) && !agentIds.has(id))
                 diagnostics.push(`${reaction.id}: carta inexistente ${id}`);
+            else if (byCard.has(id) && !isPlayableCard(byCard.get(id)))
+                diagnostics.push(`${reaction.id}: carta reservada ao histórico ${id}`);
         }
         if (reaction.kind === 'synthesis') {
             if (![2, 3].includes(reaction.inputs.length) || reaction.agent !== null)
@@ -671,15 +682,14 @@ function resolvePair(catalog, a, b) {
 }
 
 function reachablePairIds(engine, catalog, availableAgents) {
-    const reachable = new Set([...makeInitialSave(engine.cards).discovered, ...availableAgents]
-        .filter(id => !HIDDEN_ARCHIVED_IONS.has(id)));
+    const reachable = new Set([...makeInitialSave(engine.cards).discovered, ...availableAgents]);
     let previousSize;
     do {
         previousSize = reachable.size;
         for (const { inputs, reaction } of catalog.pairs) {
             if (inputs.every(id => reachable.has(id))) {
                 for (const id of reaction.outputs) {
-                    if (!HIDDEN_ARCHIVED_IONS.has(id)) reachable.add(id);
+                    if (isPlayableCard(engine.byCard.get(id))) reachable.add(id);
                 }
             }
         }

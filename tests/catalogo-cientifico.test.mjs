@@ -57,8 +57,8 @@ test('auditoria publicada deriva do motor e distingue pares, evidência e taxono
     assert.match(revision, /^[a-f0-9]{64}$/);
     const ids = JSON.parse(run('JSON.stringify([...engine.byReaction.keys()])'));
     assert.deepEqual(entries.map(r => r.id).sort(), ids.sort());
-    assert.equal(entries.filter(r => r.active).length, 279);
-    assert.equal(entries.filter(r => r.executable).length, 269);
+    assert.equal(entries.filter(r => r.active).length, run('engine.reactions.length'));
+    assert.equal(entries.filter(r => r.executable).length, run('buildPairCatalog(engine).pairs.length'));
     assert.ok(entries.every(r => r.process && r.reviewStatus && /^[a-f0-9]{64}$/.test(r.fingerprint)));
     assert.ok(entries.flatMap(r => [...r.inputs, ...r.outputs]).some(c => c.id === 'andesine' && c.materialType === 'faixa-composicional'));
     assert.ok(entries.filter(r => r.active && r.reference).every(r => r.reference.balance === 'balanced'));

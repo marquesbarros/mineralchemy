@@ -8,14 +8,18 @@ O Mineralchemy é uma aplicação web estática. O gerador incorpora estilos, c�
 | [src/catalog-overrides.js](../src/catalog-overrides.js) | Preservação de IDs e aplicação das revisões históricas e hídricas |
 | [data/review-notes.json](../data/review-notes.json) | Fontes de contexto geral e pendências editoriais identificadas por rota |
 | [data/literature.json](../data/literature.json) | Obras bibliográficas e evidência paginada por ID de rota |
+| [data/speciation.json](../data/speciation.json) | Disponibilidade de espécies na bancada, revisão redox e IDs legados |
+| [data/transformations.json](../data/transformations.json) | Transformações novas e reativações, com evidência específica e condições |
 | [src/game-engine.js](../src/game-engine.js) | Montagem do catálogo e resolução de pares executáveis |
 | [src/catalog-science.js](../src/catalog-science.js) | Tipos de material e processo, leitura de equações e conferência de massa e carga |
 | [src/reaction-reference.js](../src/reaction-reference.js) | Agrupamento no jogo e balanços complementares vinculados ao ID da rota |
 | [src/progress.js](../src/progress.js) e [src/game-storage.js](../src/game-storage.js) | Migração, histórico de descobertas, armazenamento e backup de partidas |
 | [src/game.js](../src/game.js), [src/game.css](../src/game.css) e [src/game.template.html](../src/game.template.html) | Interface, teclado, toque e bancada |
+| [src/trail-planner.js](../src/trail-planner.js) | Próximos passos e pré-requisitos pelos pares da bancada |
 | [src/mineral-icons.js](../src/mineral-icons.js), [data/atlas-layout.json](../data/atlas-layout.json) e [src/atlas.template.html](../src/atlas.template.html) | SVGs compartilhados pelo jogo e pelo atlas, agrupamento e etapas do atlas |
 | [src/audit.js](../src/audit.js) e [src/audit.template.html](../src/audit.template.html) | Auditoria, pareceres e exportações |
 | [scripts/build.mjs](../scripts/build.mjs) | Geração determinística das páginas e verificação de consistência |
+| [scripts/compare-progression.mjs](../scripts/compare-progression.mjs) | Comparação da progressão por carta inicial com uma revisão anterior |
 
 ## Editar uma carta ou rota
 
