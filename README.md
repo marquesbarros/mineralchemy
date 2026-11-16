@@ -1,87 +1,70 @@
 # Mineralchemy
 
-Jogo educativo para **revisar e fixar conhecimentos sobre minerais, sua origem e suas propriedades**. A descoberta ocorre pela combinação de componentes químicos, minerais e agentes geológicos, relacionando composição, formação e transformação mineral.
+Jogo educativo de combinações para **revisar e fixar conhecimentos sobre minerais, sua origem e suas propriedades**. O conteúdo relaciona composição química, formação e transformação mineral por meio de descobertas progressivas.
 
-**[Jogar Mineralchemy](https://marquesbarros.github.io/mineralchemy/)** · [Atlas de ilustrações](https://marquesbarros.github.io/mineralchemy/iconografia.html)
+**[Jogar](https://marquesbarros.github.io/mineralchemy/)** · **[Atlas de ilustrações](https://marquesbarros.github.io/mineralchemy/iconografia.html)** · **[Arquitetura](docs/ARQUITETURA.md)** · **[Referências](docs/REFERENCIAS.md)**
 
-## Origem
+## O que foi desenvolvido
 
-A ideia surgiu após um sonho com um jogo semelhante a [Little Alchemy](https://littlealchemy.com/). A experiência inspirou a criação de um jogo de combinações dedicado à mineralogia. Mineralchemy é um projeto independente.
+- **178 minerais**, com representações SVG individuais.
+- **279 reações ativas** e **269 pares executáveis** na versão científica documentada v0.25.
+- **Motor de combinações** entre componentes químicos, minerais e agentes geológicos.
+- **Descobertas progressivas**, com catálogo de espécies, registro das reações executadas e trilhas temáticas.
+- **Busca por nome ou fórmula**, filtros por categoria, navegação por teclado e interação por arrastar e soltar.
+- **Catálogo separado para auditoria de reações**, com registro de avaliações e exportação em JSON ou CSV.
+- **Compatibilidade com registros anteriores**, mantendo o histórico de rotas descontinuadas.
 
-## Como jogar
-
-1. Escolha materiais na coleção lateral e adicione-os à bancada.
-2. Combine duas peças arrastando uma sobre a outra ou usando **Reagir**.
-3. Descubra novos minerais e utilize-os em outras combinações.
-4. Consulte **Descobertas**, **Reações** e **Trilhas** para revisar o conteúdo.
-
-Algumas combinações exigem uma etapa intermediária. Nem todos os pares geram um resultado.
-
-## Conteúdo
-
-A versão documentada mais recente do catálogo reúne:
-
-- **178 minerais**;
-- **279 reações ativas**;
-- **269 pares executáveis**.
-
-As seções do jogo têm funções diferentes:
-
-| Seção | Conteúdo |
+| Recurso | Função |
 | --- | --- |
-| **Coleção lateral** | Materiais disponíveis, busca por nome ou fórmula e filtros |
-| **Descobertas** | Minerais encontrados e suas informações |
-| **Reações** | Combinações realizadas, agrupadas por processo ou produto |
-| **Trilhas** | Sequências didáticas de formação e transformação mineral |
+| Bancada | Combinar materiais e descobrir produtos |
+| Descobertas | Consultar os minerais encontrados |
+| Reações | Revisar combinações por produto ou processo |
+| Trilhas | Explorar sequências de formação e transformação |
+| Auditoria | Examinar rotas ativas e arquivadas fora do jogo |
 
-As combinações representam **associações didáticas**. Não constituem simulações termodinâmicas: a ocorrência real de uma reação depende, entre outros fatores, de pressão, temperatura, composição e fluidos.
+## Implementação
 
-## Navegação
-
-| Tecla | Ação |
+| Área | Solução |
 | --- | --- |
-| `Enter` na busca | Adiciona o primeiro resultado |
-| `Ctrl+K` | Foca a busca lateral |
-| `Ctrl+Enter` | Combina as peças da bancada |
-| `Delete` | Limpa a bancada |
-| `Tab` | Abre ou fecha Descobertas |
-| `Shift+Tab` | Alterna entre Descobertas, Reações e Trilhas |
-| `←` / `→` | Navega entre categorias ou filtros |
-| `Esc` | Fecha a janela ou limpa a busca |
+| Aplicação | HTML, CSS e JavaScript |
+| Interface, dados e motor | `index.html`, com catálogo `EMBEDDED` |
+| Ilustrações | SVG |
+| Persistência | `localStorage` |
+| Revisão de dados | `catalogo-auditoria.html` |
+| Hospedagem | GitHub Pages |
+| Testes | Node.js, módulo nativo `node:test` |
+| Servidor | Sem backend e sem autenticação |
 
-O progresso é salvo no navegador. Não há conta nem sincronização entre dispositivos.
+O jogo é executado no navegador e armazena o progresso localmente. A distribuição não exige compilação nem instalação de dependências npm.
 
-## Infraestrutura
+## Verificação
 
-| Componente | Implementação |
-| --- | --- |
-| Aplicação | HTML, CSS e JavaScript; execução no navegador |
-| Interface, dados e motor | `index.html` |
-| Iconografia | SVG; `iconografia.html` |
-| Revisão de reações | `catalogo-auditoria.html` |
-| Hospedagem | GitHub Pages, branch `main` |
-| Armazenamento | `localStorage` |
-| Testes | Node.js (`node:test`) |
-| Servidor | Não há backend no repositório publicado |
+Os testes cobrem o motor de combinações, a busca, a navegação, a persistência e a integridade do catálogo. Entre as verificações de dados estão a possibilidade de alcançar os 178 minerais e a preservação dos registros de reações descontinuadas.
 
-Para executar localmente, abra `index.html`. Para rodar os testes:
+Na raiz do repositório:
 
 ```sh
 node --test tests/*.test.mjs
 ```
 
-O repositório não contém `package.json` nem exige compilação. Detalhes em [Arquitetura](docs/ARQUITETURA.md).
+Os testes estão disponíveis no repositório, mas ainda não há workflow de integração contínua publicado. Detalhes em [Arquitetura](docs/ARQUITETURA.md).
 
-## Referências e revisão científica
+## Conteúdo e referências
 
-As fontes de mineralogia, petrologia, identificação mineral e transformações geológicas estão reunidas em [Referências bibliográficas](docs/REFERENCIAS.md).
+As combinações servem ao estudo de composição, propriedades e processos mineralógicos. **Não são uma simulação de equilíbrio termodinâmico.** Uma rota didática não estabelece, por si só, a ocorrência de uma reação na natureza.
 
-O [Catálogo científico](catalogo-auditoria.html) permite examinar e registrar avaliações das rotas. Ele inclui reações ainda não descobertas no jogo. Consulte também o [Mapa de reações](docs/MAPA_REACOES_CIENTIFICO.md) e a [Revisão de processos hídricos](docs/PROCESSOS_HIDRICOS_v025.md).
+A curadoria inclui [bibliografia mineralógica](docs/REFERENCIAS.md), [critérios científicos das reações](docs/MAPA_REACOES_CIENTIFICO.md) e [revisões documentadas](docs/HISTORICO.md). A página de [auditoria](catalogo-auditoria.html) permite consultar as rotas do catálogo, inclusive as ainda não descobertas em partida.
 
-## Versões e desenvolvimento
+## Origem
 
-A linhagem documentada inclui as versões **v0.15 a v0.25**, com melhorias posteriores na interface. Os marcos e alterações estão em [Histórico](docs/HISTORICO.md).
+A ideia surgiu após um sonho com um jogo semelhante a [Little Alchemy](https://littlealchemy.com/). A mecânica de combinar elementos inspirou sua aplicação ao estudo de minerais. Mineralchemy é um projeto independente.
 
-O desenvolvimento contou com apoio do **Codex (OpenAI)**. As versões dos modelos utilizados nas sessões anteriores não estão registradas. A revisão documental de 16/11/2026 utilizou **ChatGPT (GPT-6)**.
+## Estado do projeto
 
-**Documentação:** [Arquitetura](docs/ARQUITETURA.md) · [Bibliografia](docs/REFERENCIAS.md) · [Origem e desenvolvimento](docs/ORIGEM_E_DESENVOLVIMENTO.md) · [Histórico](docs/HISTORICO.md).
+O [histórico](docs/HISTORICO.md) documenta a linhagem de **v0.15 a v0.25**, seguida de alterações de interface. A revisão exata do código é identificada por [commit](https://github.com/marquesbarros/mineralchemy/commits/main).
+
+O código atual concentra dados, interface e motor em um HTML. Algumas rotas ainda requerem avaliação mineralógica individual. O repositório não contém um arquivo `LICENSE` para o software.
+
+O desenvolvimento teve apoio do **Codex (OpenAI)**; as versões dos modelos das sessões anteriores não estão registradas. A documentação foi revisada com **ChatGPT GPT-6** em 16/11/2026.
+
+[Origem e desenvolvimento assistido](docs/ORIGEM_E_DESENVOLVIMENTO.md) · [Arquitetura](docs/ARQUITETURA.md) · [Histórico](docs/HISTORICO.md)
