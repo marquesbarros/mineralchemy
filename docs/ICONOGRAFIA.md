@@ -36,13 +36,12 @@ Os desenhos são estilizações próprias de **ocorrências características**, 
 
 ## Implementação
 
-- `src/mineral-icons.ts`: biblioteca SVG original e função `mineralIconMarkup(id)`.
-- `src/main.ts`: roteia cartas minerais para SVG e demais cartas para notação química/simbólica, integrando bancada, biblioteca, coleção e detalhe.
-- `public/assets/style.css`: escala dos SVG, máscara circular e compatibilidade com toque/arraste.
-- `scripts/single-file.mjs`: incorpora o módulo na página HTML independente para GitHub Pages, sem buscar novos arquivos em runtime.
-- `tests/mineral-icons.test.mjs`: garante cobertura dos sete elementos nativos e dos 12 protótipos, ícones únicos e preservação do Pages sem service worker.
+- [src/mineral-icons.js](../src/mineral-icons.js) reúne a biblioteca e a função `mineralIconMarkup` usada nas duas páginas.
+- [src/game.js](../src/game.js) escolhe entre SVG, fórmula escrita e símbolo de agente. [src/game.css](../src/game.css) define a apresentação na bancada e na coleção.
+- [data/atlas-layout.json](../data/atlas-layout.json) registra os grupos e as etapas de criação de cada ilustração.
+- [scripts/build.mjs](../scripts/build.mjs) incorpora os SVGs ao jogo e ao atlas e verifica se cada carta mineral tem uma entrada no atlas.
 
-Todos os 178 minerais do catálogo agora recebem um SVG próprio. As 19 espécies iniciais preservam os desenhos autorais originais; as demais utilizam arquétipos mineralógicos específicos, com variações de cor, proporção e detalhe suficientes para manter unicidade por espécie. As próximas revisões podem sofisticar famílias como zeólitas, tungstatos e argilominerais sem voltar ao uso de pictogramas genéricos.
+Cada uma das 178 cartas minerais tem um SVG. As 19 cartas iniciais preservam os desenhos autorais originais. As demais usam modelos vetoriais com variações de cor, proporção e detalhe.
 
 Referência para hábitos: [Mineral Identification Key, Mineralogical Society of America](https://msaweb.org/mineral-id-key/).
 
@@ -63,14 +62,12 @@ Os polimorfos ou membros de uma mesma série que não apresentam diferenciação
 macroscópica convincente podem permanecer semelhantes, com variação de cor e
 microdetalhes, sem símbolos fictícios.
 
-A implementação dispõe de testes que comparam **geometrias SVG sem usar cores**
-para pares de minerais revisados. Conserva os 19 desenhos autorais da versão anterior.
+A revisão v0.15 comparou geometrias SVG sem usar cores para pares selecionados. Os 19 desenhos autorais da versão anterior foram preservados.
 
 ## Revisão integral v0.16
 
-A produção da iconografia foi concluída em um único bloco, com 129 espécies
-adicionais individualizadas por uma direção artística própria. Cada entrada do
-arquivo `src/mineral-icons.ts` utiliza uma composição mineralógica específica de
+A produção da iconografia incluiu 129 cartas adicionais com direção artística
+própria. Cada entrada do arquivo `src/mineral-icons.js` usa uma composição específica de
 hábito e detalhe: prismático, tabular, acicular, fibroso, botrioidal, drusiforme,
 lamelar, dendrítico, romboédrico, octaédrico, granular, entre outros.
 
@@ -83,7 +80,7 @@ ajustadas individualmente para os minerais menos comuns, evitando tons aleatóri
 **Situação da biblioteca:**
 - 19 ilustrações originais preservadas.
 - 30 ilustrações individualizadas na v0.15 preservadas.
-- 129 espécies remanescentes refinadas e cobertas pela direção artística da v0.16.
+- 129 cartas remanescentes refinadas na v0.16.
 - 178/178 cartas minerais possuem SVG original, sem pictogramas de família na interface.
 - 177 geometrias diferentes; apenas muscovita/biotita compartilham o mesmo traçado-base,
   mantendo cores e acabamentos diferentes, coerentes com o hábito micáceo.
@@ -98,10 +95,7 @@ organização por família e filtros por etapa de criação. As figuras são SVG
 inline sem dependências de rede. A aplicação principal permanece um único
 `index.html` pronto para GitHub Pages.
 
-**Verificações:** testes unitários e de integração; auditoria da cobertura e
-da unicidade geométrica; validação estrutural XML dos 178 SVGs; navegação na
-galeria em computador e celular; testes da bancada, reações com múltiplos
-produtos, histórico, migração de partidas antigas e ausência de erros JavaScript.
+O gerador verifica a cobertura do atlas e a suíte de navegador exercita sua busca. A auditoria de unicidade geométrica e a validação XML dos 178 SVGs fazem parte do registro da v0.16.
 
 Referências gerais para hábito, clivagem e descrição mineralógica:
 - [Mineral Identification Key, MSA](https://msaweb.org/mineral-id-key/)

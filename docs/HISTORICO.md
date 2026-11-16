@@ -53,3 +53,9 @@ Referência: [Processos hídricos](PROCESSOS_HIDRICOS_v025.md).
 A interface de Descobertas, o histórico de Reações e a navegação por teclado passaram por melhorias de categorização, foco e busca. As explicações e avisos públicos foram reorganizados, mantendo o conjunto mineralógico e o motor de reações.
 
 Veja o [guia atual](../README.md) e a [arquitetura](ARQUITETURA.md).
+
+## Revisão local de 16/11/2026
+
+O jogo, a auditoria e o atlas passaram a ser gerados a partir de fontes compartilhadas. A revisão conservou os 768 IDs de rota, os produtos, as 178 cartas e os 269 pares da bancada. As fichas passaram a distinguir peças, equações de referência, condições e componentes do meio. A auditoria usa uma impressão digital por rota para sinalizar pareceres antigos. O jogo também ganhou backup de progresso, registro durável de descobertas e navegação por foco nos diálogos.
+
+A revisão científica individual continua no [inventário de pendências](REVISAO_PENDENCIAS.md). O [guia docente](GUIA_DOCENTE.md) inclui a proposta de aplicação do piloto.

@@ -1,55 +1,46 @@
-# Arquitetura do Mineralchemy
+# Arquitetura e manutenção
 
-Aplicação web estática, executada no navegador e publicada no GitHub Pages.
+O Mineralchemy é uma aplicação web estática. O gerador incorpora estilos, código e dados nas três páginas HTML da raiz. Abra `index.html` para jogar, `iconografia.html` para consultar as ilustrações e `catalogo-auditoria.html` para revisar as rotas.
 
-## Infraestrutura
-
-| Componente | Implementação |
+| Fonte | Responsabilidade |
 | --- | --- |
-| Interface e motor | HTML, CSS e JavaScript em `index.html` |
-| Dados | Catálogo `EMBEDDED` incorporado ao jogo |
-| Ilustrações | SVG; página `iconografia.html` |
-| Auditoria de rotas | `catalogo-auditoria.html` |
-| Armazenamento | `localStorage` |
-| Hospedagem | GitHub Pages, branch `main`, diretório `/(root)` |
-| Testes | Node.js com `node:test`, arquivos `tests/*.test.mjs` |
+| [data/catalog.json](../data/catalog.json) | Cartas, agentes, rotas explícitas e regras de família |
+| [src/catalog-overrides.js](../src/catalog-overrides.js) | Preservação de IDs e aplicação das revisões históricas e hídricas |
+| [data/review-notes.json](../data/review-notes.json) | Fontes de contexto geral e pendências editoriais identificadas por rota |
+| [src/game-engine.js](../src/game-engine.js) | Montagem do catálogo e resolução de pares executáveis |
+| [src/catalog-science.js](../src/catalog-science.js) | Tipos de material e processo, leitura de equações e conferência de massa e carga |
+| [src/reaction-reference.js](../src/reaction-reference.js) | Agrupamento no jogo e balanços complementares vinculados ao ID da rota |
+| [src/progress.js](../src/progress.js) e [src/game-storage.js](../src/game-storage.js) | Migração, histórico de descobertas, armazenamento e backup de partidas |
+| [src/game.js](../src/game.js), [src/game.css](../src/game.css) e [src/game.template.html](../src/game.template.html) | Interface, teclado, toque e bancada |
+| [src/mineral-icons.js](../src/mineral-icons.js), [data/atlas-layout.json](../data/atlas-layout.json) e [src/atlas.template.html](../src/atlas.template.html) | SVGs compartilhados pelo jogo e pelo atlas, agrupamento e etapas do atlas |
+| [src/audit.js](../src/audit.js) e [src/audit.template.html](../src/audit.template.html) | Auditoria, pareceres e exportações |
+| [scripts/build.mjs](../scripts/build.mjs) | Geração determinística das páginas e verificação de consistência |
 
-Não há backend, autenticação, `package.json` ou etapa obrigatória de compilação na distribuição atual.
+## Editar uma carta ou rota
 
-## Funcionamento
+1. Procure o ID nas fontes da tabela. O catálogo inclui rotas geradas por regras, rotas intuitivas do motor e associações em etapas. Preserve o ID quando atualizar uma rota existente. Quando descontinuar uma combinação, conserve o registro e documente a justificativa.
+2. Para uma carta, informe nome de exibição, fórmula, família e descrição. Use `materialType` quando a carta representa faixa composicional ou nome coletivo. Inclua a nova carta mineral no agrupamento do atlas.
+3. Para uma rota, atualize a expressão, o resumo e as condições. Registre em `sources` uma lista de objetos com `url` e `claim`, indicando o que cada referência sustenta. Use `environmentalInputs` para materiais do meio com ID no catálogo. Descreva nos condicionantes qualquer componente relevante que ainda não tenha uma carta.
+4. Use `→` ou `⇌` com espaços ao redor do símbolo para equações de referência. O analisador verifica massa e carga em fórmulas suportadas, incluindo hidratos e íons em notação sobrescrita. Use `⇢` para uma associação expressa em texto. O balanço químico e a avaliação do processo geológico são campos distintos da ficha.
+5. Gere as páginas e confira o jogo e a auditoria. A revisão da rota na auditoria é identificada por uma impressão digital do conteúdo. Pareceres feitos sobre outra versão são sinalizados.
 
-1. A aplicação carrega minerais, componentes, agentes e combinações do catálogo incorporado.
-2. A bancada recebe duas peças e verifica se existe um par executável.
-3. Descobertas e histórico de reações são atualizados e salvos localmente.
-4. Os catálogos permitem consultar espécies descobertas, combinações realizadas e trilhas de formação ou transformação.
+## Gerar e testar
 
-Algumas rotas usam uma etapa intermediária para representar associações de três componentes. Uma combinação jogável não equivale necessariamente a uma equação química balanceada.
-
-## Organização
-
-| Caminho | Conteúdo |
-| --- | --- |
-| `index.html` | Interface, estilos, motor e dados |
-| `iconografia.html` | Atlas de ilustrações |
-| `catalogo-auditoria.html` | Revisão de rotas ativas e arquivadas |
-| `docs/` | Histórico, bibliografia e revisões científicas |
-| `tests/` | Verificações automatizadas |
-| `.nojekyll` | Publicação direta no GitHub Pages |
-
-Os dados de progresso e as avaliações da auditoria são armazenados separadamente no navegador. A auditoria pode exportar avaliações em JSON ou CSV.
-
-## Execução e testes
-
-Abra `index.html` para executar o jogo localmente.
-
-Para rodar os testes na raiz do repositório:
+Use Node.js 24 ou superior. Rode os comandos a partir da raiz do repositório.
 
 ```sh
-node --test tests/*.test.mjs
+npm ci
+npm run build
+npm run check:generated
+npm test
+npx playwright install --only-shell chromium
+npm run test:browser
 ```
 
-A suíte cobre busca, catálogo, navegação, motor de combinações e integridade dos dados. Após alterar a interface, verifique também navegação por teclado, persistência das descobertas e uso em telas pequenas.
+`npm run check:generated` compara as três páginas com a saída que as fontes atuais produziriam. O gerador valida IDs, pares, cobertura do atlas e alcance das cartas pela bancada. A suíte do Node cobre também o balanço das equações suportadas, migração de partidas, fichas científicas e importação de pareceres. Playwright testa o Chromium em computador e emulação móvel. [Fluxo do GitHub Actions](../.github/workflows/verify.yml)
 
-O repositório não contém um arquivo `LICENSE`. Testes de software não substituem a revisão científica das reações.
+## Publicar e citar
 
-**Documentação:** [Referências](REFERENCIAS.md) · [Origem e desenvolvimento](ORIGEM_E_DESENVOLVIMENTO.md) · [Mapa científico](MAPA_REACOES_CIENTIFICO.md).
+O GitHub Pages está configurado para servir a raiz de `main`. Inclua as fontes e os três HTML gerados na mesma alteração revisada. Após integrar a alteração, confira a versão publicada do jogo, do atlas e da auditoria. Cite Mineralchemy com o SHA completo do commit e a data de acesso. O hash mostrado na auditoria identifica o conteúdo do catálogo e complementa a citação do commit. [Referências](REFERENCIAS.md#citação-do-software)
+
+O jogo guarda a sessão em `localStorage` e lê as chaves legadas de progresso, bancada e recentes. O histórico reúne as rotas descobertas com seus totais e usa um registro separado para os últimos 100 eventos. A tela Ajuda exporta e restaura arquivos de progresso. Os pareceres também ficam no navegador, sob outra chave, com arquivos próprios de exportação.

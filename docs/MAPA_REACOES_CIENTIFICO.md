@@ -165,7 +165,7 @@ Os oito pares redundantes são: cal + água, hematita + água, anidrita + água,
 5. Referências genéricas servem para conceitos gerais, **não** para aprovar reações específicas.
 6. Não deve haver rotas contraditórias, produtos implausíveis nem atalhos que ignorem etapas conceitualmente indispensáveis.
 7. Toda remoção ou substituição preserva o reconhecimento de IDs históricos, sem permitir a execução de reações descontinuadas.
-8. Cada mudança de rota executável deve ter teste de regressão, auditoria de alcance das 178 espécies e teste de não ambiguidade de pares.
+8. Verificar regressões no grafo para cada mudança de rota executável, incluindo o alcance das 178 cartas minerais e a ausência de pares com produtos conflitantes.
 9. **Status científico aprovado** só pode ser atribuído após revisão de referências e condições específicas da rota. Testes automatizados não substituem essa avaliação.
 
 ## 7. Ordem da revisão integral

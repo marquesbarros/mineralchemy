@@ -6,13 +6,13 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 
 ## O que foi desenvolvido
 
-- **178 minerais**, com representações SVG individuais.
-- **279 reações ativas** e **269 pares executáveis** na versão científica documentada v0.25.
+- **178 cartas minerais**, com representações SVG individuais.
+- **279 rotas ativas**, **269 pares executáveis** e **489 rotas arquivadas**.
 - **Motor de combinações** entre componentes químicos, minerais e agentes geológicos.
-- **Descobertas progressivas**, com catálogo de espécies, registro das reações executadas e trilhas temáticas.
+- **Descobertas progressivas**, com coleção de cartas, registro das reações executadas e trilhas temáticas.
 - **Busca por nome ou fórmula**, filtros por categoria, navegação por teclado e interação por arrastar e soltar.
-- **Catálogo separado para auditoria de reações**, com registro de avaliações e exportação em JSON ou CSV.
-- **Compatibilidade com registros anteriores**, mantendo o histórico de rotas descontinuadas.
+- **Catálogo de auditoria** com filtros por família, processo e pendência, pareceres vinculados à versão da rota e exportação em JSON ou CSV.
+- **Progresso local** com exportação e restauração pela tela Ajuda e leitura de partidas anteriores.
 
 | Recurso | Função |
 | --- | --- |
@@ -27,33 +27,38 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 | Área | Solução |
 | --- | --- |
 | Aplicação | HTML, CSS e JavaScript |
-| Interface, dados e motor | `index.html`, com catálogo `EMBEDDED` |
+| Interface, dados e motor | Fontes em `src/` e `data/`, incorporados ao HTML durante a geração |
 | Ilustrações | SVG |
 | Persistência | `localStorage` |
 | Revisão de dados | `catalogo-auditoria.html` |
 | Hospedagem | GitHub Pages |
-| Testes | Node.js, módulo nativo `node:test` |
+| Testes | `node:test` e Playwright em Chromium |
 | Servidor | Sem backend e sem autenticação |
 
-O jogo é executado no navegador e armazena o progresso localmente. A distribuição não exige compilação nem instalação de dependências npm.
+As três páginas geradas são autônomas. O jogo armazena o progresso no navegador.
 
 ## Verificação
 
-Os testes cobrem o motor de combinações, a busca, a navegação, a persistência e a integridade do catálogo. Entre as verificações de dados estão a possibilidade de alcançar os 178 minerais e a preservação dos registros de reações descontinuadas.
+Use Node.js 24 ou superior para manter o projeto. Execute os comandos na raiz do repositório.
 
 Na raiz do repositório:
 
 ```sh
-node --test tests/*.test.mjs
+npm ci
+npm run build
+npm run check:generated
+npm test
+npx playwright install --only-shell chromium
+npm run test:browser
 ```
 
-Os testes estão disponíveis no repositório, mas ainda não há workflow de integração contínua publicado. Detalhes em [Arquitetura](docs/ARQUITETURA.md).
+O fluxo do GitHub Actions verifica a geração, a integridade dos dados e os fluxos do jogo em navegador. Veja os comandos de edição e publicação na [Arquitetura](docs/ARQUITETURA.md).
 
 ## Conteúdo e referências
 
 As combinações servem ao estudo de composição, propriedades e processos mineralógicos. **Não são uma simulação de equilíbrio termodinâmico.** Uma rota didática não estabelece, por si só, a ocorrência de uma reação na natureza.
 
-A curadoria inclui [bibliografia mineralógica](docs/REFERENCIAS.md), [critérios científicos das reações](docs/MAPA_REACOES_CIENTIFICO.md) e [revisões documentadas](docs/HISTORICO.md). A página de [auditoria](catalogo-auditoria.html) permite consultar as rotas do catálogo, inclusive as ainda não descobertas em partida.
+A página de auditoria permite consultar combinações ainda ocultas no jogo e acompanhar as pendências por rota. O guia inclui atividades comentadas, folha do estudante e roteiro para um piloto em turma. [Auditoria local](catalogo-auditoria.html) · [Inventário científico](docs/REVISAO_PENDENCIAS.md) · [Guia docente](docs/GUIA_DOCENTE.md) · [Referências](docs/REFERENCIAS.md)
 
 ## Origem
 
@@ -63,7 +68,7 @@ A ideia surgiu após um sonho com um jogo semelhante a [Little Alchemy](https://
 
 O [histórico](docs/HISTORICO.md) documenta a linhagem de **v0.15 a v0.25**, seguida de alterações de interface. A revisão exata do código é identificada por [commit](https://github.com/marquesbarros/mineralchemy/commits/main).
 
-O código atual concentra dados, interface e motor em um HTML. Algumas rotas ainda requerem avaliação mineralógica individual. O repositório não contém um arquivo `LICENSE` para o software.
+A revisão científica individual de parte das rotas está pendente. A escolha de licença para código, dados e ilustrações cabe ao mantenedor.
 
 O desenvolvimento teve apoio do **Codex (OpenAI)**; as versões dos modelos das sessões anteriores não estão registradas. A documentação foi revisada com **ChatGPT GPT-6** em 16/11/2026.
 
