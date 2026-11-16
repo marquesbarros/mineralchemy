@@ -1,0 +1,52 @@
+{
+  "genericSources": [
+    "https://australian.museum/learn/minerals/what-are-minerals/mineral-groups/",
+    "https://geologyva.pages.wm.edu/minerals-rocks-and-fossils/minerals/"
+  ],
+  "routes": {
+    "v08-anthophyllite-2": {
+      "priority": "P0",
+      "issue": "P0: talco + calor é interpretado como síntese de antofilita, prevalecendo sobre a desidroxilação correta do talco sem explicitar a entrada de Mg. Descontinuar este atalho após assegurar outra rota de descoberta."
+    },
+    "v08-alt-sulfate-reduction": {
+      "priority": "P1",
+      "issue": "Redução de sulfato não tem enxofre nativo como produto universal; especificar meio, agente redutor e percurso redox."
+    },
+    "v08-alt-pyrite-reduction": {
+      "priority": "P1",
+      "issue": "Redução de pirita para troilita exige destino do excesso de enxofre e condições adequadas."
+    },
+    "v08-alt-diamond-heat": {
+      "priority": "P1",
+      "issue": "Grafitização de diamante depende de condições termodinâmicas, cinética e meio; calor isolado não determina o produto."
+    },
+    "v08-alt-malachite-heat": {
+      "priority": "P1",
+      "issue": "A decomposição térmica da malaquita precisa explicitar também CO2 e H2O, não somente tenorita."
+    },
+    "v08-alt-sphalerite-air": {
+      "priority": "P1",
+      "issue": "Formação de smithsonita por alteração oxidante requer carbono inorgânico e água; não é oxidação seca."
+    },
+    "v08-alt-chalcopyrite-air": {
+      "priority": "P1",
+      "issue": "Formação de malaquita exige carbonatação, oxidação, lixiviação e gestão do Fe e S; não é transformação binária fechada."
+    },
+    "v08-alt-anorthite-rain": {
+      "priority": "P1",
+      "issue": "A caulinização da anortita é de sistema aberto e libera Ca2+; não deve figurar como conversão fechada."
+    },
+    "v08-alt-muscovite-heat": {
+      "priority": "P0",
+      "issue": "Inadequada como reação isolada: omite fases aluminossilicáticas e voláteis; considerar descontinuar o atalho e manter meta-muscovite-out como rota de referência."
+    },
+    "v08-alt-actinolite-heat": {
+      "priority": "P1",
+      "issue": "Actinolita para diopsídio isolado perde Fe, Si e H2O do balanço; declarar copro­dutos e condições ou manter apenas como associação."
+    },
+    "meta-muscovite-out": {
+      "priority": "P2",
+      "issue": "Equação global balanceada; especificar campo de estabilidade de Al2SiO5 e a possível fusão em condições suprassólidus."
+    }
+  }
+}

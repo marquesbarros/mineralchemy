@@ -77,29 +77,16 @@ function press(game, key, target = 'BODY', extras = '') {
   game.run(`handleGameplayShortcut({key:${JSON.stringify(key)},target:{tagName:${JSON.stringify(target)},isContentEditable:false},ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){},${extras}})`);
 }
 
-test('Tab abre e fecha o catálogo de descobertas sem ocultar a barra lateral', async () => {
+test('Tab e Shift+Tab preservam a navegação nativa fora dos diálogos', async () => {
   const g = await makeGame();
-  assert.equal(g.run('modal'), null);
-  press(g, 'Tab');
-  assert.equal(g.run('modal'), 'collection');
-  assert.match(g.run('modalMarkup()'), /class="dialog dialog-wide collection-dialog"/);
-  assert.match(g.run('mainMarkup()'), /class="library"/);
-  press(g, 'Tab');
-  assert.equal(g.run('modal'), null);
-  assert.match(g.run('mainMarkup()'), /class="library"/);
-  assert.doesNotMatch(g.run('mainMarkup()'), /catalog-collapsed|toggle-catalog/);
-});
-
-test('Shift+Tab alterna entre Descobertas, Reações e Trilhas em ciclo', async () => {
-  const g = await makeGame();
-  for (const expected of ['collection', 'history', 'paths', 'collection', 'history']) {
-    press(g, 'Tab', 'BODY', 'shiftKey:true,');
-    assert.equal(g.run('modal'), expected);
+  for (const shiftKey of [false, true]) {
+    assert.equal(g.run(`var prevented = false; handleGameplayShortcut({
+      key: 'Tab', shiftKey: ${shiftKey}, target: { tagName: 'BUTTON' },
+      preventDefault() { prevented = true; },
+    }); prevented;`), false);
   }
-  press(g, 'Tab');
-  assert.equal(g.run('modal'), 'collection', 'Tab sempre abre Descobertas');
-  press(g, 'Tab');
-  assert.equal(g.run('modal'), null, 'Tab fecha Descobertas');
+  assert.equal(g.run('modal'), null);
+  assert.match(g.run('mainMarkup()'), /class="library"/);
 });
 
 test('atalhos não capturam edição, outros diálogos ou modificadores extras', async () => {
@@ -176,26 +163,25 @@ test('setas preservam cursores de pesquisa e não afetam Trilhas sem submenus', 
   assert.equal(g.run('modal'), 'paths');
 });
 
-test('foco entra no catálogo ao abrir e Shift+Tab também funciona após foco na busca', async () => {
+test('foco entra no catálogo e retorna ao acionador quando o diálogo fecha', async () => {
   const g = await makeGame();
-  press(g, 'Tab');
+  const trigger = g.get('#trigger');
+  trigger.dataset.action = 'collection';
+  trigger.focus();
+  g.run("action(document.querySelector('#trigger'))");
   assert.equal(g.run('modal'), 'collection');
-  assert.equal(g.activeElement, g.get('#dialog'), 'o foco deve entrar no diálogo');
-  assert.equal(g.windowCapture.get('keydown'), true, 'capturar eventos antes dos controles internos');
-  press(g, 'Tab', 'INPUT', 'shiftKey:true,');
-  assert.equal(g.run('modal'), 'history');
   assert.equal(g.activeElement, g.get('#dialog'));
-  press(g, 'Tab', 'INPUT', 'shiftKey:true,');
-  assert.equal(g.run('modal'), 'paths');
-  press(g, 'Tab', 'BUTTON');
-  assert.equal(g.run('modal'), 'collection');
-  press(g, 'Tab', 'BUTTON');
+  assert.equal(g.get('.game').inert, true);
+  assert.equal(g.windowCapture.get('keydown'), true);
+  press(g, 'Escape', 'INPUT');
   assert.equal(g.run('modal'), null);
+  assert.equal(g.get('.game').inert, false);
+  assert.equal(g.activeElement, trigger);
 });
 
 test('a pesquisa de minerais não perde o foco nem a posição do cursor ao atualizar', async () => {
   const g = await makeGame();
-  press(g, 'Tab');
+  g.run("action({ dataset: { action: 'collection' } })");
   const input = g.get('#collectionSearch');
   input.value = 'quartzo';
   input.setSelectionRange(3, 3);
@@ -243,7 +229,7 @@ test('histórico mantém agrupamento por processo e oferece modo por produto com
   g.run(`save = discover(save, engine.byReaction.get(${JSON.stringify(reactionId)}), engine).save`);
   g.run("historyGroup = 'product'");
   const byProduct = g.run('historySectionsMarkup()');
-  assert.match(byProduct, /<section class="history-section"/);
+  assert.match(byProduct, /<section class="history-section history-product-section"/);
   assert.match(byProduct, /reaction-entry/);
   g.run("historyGroup = 'section'");
   const bySection = g.run('historySectionsMarkup()');

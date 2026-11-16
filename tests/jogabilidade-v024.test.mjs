@@ -77,7 +77,7 @@ test('arrastar peça existente e soltar fora remove da bancada e persiste',async
  g.eval("active={pointerId:3,instanceId:51,origin:'board',moved:true,element:{classList:{remove(){}},style:{}}};");
  g.eval("endPointer({pointerId:3,clientX:900,clientY:220})");
  assert.equal(g.eval('pieces.length'),0);
- assert.equal(JSON.parse(g.saved.get('mineralchemy:board:v05')).length,0);
+ assert.equal(JSON.parse(g.saved.get('mineralchemy:session:v2')).board.length,0);
 });
 
 test('reagir com peças demais não altera bancada, e associações em etapas permanecem',async()=>{
@@ -85,7 +85,7 @@ test('reagir com peças demais não altera bancada, e associações em etapas pe
  g.eval("pieces=[{instanceId:1,itemId:'oxide',x:200,y:180},{instanceId:2,itemId:'proton',x:300,y:180},{instanceId:3,itemId:'chloride',x:400,y:180}];");
  assert.equal(g.eval('reactBoard()'),false);
  assert.equal(g.eval('pieces.length'),3);
- assert.match(g.get('#toast').textContent,/peças demais/i);
+ assert.match(g.get('#toast').textContent,/duas peças/i);
  assert.ok(g.eval("engine.reactions.some(r=>r.id.startsWith('prepare-'))"));
 });
 
