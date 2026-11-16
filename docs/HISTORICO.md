@@ -67,3 +67,7 @@ A rodada seguinte incorporou referências paginadas das sete obras consultadas, 
 ## Revisão da progressão e das transformações
 
 O jogo passou a mostrar pistas de continuação para um material escolhido e a indicar como obter parceiros que faltam. O₂ e H₂ entraram entre as peças iniciais. A revisão arquivou atalhos de redução e duplicações da bancada, manteve os papéis de Fe(II), Fe(III) e ferro metálico e incluiu 22 transformações novas ou reativadas. O catálogo preservou o alcance das 178 cartas e passou a oferecer 262 pares executáveis. [Comparação do grafo](PROGRESSAO.md) · [Estados químicos](ESTADOS_QUIMICOS.md) · [Transformações](TRANSFORMACOES.md)
+
+## Revisão da experiência de jogo
+
+O commit `2f380af` adicionou a abertura automática da ficha na primeira descoberta, com celebração silenciosa e destaque estático quando o navegador indica movimento reduzido. A bancada passou a reagir ao soltar a peça. O menu ganhou rótulos visíveis no celular, e o retorno da ficha ao atlas preserva a busca. A revisão manteve as 178 cartas e os 262 pares executáveis. [Roteiro para testar uma partida](../README.md#testar-uma-partida)

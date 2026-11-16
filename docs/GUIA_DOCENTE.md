@@ -6,8 +6,9 @@ O guia foi pensado para turmas do ensino médio com noções de fórmula, íon e
 
 ## Preparação
 
-- Abra o [jogo](../index.html) e mantenha o [catálogo de auditoria](../catalogo-auditoria.html) em outra aba para consultar rotas pelo ID. Anote o commit usado no piloto.
-- Experimente a atividade 1 em uma partida de teste. A bancada começa com componentes químicos, e água e minerais podem precisar ser descobertos. Use os cartões de apoio abaixo para casos que a turma ainda não tenha alcançado.
+- Abra os arquivos `index.html` do jogo e `catalogo-auditoria.html` da auditoria em abas separadas. Anote o commit usado no piloto. A auditoria revela rotas ainda ocultas na partida, por isso convém consultá-la na preparação ou na discussão.
+- Experimente a atividade 1 em uma partida de teste. H₂ e O₂ já estão na coleção inicial. A água e os minerais usados na atividade podem ser obtidos com as combinações da tabela. Use os cartões de apoio nos casos que a turma ainda não tenha alcançado.
+- Demonstre como dispensar a ficha automática de descoberta por tecla ou pelo botão **Voltar à bancada**. As fichas podem ser consultadas depois no **Atlas**, e as combinações realizadas ficam em **Reações**.
 - Entregue a [folha do estudante](#folha-do-estudante) em texto. A atividade pode ser feita com a bancada projetada ou com o material impresso. Leia os nomes e fórmulas das peças na demonstração e aceite respostas digitadas, manuscritas ou orais.
 - Reserve 5 minutos para a avaliação inicial, 25 para as três atividades, 10 para discutir as respostas e 10 para avaliar a transferência e a experiência de uso.
 
@@ -17,9 +18,9 @@ Na bancada, compare a hidratação da anidrita e a dissolução da halita. Antes
 
 | Etapa de apoio | Peças | Resultado na bancada |
 | --- | --- | --- |
-| Obter água | Óxido + Hidrogênio (H⁺), depois Hidroxila + Hidrogênio (H⁺) | Água |
+| Obter água | Hidrogênio molecular + Oxigênio molecular | Água |
 | Obter halita | Sódio (Na⁺) + Cloreto | Halita |
-| Obter anidrita | Óxido + Óxido, depois Oxigênio molecular + Sulfeto, depois Sulfato + Cálcio (Ca²⁺) | Anidrita |
+| Obter anidrita | Oxigênio molecular + Sulfeto, depois Sulfato + Cálcio (Ca²⁺) | Anidrita |
 | Comparar as rotas | Anidrita + Água e Halita + Água | Gipsita em uma rota, sódio e cloreto na outra |
 
 **Cartões de apoio.** Na hidratação da anidrita, CaSO₄ + 2 H₂O → CaSO₄·2H₂O. Na dissolução da halita em água, NaCl(s) → Na⁺(aq) + Cl⁻(aq).
@@ -28,7 +29,7 @@ Na bancada, compare a hidratação da anidrita e a dissolução da halita. Antes
 
 ## Atividade 2 · O que a seta da trilha representa
 
-Mostre a trilha de plagioclásios. Compare anortita, CaAl₂Si₂O₈, e albita, NaAlSi₃O₈. Peça à dupla que identifique o que precisa vir do líquido magmático para a composição caminhar em direção à albita. Em seguida, compare com a ficha de anortita + alta pressão, que leva à lawsonita.
+Em **Trilhas → Trilhas temáticas**, mostre a série de plagioclásios. Compare anortita, CaAl₂Si₂O₈, e albita, NaAlSi₃O₈. Peça à dupla que identifique o que precisa vir do líquido magmático para a composição caminhar em direção à albita. Em seguida, compare com a ficha de anortita + alta pressão, que leva à lawsonita.
 
 **Cartão de apoio.** Na trilha, a sequência de nomes acompanha a variação composicional dos plagioclásios. Para lawsonita, a equação de referência é CaAl₂Si₂O₈ + 2 H₂O ⇌ CaAl₂Si₂O₇(OH)₂·H₂O.
 
@@ -81,5 +82,7 @@ Atribua de 0 a 2 pontos em cada critério. Zero indica ausência ou erro conceit
 | Código | Inicial / 6 | Final / 6 | Erro conceitual observado | Etapa em que precisou de ajuda | Dispositivo e modo de interação |
 | --- | ---: | ---: | --- | --- | --- |
 |  |  |  |  |  |  |
+
+Na observação de uso, anote se a dupla encontrou a primeira combinação, conseguiu fechar a ficha da descoberta e soube retomar uma trilha depois de obter o parceiro que faltava. Registre em qual passo foi necessária uma intervenção e qual foi a orientação dada.
 
 Depois da aula, registre quantos estudantes completaram as duas questões, a diferença de pontuação por critério e as dificuldades mais frequentes. Anote se a dificuldade veio da interface, da leitura da notação ou da inferência geológica. Um piloto de turma descreve a viabilidade e orienta a próxima versão. Para estimar o efeito do jogo sobre a aprendizagem, planeje uma comparação com outra atividade e controle diferenças na aplicação.
