@@ -11,17 +11,25 @@ async function findAndTap(page, query, material) {
 test('bancada e busca funcionam por toque em uma tela de 360 px', async ({ page }) => {
   await page.goto('/');
   const board = page.getByRole('region', { name: 'Bancada' });
+  await expect(board.getByText('Combine duas peças')).toBeVisible();
+  const atlas = page.getByRole('button', { name: 'Abrir catálogo de descobertas' });
+  await expect(atlas).toBeInViewport({ ratio: 1 });
   await findAndTap(page, 'calcio', 'Cálcio (Ca²⁺)');
   await expect(board.getByRole('button', { name: /^Cálcio \(Ca²⁺\)\./ })).toBeVisible();
   await findAndTap(page, 'carbonato', 'Carbonato');
   await expect(board.getByRole('button', { name: /^Carbonato\./ })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Reagir as peças da bancada' }).tap();
+  const react = page.getByRole('button', { name: 'Reagir as peças da bancada' });
+  await react.tap();
+  const discovery = page.getByRole('dialog', { name: /^Descoberta/ });
+  await expect(discovery.getByRole('heading', { name: 'Calcita' })).toBeInViewport();
+  await discovery.getByRole('button', { name: 'Voltar à bancada' }).tap();
+  await expect(discovery).toHaveCount(0);
+  await expect(react).toBeFocused();
   await expect(board.getByRole('button', { name: /^Calcita\./ })).toBeVisible();
   await expect(board.getByRole('button')).toHaveCount(1);
 
-  const discoveries = page.getByRole('button', { name: 'Abrir catálogo de descobertas' });
-  await discoveries.tap();
+  await atlas.tap();
   const dialog = page.getByRole('dialog', { name: 'Coleção de minerais' });
   await expect(dialog).toBeVisible();
   await dialog.getByRole('button', { name: 'Fechar' }).tap();
@@ -47,9 +55,14 @@ test('arraste por toque também combina peças na bancada estreita', async ({ pa
     const point = { x: start.x + (end.x - start.x) * fraction, y: start.y + (end.y - start.y) * fraction };
     await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [point] });
   }
+  const discovery = page.getByRole('dialog', { name: /^Descoberta/ });
+  await expect(discovery).toHaveCount(0);
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await session.detach();
 
+  await expect(discovery.getByRole('heading', { name: 'Calcita' })).toBeVisible();
+  await discovery.getByRole('button', { name: 'Voltar à bancada' }).tap();
+  await expect(board.getByRole('button', { name: /^Calcita\./ })).toBeFocused();
   await expect(board.getByRole('button', { name: /^Calcita\./ })).toBeVisible();
 });
 
@@ -60,7 +73,16 @@ test('Trilhas apresenta a continuação e as trilhas temáticas em uma tela de 3
   await dialog.getByRole('button', { name: 'Trilhas temáticas' }).tap();
   await expect(dialog.getByRole('heading', { name: /Bowen.*plagioclásios/ })).toBeVisible();
   await dialog.getByRole('button', { name: 'Continuar descobertas' }).tap();
-  await dialog.getByRole('combobox', { name: 'Material de partida' }).selectOption('si');
+  const material = dialog.getByRole('combobox', { name: 'Material de partida' });
+  await material.selectOption('calcium_ion');
+  const blocked = dialog.locator('[data-trail-reaction="ion-path-wollastonite"]');
+  await blocked.getByRole('button', { name: 'Mostrar pista' }).tap();
+  await blocked.getByRole('button', { name: 'Mostrar como obter a peça' }).tap();
+  await expect(dialog.getByRole('button', { name: 'Fechar' })).toBeInViewport({ ratio: 1 });
+  await dialog.getByRole('button', { name: 'Fechar' }).tap();
+  await expect(dialog).toHaveCount(0);
+  await page.getByRole('button', { name: 'Ver trilhas mineralógicas' }).tap();
+  await material.selectOption('si');
   const route = dialog.locator('[data-trail-reaction="s-quartz"]');
   await expect(route).not.toContainText(/Oxigênio molecular|Quartzo/);
   await route.getByRole('button', { name: 'Mostrar pista' }).tap();
@@ -70,6 +92,7 @@ test('Trilhas apresenta a continuação e as trilhas temáticas em uma tela de 3
   await route.getByRole('button', { name: 'Preparar na bancada' }).tap();
   await expect(dialog).toHaveCount(0);
   await page.getByRole('button', { name: 'Reagir as peças da bancada' }).tap();
+  await page.getByRole('dialog', { name: /^Descoberta/ }).getByRole('button', { name: 'Voltar à bancada' }).tap();
   await expect(page.getByRole('region', { name: 'Bancada' }).getByRole('button', { name: /^Quartzo\./ })).toBeVisible();
 });
 

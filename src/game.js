@@ -22,7 +22,10 @@ let recentDiscoveries = [];
 let missingPairIds = [];
 let modal = null;
 let detailId = null;
+let detailOrigin = null;
+let discoveryIds = [];
 let dialogReturnFocus = null;
+const consumedKeys = new Set();
 let pendingProgressFile = null;
 let pendingImport = null;
 let importNotice = '';
@@ -486,7 +489,7 @@ function continuationMarkup() {
     const known = new Set(list.map(p => p.id));
     const focus = known.has(trailFocusId) ? trailFocusId : '';
     const select = `<label class="trail-focus" for="trailFocus"><span>Material de partida</span><select id="trailFocus"><option value="">Escolha um material</option>${list.map(p => `<option value="${esc(p.id)}"${p.id === focus ? ' selected' : ''}>${esc(p.name)}</option>`).join('')}</select></label>`;
-    if (!focus) return `${select}<p class="paths-intro">Escolha um material disponível e peça pistas para descobrir o que pode combinar com ele.</p>`;
+    if (!focus) return `${select}<p class="paths-intro">Escolha um material da coleção para ver combinações e pistas.</p>`;
     const { available, blocked } = continuationOptions(pairs, focus, known, byPlayable);
     const group = (title, options, isBlocked) => options.length
         ? `<section class="trail-options"><h3>${title}</h3>${options.map(option => trailOptionMarkup(option, isBlocked)).join('')}</section>` : '';
@@ -496,7 +499,7 @@ function continuationMarkup() {
 }
 function pathsMarkup() {
     const tabs = [['continuation', 'Continuar descobertas'], ['thematic', 'Trilhas temáticas']];
-    return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide paths-dialog" role="dialog" aria-modal="true" aria-label="Trilhas mineralógicas"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Trilhas de transformação</h2><div class="trail-modes" role="group" aria-label="Modo das trilhas">${tabs.map(([mode, name]) => `<button type="button" class="secondary" data-action="trail-mode" data-mode="${mode}" aria-pressed="${trailMode === mode}">${name}</button>`).join('')}</div>${trailMode === 'continuation' ? continuationMarkup() : thematicPathsMarkup()}</section></div>`;
+    return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide paths-dialog" role="dialog" aria-modal="true" aria-label="Trilhas mineralógicas"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Trilhas</h2><div class="trail-modes" role="group" aria-label="Modo das trilhas">${tabs.map(([mode, name]) => `<button type="button" class="secondary" data-action="trail-mode" data-mode="${mode}" aria-pressed="${trailMode === mode}">${name}</button>`).join('')}</div>${trailMode === 'continuation' ? continuationMarkup() : thematicPathsMarkup()}</section></div>`;
 }
 function boardTrailMarkup() {
     const button = (id, label) => `<button type="button" class="trail-link" data-action="trail-focus" data-id="${esc(id)}">${esc(label)}</button>`;
@@ -530,6 +533,7 @@ function openContinuation(id = trailFocusId) {
     trailMode = 'continuation';
     modal = 'paths';
     detailId = null;
+    detailOrigin = null;
     updateModal('#trailFocus');
 }
 function resetContinuation() {
@@ -571,7 +575,20 @@ function prepareTrailPair(reactionId, replace = false) {
     document.querySelector('.workspace [data-action="react"]')?.focus();
     notify('Duas peças preparadas. Use Reagir para realizar a combinação.');
 }
-function headerMarkup() { const { count, total } = percent(); const n = completedReactions(save, engine).length; return `<header class="topbar"><div class="brand"><span class="brand-mark">✦</span><div><strong>mineralchemy</strong></div></div><div class="top-actions"><div class="progress" title="Minerais descobertos"><span class="progress-label">Minerais</span><b>${count}<span> / ${total}</span></b><span class="progress-track"><span style="width:${total ? Math.round(count / total * 100) : 0}%"></span></span></div><button type="button" class="top-button paths-trigger" data-action="paths" title="Trilhas mineralógicas" aria-label="Ver trilhas mineralógicas"><span>⇄</span><span class="desktop-only">Trilhas</span></button><button type="button" class="top-button history-trigger" data-action="history" title="Ver reações realizadas" aria-label="Reações realizadas"><span>≋</span><span class="desktop-only">Reações</span><span class="history-count">${n}</span></button><button type="button" class="top-button top-help" data-action="help" title="Como jogar"><span>?</span><span class="desktop-only">Ajuda</span></button><button type="button" class="top-button icon-button" data-action="collection" title="Catálogo de descobertas" aria-label="Abrir catálogo de descobertas">▦</button></div></header>`; }
+function headerMarkup() {
+    const { count, total } = percent();
+    const n = completedReactions(save, engine).length;
+    return `<header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><strong>mineralchemy</strong></div>
+      <nav class="top-actions" aria-label="Menu do jogo">
+        <div class="progress" aria-label="${count} de ${total} minerais descobertos"><span class="progress-label">Minerais</span><b>${count}<span> / ${total}</span></b><span class="progress-track" aria-hidden="true"><span style="width:${total ? Math.round(count / total * 100) : 0}%"></span></span></div>
+        <button type="button" class="top-button paths-trigger" data-action="paths" aria-label="Ver trilhas mineralógicas"><span class="nav-icon" aria-hidden="true">⇄</span> Trilhas</button>
+        <button type="button" class="top-button history-trigger" data-action="history" aria-label="Reações realizadas"><span class="nav-icon" aria-hidden="true">≋</span> Reações <span class="history-count" aria-hidden="true">${n}</span></button>
+        <button type="button" class="top-button top-help" data-action="help"><span class="nav-icon" aria-hidden="true">?</span> Ajuda</button>
+        <button type="button" class="top-button" data-action="collection" aria-label="Abrir catálogo de descobertas"><span class="nav-icon" aria-hidden="true">▦</span> Atlas</button>
+      </nav>
+    </header>`;
+}
 function modalMarkup() {
     const present = detailId ? item(detailId) : undefined;
     if (present) {
@@ -583,17 +600,41 @@ function modalMarkup() {
               ${scientificDetailsMarkup(reaction, routeScience(reaction, engine.byCard))}
             </details>`;
         }).join('')}</div>` : '';
-        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Detalhes do material"><button class="close" data-action="close" aria-label="Fechar">×</button><div class="detail-orb" style="${styleFor(present)}">${iconMarkup(present)}</div><p class="overline">${esc(present.kind === 'agent' ? 'AGENTE' : present.family)}</p><h2>${esc(present.name)}</h2><div class="detail-formula">${esc(present.formula)}</div><p class="material-type">${esc(MATERIAL_LABELS[materialType(present)])}</p><p>${esc(present.description)}</p>${routes}<div class="detail-foot">${possibleReactionCount} rotas cadastradas com este material</div><div class="dialog-buttons"><button class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada <span>↗</span></button><button type="button" class="secondary" data-action="trail-focus" data-id="${esc(present.id)}">Continuar a partir deste material</button></div></section></div>`;
+        const celebrating = discoveryIds.length > 0;
+        const discoveryLabel = discoveryIds.length === 1 ? 'Mineral descoberto' : `${discoveryIds.length} minerais descobertos`;
+        const bursts = celebrating ? '<span class="discovery-burst" aria-hidden="true"></span><span class="discovery-burst" aria-hidden="true"></span><span class="discovery-burst" aria-hidden="true"></span>' : '';
+        const others = discoveryIds.slice(1);
+        const additional = others.length ? `<div class="discovery-also"><b>Também descobertos</b>${reactionFlowMarkup(others)}</div>` : '';
+        const footer = celebrating
+            ? '<footer class="discovery-footer"><button type="button" class="primary" data-action="close">Voltar à bancada</button><p class="discovery-keyboard">Pressione qualquer tecla para voltar.</p></footer>'
+            : `<div class="dialog-buttons detail-actions"><button type="button" class="primary" data-action="use-detail" data-id="${esc(present.id)}">Adicionar à bancada</button><button type="button" class="secondary" data-action="trail-focus" data-id="${esc(present.id)}">Continuar a partir deste material</button>
+              ${detailOrigin ? `<button type="button" class="text-button detail-back" data-action="detail-back">${detailOrigin.modal === 'collection' ? 'Voltar ao atlas' : 'Voltar às trilhas'}</button>` : ''}
+            </div>`;
+        return `<div class="shade"${celebrating ? '' : ' data-action="close-shade"'}><section class="dialog detail-dialog${celebrating ? ' discovery-dialog' : ''}" role="dialog" aria-modal="true" aria-label="${celebrating ? `Descoberta · ${esc(present.name)}` : 'Detalhes do material'}"><div class="detail-dismiss"><button type="button" class="close" data-action="close" aria-label="Fechar">×</button></div>
+          <div class="detail-hero">
+            <div class="detail-illustration">${bursts}<div class="detail-orb" style="${styleFor(present)}" aria-hidden="true">${iconMarkup(present)}</div></div>
+            <div class="detail-identity">
+              ${celebrating ? `<p class="overline discovery-label">${discoveryLabel}</p>` : ''}
+              <p class="overline">${esc(present.kind === 'agent' ? 'Agente' : present.family)}</p>
+              <h2>${esc(present.name)}</h2>
+              <div class="detail-formula">${esc(present.formula)}</div>
+              <p class="material-type">${esc(MATERIAL_LABELS[materialType(present)])}</p>
+            </div>
+          </div>
+          <p class="detail-description">${esc(present.description)}</p>${additional}${routes}
+          <div class="detail-foot">${possibleReactionCount} ${possibleReactionCount === 1 ? 'rota cadastrada' : 'rotas cadastradas'} com este material</div>
+          ${footer}
+        </section></div>`;
     }
     if (modal === 'help')
-        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">PRIMEIROS PASSOS</p><h2>Explore combinações mineralógicas</h2><div class="help-step"><span>01</span><p><b>Escolha um material</b> na coleção lateral. Toque para adicioná-lo à bancada ou arraste a peça diretamente para lá.</p></div><div class="help-step"><span>02</span><p><b>Combine duas peças</b> arrastando uma sobre a outra ou usando o botão Reagir. Algumas descobertas exigem uma associação intermediária.</p></div><div class="help-step"><span>03</span><p><b>Continue explorando.</b> Os materiais descobertos ficam disponíveis para novas combinações. Consulte o catálogo de descobertas e o histórico de reações.</p></div><p class="help-note">As combinações são modelos didáticos e não equivalem necessariamente a equações químicas balanceadas ou processos geológicos viáveis em qualquer condição. Toque em uma peça da bancada para ver seus detalhes.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Digitar</kbd> inicia a busca da coleção lateral · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> e <kbd>Shift+Tab</kbd> percorrem os controles · <kbd>←</kbd>/<kbd>→</kbd> mudam a categoria da janela aberta · <kbd>Esc</kbd> fecha a janela ou limpa a busca lateral.</div><div>Em buscas e campos editáveis, as setas continuam movendo o cursor. O jogo salva o progresso neste navegador.</div></div><div class="progress-tools"><h3>Progresso da partida</h3><div class="dialog-buttons"><button type="button" class="secondary" data-action="export-progress">Exportar progresso</button></div><label for="importProgress">Restaurar progresso</label><input id="importProgress" type="file" accept=".json,application/json"><p role="status">${esc(importNotice)}</p>${pendingImport ? '<button type="button" class="primary" data-action="confirm-import">Confirmar restauração</button>' : ''}</div><button class="primary" data-action="close">Voltar ao jogo <span>→</span></button></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Como jogar"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Como jogar</h2><ol class="help-flow"><li><b>Escolha duas peças.</b> Clique ou toque nos materiais da coleção para colocá-los na bancada.</li><li><b>Combine.</b> Use <b>Reagir</b> ou solte uma peça sobre a outra. A primeira descoberta de cada mineral abre a ficha.</li><li><b>Continue explorando.</b> Em <b>Trilhas</b>, escolha um material e veja pistas para combinar com ele ou obter o parceiro que falta.</li></ol><p class="help-note">As fichas e o histórico indicam quando uma combinação representa uma associação didática ou um processo que depende das condições do meio.</p><div class="shortcut-guide"><b>Atalhos</b><div><kbd>Digitar</kbd> inicia a busca da coleção lateral · <kbd>Ctrl+K</kbd> foca a busca · <kbd>Enter</kbd> adiciona o primeiro resultado.</div><div><kbd>Ctrl+Enter</kbd> reage · <kbd>Delete</kbd> limpa a bancada · <kbd>Tab</kbd> e <kbd>Shift+Tab</kbd> percorrem os controles · <kbd>←</kbd>/<kbd>→</kbd> mudam a categoria da janela aberta · <kbd>Esc</kbd> fecha a janela ou limpa a busca lateral.</div><div>Em buscas e campos editáveis, as setas continuam movendo o cursor. O jogo salva o progresso neste navegador.</div></div><div class="progress-tools"><h3>Progresso da partida</h3><div class="dialog-buttons"><button type="button" class="secondary" data-action="export-progress">Exportar progresso</button></div><label for="importProgress">Restaurar progresso</label><input id="importProgress" type="file" accept=".json,application/json"><p role="status">${esc(importNotice)}</p>${pendingImport ? '<button type="button" class="primary" data-action="confirm-import">Confirmar restauração</button>' : ''}</div><button class="primary" data-action="close">Voltar ao jogo <span>→</span></button></section></div>`;
     if (modal === 'reset')
         return `<div class="shade" data-action="close-shade"><section class="dialog" role="dialog" aria-modal="true" aria-label="Reiniciar descobertas"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">NOVA PARTIDA</p><h2>Reiniciar a partida?</h2><p>Os minerais descobertos, as reações registradas e as peças da bancada serão apagados deste navegador. Esta ação não pode ser desfeita.</p><div class="dialog-buttons"><button class="secondary" data-action="close">Cancelar</button><button class="danger" data-action="confirm-reset">Reiniciar jogo</button></div></section></div>`;
     if (modal === 'paths')
         return pathsMarkup();
     if (modal === 'history') {
         const entries = completedReactions(save, engine);
-        return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide history-dialog" role="dialog" aria-modal="true" aria-label="Histórico de reações"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">REGISTRO DE EXPERIMENTOS</p><h2>Reações <span class="muted">${entries.length}</span></h2><p class="history-intro">Consulte as combinações que você já realizou. Os diagramas mostram as peças usadas; quando disponível, a equação de referência apresenta um processo químico que pode envolver outros componentes e condições. Organize as rotas por processo ou produto. Receitas desconhecidas não são reveladas.</p>${historyGroupMarkup()}<div class="history-filters">${historyFilterMarkup()}</div><label class="search history-search"><span>⌕</span><input id="historySearch" value="${esc(historySearch)}" type="search" placeholder="Buscar reação, componente ou produto" aria-label="Buscar nas reações realizadas" autocomplete="off"/></label><div id="historyResults" class="history-results">${historySectionsMarkup()}</div></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide history-dialog" role="dialog" aria-modal="true" aria-label="Histórico de reações"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Reações realizadas <span class="muted">${entries.length}</span></h2><p class="history-intro">Busque uma combinação feita na bancada. Cada registro mostra as peças usadas e, quando disponível, a equação de referência com as condições do processo.</p>${historyGroupMarkup()}<div class="history-filters">${historyFilterMarkup()}</div><label class="search history-search"><span>⌕</span><input id="historySearch" value="${esc(historySearch)}" type="search" placeholder="Buscar reação, componente ou produto" aria-label="Buscar nas reações realizadas" autocomplete="off"/></label><div id="historyResults" class="history-results">${historySectionsMarkup()}</div></section></div>`;
     }
     if (modal === 'collection') {
         const acquired = discovered();
@@ -607,14 +648,29 @@ function modalMarkup() {
             return { section, total: sectionItems.length, discovered: sectionItems.filter(p => acquired.has(p.id)).length, visibleItems };
         }).filter(entry => entry.total > 0 && (!query || entry.visibleItems.length > 0));
         const summary = topicStats.find(entry => entry.topic.id === collectionTopic) ?? { topic: collectionTopicDefs[0], discovered: 0, total: 0 };
-        return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide collection-dialog" role="dialog" aria-modal="true" aria-label="Coleção de minerais"><button class="close" data-action="close" aria-label="Fechar">×</button><p class="overline">ATLAS MINERALÓGICO</p><h2>Descobertas <span class="muted">${count} / ${total}</span></h2><p class="collection-summary">Acompanhe os minerais encontrados por categoria. Uma carta pode aparecer em mais de um grupo; minerais não descobertos permanecem ocultos.</p><div class="collection-topics">${topicStats.map(({ topic, discovered, total }) => `<button type="button" class="collection-topic ${collectionTopic === topic.id ? 'selected' : ''}" data-action="collection-topic" data-topic="${topic.id}" aria-pressed="${collectionTopic === topic.id ? 'true' : 'false'}"><span>${topic.label}</span><b>${discovered} / ${total}</b></button>`).join('')}</div><label class="search collection-search"><span>⌕</span><input id="collectionSearch" value="${esc(collectionSearch)}" type="search" placeholder="Buscar por mineral, fórmula ou família" aria-label="Buscar no atlas mineralógico" autocomplete="off"/></label><p class="collection-topic-summary">Exibindo <b>${summary.discovered} / ${summary.total}</b> minerais em <b>${esc(summary.topic.label)}</b>.</p>${visibleSections.length ? `<div class="collection-sections">${visibleSections.map(({ section, total, discovered, visibleItems }) => `<section class="collection-section"><div class="collection-section-head"><div><h3>${esc(section.label)}</h3><p>${discovered} descobertos · ${total - discovered} restantes</p></div><span>${discovered} / ${total}</span></div><div class="collection-grid">${visibleItems.map(p => collectionTileMarkup(p, acquired.has(p.id))).join('')}</div></section>`).join('')}</div>` : `<div class="collection-empty">Nenhum mineral corresponde à busca e à categoria selecionadas.</div>`}<button class="text-button" data-action="reset">Reiniciar descobertas</button></section></div>`;
+        return `<div class="shade" data-action="close-shade"><section class="dialog dialog-wide collection-dialog" role="dialog" aria-modal="true" aria-label="Coleção de minerais"><button class="close" data-action="close" aria-label="Fechar">×</button><h2>Atlas de descobertas <span class="muted">${count} / ${total}</span></h2><p class="collection-summary">Busque por nome, fórmula ou família. Selecione um mineral descoberto para abrir a ficha.</p><div class="collection-topics">${topicStats.map(({ topic, discovered, total }) => `<button type="button" class="collection-topic ${collectionTopic === topic.id ? 'selected' : ''}" data-action="collection-topic" data-topic="${topic.id}" aria-pressed="${collectionTopic === topic.id ? 'true' : 'false'}"><span>${topic.label}</span><b>${discovered} / ${total}</b></button>`).join('')}</div><label class="search collection-search"><span>⌕</span><input id="collectionSearch" value="${esc(collectionSearch)}" type="search" placeholder="Buscar por mineral, fórmula ou família" aria-label="Buscar no atlas mineralógico" autocomplete="off"/></label><p class="collection-topic-summary">Exibindo <b>${summary.discovered} / ${summary.total}</b> minerais em <b>${esc(summary.topic.label)}</b>.</p>${visibleSections.length ? `<div class="collection-sections">${visibleSections.map(({ section, total, discovered, visibleItems }) => `<section class="collection-section"><div class="collection-section-head"><div><h3>${esc(section.label)}</h3><p>${discovered} descobertos · ${total - discovered} restantes</p></div><span>${discovered} / ${total}</span></div><div class="collection-grid">${visibleItems.map(p => collectionTileMarkup(p, acquired.has(p.id))).join('')}</div></section>`).join('')}</div>` : `<div class="collection-empty">Nenhum mineral corresponde à busca e à categoria selecionadas.</div>`}<button class="text-button" data-action="reset">Reiniciar descobertas</button></section></div>`;
     }
     return '';
 }
 function mainMarkup() {
     const acquired = knownItems();
-    const library = `<aside class="library"><div class="library-heading"><h2>Coleção <span>${acquired.length}</span></h2></div><label class="search"><span>⌕</span><input id="catalogSearch" value="${esc(search)}" type="search" placeholder="Buscar material ou fórmula" aria-label="Buscar material na coleção lateral" autocomplete="off"/></label><div class="filters"><button data-action="filter" data-filter="all" class="${filter === 'all' ? 'selected' : ''}">Tudo</button><button data-action="filter" data-filter="ion" class="${filter === 'ion' ? 'selected' : ''}">Íons</button><button data-action="filter" data-filter="mineral" class="${filter === 'mineral' ? 'selected' : ''}">Minerais</button><button data-action="filter" data-filter="agent" class="${filter === 'agent' ? 'selected' : ''}">Agentes</button><button data-action="filter" data-filter="compound" class="${filter === 'compound' ? 'selected' : ''}">Compostos</button></div><div id="libraryItems" class="library-items">${libraryMarkup()}</div></aside>`;
-    const board = `<section class="workspace"><div class="workspace-heading"><h1>Bancada</h1><div class="board-actions"><span id="pieceCount">${pieces.length} peças</span><button type="button" data-action="react" class="clear-button board-react" title="Reagir as peças da bancada (Ctrl+Enter)" aria-label="Reagir as peças da bancada">⚗ <span>Reagir</span></button><button type="button" data-action="clear" class="clear-button" title="Limpar a bancada (Delete)">↺ <span>Limpar</span></button></div></div><div id="boardTrailLinks" class="board-trail-links">${boardTrailMarkup()}</div><div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}<div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}"></div></div></section>`;
+    const library = `<aside class="library"><div class="library-heading"><h2>Coleção <span>${acquired.length}</span></h2></div><label class="search"><span>⌕</span><input id="catalogSearch" value="${esc(search)}" type="search" placeholder="Buscar material ou fórmula" aria-label="Buscar material na coleção lateral" autocomplete="off"/></label><div class="filters" role="group" aria-label="Filtrar materiais">${Object.entries({ all: 'Tudo', ion: 'Íons', mineral: 'Minerais', agent: 'Agentes', compound: 'Compostos' }).map(([id, label]) => `<button type="button" data-action="filter" data-filter="${id}" aria-pressed="${filter === id}" class="${filter === id ? 'selected' : ''}">${label}</button>`).join('')}</div><div id="libraryItems" class="library-items">${libraryMarkup()}</div></aside>`;
+    const board = `<main class="workspace">
+      <div class="workspace-heading"><h1>Bancada</h1><div class="board-actions">
+        <span id="pieceCount"></span>
+        <button type="button" data-action="react" class="clear-button board-react" title="Reagir (Ctrl+Enter)" aria-label="Reagir as peças da bancada"><span aria-hidden="true">⚗</span> Reagir</button>
+        <button type="button" data-action="clear" class="clear-button" title="Limpar (Delete)"><span aria-hidden="true">↺</span> Limpar</button>
+      </div></div>
+      <div id="boardTrailLinks" class="board-trail-links" aria-live="polite">${boardTrailMarkup()}</div>
+      <div id="board" class="board" role="region" aria-label="Bancada">${pieces.map(pieceMarkup).join('')}
+        <div id="boardEmpty" class="board-empty ${pieces.length ? 'hidden' : ''}">
+          <div class="empty-illustration" aria-hidden="true"><span>Ca²⁺</span><b>+</b><span>CO₃²⁻</span></div>
+          <h2>Combine duas peças</h2>
+          <p>Escolha materiais na coleção e use <strong>Reagir</strong>, ou solte uma peça sobre a outra.</p>
+          ${save.recorded.length ? '' : '<p class="first-pair">Para começar, tente cálcio e carbonato.</p>'}
+        </div>
+      </div>
+    </main>`;
     return `${headerMarkup()}<p id="saveWarning" class="save-warning" role="status" ${storageWarning ? '' : 'hidden'}>${esc(storageWarning)}</p><div class="game">${board}${library}</div><div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
 }
 function render() {
@@ -630,6 +686,7 @@ function updateBoardDom() {
     const board = document.querySelector('#board');
     if (!board)
         return;
+    const focusedPiece = document.activeElement?.dataset?.instance;
     board.querySelectorAll('.piece').forEach(e => e.remove());
     const empty = board.querySelector('#boardEmpty');
     empty?.classList.toggle('hidden', pieces.length > 0);
@@ -637,6 +694,7 @@ function updateBoardDom() {
     const count = document.querySelector('#pieceCount');
     if (count)
         count.textContent = `${pieces.length} ${pieces.length === 1 ? 'peça' : 'peças'}`;
+    if (focusedPiece) board.querySelector(`[data-instance="${focusedPiece}"]`)?.focus({ preventScroll: true });
 }
 function notify(message, newDiscovery = false) {
     const toast = document.querySelector('#toast');
@@ -677,7 +735,7 @@ function addPiece(itemId, saveAfterAdd = true) {
     board?.querySelector('#boardEmpty')?.classList.add('hidden');
     const count = document.querySelector('#pieceCount');
     if (count)
-        count.textContent = `${pieces.length} peças`;
+        count.textContent = `${pieces.length} ${pieces.length === 1 ? 'peça' : 'peças'}`;
     if (missingPairIds.length) {
         missingPairIds = [];
         updateBoardTrailLinks();
@@ -689,9 +747,8 @@ function addPiece(itemId, saveAfterAdd = true) {
 function reportUnregisteredPair(a, b) {
     missingPairIds = [...new Set([a.itemId, b.itemId])];
     updateBoardTrailLinks();
-    notify('Explore as alternativas para cada peça na bancada.');
 }
-function reactBoard() {
+function reactBoard(openingKey) {
     if (active) return false;
     if (pieces.length > 2) {
         notify('Use apenas duas peças por reação. Para mais componentes, combine em etapas.');
@@ -703,7 +760,7 @@ function reactBoard() {
     }
     const r = resolvePair(pairs, pieces[0].itemId, pieces[1].itemId);
     if (!r) { reportUnregisteredPair(pieces[0], pieces[1]); return false; }
-    combine(pieces[0], pieces[1], r);
+    combine(pieces[0], pieces[1], r, openingKey);
     return true;
 }
 function clearBoard() {
@@ -745,23 +802,33 @@ function beginPointer(e, origin, source) {
     element.classList.add('dragging');
     source.setPointerCapture?.(e.pointerId);
 }
-function hitTest(p, reportMissing = false) {
+function reactDroppedPiece(p, pointerType) {
     const target = findCollision(pieces, p.instanceId, p.x, p.y, 76);
     if (!target)
         return false;
     const reaction = resolvePair(pairs, p.itemId, target.itemId);
     if (!reaction) {
-        if (reportMissing) reportUnregisteredPair(p, target);
+        reportUnregisteredPair(p, target);
         return false;
     }
-    combine(p, target, reaction);
+    if (pointerType === 'touch') {
+        // Mantenha a peça capturada no DOM até o navegador terminar o gesto.
+        setTimeout(() => {
+            if (!active && !modal && !detailId && pieces.includes(p) && pieces.includes(target)) {
+                combine(p, target, reaction, null, true);
+            }
+        }, 0);
+    } else {
+        combine(p, target, reaction, null, true);
+    }
     return true;
 }
-function combine(a, b, reaction) {
+function combine(a, b, reaction, openingKey = null, fromDrop = false) {
     const newSave = discover(save, reaction, engine);
     save = newSave.save;
     const newPlayables = newSave.newIds.filter(id => isPlayableCard(item(id)));
-    if (newPlayables.length) recentDiscoveries = newPlayables;
+    recentDiscoveries = newPlayables;
+    discoveryIds = newPlayables.filter(id => item(id)?.kind === 'mineral');
     missingPairIds = [];
     const { width, height } = boardSize();
     const x = (a.x + b.x) / 2, y = (a.y + b.y) / 2;
@@ -772,11 +839,18 @@ function combine(a, b, reaction) {
     persistSession();
     if (active?.origin === 'shelf') search = '';
     active = null;
+    if (discoveryIds.length) {
+        modal = null;
+        detailId = discoveryIds[0];
+        const product = products.find(p => p.itemId === detailId);
+        dialogReturnFocus = { selector: fromDrop && product ? `[data-instance="${product.instanceId}"]` : '[data-action="react"]' };
+        if (openingKey) consumedKeys.add(openingKey);
+    }
     render();
-    const names = reaction.outputs.map(id => item(id)?.name ?? id).join(' + ');
-    notify(newSave.newIds.length ? `Nova descoberta: ${newSave.newIds.map(id => item(id)?.name ?? id).join(' + ')}` : `Combinação: ${names}`, newSave.newIds.length > 0);
-    if (newSave.newIds.length && 'vibrate' in navigator)
-        navigator.vibrate?.(20);
+    if (!discoveryIds.length) {
+        const names = reaction.outputs.map(id => item(id)?.name ?? id).join(' + ');
+        notify(newPlayables.length ? `Nova descoberta: ${newPlayables.map(id => item(id).name).join(' + ')}` : `Resultado: ${names}`, newPlayables.length > 0);
+    }
 }
 function movePointer(e) {
     if (!active || active.pointerId !== e.pointerId)
@@ -794,8 +868,6 @@ function movePointer(e) {
     active.element.style.left = `${p.x}px`;
     active.element.style.top = `${p.y}px`;
     active.element.classList.add('has-moved');
-    if (pos.inside)
-        hitTest(p);
 }
 function endPointer(e) {
     if (!active || active.pointerId !== e.pointerId)
@@ -817,15 +889,36 @@ function endPointer(e) {
             if (state.origin === 'board') notify('Peça removida da bancada.');
             return;
         }
-        if (hitTest(p, true)) return;
+        if (state.origin === 'shelf') resetLibrarySearch();
+        if (reactDroppedPiece(p, e.pointerType)) return;
     }
-    else if (state.origin === 'board')
+    else if (state.origin === 'board') {
+        state.element.focus({ preventScroll: true });
         openDetails(p.itemId);
+    }
     persistSession();
-    if (state.origin === 'shelf' && pieces.some(x => x.instanceId === state.instanceId)) resetLibrarySearch();
+    if (state.origin === 'shelf' && !state.moved) resetLibrarySearch();
 }
-function openDetails(id) { if (!discovered().has(id) || !item(id))
-    return; detailId = id; modal = null; updateModal(); }
+function openDetails(id) {
+    if (!discovered().has(id) || !item(id)) return;
+    detailOrigin = modal === 'collection' || modal === 'paths'
+        ? { modal, scroll: document.querySelector('#modalRoot .dialog')?.scrollTop ?? 0 }
+        : null;
+    detailId = id;
+    modal = null;
+    updateModal();
+}
+function returnFromDetails() {
+    if (!detailOrigin) return;
+    const id = detailId;
+    const { modal: parent, scroll } = detailOrigin;
+    detailOrigin = null;
+    detailId = null;
+    modal = parent;
+    updateModal(`[data-action="detail"][data-id="${id}"]`);
+    const dialog = document.querySelector('#modalRoot .dialog');
+    if (dialog) dialog.scrollTop = scroll;
+}
 function focusSelectorFor(element) {
     const { action, instance, item: itemId, id } = element?.dataset ?? {};
     if (element?.id === 'catalogSearch') return '#catalogSearch';
@@ -851,6 +944,8 @@ function restoreDialogFocus() {
 function closeDialog() {
     modal = null;
     detailId = null;
+    detailOrigin = null;
+    discoveryIds = [];
     pendingProgressFile = null;
     pendingImport = null;
     importNotice = '';
@@ -1024,12 +1119,22 @@ function action(el) {
                 openDetails(id);
             break;
         }
+        case 'detail-back':
+            returnFromDetails();
+            break;
     }
 }
 function updateHistoryResults() { const root = document.querySelector('#historyResults'); if (root)
     root.innerHTML = historySectionsMarkup(); }
-function updateLibrary() { const panel = document.querySelector('#libraryItems'); if (panel)
-    panel.innerHTML = libraryMarkup(); document.querySelectorAll('.filters button').forEach(button => button.classList.toggle('selected', button.dataset.filter === filter)); }
+function updateLibrary() {
+    const panel = document.querySelector('#libraryItems');
+    if (panel) panel.innerHTML = libraryMarkup();
+    for (const button of document.querySelectorAll('.filters button')) {
+        const selected = button.dataset.filter === filter;
+        button.classList.toggle('selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+    }
+}
 function setLibrarySearch(value) {
     search = value;
     if (search.trim()) {
@@ -1067,6 +1172,15 @@ app.addEventListener('pointerup', e => {
 app.addEventListener('pointercancel', e => { if (shelfLabelTap?.pointerId === e.pointerId)
     shelfLabelTap = null; if (!active || active.pointerId !== e.pointerId)
     return; const orig = active; active = null; orig.element.classList.remove('dragging', 'has-moved'); persistSession(); });
+app.addEventListener('touchend', e => {
+    if (!discoveryIds.length || e.touches.length || !(e.target instanceof Element)) return;
+    const close = e.target.closest('.discovery-dialog [data-action="close"]');
+    const touch = e.changedTouches[0];
+    if (!close || !touch || !close.contains(document.elementFromPoint(touch.clientX, touch.clientY))) return;
+    // Após o arraste o navegador pode suprimir o clique derivado do toque.
+    e.preventDefault();
+    closeDialog();
+}, { passive: false });
 app.addEventListener('click', e => {
     const target = e.target;
     if (!(target instanceof Element))
@@ -1129,10 +1243,23 @@ function nextMenuOption(options, currentId, step) {
 }
 function handleGameplayShortcut(e) {
     if (!engine || e.defaultPrevented || e.isComposing) return;
+    const physicalKey = e.code || e.key;
+    if (consumedKeys.has(physicalKey)) {
+        e.preventDefault();
+        return;
+    }
     const key = String(e.key ?? '').toLowerCase();
     const target = e.target;
     const editing = !!target && (target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(target.tagName));
     const noModifiers = !e.ctrlKey && !e.metaKey && !e.altKey;
+    if (discoveryIds.length) {
+        if (noModifiers && !['Shift', 'Control', 'Alt', 'AltGraph', 'Meta', 'CapsLock'].includes(e.key) && !/^F\d+$/.test(e.key)) {
+            e.preventDefault();
+            consumedKeys.add(physicalKey);
+            closeDialog();
+        }
+        return;
+    }
     if ((modal || detailId) && noModifiers && e.key === 'Escape') {
         e.preventDefault();
         closeDialog();
@@ -1184,7 +1311,14 @@ function handleGameplayShortcut(e) {
         e.preventDefault(); resetLibrarySearch(); return;
     }
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && !e.altKey && !editing) {
-        e.preventDefault(); reactBoard(); return;
+        e.preventDefault();
+        if (!e.repeat) reactBoard(physicalKey);
+        return;
+    }
+    if (noModifiers && (e.key === 'Enter' || e.key === ' ') && target?.dataset?.action === 'react') {
+        e.preventDefault();
+        if (!e.repeat) reactBoard(physicalKey);
+        return;
     }
     const altGraph = e.getModifierState?.('AltGraph') === true;
     if (editing || ((e.ctrlKey || e.metaKey || e.altKey) && !altGraph)) return;
@@ -1203,6 +1337,10 @@ function handleGameplayShortcut(e) {
     }
 }
 window.addEventListener('keydown', handleGameplayShortcut, true);
+window.addEventListener('keyup', e => {
+    if (consumedKeys.delete(e.code || e.key)) e.preventDefault();
+}, true);
+window.addEventListener('blur', () => consumedKeys.clear());
 window.addEventListener('resize', () => { if (active)
     return; for (const p of pieces)
     clampPiece(p); updateBoardDom(); });

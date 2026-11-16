@@ -11,6 +11,7 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 - **Motor de combinações** entre componentes químicos, minerais e agentes geológicos.
 - **Descobertas progressivas**, com coleção de cartas, registro de reações e pistas de continuação calculadas a partir da partida.
 - **Busca por nome ou fórmula**, filtros por categoria, navegação por teclado e interação por arrastar e soltar.
+- **Ficha na primeira descoberta** de um mineral, com celebração breve e alternativa estática para movimento reduzido. Pressione uma tecla ou use **Voltar à bancada** para continuar.
 - **Catálogo de auditoria** com filtros por família, processo e pendência, pareceres vinculados à versão da rota e exportação em JSON ou CSV.
 - **Progresso local** com exportação e restauração pela tela Ajuda e leitura de partidas anteriores.
 

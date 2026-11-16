@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 
 const calcite = /^Calcita\./;
 const lawsoniteRoute = 'a-anorthite-pressure-lawsonite';
+const reactButton = page => page.getByRole('button', { name: 'Reagir as peças da bancada' });
+const discoveryDialog = page => page.getByRole('dialog', { name: /^Descoberta/ });
 
 async function searchAndAdd(page, query, material) {
   const search = page.getByRole('searchbox', { name: 'Buscar material na coleção lateral' });
@@ -29,16 +31,117 @@ test('busca sem acento, combinação por arraste e histórico após recarga', as
   await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
   await searchAndAdd(page, 'carbonato', 'Carbonato');
   await calcium.dragTo(carbonate);
+  await expect(discoveryDialog(page)).toContainText('Calcita');
+  await page.keyboard.press('Escape');
   await expect(calcium).toHaveCount(0);
   await expect(carbonate).toHaveCount(0);
   await expect(board.getByRole('button', { name: calcite })).toBeVisible();
 
   await page.reload();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(board.getByRole('button', { name: calcite })).toBeVisible();
   await page.getByRole('button', { name: 'Reações realizadas' }).click();
   await expect(page.getByRole('dialog', { name: 'Histórico de reações' }))
     .toContainText('Ca²⁺ + CO₃²⁻ → CaCO₃');
   expect(errors).toEqual([]);
+});
+
+test('arrastar da coleção diretamente sobre outra peça também abre a descoberta', async ({ page }) => {
+  await page.goto('/');
+  await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
+  const search = page.getByRole('searchbox', { name: 'Buscar material na coleção lateral' });
+  await search.fill('carbonato');
+  const source = page.getByRole('button', { name: 'Adicionar Carbonato à bancada' }).locator('.library-orb');
+  const target = page.getByRole('region', { name: 'Bancada' }).getByRole('button', { name: /^Cálcio/ });
+  await source.dragTo(target);
+  await expect(discoveryDialog(page)).toContainText('Calcita');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: calcite })).toBeFocused();
+});
+
+test('a ficha da descoberta fica aberta e consome as teclas de reação e de fechamento', async ({ page }) => {
+  await page.goto('/');
+  await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
+  await searchAndAdd(page, 'carbonato', 'Carbonato');
+  await reactButton(page).focus();
+  await page.keyboard.down('Enter');
+  const discovery = discoveryDialog(page);
+  await expect(discovery.getByRole('heading', { name: 'Calcita' })).toBeVisible();
+  await expect(discovery).toBeFocused();
+  const burst = discovery.locator('.discovery-burst').first();
+  await expect(burst).toHaveCSS('animation-name', 'discovery-burst');
+  await page.keyboard.down('Enter');
+  await expect(discovery).toBeVisible();
+  await page.keyboard.up('Enter');
+  await burst.evaluate(el => Promise.all(el.getAnimations().map(animation => animation.finished)));
+  await expect(discovery).toBeVisible();
+  await page.keyboard.down('Delete');
+  await expect(discovery).toHaveCount(0);
+  await expect(reactButton(page)).toBeFocused();
+  await page.keyboard.down('Delete');
+  await page.keyboard.up('Delete');
+  await expect(page.getByRole('button', { name: calcite })).toBeVisible();
+
+  await page.getByRole('button', { name: calcite }).focus();
+  await page.keyboard.press('Enter');
+  const manual = page.getByRole('dialog', { name: 'Detalhes do material' });
+  await expect(manual.getByRole('heading', { name: 'Calcita' })).toBeVisible();
+  await page.keyboard.press('Tab');
+  await expect(manual.getByRole('button', { name: 'Fechar' })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: calcite })).toBeFocused();
+
+  await page.locator('[data-action="clear"]').click();
+  await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
+  await searchAndAdd(page, 'carbonato', 'Carbonato');
+  await reactButton(page).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: calcite })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Calcita', exact: true })).toHaveCount(0);
+});
+
+for (const key of ['Enter', 'Space', 'Tab']) {
+  test(`Ctrl+Enter celebra a descoberta e ${key} devolve o foco à bancada`, async ({ page }) => {
+    await page.goto('/');
+    await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
+    await searchAndAdd(page, 'carbonato', 'Carbonato');
+    await reactButton(page).focus();
+    await page.keyboard.down('Control');
+    await page.keyboard.down('Enter');
+    await page.keyboard.up('Control');
+    await page.keyboard.down('Enter');
+    await expect(discoveryDialog(page)).toBeVisible();
+    await page.keyboard.up('Enter');
+    await page.keyboard.press(key);
+    await expect(discoveryDialog(page)).toHaveCount(0);
+    await expect(reactButton(page)).toBeFocused();
+    await expect(page.getByRole('button', { name: calcite })).toBeVisible();
+  });
+}
+
+test('uma reação de albita celebra jadeíta e quartzo em uma ficha com movimento reduzido', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Ajuda' }).click();
+  const prior = { format: 'mineralchemy-progress-v1', progress: { version: 1, discovered: ['albite'], history: [] }, board: [], recent: [] };
+  await page.locator('#importProgress').setInputFiles({
+    name: 'partida.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(prior)),
+  });
+  await page.getByRole('button', { name: 'Confirmar restauração' }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await searchAndAdd(page, 'albita', 'Albita');
+  await searchAndAdd(page, 'alta pressao', 'Alta pressão');
+  await reactButton(page).click();
+  const discovery = discoveryDialog(page);
+  await expect(discovery).toHaveCount(1);
+  await expect(discovery.getByRole('heading', { name: 'Jadeíta' })).toBeVisible();
+  await expect(discovery.getByText('Quartzo', { exact: true })).toBeVisible();
+  await expect(discovery.locator('.discovery-burst').first()).toBeHidden();
+  await expect(discovery.getByText('2 minerais descobertos')).toBeVisible();
+  await page.keyboard.press('a');
+  await expect(discovery).toHaveCount(0);
+  await expect(page.locator('#catalogSearch')).toHaveValue('');
+  await expect(page.getByRole('region', { name: 'Bancada' }).getByRole('button')).toHaveCount(2);
 });
 
 test('Tab percorre o jogo e o diálogo devolve o foco após Escape', async ({ page }) => {
@@ -64,6 +167,22 @@ test('Tab percorre o jogo e o diálogo devolve o foco após Escape', async ({ pa
   await page.keyboard.press('Escape');
   await expect(dialog).toHaveCount(0);
   await expect(opener).toBeFocused();
+});
+
+test('voltar da ficha ao atlas preserva a busca e o mineral selecionado', async ({ page }) => {
+  await page.goto('/');
+  const atlasButton = page.getByRole('button', { name: 'Abrir catálogo de descobertas' });
+  await atlasButton.click();
+  const atlas = page.getByRole('dialog', { name: 'Coleção de minerais' });
+  await atlas.getByRole('searchbox').fill('grafita');
+  const graphite = atlas.getByRole('button', { name: 'Grafita', exact: true });
+  await graphite.click();
+  const detail = page.getByRole('dialog', { name: 'Detalhes do material' });
+  await detail.getByRole('button', { name: 'Voltar ao atlas' }).click();
+  await expect(atlas.getByRole('searchbox')).toHaveValue('grafita');
+  await expect(graphite).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(atlasButton).toBeFocused();
 });
 
 test('Trilhas guia a descoberta de um precursor e retoma a continuação', async ({ page }) => {
@@ -101,6 +220,7 @@ test('Trilhas guia a descoberta de um precursor e retoma a continuação', async
   await expect(board.getByRole('button', { name: /^Oxigênio molecular\./ })).toBeVisible();
   await expect(react).toBeFocused();
   await react.click();
+  await page.keyboard.press('Escape');
   const quartz = board.getByRole('button', { name: /^Quartzo\./ });
   await expect(quartz).toBeVisible();
   await expect(page.getByRole('button', { name: 'Quartzo', exact: true })).toBeVisible();
@@ -114,6 +234,7 @@ test('Trilhas guia a descoberta de um precursor e retoma a continuação', async
   await route.getByRole('button', { name: 'Preparar na bancada' }).click();
   await expect(board.getByRole('button')).toHaveCount(2);
   await react.click();
+  await page.keyboard.press('Escape');
   await expect(board.getByRole('button', { name: /^Wollastonita\./ })).toBeVisible();
 
   await searchAndAdd(page, 'quartzo', 'Quartzo');
@@ -133,6 +254,7 @@ test('uma descoberta sem continuação oferece o retorno a um precursor', async 
   await searchAndAdd(page, 'zinco', 'Zinco (Zn²⁺)');
   await searchAndAdd(page, 'carbonato', 'Carbonato');
   await page.getByRole('button', { name: 'Reagir as peças da bancada' }).click();
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Smithsonita', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Trilhas mineralógicas' });
   const focus = dialog.getByRole('combobox', { name: 'Material de partida' });
@@ -147,6 +269,7 @@ test('backup restaura bancada e reações em um navegador sem progresso anterior
   await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
   await searchAndAdd(page, 'carbonato', 'Carbonato');
   await page.getByRole('button', { name: 'Reagir as peças da bancada' }).click();
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Calcita', exact: true }).click();
   await page.getByRole('dialog', { name: 'Trilhas mineralógicas' }).getByRole('button', { name: 'Fechar' }).click();
   await page.getByRole('button', { name: /Ajuda/ }).click();
@@ -169,6 +292,7 @@ test('backup restaura bancada e reações em um navegador sem progresso anterior
       name: file.suggestedFilename(), mimeType: 'application/json', buffer: backup,
     });
     await freshPage.locator('[data-action="confirm-import"]').click();
+    await expect(freshPage.getByRole('dialog')).toHaveCount(0);
     await expect(board.getByRole('button', { name: calcite })).toBeVisible();
     await freshPage.getByRole('button', { name: 'Voltar à continuação de Calcita' }).click();
     const trails = freshPage.getByRole('dialog', { name: 'Trilhas mineralógicas' });
@@ -190,6 +314,7 @@ test('falha de armazenamento mantém a partida ativa e oferece exportação', as
   await searchAndAdd(page, 'calcio', 'Cálcio (Ca²⁺)');
   await searchAndAdd(page, 'carbonato', 'Carbonato');
   await page.getByRole('button', { name: 'Reagir as peças da bancada' }).click();
+  await page.keyboard.press('Escape');
   await expect(page.getByRole('region', { name: 'Bancada' }).getByRole('button', { name: calcite })).toBeVisible();
   await expect(page.locator('#saveWarning')).toContainText('não conseguiu salvar a partida');
   await page.getByRole('button', { name: /Ajuda/ }).click();
