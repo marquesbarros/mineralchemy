@@ -1,0 +1,555 @@
+{
+  "works": {
+    "winter": {
+      "citation": "Winter, J. D. (2014). Principles of Igneous and Metamorphic Petrology. 2ª ed. internacional, Pearson. ISBN 9781292021539."
+    },
+    "philpotts": {
+      "citation": "Philpotts, A. R. e Ague, J. J. (2022). Principles of Igneous and Metamorphic Petrology. 3ª ed., Cambridge University Press.",
+      "url": "https://doi.org/10.1017/9781108631419"
+    },
+    "gill": {
+      "citation": "Gill, R. (2010). Igneous Rocks and Processes: A Practical Guide. 1ª ed., Wiley-Blackwell. ISBN 9780632063772."
+    },
+    "earth": {
+      "citation": "Klein, C. e Philpotts, A. R. (2013). Earth Materials: Introduction to Mineralogy and Petrology. 1ª ed., Cambridge University Press.",
+      "url": "https://doi.org/10.1017/CBO9781139028028"
+    },
+    "minerals": {
+      "citation": "Klein, C. e Dutrow, B. (2012). Manual de ciência dos minerais. 23ª ed., Bookman. ISBN 9788577809639.",
+      "url": "https://loja.grupoa.com.br/manual-de-ciencia-dos-minerais-9788577809639-p990065"
+    },
+    "atlasMinerals": {
+      "citation": "MacKenzie, W. S. e Guilford, C. (1980). Atlas of Rock-Forming Minerals in Thin Section. Longman.",
+      "url": "https://www.routledge.com/Atlas-of-Rock-Forming-Minerals-in-Thin-Section/Mackenzie-Guilford/p/book/9781315837413"
+    },
+    "atlasMetamorphic": {
+      "citation": "Yardley, B. W. D., MacKenzie, W. S. e Guilford, C. (1990). Atlas of Metamorphic Rocks and Their Textures. Longman."
+    }
+  },
+  "routes": {
+    "i-agent-anorthite-cooling": [
+      {
+        "work": "gill",
+        "locator": "cap. 3, pp. 79–80 (PDF 91–92), Fig. 3.5",
+        "claim": "Ilustra a variação composicional de plagioclásio no sistema albita–anortita e o contraste entre equilíbrio com líquido e preservação de núcleos mais cálcicos na cristalização fracionada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "§11.4.5, pp. 265–267 (PDF 293–295), Fig. 11.24",
+        "claim": "Discute equilíbrio e cristalização fracionada no sistema diopsídio–albita–anortita. Composição do líquido e difusão no cristal controlam a evolução e o zonamento."
+      }
+    ],
+    "i-agent-bytownite-cooling": [
+      {
+        "work": "gill",
+        "locator": "cap. 3, pp. 79–80 (PDF 91–92), Fig. 3.5",
+        "claim": "Ilustra a variação composicional de plagioclásio no sistema albita–anortita e o contraste entre equilíbrio com líquido e preservação de núcleos mais cálcicos na cristalização fracionada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "§11.4.5, pp. 265–267 (PDF 293–295), Fig. 11.24",
+        "claim": "Discute equilíbrio e cristalização fracionada no sistema diopsídio–albita–anortita. Composição do líquido e difusão no cristal controlam a evolução e o zonamento."
+      }
+    ],
+    "i-agent-labradorite-cooling": [
+      {
+        "work": "gill",
+        "locator": "cap. 3, pp. 79–80 (PDF 91–92), Fig. 3.5",
+        "claim": "Ilustra a variação composicional de plagioclásio no sistema albita–anortita e o contraste entre equilíbrio com líquido e preservação de núcleos mais cálcicos na cristalização fracionada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "§11.4.5, pp. 265–267 (PDF 293–295), Fig. 11.24",
+        "claim": "Discute equilíbrio e cristalização fracionada no sistema diopsídio–albita–anortita. Composição do líquido e difusão no cristal controlam a evolução e o zonamento."
+      }
+    ],
+    "i-agent-andesine-cooling": [
+      {
+        "work": "gill",
+        "locator": "cap. 3, pp. 79–80 (PDF 91–92), Fig. 3.5",
+        "claim": "Ilustra a variação composicional de plagioclásio no sistema albita–anortita e o contraste entre equilíbrio com líquido e preservação de núcleos mais cálcicos na cristalização fracionada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "§11.4.5, pp. 265–267 (PDF 293–295), Fig. 11.24",
+        "claim": "Discute equilíbrio e cristalização fracionada no sistema diopsídio–albita–anortita. Composição do líquido e difusão no cristal controlam a evolução e o zonamento."
+      }
+    ],
+    "i-agent-oligoclase-cooling": [
+      {
+        "work": "gill",
+        "locator": "cap. 3, pp. 79–80 (PDF 91–92), Fig. 3.5",
+        "claim": "Ilustra a variação composicional de plagioclásio no sistema albita–anortita e o contraste entre equilíbrio com líquido e preservação de núcleos mais cálcicos na cristalização fracionada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "§11.4.5, pp. 265–267 (PDF 293–295), Fig. 11.24",
+        "claim": "Discute equilíbrio e cristalização fracionada no sistema diopsídio–albita–anortita. Composição do líquido e difusão no cristal controlam a evolução e o zonamento."
+      }
+    ],
+    "i-pair-quartz-forsterite": [
+      {
+        "work": "gill",
+        "locator": "Box 4.3, pp. 112–113 (PDF 124–125), Fig. 4.3.1 e eq. 4.3.1",
+        "claim": "Fundamenta a formação de enstatita quando forsterita interage com o líquido apropriado no sistema forsterita–sílica. A peça Quartzo representa SiO₂ nesse balanço."
+      },
+      {
+        "work": "winter",
+        "locator": "cap. 26, p. 595 (PDF 602)",
+        "claim": "Usa a reação forsterita mais quartzo em equilíbrio com enstatita para ilustrar a geometria composicional; sua ocorrência depende das condições."
+      }
+    ],
+    "i-pair-leucite-quartz": [
+      {
+        "work": "philpotts",
+        "locator": "§11.3.6, pp. 247–248 (PDF 275–276)",
+        "claim": "O diagrama KAlSiO₄–SiO₂ inclui leucita e feldspato potássico. A discussão de fusão incongruente é para sanidina; a rota usa a carta Ortoclásio como representante composicional."
+      }
+    ],
+    "a-olivine-hydrothermal": [
+      {
+        "work": "gill",
+        "locator": "p. 119 (PDF 131), prancha 2.8 (PDF 230)",
+        "claim": "Ilustra alteração de olivina gabróica ao longo de fraturas com serpentina e óxido de ferro secundário. A textura mostra o local da alteração; a identificação da espécie de serpentina exige evidência própria."
+      },
+      {
+        "work": "atlasMinerals",
+        "locator": "p. 62 (PDF 69)",
+        "claim": "Ilustra malha de serpentina e óxidos de ferro. A identificação de lizardita e crisotila é apresentada como provável e a óptica pode ser insuficiente para separá-las."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "pp. 74–76 (PDF 82–84), fotos 71–73",
+        "claim": "Mostra textura de malha, óxidos e relações de alteração e recristalização em rochas ultramáficas."
+      }
+    ],
+    "meta-antigorite-brucite": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 676 (PDF 683), eq. 23",
+        "claim": "O balanço usa a composição ideal da antigorita de 17 módulos e brucita, com formação de olivina magnesiana e liberação de água."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 9, p. 215 (PDF 243), questão 9.19",
+        "claim": "Usa a reação com antigorita polissomática e brucita para discutir a trajetória da curva de desidratação usando a equação de Clapeyron."
+      }
+    ],
+    "meta-staurolite-chlorite-muscovite": [
+      {
+        "work": "winter",
+        "locator": "cap. 28, p. 648 (PDF 655), eq. 15",
+        "claim": "No esquema de aparecimento de cianita, o quartzo figura no conjunto de reagentes com estaurolita, clorita e muscovita. As fases de composição variável impedem um balanço universal para a carta."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "pp. 101–102 (PDF 107–108), fotos 96–97",
+        "claim": "Ilustra fases preservadas como inclusões enquanto a matriz reage. Esta observação é de contexto textural e não resolve os coeficientes da rota."
+      }
+    ],
+    "meta-garnet-chlorite-muscovite": [
+      {
+        "work": "winter",
+        "locator": "cap. 28, p. 643 (PDF 650), eq. 12",
+        "claim": "Mostra o aparecimento da estaurolita em metapelitos com granada, clorita e muscovita, sob condições de composição e metamorfismo adequadas."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 19, p. 536 (PDF 564), eq. 19.6",
+        "claim": "Apresenta esta relação esquemática em diagrama de assembleias metamórficas com minerais de solução sólida."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "pp. 101–102 (PDF 107–108), fotos 96–97",
+        "claim": "Ilustra fases preservadas como inclusões enquanto a matriz reage. Esta observação é de contexto textural e não resolve os coeficientes da rota."
+      }
+    ],
+    "meta-muscovite-out": [
+      {
+        "work": "winter",
+        "locator": "cap. 28, pp. 649–650 (PDF 656–657), eq. 19",
+        "claim": "Descreve a desidratação subsólida de muscovita com quartzo e formação de feldspato potássico e aluminossilicato."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 24, p. 698 (PDF 726), eq. 24.6",
+        "claim": "Ilustra fusão por desidratação de muscovita em condições distintas do equilíbrio subsólido. A água pode compor o líquido produzido."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "p. 24 (PDF 32)",
+        "claim": "Apresenta a desidratação de muscovita com quartzo, feldspato potássico e silimanita em condições apropriadas, e discute água e fusão."
+      }
+    ],
+    "meta-wollastonite-decarbonation": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 667 (PDF 674), eq. 11",
+        "claim": "Registra o equilíbrio calcita + quartzo ⇌ wollastonita + CO₂ para rochas carbonáticas silicosas."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 21, pp. 574, 582 e 585 (PDF 602, 610 e 613), eq. 21.10",
+        "claim": "Apresenta o equilíbrio de descarbonatação e explica a influência da composição do fluido e de sua infiltração."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "pp. 50 e 56 (PDF 58 e 64), foto 54",
+        "claim": "Ilustra ocorrência calcissilicática com wollastonita, diopsídio e grossulária. A observação complementa os estudos de equilíbrio."
+      },
+      {
+        "work": "minerals",
+        "locator": "cap. 19, p. 541 (PDF 538), verbete Wollastonita",
+        "claim": "Explicita a descarbonatação calcita + quartzo com produção de wollastonita e CO₂."
+      }
+    ],
+    "meta-diopside-dolomite": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 667 (PDF 674), eq. 8",
+        "claim": "Fundamenta o balanço de um mol de dolomita e dois de quartzo para formar diopsídio e liberar CO₂."
+      }
+    ],
+    "meta-tremolite-calcite-quartz": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 666 (PDF 673), eq. 4",
+        "claim": "Documenta o equilíbrio de tremolita, calcita e quartzo com diopsídio, CO₂ e H₂O no sistema simplificado."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 21, pp. 579 e 587 (PDF 607 e 615), eq. 21.21 e Fig. 21.13",
+        "claim": "Discute a reação em rochas calcissilicáticas e condiciona sua interpretação à composição do fluido."
+      }
+    ],
+    "a-orthoclase-rain": [
+      {
+        "work": "earth",
+        "locator": "§§10.1 e 11.2.1, PDF 663 e 716–718, eqs. 10.3 e 11.4",
+        "claim": "O feldspato potássico pode sofrer hidrólise, produzir caulinita e perder K e sílica para a solução; as equações também representam a participação de água e de CO₂."
+      }
+    ],
+    "a-pyrite-air": [
+      {
+        "work": "earth",
+        "locator": "§10.1, PDF 665, eq. 10.4",
+        "claim": "A equação de oxidação produz Fe²⁺, sulfato e acidez. O texto descreve a oxidação posterior do ferro e a precipitação de goethita como percurso possível."
+      }
+    ],
+    "ion-halite": [
+      {
+        "work": "earth",
+        "locator": "§§11.4 e 12.5, PDF 732–733 e 826",
+        "claim": "Apresenta a sequência evaporítica e o papel da saturação da salmoura na seleção dos sais, incluindo sulfatos de cálcio, halita e silvita."
+      }
+    ],
+    "ion-anhydrite": [
+      {
+        "work": "earth",
+        "locator": "§§11.4 e 12.5, PDF 732–733 e 826",
+        "claim": "Apresenta a sequência evaporítica e o papel da saturação da salmoura na seleção dos sais, incluindo sulfatos de cálcio, halita e silvita."
+      }
+    ],
+    "v08-sylvite-1": [
+      {
+        "work": "earth",
+        "locator": "§§11.4 e 12.5, PDF 732–733 e 826",
+        "claim": "Apresenta a sequência evaporítica e o papel da saturação da salmoura na seleção dos sais, incluindo sulfatos de cálcio, halita e silvita."
+      }
+    ],
+    "s-anhydrite-water": [
+      {
+        "work": "earth",
+        "locator": "§§10.13–10.14 e 12.5, PDF 695–699 e 827, Fig. 10.27",
+        "claim": "Descreve hidratação de anidrita em soterramento raso, desidratação de gipsita em maior profundidade e possíveis fases intermediárias durante aquecimento."
+      },
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 450 (PDF 447), verbete Anidrita",
+        "claim": "Descreve a hidratação da anidrita em baixa temperatura e identifica a gipsita como produto."
+      }
+    ],
+    "a-anhydrite-water": [
+      {
+        "work": "earth",
+        "locator": "§§10.13–10.14 e 12.5, PDF 695–699 e 827, Fig. 10.27",
+        "claim": "Descreve hidratação de anidrita em soterramento raso, desidratação de gipsita em maior profundidade e possíveis fases intermediárias durante aquecimento."
+      },
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 450 (PDF 447), verbete Anidrita",
+        "claim": "Descreve a hidratação da anidrita em baixa temperatura e identifica a gipsita como produto."
+      }
+    ],
+    "a-gypsum-heat": [
+      {
+        "work": "earth",
+        "locator": "§§10.13–10.14 e 12.5, PDF 695–699 e 827, Fig. 10.27",
+        "claim": "Descreve hidratação de anidrita em soterramento raso, desidratação de gipsita em maior profundidade e possíveis fases intermediárias durante aquecimento."
+      }
+    ],
+    "v08-aragonite-1": [
+      {
+        "work": "winter",
+        "locator": "cap. 26, p. 585 (PDF 592), Fig. 1",
+        "claim": "O diagrama P–T mostra os campos de estabilidade de calcita e aragonita, com a aragonita favorecida pela pressão elevada a temperatura dada."
+      },
+      {
+        "work": "philpotts",
+        "locator": "caps. 20 e 22, pp. 548 e 619–620 (PDF 576 e 647–648), Fig. 22.20",
+        "claim": "Distingue estabilidade de polimorfos e persistência ou substituição de fases fora do equilíbrio."
+      }
+    ],
+    "a-anorthite-pressure-lawsonite": [
+      {
+        "work": "winter",
+        "locator": "cap. 25, p. 571 (PDF 578)",
+        "claim": "Apresenta lawsonita em assembleias de xisto azul em regime de alta pressão relativa à temperatura."
+      },
+      {
+        "work": "atlasMetamorphic",
+        "locator": "p. 69 (PDF 77), foto 66",
+        "claim": "Observação de lawsonita em xisto azul com glaucofânio e outras fases. A textura documenta coexistência e deixa a identificação do precursor em aberto."
+      }
+    ],
+    "v08-jadeite-1": [
+      {
+        "work": "atlasMetamorphic",
+        "locator": "p. 43 (PDF 51), foto 41",
+        "claim": "Exemplo de assembleia de jadeíta e glaucofânio com quartzo. Parte do quartzo é detrítico, portanto a coexistência é evidência de contexto."
+      }
+    ],
+    "s-brucite-water": [
+      {
+        "work": "atlasMinerals",
+        "locator": "p. 88 (PDF 95)",
+        "claim": "Mostra brucita em mármore dolomítico, interpretada como provável pseudomorfo de periclásio. O grau de certeza é textural."
+      }
+    ],
+    "a-periclase-water": [
+      {
+        "work": "atlasMinerals",
+        "locator": "p. 88 (PDF 95)",
+        "claim": "Mostra brucita em mármore dolomítico, interpretada como provável pseudomorfo de periclásio. O grau de certeza é textural."
+      }
+    ],
+    "v08-alt-biotite-water": [
+      {
+        "work": "atlasMinerals",
+        "locator": "p. 60 (PDF 67)",
+        "claim": "Mostra biotita parcialmente substituída por clorita. A imagem sustenta o processo geral, sem identificar chamosita como espécie."
+      }
+    ],
+    "a-prehnite-hydrothermal-laumontite": [
+      {
+        "work": "atlasMetamorphic",
+        "locator": "p. 41 (PDF 49), foto 39",
+        "claim": "Ilustra feldspato parcialmente substituído por laumontita. A observação documenta o mineral secundário em outro contexto; o precursor prehnita deste balanço ainda requer evidência específica."
+      }
+    ],
+    "v08-riebeckite-2": [
+      {
+        "work": "atlasMetamorphic",
+        "locator": "p. 47 (PDF 55), foto 45",
+        "claim": "Textura de riebeckita com bordos enriquecidos em ferro e coexistência de aegirina-augita. A imagem não estabelece transformação da egirina em riebeckita."
+      }
+    ],
+    "a-kaolinite-rain": [
+      {
+        "work": "earth",
+        "locator": "§15.13, PDF 1016–1017",
+        "claim": "Discute bauxitização por intemperismo prolongado e gibbsita entre os possíveis produtos, junto de outras fases de alumínio."
+      }
+    ],
+    "a-forsterite-carbon": [
+      {
+        "work": "earth",
+        "locator": "§11.2.1, PDF 716, eqs. 11.2–11.3",
+        "claim": "Apresenta o balanço com magnesita e sílica amorfa e, em outro caso, a liberação de Mg, bicarbonato e sílica para a solução."
+      }
+    ],
+    "v08-dolomite-1": [
+      {
+        "work": "earth",
+        "locator": "§§10.7 e 11.9.4, PDF 683–685 e 768–769",
+        "claim": "Discute a formação diagenética de dolomita por substituição de carbonatos de cálcio na presença de solução com Mg. A equação da ficha é um balanço ideal de troca."
+      }
+    ],
+    "a-calcite-rain": [
+      {
+        "work": "earth",
+        "locator": "§§11.3.1 e 12.2.1, PDF 731 e 818–820",
+        "claim": "Explica como CO₂ dissolvido e saturação controlam a dissolução ou a precipitação de carbonato de cálcio."
+      }
+    ],
+    "ion-calcite": [
+      {
+        "work": "earth",
+        "locator": "§§11.3.1 e 12.2.1, PDF 731 e 818–820",
+        "claim": "Explica como CO₂ dissolvido e saturação controlam a dissolução ou a precipitação de carbonato de cálcio."
+      }
+    ],
+    "a-talc-heat": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 678 (PDF 685), eq. 33",
+        "claim": "Registra a desidratação de talco com ortopiroxênio, quartzo e água."
+      }
+    ],
+    "a-tremolite-heat": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 678 (PDF 685), eq. 37",
+        "claim": "Registra a assembleia com diopsídio, ortopiroxênio, quartzo e água na desidratação de tremolita."
+      }
+    ],
+    "v08-anthophyllite-1": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 678 (PDF 685), eq. 35",
+        "claim": "O balanço reversível indica água e sílica como componentes na formação de antofilita magnesiana a partir de enstatita."
+      }
+    ],
+    "a-forsterite-serp": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, pp. 675–676 (PDF 682–683)",
+        "claim": "Situa a serpentinização e a formação de talco em contextos que variam com composição e disponibilidade de sílica."
+      },
+      {
+        "work": "minerals",
+        "locator": "cap. 19, p. 549 (PDF 558), Grupo da serpentina",
+        "claim": "Explicita o balanço ideal de hidratação de forsterita que dá serpentina e brucita. A fórmula da serpentina por si só não identifica um polimorfo."
+      }
+    ],
+    "v08-alt-lizardite-quartz": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, pp. 675–676 (PDF 682–683)",
+        "claim": "Situa a serpentinização e a formação de talco em contextos que variam com composição e disponibilidade de sílica."
+      },
+      {
+        "work": "winter",
+        "locator": "cap. 30, pp. 699–703 (PDF 706–710), Figs. 16 e 21",
+        "claim": "Documenta zonas de transferência metasomática com talco junto a rochas serpentinizadas. Os gradientes químicos e a litologia condicionam o processo."
+      }
+    ],
+    "meta-pyrophyllite-andalusite": [
+      {
+        "work": "winter",
+        "locator": "cap. 28, pp. 638 e 652 (PDF 645 e 659), eq. 1",
+        "claim": "A desidratação de pirofilita libera água e produz quartzo com um aluminossilicato. A discussão do regime de baixa pressão reconhece a andaluzita nessa reação e assinala que o caso natural é pouco comum."
+      }
+    ],
+    "v08-aragonite-2": [
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 439 (PDF 436), verbete Aragonita",
+        "claim": "Descreve ambientes de ocorrência e controles de pressão, temperatura e composição. A descrição deixa sem apoio específico a conversão de calcita pela adição de Sr²⁺."
+      }
+    ],
+    "a-albite-weathering-halloysite": [
+      {
+        "work": "minerals",
+        "locator": "cap. 19, p. 552 (PDF 561), Grupo da caulinita",
+        "claim": "Descreve a composição representativa da haloisita hidratada e sua água interlamelar. O verbete não especifica o precursor albita desta rota."
+      }
+    ],
+    "v08-wolframite-1": [
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 453 (PDF 450), verbete Volframita",
+        "claim": "Descreve a série contínua entre ferberita e hübnerita, com substituição Fe–Mn no tungstato."
+      }
+    ],
+    "v08-coesite-1": [
+      {
+        "work": "winter",
+        "locator": "cap. 6, p. 105 (PDF 112), Fig. 6",
+        "claim": "O diagrama pressão–temperatura de SiO₂ distingue os campos estáveis de quartzo, tridimita, cristobalita, coesita e estishovita. Ele não prescreve o caminho cinético da transformação."
+      }
+    ],
+    "v08-stishovite-2": [
+      {
+        "work": "winter",
+        "locator": "cap. 6, p. 105 (PDF 112), Fig. 6",
+        "claim": "O diagrama pressão–temperatura de SiO₂ distingue os campos estáveis de quartzo, tridimita, cristobalita, coesita e estishovita. Ele não prescreve o caminho cinético da transformação."
+      },
+      {
+        "work": "philpotts",
+        "locator": "cap. 16, pp. 471–473 (PDF 499–501)",
+        "claim": "Discute metamorfismo de choque e a formação de fases de alta pressão. Coesita funciona como exemplo de fase e não como precursor universal."
+      }
+    ],
+    "v08-tridymite-2": [
+      {
+        "work": "winter",
+        "locator": "cap. 6, p. 105 (PDF 112), Fig. 6",
+        "claim": "O diagrama pressão–temperatura de SiO₂ distingue os campos estáveis de quartzo, tridimita, cristobalita, coesita e estishovita. Ele não prescreve o caminho cinético da transformação."
+      }
+    ],
+    "v08-cristobalite-2": [
+      {
+        "work": "winter",
+        "locator": "cap. 6, p. 105 (PDF 112), Fig. 6",
+        "claim": "O diagrama pressão–temperatura de SiO₂ distingue os campos estáveis de quartzo, tridimita, cristobalita, coesita e estishovita. Ele não prescreve o caminho cinético da transformação."
+      }
+    ],
+    "i-agent-stishovite-decompression": [
+      {
+        "work": "winter",
+        "locator": "cap. 6, p. 105 (PDF 112), Fig. 6",
+        "claim": "O diagrama pressão–temperatura de SiO₂ distingue os campos estáveis de quartzo, tridimita, cristobalita, coesita e estishovita. Ele não prescreve o caminho cinético da transformação."
+      }
+    ],
+    "ion-diamond": [
+      {
+        "work": "philpotts",
+        "locator": "caps. 16 e 20, pp. 458 e 548 (PDF 486 e 576)",
+        "claim": "Apresenta a relação pressão–temperatura entre os campos de grafita e diamante."
+      }
+    ],
+    "a-woll-carbon": [
+      {
+        "work": "winter",
+        "locator": "cap. 29, p. 667 (PDF 674), eq. 11",
+        "claim": "A carbonatação corresponde ao sentido inverso do equilíbrio de descarbonatação quando o sistema favorece calcita e sílica."
+      }
+    ],
+    "v08-lepidolite-1": [
+      {
+        "work": "minerals",
+        "locator": "cap. 19, pp. 558–559 (PDF 567–568)",
+        "claim": "Descreve as substituições de Li e Al e a ocorrência de lepidolita em pegmatitos. Sustenta o contexto composicional da associação."
+      }
+    ],
+    "v08-anglesite-1": [
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 449 (PDF 446), verbete Anglesita",
+        "claim": "Documenta crostas supergênicas de anglesita sobre galena. A observação indica um contexto de formação secundária."
+      }
+    ],
+    "v08-anglesite-2": [
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 449 (PDF 446), verbete Anglesita",
+        "claim": "Documenta crostas supergênicas de anglesita sobre galena. A observação indica um contexto de formação secundária."
+      }
+    ],
+    "i-agent-galena-air": [
+      {
+        "work": "minerals",
+        "locator": "cap. 17, p. 449 (PDF 446), verbete Anglesita",
+        "claim": "Documenta crostas supergênicas de anglesita sobre galena. A observação indica um contexto de formação secundária."
+      }
+    ],
+    "s-goethite": [
+      {
+        "work": "minerals",
+        "locator": "cap. 16, p. 419 (PDF 416), verbete Goethita",
+        "claim": "Descreve goethita como produto de intemperismo oxidante e precipitado aquoso. A coexistência com hematita deixa o sentido da transformação específico em aberto."
+      }
+    ]
+  }
+}

@@ -89,3 +89,4 @@
 .dialog .material-type{font-size:.88rem;color:#486359}
 .detail-routes details{padding:6px 0}
 .detail-routes summary{cursor:pointer}
+.path-stage{display:flex;flex-wrap:wrap;gap:6px}

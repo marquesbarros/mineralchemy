@@ -51,7 +51,8 @@ function parseEquationTerm(text) {
     const match = /^(?:(\d+)\s+)?(.+)$/.exec(text.trim());
     if (!match) return null;
     const coefficient = Number(match[1] ?? 1);
-    let species = match[2].replace(/^[α-ω]-/u, '').replace(/\((?:aq|s|l|g)\)$/u, '');
+    let species = match[2].replace(/^[α-ω]-/u, '')
+        .replace(/(?:\((?:aq|s|l|g)\)|\s+\([^()]+\))$/u, '');
     const superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
     const ion = /([⁰¹²³⁴⁵⁶⁷⁸⁹]*)([⁺⁻])$/u.exec(species);
     const charge = ion
@@ -129,7 +130,11 @@ function routeScience(reaction, byCard) {
     const evidence = reference
         ? reaction.generatedBy === 'family' ? 'balanco_ideal' : reference.kind
         : 'didatica';
-    const sources = reaction.sources ?? (reaction.source ? [{ url: reaction.source, claim: '' }] : []);
+    const initialSources = reaction.sources ?? (reaction.source ? [{ url: reaction.source, claim: '' }] : []);
+    const citations = LITERATURE.routes[reaction.id.replace(/^complete-/, '')] ?? [];
+    const sources = [...initialSources, ...citations.map(({ work, locator, claim }) => ({
+        ...LITERATURE.works[work], locator, claim,
+    }))];
     return {
         process, reviewStatus, evidence, reference, sources,
         equationIssue: candidate?.balance === 'unbalanced' ? 'Balanço de massa ou carga a revisar.' : null,

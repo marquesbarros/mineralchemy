@@ -7,7 +7,7 @@ Jogo educativo de combinações para **revisar e fixar conhecimentos sobre miner
 ## O que foi desenvolvido
 
 - **178 cartas minerais**, com representações SVG individuais.
-- **279 rotas ativas**, **269 pares executáveis** e **489 rotas arquivadas**.
+- **279 rotas ativas**, **269 pares executáveis** e **490 rotas arquivadas**.
 - **Motor de combinações** entre componentes químicos, minerais e agentes geológicos.
 - **Descobertas progressivas**, com coleção de cartas, registro das reações executadas e trilhas temáticas.
 - **Busca por nome ou fórmula**, filtros por categoria, navegação por teclado e interação por arrastar e soltar.

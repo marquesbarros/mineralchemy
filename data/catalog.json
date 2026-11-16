@@ -1558,10 +1558,10 @@
     {
       "id": "antigorite",
       "name": "Antigorita",
-      "formula": "Mg₃Si₂O₅(OH)₄",
+      "formula": "Mg₄₈Si₃₄O₈₅(OH)₆₂",
       "kind": "mineral",
       "family": "Serpentinas",
-      "description": "Mineral da classe serpentinas. As rotas de descoberta representam relações composicionais e ambientes possíveis.",
+      "description": "Serpentina com estrutura modulada. A fórmula da carta representa a composição magnesiana ideal do polissoma com 17 módulos; outras periodicidades e substituições alteram a composição.",
       "color": "#5eac88",
       "starter": false,
       "classification": "species"
@@ -2938,7 +2938,7 @@
       "agent": "co2",
       "equation": "Mg₂SiO₄ + 2 CO₂ → 2 MgCO₃ + SiO₂",
       "summary": "Carbonatação de forsterita; forma um carbonato e sílica.",
-      "conditions": "Pressão parcial de CO₂, temperatura e disponibilidade de fluido adequadas.",
+      "conditions": "Balanço ideal de carbonatação. A sílica pode aparecer em forma amorfa; a peça Quartzo representa SiO₂. Água, atividade da sílica e disponibilidade de CO₂ afetam o percurso.",
       "source": "https://link.springer.com/article/10.1186/s42834-022-00155-6",
       "symbolic": false
     },
@@ -3007,10 +3007,14 @@
       ],
       "agent": "air",
       "equation": "4 FeS₂ + 15 O₂ + 10 H₂O → 4 FeOOH + 8 SO₄²⁻ + 16 H⁺",
-      "summary": "Oxidação de pirita: formam-se goethita, sulfato e acidez.",
-      "conditions": "Exposição prolongada a ar e água; sequência geoquímica global.",
+      "summary": "O balanço global da oxidação aquosa de pirita representa sulfato, produção de acidez e goethita como fase férrica possível.",
+      "conditions": "Água e O₂ participam do balanço. pH, condições redox e evolução do meio controlam as fases de ferro; goethita é o produto representativo desta rota.",
       "source": "https://www.mdpi.com/2227-9717/8/4/409/htm",
-      "symbolic": false
+      "symbolic": false,
+      "environmentalInputs": [
+        "water",
+        "o2"
+      ]
     },
     {
       "id": "a-orthoclase-rain",
@@ -3026,9 +3030,13 @@
       "agent": "rain",
       "equation": "2 KAlSi₃O₈ + 2 H⁺ + 9 H₂O → Al₂Si₂O₅(OH)₄ + 2 K⁺ + 4 H₄SiO₄",
       "summary": "Hidrólise ácida de feldspato potássico em caulinita.",
-      "conditions": "Água ácida, lixiviação e condições geoquímicas favoráveis.",
+      "conditions": "A hidrólise depende da água ácida, da drenagem e da lixiviação de K e sílica. A composição de solução e o grau de intemperismo controlam quais argilominerais se formam.",
       "source": "https://www.geo.fu-berlin.de/en/v/geolearning/mountain_building/weathering/weathering3/index.html",
-      "symbolic": false
+      "symbolic": false,
+      "environmentalInputs": [
+        "water",
+        "proton"
+      ]
     },
     {
       "id": "a-kaolinite-rain",
@@ -3043,7 +3051,7 @@
       "agent": "rain",
       "equation": "Al₂Si₂O₅(OH)₄ + 5 H₂O → 2 Al(OH)₃ + 2 H₄SiO₄",
       "summary": "Dessilicificação avançada de caulinita, produzindo gibbsita.",
-      "conditions": "Intemperismo intenso, com forte lixiviação de sílica.",
+      "conditions": "A desilicação e a remoção prolongada de sílica em condições favoráveis podem produzir gibbsita junto a outras fases de Al. São importantes drenagem, clima e composição do material de partida.",
       "source": "https://www.sciencedirect.com/science/article/abs/pii/S0009254111000076",
       "symbolic": false
     },
@@ -3076,7 +3084,7 @@
       "agent": "heat",
       "equation": "CaSO₄·2H₂O → CaSO₄ + 2 H₂O",
       "summary": "Desidratação global da gipsita.",
-      "conditions": "Aquecimento suficiente; podem ocorrer fases intermediárias.",
+      "conditions": "Balanço global de desidratação. Durante o aquecimento podem aparecer hemidrato e formas de CaSO₄ metaestáveis. Temperatura, pressão de vapor da água e condições do ensaio influenciam o percurso.",
       "source": "https://www.britannica.com/science/gypsum",
       "symbolic": false
     },
@@ -3922,9 +3930,10 @@
       "agent": null,
       "equation": "Na⁺ + Cl⁻ → NaCl",
       "summary": "Composição da halita por combinação de íons.",
-      "conditions": "Representação simplificada; a ocorrência natural depende do ambiente.",
+      "conditions": "Precipitação quando a salmoura atinge a saturação relevante. Evaporação altera a concentração; a disponibilidade de íons e a atividade da água influenciam a sequência dos sais.",
       "source": "https://australian.museum/learn/minerals/what-are-minerals/mineral-groups/",
-      "symbolic": false
+      "symbolic": false,
+      "reviewStatus": "condicional"
     },
     {
       "id": "ion-fluorite",
@@ -4279,9 +4288,10 @@
       "agent": null,
       "equation": "Ca²⁺ + SO₄²⁻ → CaSO₄",
       "summary": "Formação composicional de anidrita.",
-      "conditions": "Representação simplificada; a ocorrência natural depende do ambiente.",
+      "conditions": "Saturação em relação ao sulfato de cálcio e condições de temperatura, salinidade e atividade da água influenciam a fase formada. Gipsita e anidrita ocupam campos distintos.",
       "source": "https://australian.museum/learn/minerals/what-are-minerals/mineral-groups/",
-      "symbolic": false
+      "symbolic": false,
+      "reviewStatus": "condicional"
     },
     {
       "id": "ion-bicarbonate",
@@ -5763,12 +5773,17 @@
         "anthophyllite"
       ],
       "agent": null,
-      "equation": "MgSiO₃ + hydrothermal ⇢ Mg₇Si₈O₂₂(OH)₂ (modelo lúdico)",
+      "equation": "7 MgSiO₃ + SiO₂ + H₂O ⇌ Mg₇Si₈O₂₂(OH)₂",
       "summary": "Associação composicional que permite descobrir Antofilita (anfibólios).",
-      "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética.",
+      "conditions": "Balanço para membros finais magnesianos. A formação de antofilita a partir de enstatita depende de sílica e água disponíveis e do campo de estabilidade em pressão e temperatura.",
       "source": "https://www.mindat.org/min-207.html",
       "symbolic": true,
-      "mechanic": "evolution"
+      "mechanic": "evolution",
+      "environmentalInputs": [
+        "quartz",
+        "water"
+      ],
+      "reviewStatus": "condicional"
     },
     {
       "id": "v08-anthophyllite-2",
@@ -6821,7 +6836,8 @@
       "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética.",
       "source": "https://geologyva.pages.wm.edu/minerals-rocks-and-fossils/minerals/",
       "symbolic": true,
-      "mechanic": "evolution"
+      "mechanic": "evolution",
+      "retired": true
     },
     {
       "id": "v08-andalusite-2",
@@ -8001,12 +8017,13 @@
         "dolomite"
       ],
       "agent": null,
-      "equation": "CaCO₃ + Mg²⁺ ⇢ CaMg(CO₃)₂ (modelo lúdico)",
-      "summary": "Associação composicional que permite descobrir Dolomita (carbonatos).",
-      "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética.",
+      "equation": "2 CaCO₃ + Mg²⁺ ⇌ CaMg(CO₃)₂ + Ca²⁺",
+      "summary": "Balanço ideal da substituição de calcita por dolomita em contato com solução magnesiana.",
+      "conditions": "A reação representa dissolução e precipitação em sistema aberto. A solução fornece Mg²⁺ e recebe Ca²⁺; salinidade, nucleação e evolução do fluido influenciam a formação. O Ca²⁺ liberado está na equação de referência.",
       "source": "https://geologyva.pages.wm.edu/minerals-rocks-and-fossils/minerals/",
       "symbolic": true,
-      "mechanic": "evolution"
+      "mechanic": "evolution",
+      "reviewStatus": "condicional"
     },
     {
       "id": "v08-dolomite-2",
@@ -8037,12 +8054,13 @@
         "aragonite"
       ],
       "agent": null,
-      "equation": "CaCO₃ + pressure ⇢ CaCO₃ (modelo lúdico)",
-      "summary": "Associação composicional que permite descobrir Aragonita (carbonatos).",
-      "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética.",
+      "equation": "CaCO₃ (calcita) ⇌ CaCO₃ (aragonita)",
+      "summary": "Equilíbrio entre dois polimorfos do carbonato de cálcio.",
+      "conditions": "A aragonita é favorecida no campo de maior pressão para dada temperatura. A transformação depende da trajetória P–T e da cinética, e a aragonita também pode precipitar fora do campo de estabilidade por controle cinético.",
       "source": "https://geologyva.pages.wm.edu/minerals-rocks-and-fossils/minerals/",
       "symbolic": true,
-      "mechanic": "evolution"
+      "mechanic": "evolution",
+      "reviewStatus": "condicional"
     },
     {
       "id": "v08-aragonite-2",
@@ -8633,10 +8651,11 @@
       "agent": null,
       "equation": "K⁺ + Cl⁻ ⇢ KCl (modelo lúdico)",
       "summary": "Associação composicional que permite descobrir Silvita (haletos).",
-      "conditions": "Rota de descoberta inspirada em composição, substituição ou transformação; não constitui reação balanceada nem prevê estabilidade ou cinética.",
+      "conditions": "Em salmouras evaporíticas ricas em K e Cl, a precipitação depende da saturação e da evolução da salmoura. Outras fases salinas podem competir.",
       "source": "https://geologyva.pages.wm.edu/minerals-rocks-and-fossils/minerals/",
       "symbolic": true,
-      "mechanic": "evolution"
+      "mechanic": "evolution",
+      "reviewStatus": "condicional"
     },
     {
       "id": "v08-sylvite-2",
@@ -10489,11 +10508,12 @@
         "co2"
       ],
       "agent": null,
-      "equation": "CaMg(CO₃)₂ + 2 SiO₂ → CaMgSi₂O₆ + 2 CO₂",
+      "equation": "CaMg(CO₃)₂ + 2 SiO₂ ⇌ CaMgSi₂O₆ + 2 CO₂",
       "summary": "Descarbonatação de dolomita na presença de quartzo produzindo diopsídio.",
       "conditions": "Reação idealizada em rochas carbonáticas silicosas, condicionada a P, T e XCO₂.",
       "source": "https://www.usgs.gov/publications/metamorphic-forsterite-and-diopside-ultramafic-complex-tuolumne-river-california",
-      "symbolic": false
+      "symbolic": false,
+      "reviewStatus": "condicional"
     },
     {
       "id": "meta-muscovite-out",
@@ -10508,11 +10528,12 @@
         "water"
       ],
       "agent": null,
-      "equation": "KAl₃Si₃O₁₀(OH)₂ + SiO₂ → KAlSi₃O₈ + Al₂SiO₅ + H₂O",
+      "equation": "KAl₃Si₃O₁₀(OH)₂ + SiO₂ ⇌ KAlSi₃O₈ + Al₂SiO₅ + H₂O",
       "summary": "Desestabilização da muscovita em presença de quartzo, produzindo feldspato potássico, aluminossilicato e água.",
-      "conditions": "Reação de desidratação a T elevada; o polimorfo Al₂SiO₅ depende das condições P–T.",
+      "conditions": "Equilíbrio subsólido de desidratação. Pressão e temperatura determinam o polimorfo de Al₂SiO₅. Em condições de fusão por desidratação, parte da água pode incorporar-se ao fundido.",
       "source": "https://earth.yale.edu/sites/default/files/2024-08/Ague%20doc%209.pdf",
-      "symbolic": false
+      "symbolic": false,
+      "reviewStatus": "condicional"
     },
     {
       "id": "meta-antigorite-brucite",
@@ -10526,11 +10547,12 @@
         "water"
       ],
       "agent": null,
-      "equation": "Mg₃Si₂O₅(OH)₄ + Mg(OH)₂ → 2 Mg₂SiO₄ + 3 H₂O",
+      "equation": "Mg₄₈Si₃₄O₈₅(OH)₆₂ + 20 Mg(OH)₂ ⇌ 34 Mg₂SiO₄ + 51 H₂O",
       "summary": "Desidratação de associação serpentina–brucita e crescimento de forsterita.",
-      "conditions": "Equação no membro final idealizado da serpentina; antigorita natural tem polissomatismo e coeficientes específicos.",
+      "conditions": "Balanço para o polissoma ideal de 17 módulos da antigorita magnesiana. Pressão, temperatura e atividade da água condicionam o equilíbrio; variações na composição e na estrutura mudam os coeficientes.",
       "source": "https://www.sciencedirect.com/science/article/pii/S0024493797820130",
-      "symbolic": false
+      "symbolic": false,
+      "reviewStatus": "condicional"
     },
     {
       "id": "meta-clinochlore-muscovite-quartz",
@@ -10573,13 +10595,14 @@
       "agent": null,
       "equation": "Granada + Clorita + Muscovita → Estaurolita + Biotita + Quartzo + H₂O (esquemático)",
       "summary": "Reação progradante de aparecimento da estaurolita em metapelitos aluminosos.",
-      "conditions": "Relação KFMASH simplificada; quantidades e solução sólida de Fe–Mg exigem cálculo de equilíbrio para uma composição global.",
+      "conditions": "Relação esquemática em metapelitos. As soluções sólidas Fe–Mg, a atividade da água e a composição global influenciam os limites de equilíbrio e os coeficientes.",
       "source": "https://www.sciencedirect.com/science/article/abs/pii/S0009254117301250",
       "symbolic": true,
       "staging": [
         "almandine",
         "clinochlore"
-      ]
+      ],
+      "reviewStatus": "condicional"
     },
     {
       "id": "meta-staurolite-chlorite-muscovite",
@@ -10592,19 +10615,22 @@
       "outputs": [
         "kyanite",
         "biotite",
-        "quartz",
         "water"
       ],
       "agent": null,
-      "equation": "Estaurolita + Clorita + Muscovita → Cianita + Biotita + Quartzo + H₂O (esquemático)",
+      "equation": "Estaurolita + clorita + muscovita + quartzo ⇢ cianita + biotita + H₂O (esquemático)",
       "summary": "Reação progradante de aparecimento de aluminossilicato em metapelitos.",
-      "conditions": "Modelo esquemático KFMASH; produto Al₂SiO₅ depende de pressão e temperatura, e composição real controla a estequiometria.",
+      "conditions": "Relação esquemática em metapelitos no campo da cianita. O quartzo participa como reagente da assembleia. Composição global, soluções sólidas e condição P–T controlam o balanço e o aparecimento das fases.",
       "source": "https://www.sciencedirect.com/science/article/abs/pii/S0009254117301250",
       "symbolic": true,
       "staging": [
         "staurolite",
         "clinochlore"
-      ]
+      ],
+      "environmentalInputs": [
+        "quartz"
+      ],
+      "reviewStatus": "condicional"
     },
     {
       "id": "meta-tremolite-calcite-quartz",
@@ -10620,7 +10646,7 @@
         "water"
       ],
       "agent": null,
-      "equation": "Ca₂Mg₅Si₈O₂₂(OH)₂ + 3 CaCO₃ + 2 SiO₂ → 5 CaMgSi₂O₆ + 3 CO₂ + H₂O",
+      "equation": "Ca₂Mg₅Si₈O₂₂(OH)₂ + 3 CaCO₃ + 2 SiO₂ ⇌ 5 CaMgSi₂O₆ + 3 CO₂ + H₂O",
       "summary": "Desestabilização de tremolita com calcita e quartzo formando diopsídio e fluido.",
       "conditions": "Reação idealizada de rochas calcissilicáticas; a temperatura e XCO₂ do fluido controlam o equilíbrio.",
       "source": "https://www.usgs.gov/publications/metamorphic-forsterite-and-diopside-ultramafic-complex-tuolumne-river-california",
@@ -10628,7 +10654,27 @@
       "staging": [
         "tremolite",
         "calcite"
-      ]
+      ],
+      "reviewStatus": "condicional"
+    },
+    {
+      "id": "meta-pyrophyllite-andalusite",
+      "kind": "synthesis",
+      "inputs": [
+        "pyrophyllite",
+        "heat"
+      ],
+      "outputs": [
+        "andalusite",
+        "quartz",
+        "water"
+      ],
+      "agent": null,
+      "equation": "Al₂Si₄O₁₀(OH)₂ ⇌ Al₂SiO₅ + 3 SiO₂ + H₂O",
+      "summary": "A desidratação de pirofilita pode gerar andaluzita, quartzo e água.",
+      "conditions": "O aluminossilicato é andaluzita no campo de baixa pressão apropriado. Em outras condições pode ocorrer cianita; a entrada de aquecimento representa a trajetória térmica no campo escolhido.",
+      "symbolic": false,
+      "reviewStatus": "condicional"
     }
   ],
   "rules": {

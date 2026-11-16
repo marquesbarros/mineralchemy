@@ -431,13 +431,19 @@ function pathNodeMarkup(id) {
     return found ? `<button class="path-node" data-action="detail" data-id="${esc(id)}" style="${styleFor(p)}" title="Ver ${esc(p.name)}">${inner}</button>` : `<span class="path-node path-node-locked" style="${styleFor(p)}">${inner}</span>`;
 }
 function pathMarkup(ids, transitions) {
-    return `<div class="path-list">${ids.map((id, i) => `${i ? `<div class="path-step"><span>↓</span><small>${esc(transitions[i - 1] ?? 'Reequilíbrio')}</small></div>` : ''}${pathNodeMarkup(id)}`).join('')}</div>`;
+    return `<div class="path-list">${ids.map((stage, i) => {
+        const step = i ? `<div class="path-step"><span>↓</span><small>${esc(transitions[i - 1] ?? 'Reequilíbrio')}</small></div>` : '';
+        const materials = Array.isArray(stage)
+            ? `<div class="path-stage">${stage.map(pathNodeMarkup).join('')}</div>`
+            : pathNodeMarkup(stage);
+        return step + materials;
+    }).join('')}</div>`;
 }
 function pathsMarkup() {
     const tracks = [
-        { label: 'Bowen · série descontínua', desc: 'Relações representativas de silicatos: sílica, Ca, H₂O e K não são supridos apenas pelo resfriamento.', ids: ['forsterite', 'enstatite', 'diopside', 'tremolite', 'phlogopite', 'biotite'], steps: ['+ sílica', '+ Ca', '+ H₂O e Ca', '+ K e Al', '+ Fe²⁺'] },
-        { label: 'Bowen · plagioclásios', desc: 'Cristalização em equilíbrio com líquido magmático progressivamente mais rico em Na; não é alteração de cristal a seco.', ids: ['anorthite', 'bytownite', 'labradorite', 'andesine', 'oligoclase', 'albite'], steps: ['resfriamento + líquido Na', 'resfriamento + líquido Na', 'resfriamento + líquido Na', 'resfriamento + líquido Na', 'resfriamento + líquido Na'] },
-        { label: 'Metamorfismo de pelitos', desc: 'Al₂SiO₅ pode participar de equilíbrio com mica. Em alta T, muscovita + quartzo pode produzir K-feldspato + Al₂SiO₅ + H₂O.', ids: ['andalusite', 'muscovite', 'orthoclase'], steps: ['+ K, Si e fluidos', '+ quartzo, aquecimento'] },
+        { label: 'Bowen · série descontínua', desc: 'Olivina, piroxênios, anfibólio e biotita ilustram mudanças de minerais durante a evolução de certos magmas. A ordem e as fases dependem da composição do líquido, da pressão e da água disponível.', ids: ['forsterite', ['enstatite', 'augite'], 'magnesiohornblende', 'biotite'], steps: ['reação com o líquido', 'evolução do líquido e disponibilidade de H₂O', 'evolução do líquido e inclusão de K'] },
+        { label: 'Bowen · plagioclásios', desc: 'Cristais em equilíbrio com líquido magmático podem evoluir para composições mais sódicas. Difusão lenta ou retirada dos cristais pode preservar núcleos mais cálcicos.', ids: ['anorthite', 'bytownite', 'labradorite', 'andesine', 'oligoclase', 'albite'], steps: Array(5).fill('líquido residual e troca Ca–Al por Na–Si') },
+        { label: 'Metamorfismo de pelitos', desc: 'A desidratação subsólida de muscovita com quartzo pode produzir feldspato potássico, Al₂SiO₅ e fluido. A silimanita representa o aluminossilicato no campo apropriado de pressão e temperatura.', ids: [['muscovite', 'quartz'], ['orthoclase', 'sillimanite', 'water']], steps: ['desidratação subsólida em condições adequadas'] },
         { label: 'Alteração de feldspatos', desc: 'Sericitização e argilização são caminhos possíveis, não etapas obrigatórias de uma única história geológica.', ids: ['orthoclase', 'muscovite', 'kaolinite'], steps: ['+ fluido hidrotermal', '+ intemperismo, lixiviação'] },
         { label: 'Metamorfismo calcissilicático', desc: 'Reação de descarbonatação: calcita + quartzo → wollastonita + CO₂ sob condições P–T–X(CO₂) adequadas.', ids: ['calcite', 'wollastonite'], steps: ['+ quartzo, aquecimento'] },
     ];

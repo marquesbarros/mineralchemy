@@ -16,7 +16,21 @@ function auditedReaction(r) {
     return CATALOG_RETIRED_EXPLICIT.has(r.id) ? { ...r, retired: true } : r;
 }
 function auditIntuitiveReaction(r) {
-    return r.retired || !CATALOG_RETAINED_INTUITIVE.has(r.id) ? { ...r, retired: true } : r;
+    if (r.retired || !CATALOG_RETAINED_INTUITIVE.has(r.id)) return { ...r, retired: true };
+    if (r.id === 'i-pair-quartz-forsterite') return {
+        ...r, equation: 'Mg₂SiO₄ + SiO₂ ⇌ 2 MgSiO₃',
+        conditions: 'Balanço no sistema forsterita–sílica. Na cristalização reacional, a forsterita reage com o líquido apropriado; a peça Quartzo representa o componente SiO₂.',
+        reviewStatus: 'condicional',
+    };
+    if (r.id === 'i-pair-leucite-quartz') return {
+        ...r, equation: 'KAlSi₂O₆ + SiO₂ ⇌ KAlSi₃O₈',
+        conditions: 'Relação no sistema KAlSiO₄–SiO₂ a baixa pressão. A carta Ortoclásio representa a composição KAlSi₃O₈; a fase potássica de alta temperatura no diagrama é a sanidina.',
+    };
+    if (r.id === 'i-agent-stishovite-decompression') return {
+        ...r, summary: 'A descompressão retira a estishovita de seu campo de estabilidade.',
+        conditions: 'A trajetória de pressão e temperatura e a cinética determinam se a fase de alta pressão persiste ou se transforma. A carta Quartzo representa o polimorfo estável em condições crustais usuais.',
+    };
+    return r;
 }
 
 const subDigits = '₀₁₂₃₄₅₆₇₈₉';
@@ -455,7 +469,7 @@ function generateIntuitiveRoutes(cards, agents, existing) {
             id: `i-${idPrefix}-${from}-${withId}`,
             kind: isAgent ? 'alteration' : 'synthesis',
             inputs: [from, ...(isAgent ? [] : [withId])], outputs, agent: isAgent ? withId : null,
-            equation, summary: note, conditions: isAgent ? (idPrefix === 'agent' && withId === 'cooling' && ['anorthite', 'bytownite', 'labradorite', 'andesine', 'oligoclase'].includes(from) ? 'Evolução composicional de cristais em equilíbrio com magma ou líquido fundido residual com Na disponível; não é resfriamento a seco.' : environmentNotes[withId] ?? notes.fluid) : notes.exchange,
+            equation, summary: note, conditions: isAgent ? (idPrefix === 'agent' && withId === 'cooling' && ['anorthite', 'bytownite', 'labradorite', 'andesine', 'oligoclase'].includes(from) ? 'Evolução do plagioclásio com o líquido residual, com troca acoplada Ca–Al por Na–Si. Difusão lenta ou cristalização fracionada pode preservar núcleos mais cálcicos.' : environmentNotes[withId] ?? notes.fluid) : notes.exchange,
             source, symbolic: true, mechanic: 'evolution', retired,
         });
         if (!retired)

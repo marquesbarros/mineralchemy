@@ -230,7 +230,7 @@ const CATALOG_RETIRED_EXPLICIT = new Set([
     "v08-stilbite-2",
     "v08-clinoptilolite-1",
     "v08-dolomite-2",
-    "v08-aragonite-1",
+    "v08-aragonite-2",
     "v08-ankerite-2",
     "v08-rhodochrosite-2",
     "v08-smithsonite-2",

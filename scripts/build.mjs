@@ -30,10 +30,10 @@ function rowFor(reaction, engine, pairIds, agentById, notes, science, describeCa
     const outputs = reaction.outputs.map(piece);
     const note = notes.routes[reaction.id];
     const active = !reaction.retired;
-    const source = sources[0]?.url ?? null;
-    const sourceSpecificity = !source ? 'sem_fonte'
-        : note?.genericSource || notes.genericSources.includes(source) ? 'referência_genérica'
-        : sources.some(item => item.claim) ? 'escopo_documentado' : 'a_verificar';
+    const source = sources.find(item => item.url)?.url ?? null;
+    const sourceSpecificity = sources.some(item => item.claim) ? 'escopo_documentado'
+        : !sources.length ? 'sem_fonte'
+        : note?.genericSource || notes.genericSources.includes(source) ? 'referência_genérica' : 'a_verificar';
     const row = {
         id: reaction.id, origin, kind: reaction.kind, active, executable: pairIds.has(reaction.id), old: !active,
         inputs: reaction.inputs.map(piece), outputs, agent: reaction.agent ? piece(reaction.agent) : null,
@@ -78,14 +78,16 @@ function buildAtlas(template, layout, minerals, iconMarkup) {
         .replace('{{ATLAS_REFINED}}', stageCounts.refined);
 }
 
-const [catalog, notes, layout, game, css, atlas, modules, gameUi, audit, auditUi] = await Promise.all([
+const [catalog, notes, layout, literature, game, css, atlas, modules, gameUi, audit, auditUi] = await Promise.all([
     json('data/catalog.json'), json('data/review-notes.json'), json('data/atlas-layout.json'),
+    json('data/literature.json'),
     read('src/game.template.html'), read('src/game.css'), read('src/atlas.template.html'),
     Promise.all(['catalog-overrides', 'game-engine', 'progress', 'catalog-science', 'mineral-icons', 'reaction-reference', 'game-storage']
         .map(name => read('src/' + name + '.js'))),
     read('src/game.js'), read('src/audit.template.html'), read('src/audit.js'),
 ]);
-const sharedScript = 'const EMBEDDED = ' + safeJson(catalog) + ';\n\n' + modules.join('\n');
+const sharedScript = 'const EMBEDDED = ' + safeJson(catalog) + ';\n' +
+    'const LITERATURE = ' + safeJson(literature) + ';\n\n' + modules.join('\n');
 const context = vm.createContext({});
 vm.runInContext(sharedScript, context);
 const { engine, pairs, reachable, minerals } = vm.runInContext(`(() => {
@@ -101,6 +103,14 @@ if (minerals.some(card => !reachable.has(card.id))) {
 }
 for (const id of Object.keys(notes.routes)) {
     if (!engine.byReaction.has(id)) throw new Error('Parecer editorial sem rota: ' + id);
+}
+for (const [id, sources] of Object.entries(literature.routes)) {
+    if (!engine.byReaction.has(id)) throw new Error('Referência bibliográfica sem rota: ' + id);
+    for (const { work, locator, claim } of sources) {
+        if (!Object.hasOwn(literature.works, work) || !locator?.trim() || !claim?.trim()) {
+            throw new Error('Referência bibliográfica incompleta para a rota ' + id);
+        }
+    }
 }
 const pairIds = new Set(pairs.pairs.map(({ reaction }) => reaction.id));
 const agentById = new Map(catalog.agents.map(agent => [agent.id, { ...agent, kind: 'agent', family: 'Processo geológico' }]));

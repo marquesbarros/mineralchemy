@@ -59,3 +59,7 @@ Veja o [guia atual](../README.md) e a [arquitetura](ARQUITETURA.md).
 O jogo, a auditoria e o atlas passaram a ser gerados a partir de fontes compartilhadas. A revisão conservou os 768 IDs de rota, os produtos, as 178 cartas e os 269 pares da bancada. As fichas passaram a distinguir peças, equações de referência, condições e componentes do meio. A auditoria usa uma impressão digital por rota para sinalizar pareceres antigos. O jogo também ganhou backup de progresso, registro durável de descobertas e navegação por foco nos diálogos.
 
 A revisão científica individual continua no [inventário de pendências](REVISAO_PENDENCIAS.md). O [guia docente](GUIA_DOCENTE.md) inclui a proposta de aplicação do piloto.
+
+## Revisão com livros e atlas
+
+A rodada seguinte incorporou referências paginadas das sete obras consultadas, ajustou as trilhas de Bowen e dos pelitos e reviu rotas de equilíbrio e alteração. O catálogo manteve os pares da bancada em 269 e passou a registrar 490 rotas arquivadas. O detalhamento das fontes e das decisões fica na [revisão bibliográfica](REVISAO_BIBLIOGRAFICA.md).

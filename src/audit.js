@@ -264,9 +264,13 @@ function auditRouteLabel(route) {
 }
 
 function auditSourceList(sources) {
-  const items = sources.map(({ url, claim }) => {
+  const items = sources.map(({ url, claim, citation, locator }) => {
     const link = auditSourceUrl(url);
-    return link ? `<li><a href="${escapeAudit(link)}" target="_blank" rel="noopener noreferrer">${escapeAudit(url)}</a>${claim ? `<p>${escapeAudit(claim)}</p>` : ''}</li>` : '';
+    const label = citation || url;
+    const title = link
+      ? `<a href="${escapeAudit(link)}" target="_blank" rel="noopener noreferrer">${escapeAudit(label)}</a>`
+      : escapeAudit(citation);
+    return title ? `<li>${title}${locator ? ` · ${escapeAudit(locator)}` : ''}${claim ? `<p>${escapeAudit(claim)}</p>` : ''}</li>` : '';
   }).join('');
   return items ? `<ul class="source-list">${items}</ul>` : '<p>Fontes a registrar.</p>';
 }

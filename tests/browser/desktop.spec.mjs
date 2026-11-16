@@ -127,6 +127,8 @@ test('auditoria localiza uma rota e mostra seus condicionantes', async ({ page }
   await expect(details).toContainText('Lawsonita');
   await expect(details).toContainText('⇌');
   await expect(details).toContainText(/água|H₂O/i);
+  await expect(details).toContainText('p. 69 (PDF 77), foto 66');
+  await expect(details).toContainText('Yardley');
 });
 
 test('auditoria grava e exporta fontes e versão de um parecer', async ({ page }) => {

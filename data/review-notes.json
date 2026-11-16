@@ -47,6 +47,12 @@
     "meta-muscovite-out": {
       "priority": "P2",
       "issue": "Equação global balanceada; especificar campo de estabilidade de Al2SiO5 e a possível fusão em condições suprassólidus."
+    },
+    "v08-aragonite-2": {
+      "issue": "Substituída para a bancada por calcita + alta pressão. A presença de Sr²⁺ pode influenciar a precipitação, mas não representa uma transformação universal de calcita em aragonita."
+    },
+    "v08-andalusite-1": {
+      "issue": "Substituída por pirofilita + aquecimento no campo da andaluzita. O atalho com caulinita omitia a assembleia e as condições de estabilidade."
     }
   }
 }

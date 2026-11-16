@@ -77,6 +77,43 @@ test('o catálogo rejeita produtos conflitantes para o mesmo par da bancada', ()
     ] })`), /par ambíguo/i);
 });
 
+test('a desidratação da antigorita explicita o polissoma e tem referência paginada', () => {
+    const science = route('meta-antigorite-brucite');
+    assert.match(science.reference.equation, /Mg₄₈Si₃₄O₈₅\(OH\)₆₂.*51 H₂O/);
+    assert.equal(science.reference.balance, 'balanced');
+    assert.ok(science.sources.some(source => source.locator?.includes('676')));
+});
+
+test('a rota encenada da estaurolita consome quartzo do meio', () => {
+    const { entries } = payload();
+    for (const id of ['meta-staurolite-chlorite-muscovite', 'complete-meta-staurolite-chlorite-muscovite']) {
+        const entry = entries.find(r => r.id === id);
+        assert.ok(entry.environmentalInputs.some(material => material.id === 'quartz'));
+        assert.ok(!entry.outputs.some(material => material.id === 'quartz'));
+        assert.ok(entry.sources.some(source => source.locator?.includes('648')));
+    }
+});
+
+test('aragonita fica alcançável pelo equilíbrio polimórfico e conserva a rota antiga no arquivo', () => {
+    const { entries } = payload();
+    assert.equal(entries.find(r => r.id === 'v08-aragonite-2').active, false);
+    const pressure = entries.find(r => r.id === 'v08-aragonite-1');
+    assert.equal(pressure.executable, true);
+    assert.equal(pressure.reference.kind, 'equilibrio');
+    assert.equal(pressure.reference.balance, 'balanced');
+    assert.match(pressure.reference.equation, /calcita.*⇌.*aragonita/);
+});
+
+test('a desidratação de pirofilita fornece uma rota documentada para andaluzita', () => {
+    const { entries } = payload();
+    const route = entries.find(r => r.id === 'meta-pyrophyllite-andalusite');
+    assert.equal(entries.find(r => r.id === 'v08-andalusite-1').active, false);
+    assert.equal(route.executable, true);
+    assert.equal(route.reference.balance, 'balanced');
+    assert.deepEqual(route.outputs.map(material => material.id), ['andalusite', 'quartz', 'water']);
+    assert.match(route.conditions, /baixa pressão/);
+});
+
 test('o resumo da partida mantém rotas antigas após cem eventos recentes', () => {
     const progress = JSON.parse(run(`JSON.stringify((() => {
         let progress = makeInitialSave(engine.cards);

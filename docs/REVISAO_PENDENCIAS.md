@@ -39,32 +39,34 @@ Os rótulos da tabela vêm dos metadados originais. “A verificar” inclui ref
 
 ## Processos no catálogo gerado
 
+A revisão com os livros e atlas acrescentou uma rota e reviu a disponibilidade de alguns pares. As tabelas anteriores preservam a contagem da versão de partida. [Revisão bibliográfica](REVISAO_BIBLIOGRAFICA.md)
+
 | Processo exibido | Ativas | Arquivadas | Executáveis na bancada |
 | --- | ---: | ---: | ---: |
 | Alteração aquosa | 8 | 17 | 5 |
 | Alteração hidrotermal | 14 | 77 | 14 |
 | Alteração por agente | 5 | 4 | 5 |
-| Associação didática | 119 | 177 | 119 |
+| Associação didática | 118 | 178 | 118 |
 | Cristalização magmática | 1 | 0 | 1 |
-| Equilíbrio de fases | 8 | 9 | 8 |
+| Equilíbrio de fases | 9 | 8 | 9 |
 | Intemperismo | 7 | 108 | 7 |
 | Oxirredução | 14 | 42 | 14 |
 | Reação em etapas | 5 | 0 | 5 |
 | Reação entre componentes | 9 | 0 | 9 |
-| Reação metamórfica | 9 | 0 | 5 |
+| Reação metamórfica | 10 | 0 | 6 |
 | Resfriamento | 7 | 5 | 7 |
 | Síntese didática | 25 | 1 | 25 |
 | Transformação mineral | 32 | 0 | 29 |
-| Transformação térmica | 14 | 49 | 14 |
+| Transformação térmica | 13 | 50 | 13 |
 | Troca composicional | 2 | 0 | 2 |
-| **Total** | **279** | **489** | **269** |
+| **Total** | **279** | **490** | **269** |
 
 | Especificidade bibliográfica atual | Ativas | Arquivadas | Total |
 | --- | ---: | ---: | ---: |
-| A verificar | 139 | 378 | 517 |
-| Referência genérica | 130 | 111 | 241 |
-| Escopo documentado | 10 | 0 | 10 |
-| **Total** | **279** | **489** | **768** |
+| A verificar | 103 | 376 | 479 |
+| Referência genérica | 116 | 111 | 227 |
+| Escopo documentado | 60 | 3 | 63 |
+| **Total** | **279** | **490** | **769** |
 
 “Escopo documentado” indica que a ficha explica o que a fonte sustenta. Para recontar ou cruzar as tabelas em uma planilha, exporte o catálogo em CSV. Em uma tabela dinâmica, use `processo` nas linhas, `especificidade_das_fontes` nas colunas, contagem de `id` nos valores e `disponibilidade` como filtro.
 

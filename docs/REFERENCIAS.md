@@ -28,6 +28,7 @@ Referências adicionais e justificativas de rotas constam nos documentos de revi
 - [Processos hídricos v0.25](PROCESSOS_HIDRICOS_v025.md)
 - [Rotas intuitivas](ROTAS_INTUITIVAS.md)
 - [Registro de revisão (JSON)](REGISTRO_REVISAO_REACOES.json)
+- [Revisão com livros e atlas](REVISAO_BIBLIOGRAFICA.md)
 
 Uma rota pode representar associação composicional, formação mineral ou transformação geológica. Sua execução no jogo não comprova a ocorrência da reação na natureza.
 
