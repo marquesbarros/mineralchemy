@@ -78,15 +78,16 @@ function buildAtlas(template, layout, minerals, iconMarkup) {
         .replace('{{ATLAS_REFINED}}', stageCounts.refined);
 }
 
-const [catalog, notes, layout, literature, speciation, transformations, game, css, atlas, modules, gameUi, audit, auditUi] = await Promise.all([
+const [catalog, notes, layout, literature, speciation, transformations, game, css, atlas, modules, gameUi, audit, auditUi, brand] = await Promise.all([
     json('data/catalog.json'), json('data/review-notes.json'), json('data/atlas-layout.json'),
     json('data/literature.json'),
     json('data/speciation.json'), json('data/transformations.json'),
     read('src/game.template.html'), read('src/game.css'), read('src/atlas.template.html'),
     Promise.all(['catalog-overrides', 'game-engine', 'progress', 'catalog-science', 'mineral-icons', 'reaction-reference', 'game-storage', 'trail-planner']
         .map(name => read('src/' + name + '.js'))),
-    read('src/game.js'), read('src/audit.template.html'), read('src/audit.js'),
+    read('src/game.js'), read('src/audit.template.html'), read('src/audit.js'), read('src/brand.svg'),
 ]);
+const brandIcon = 'data:image/svg+xml,' + encodeURIComponent(brand.trim());
 const sharedScript = 'const EMBEDDED = ' + safeJson(catalog) + ';\n' +
     'const LITERATURE = ' + safeJson(literature) + ';\n' +
     'const SPECIATION = ' + safeJson(speciation) + ';\n' +
@@ -154,7 +155,7 @@ const payload = { version: 2, repository: 'marquesbarros/mineralchemy', revision
 let auditHtml = insert(audit, '<!-- AUDIT_PAYLOAD -->', '<script type="application/json" id="payload">' + safeJson(payload) + '</script>');
 auditHtml = insert(auditHtml, '<!-- AUDIT_SCRIPT -->', '<script>\n' + auditUi + '</script>');
 const gameHtml = insert(insert(game, '<!-- GAME_STYLE -->', '<style>\n' + css + '</style>'),
-    '<!-- GAME_SCRIPT -->', '<script>' + sharedScript + '\n' + gameUi + '</script>');
+    '<!-- GAME_SCRIPT -->', '<script>' + sharedScript + '\nconst BRAND_ICON = ' + safeJson(brandIcon) + ';\n' + gameUi + '</script>');
 const outputs = {
     'index.html': gameHtml,
     'catalogo-auditoria.html': auditHtml,
@@ -162,7 +163,9 @@ const outputs = {
 };
 const drift = [];
 for (const [path, html] of Object.entries(outputs)) {
-    const result = html.trimEnd().replace(/^(<!doctype html>)/i, '$1\n' + generated + '\n') + '\n';
+    const withIcon = insert(html, '<meta charset="UTF-8">',
+        '<meta charset="UTF-8">\n<link rel="icon" type="image/svg+xml" href="' + brandIcon + '">');
+    const result = withIcon.trimEnd().replace(/^(<!doctype html>)/i, '$1\n' + generated + '\n') + '\n';
     if (process.argv.includes('--check')) {
         if (await read(path) !== result) drift.push(path);
     } else {

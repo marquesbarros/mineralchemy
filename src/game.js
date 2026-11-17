@@ -579,7 +579,7 @@ function headerMarkup() {
     const { count, total } = percent();
     const n = completedReactions(save, engine).length;
     return `<header class="topbar">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><strong>mineralchemy</strong></div>
+      <div class="brand"><img class="brand-mark" src="${BRAND_ICON}" alt=""><strong>mineralchemy</strong></div>
       <nav class="top-actions" aria-label="Menu do jogo">
         <div class="progress" aria-label="${count} de ${total} minerais descobertos"><span class="progress-label">Minerais</span><b>${count}<span> / ${total}</span></b><span class="progress-track" aria-hidden="true"><span style="width:${total ? Math.round(count / total * 100) : 0}%"></span></span></div>
         <button type="button" class="top-button paths-trigger" data-action="paths" aria-label="Ver trilhas mineralógicas"><span class="nav-icon" aria-hidden="true">⇄</span> Trilhas</button>
