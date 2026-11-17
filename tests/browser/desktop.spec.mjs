@@ -70,10 +70,11 @@ test('a ficha da descoberta fica aberta e consome as teclas de reação e de fec
   await expect(discovery).toBeFocused();
   const burst = discovery.locator('.discovery-burst').first();
   await expect(burst).toHaveCSS('animation-name', 'discovery-burst');
+  await expect(burst).toHaveCSS('animation-iteration-count', '2');
   await page.keyboard.down('Enter');
   await expect(discovery).toBeVisible();
   await page.keyboard.up('Enter');
-  await burst.evaluate(el => Promise.all(el.getAnimations().map(animation => animation.finished)));
+  await discovery.evaluate(el => Promise.all(el.getAnimations({ subtree: true }).map(animation => animation.finished)));
   await expect(discovery).toBeVisible();
   await page.keyboard.down('Delete');
   await expect(discovery).toHaveCount(0);
@@ -112,8 +113,12 @@ for (const key of ['Enter', 'Space', 'Tab']) {
     await page.keyboard.down('Enter');
     await expect(discoveryDialog(page)).toBeVisible();
     await page.keyboard.up('Enter');
+    const activeBursts = () => page.evaluate(() => document.getAnimations()
+      .filter(animation => animation.animationName === 'discovery-burst' && animation.playState === 'running').length);
+    expect(await activeBursts()).toBeGreaterThan(0);
     await page.keyboard.press(key);
     await expect(discoveryDialog(page)).toHaveCount(0);
+    expect(await activeBursts()).toBe(0);
     await expect(reactButton(page)).toBeFocused();
     await expect(page.getByRole('button', { name: calcite })).toBeVisible();
   });

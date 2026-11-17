@@ -221,11 +221,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
     aspect-ratio:1;
     background:repeating-conic-gradient(from 13deg,var(--burst) 0deg 5deg,transparent 5deg 45deg);
     mask-image:radial-gradient(circle,transparent 34%,#000 37% 59%,transparent 63%);
-    animation:discovery-burst .85s ease-out both;
+    animation:discovery-burst 1.25s ease-out 2 both;
     pointer-events:none;
 }
-.discovery-burst:nth-child(2){--burst:#ac6816;top:auto;left:auto;bottom:-9px;right:-14px;width:85px;animation-delay:.09s}
-.discovery-burst:nth-child(3){--burst:#658bc1;top:-12px;left:auto;right:-8px;width:64px;animation-delay:.18s}
+.discovery-burst:nth-child(2){--burst:#ac6816;top:auto;left:auto;bottom:-9px;right:-14px;width:85px;animation-delay:.17s}
+.discovery-burst:nth-child(3){--burst:#658bc1;top:-12px;left:auto;right:-8px;width:64px;animation-delay:.34s}
 @keyframes discovery-burst{
     0%{opacity:0;transform:scale(.25) rotate(-18deg)}
     26%{opacity:.92}
