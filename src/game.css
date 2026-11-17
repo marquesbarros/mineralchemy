@@ -120,6 +120,26 @@
 }
 
 /* Bancada, navegação e fichas */
+.game-footer{
+    flex:none;
+    padding:8px 16px max(8px,env(safe-area-inset-bottom));
+    border-top:1px solid #dce8df;
+    background:#fbfcfb;
+    color:#4b6255;
+    text-align:center;
+    font-size:.78rem;
+    line-height:1.45;
+}
+.game-footer p{margin:0}
+.game-footer p+p{margin-top:3px}
+.game-footer a{
+    color:#176548;
+    font-weight:650;
+    text-decoration:underline;
+    text-underline-offset:3px;
+}
+.game-footer a:focus-visible{outline:2px solid #1f7855;outline-offset:2px}
+.game-footer a:hover{color:#103d2d}
 .topbar,.top-actions{min-width:0}
 .top-button .nav-icon{color:#24694d}
 .progress-label,.progress b span,#pieceCount,.library-heading h2 span,.search input::placeholder,.filters button{color:#52695c}
@@ -236,6 +256,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 @media(pointer:coarse){.discovery-keyboard{display:none}}
 
 @media(max-width:680px){
+    #app{min-height:570px}
+    .game-footer{padding-inline:12px}
     .topbar{
         height:auto;
         padding:10px 10px 8px;

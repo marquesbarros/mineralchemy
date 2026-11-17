@@ -671,7 +671,12 @@ function mainMarkup() {
         </div>
       </div>
     </main>`;
-    return `${headerMarkup()}<p id="saveWarning" class="save-warning" role="status" ${storageWarning ? '' : 'hidden'}>${esc(storageWarning)}</p><div class="game">${board}${library}</div><div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
+    return `${headerMarkup()}<p id="saveWarning" class="save-warning" role="status" ${storageWarning ? '' : 'hidden'}>${esc(storageWarning)}</p><div class="game">${board}${library}</div>
+      <footer class="game-footer">
+        <p>Mineralchemy é um projeto educativo independente, sem financiamento. Sinta-se à vontade para colaborar.</p>
+        <p><a href="https://github.com/marquesbarros/mineralchemy/blob/main/docs/REFERENCIAS.md" target="_blank" rel="noopener">Referências do jogo</a> · <a href="https://github.com/marquesbarros/mineralchemy/issues/new" target="_blank" rel="noopener">Abra uma issue no GitHub</a> ou <a href="https://marquesbarros.github.io/marquesbarros/" target="_blank" rel="noopener">entre em contato comigo</a>.</p>
+      </footer>
+      <div id="toast" class="toast" aria-live="polite"></div><div id="modalRoot">${modalMarkup()}</div>`;
 }
 function render() {
     if (!app) return;
@@ -971,7 +976,7 @@ function updateModal(focusSelector = null) {
         ? [previousFocus.selectionStart, previousFocus.selectionEnd] : null;
     root.innerHTML = modalMarkup();
     const dialog = root.querySelector?.('.dialog');
-    for (const selector of ['.topbar', '.game']) {
+    for (const selector of ['.topbar', '.game', '.game-footer']) {
         const background = document.querySelector(selector);
         if (background) background.inert = Boolean(dialog);
     }
